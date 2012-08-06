@@ -4,3 +4,10 @@ obj
 
 # mstest test results
 TestResults
+
+# Nuget packages folder
+packages
+
+# .user and .suo
+*.user
+*.suo

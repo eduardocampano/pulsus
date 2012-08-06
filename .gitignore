@@ -6,7 +6,8 @@ obj
 TestResults
 
 # Nuget packages folder
-packages
+src/packages
+src/nuspec/*.nupkg
 
 # .user and .suo
 *.user

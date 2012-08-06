@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+	<id>Pulsus.Mvc</id>
+	<version>1.0.0</version>
+	<title>Pulsus.Mvc</title>
+	<authors>Eduardo Campañó</authors>
+	<owners>AW Systems</owners>
+	<projectUrl>http://www.nuget.org/packages/Pulsus.Mvc</projectUrl>
+	<requireLicenseAcceptance>false</requireLicenseAcceptance>
+	<description>ASP.NET MVC integration for Pulsus logging library</description>
+	<copyright>Copyright 2012 AW Systems Inc.</copyright>
+	<tags>log logging log trace tracing error exception pulsus</tags>
+	<dependencies>
+		<dependency id="Pulsus" version="1.0.0" />
+		<dependency id="Microsoft.Web.Infrastructure" version="1.0.0.0" />
+		<dependency id="WebActivator" version="1.5.1" />
+	</dependencies>
+  </metadata>
+  <files>
+	<file src="..\Pulsus.Mvc\bin\Release\Pulsus.Mvc.dll" target="lib\net40" />
+  </files>
+</package>

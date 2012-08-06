@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+	<id>Pulsus</id>
+	<version>1.0.0</version>
+	<title>Pulsus</title>
+	<authors>Eduardo Campañó</authors>
+	<owners>Eduardo Campañó</owners>
+	<projectUrl>http://www.nuget.org/packages/Pulsus</projectUrl>
+	<requireLicenseAcceptance>false</requireLicenseAcceptance>
+	<description>A simple and extensible logging library built for modern applications.</description>
+	<copyright>Copyright 2012 AW Systems Inc.</copyright>
+	<tags>log logging log trace tracing error exception pulsus</tags>
+	<dependencies>
+	  <dependency id="Newtonsoft.Json" version="4.5.7" />
+	</dependencies>
+  </metadata>
+  <files>
+	<file src="..\Pulsus\bin\Release\Pulsus.dll" target="lib\net35" />
+  </files>
+</package>

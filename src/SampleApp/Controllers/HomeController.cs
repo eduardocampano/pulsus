@@ -25,7 +25,6 @@ namespace Pulsus.Sample.Controllers
 									.AddTags("trace")
 									.AddStrackTrace()
 									.Push();
-
 			}
 
 			stopwatch.Stop();

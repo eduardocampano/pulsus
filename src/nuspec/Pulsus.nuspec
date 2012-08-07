@@ -15,7 +15,4 @@
 	  <dependency id="Newtonsoft.Json" version="4.5.7" />
 	</dependencies>
   </metadata>
-  <files>
-	<file src="..\Pulsus\bin\Release\Pulsus.dll" target="lib\net35" />
-  </files>
 </package>

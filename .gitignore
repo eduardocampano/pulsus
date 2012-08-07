@@ -8,6 +8,8 @@ TestResults
 # Nuget packages folder
 src/packages
 src/nuspec/*.nupkg
+src/nuspec/Packages
+src/nuspec/msbuild.log
 
 # .user and .suo
 *.user

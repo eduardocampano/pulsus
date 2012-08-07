@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
+using System.Linq;
 using Pulsus.Configuration;
 
 namespace Pulsus.Repositories
@@ -29,17 +31,6 @@ namespace Pulsus.Repositories
 		public string Schema { get; set; }
 		public string TableName { get; set; }
 
-		public void Save(LoggingEvent loggingEvent)
-		{
-			if (loggingEvent == null)
-				throw new ArgumentNullException("loggingEvent");
-
-			using (var connection = GetConnection())
-			{
-				Save(connection, loggingEvent);
-			}			
-		}
-
 		public void Initialize()
 		{
 			lock (_sync)
@@ -56,13 +47,33 @@ namespace Pulsus.Repositories
 			}
 		}
 
+		public void Save(LoggingEvent loggingEvent)
+		{
+			if (loggingEvent == null)
+				throw new ArgumentNullException("loggingEvent");
+
+			using (var connection = GetConnection())
+			{
+				Save(connection, loggingEvent);
+			}
+		}
+
+		public IEnumerable<LoggingEvent> Retrieve()
+		{
+			using (var connection = GetConnection())
+			{ 
+				var sql = string.Format("select top 500 * from [{0}}].[{1}]", Schema, TableName);
+				return connection.Query<MsSqlLoggingEvent>(sql, null).Select(x => MsSqlLoggingEvent.Deserialize(x));
+			}
+		}
+
 		protected void Save(IDbConnection connection, LoggingEvent loggingEvent)
 		{
 			var sql = @"insert into [{0}].[{1}] ([EventId], [Timestamp], [Level], [Value], [Text], [Source], [User], [Tags], [Data])
 						values (@EventId, @Timestamp, @Level, @Value, @Text, @Source, @User, @Tags, @Data)";
 
 			sql = string.Format(sql, Schema, TableName);
-			connection.Execute(sql, MsSqlLoggingEvent.Create(loggingEvent));
+			connection.Execute(sql, MsSqlLoggingEvent.Serialize(loggingEvent));
 		}
 
 		protected void EnsureRepository(IDbConnection connection)

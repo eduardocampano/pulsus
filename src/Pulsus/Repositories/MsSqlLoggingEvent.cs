@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
 
@@ -6,7 +7,7 @@ namespace Pulsus.Repositories
 {
 	internal class MsSqlLoggingEvent
 	{
-		public static MsSqlLoggingEvent Create(LoggingEvent loggingEvent)
+		public static MsSqlLoggingEvent Serialize(LoggingEvent loggingEvent)
 		{
 			var result = new MsSqlLoggingEvent();
 			result.EventId = loggingEvent.EventId;
@@ -18,7 +19,21 @@ namespace Pulsus.Repositories
 			result.Data = JsonConvert.SerializeObject(loggingEvent.Data);
 			result.User = loggingEvent.User;
 			result.Source = loggingEvent.Source;
+			return result;
+		}
 
+		public static LoggingEvent Deserialize(MsSqlLoggingEvent mssqlLoggingEvent)
+		{
+			var result = new LoggingEvent();
+			result.EventId = mssqlLoggingEvent.EventId;
+			result.Timestamp = mssqlLoggingEvent.Timestamp;
+			result.Level = mssqlLoggingEvent.Level;
+			result.Value = mssqlLoggingEvent.Value;
+			result.Text = mssqlLoggingEvent.Text;
+			result.Tags = Pulsus.Tags.Clean(mssqlLoggingEvent.Tags).ToList();
+			result.Data = JsonConvert.DeserializeObject<Dictionary<string, object>>(mssqlLoggingEvent.Data);
+			result.User = mssqlLoggingEvent.User;
+			result.Source = mssqlLoggingEvent.Source;
 			return result;
 		}
 

@@ -58,11 +58,11 @@ namespace Pulsus.Repositories
 			}
 		}
 
-		public IEnumerable<LoggingEvent> Retrieve()
+		public IEnumerable<LoggingEvent> Retrieve(int take)
 		{
 			using (var connection = GetConnection())
 			{ 
-				var sql = string.Format("select top 500 * from [{0}}].[{1}]", Schema, TableName);
+				var sql = string.Format("select top {2} * from [{0}}].[{1}]", Schema, TableName, take);
 				return connection.Query<MsSqlLoggingEvent>(sql, null).Select(x => MsSqlLoggingEvent.Deserialize(x));
 			}
 		}

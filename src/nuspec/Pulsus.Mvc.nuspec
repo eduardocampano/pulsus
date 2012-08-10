@@ -9,7 +9,6 @@
 	<projectUrl>http://www.nuget.org/packages/Pulsus.Mvc</projectUrl>
 	<requireLicenseAcceptance>false</requireLicenseAcceptance>
 	<description>ASP.NET MVC integration for Pulsus logging library</description>
-	<copyright>Copyright 2012 AW Systems Inc.</copyright>
 	<tags>log logging log trace tracing error exception pulsus</tags>
 	<dependencies>
 		<dependency id="Pulsus" version="1.1.0" />

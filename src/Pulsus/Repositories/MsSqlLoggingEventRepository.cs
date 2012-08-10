@@ -58,7 +58,12 @@ namespace Pulsus.Repositories
 			}
 		}
 
-		public IEnumerable<LoggingEvent> Retrieve(int take)
+	    public IEnumerable<LoggingEvent> Retrieve()
+	    {
+	        throw new NotImplementedException();
+	    }
+
+	    public IEnumerable<LoggingEvent> Retrieve(int take)
 		{
 			using (var connection = GetConnection())
 			{ 

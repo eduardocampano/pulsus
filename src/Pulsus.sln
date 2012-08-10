@@ -20,6 +20,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nuspec", "nuspec", "{3A3400
 		nuspec\Pulsus.nuspec = nuspec\Pulsus.nuspec
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pulsus.Tests", "Pulsus.Tests\Pulsus.Tests.csproj", "{3B96CB2C-DFE0-4993-B0FD-A881F65FFC0D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,6 +32,10 @@ Global
 		{377B7691-D2D9-4451-A7AA-DC478B5F9C25}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{377B7691-D2D9-4451-A7AA-DC478B5F9C25}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{377B7691-D2D9-4451-A7AA-DC478B5F9C25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B96CB2C-DFE0-4993-B0FD-A881F65FFC0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B96CB2C-DFE0-4993-B0FD-A881F65FFC0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B96CB2C-DFE0-4993-B0FD-A881F65FFC0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B96CB2C-DFE0-4993-B0FD-A881F65FFC0D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{65BEE1C8-459A-46FA-90C6-4467EDE2E012}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{65BEE1C8-459A-46FA-90C6-4467EDE2E012}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{65BEE1C8-459A-46FA-90C6-4467EDE2E012}.Release|Any CPU.ActiveCfg = Release|Any CPU

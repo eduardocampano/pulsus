@@ -14,37 +14,35 @@ namespace Pulsus
 			ExceptionsToIgnore.Add("PotentiallyDangerousRequests", e => e is HttpException && e.Message.StartsWith("A potentially dangerous Request", StringComparison.InvariantCulture));
 		}
 
-		private static IEventFactory eventsFactory = new DefaultEventFactory();
+		private static IEventFactory _eventsFactory = new DefaultEventFactory();
 
 		public static IEventFactory EventFactory
 		{
 			get
 			{
-				return eventsFactory;
+				return _eventsFactory;
 			}
 			set
 			{
 				if (value == null)
 					throw new ArgumentNullException("value");
 
-				eventsFactory = value;	
+				_eventsFactory = value;	
 			}
 		}
 
-		private static IEventDispatcher eventDispatcher = new DefaultEventDispatcher();
+	    private static IEventDispatcher _eventDispatcher = new DefaultEventDispatcher();
+	        
 
 		public static IEventDispatcher EventDispatcher
 		{
-			get
-			{
-				return eventDispatcher;
-			}
+			get { return _eventDispatcher; }
 			set
 			{
 				if (value == null)
 					throw new ArgumentNullException("value");
 
-				eventDispatcher = value;
+				_eventDispatcher = value;
 			}
 		}
 

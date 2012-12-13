@@ -1,0 +1,242 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A0AC0A9A-0145-43FE-A850-9BBDF5701B60}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Pulsus</RootNamespace>
+    <AssemblyName>Pulsus</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <BaseDir Condition="$(BaseDir) == '' Or $(BaseDir) == '*Undefined*'">..\..\</BaseDir>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>..\Pulsus\Pulsus.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.8\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\Pulsus\Configuration\ConfigurationManager.cs">
+      <Link>Configuration\ConfigurationManager.cs</Link>
+    </Compile>
+    <Compile Include="..\Pulsus\Configuration\EmailElement.cs">
+      <Link>Configuration\EmailElement.cs</Link>
+    </Compile>
+    <Compile Include="..\Pulsus\Configuration\EmailSettings.cs">
+      <Link>Configuration\EmailSettings.cs</Link>
+    </Compile>
+    <Compile Include="..\Pulsus\Configuration\IEmailSettings.cs">
+      <Link>Configuration\IEmailSettings.cs</Link>
+    </Compile>
+    <Compile Include="..\Pulsus\Configuration\IMsSqlSettings.cs">
+      <Link>Configuration\IMsSqlSettings.cs</Link>
+    </Compile>
+    <Compile Include="..\Pulsus\Configuration\IPulsusSettings.cs">
+      <Link>Configuration\IPulsusSettings.cs</Link>
+    </Compile>
+    <Compile Include="..\Pulsus\Configuration\IServerSettings.cs">
+      <Link>Configuration\IServerSettings.cs</Link>
+    </Compile>
+    <Compile Include="..\Pulsus\Configuration\MsSqlElement.cs">
+      <Link>Configuration\MsSqlElement.cs</Link>
+    </Compile>
+    <Compile Include="..\Pulsus\Configuration\MsSqlSettings.cs">
+      <Link>Configuration\MsSqlSettings.cs</Link>
+    </Compile>
+    <Compile Include="..\Pulsus\Configuration\PulsusSection.cs">
+      <Link>Configuration\PulsusSection.cs</Link>
+    </Compile>
+    <Compile Include="..\Pulsus\Configuration\PulsusSettings.cs">
+      <Link>Configuration\PulsusSettings.cs</Link>
+    </Compile>
+    <Compile Include="..\Pulsus\Configuration\ServerElement.cs">
+      <Link>Configuration\ServerElement.cs</Link>
+    </Compile>
+    <Compile Include="..\Pulsus\Configuration\ServerSettings.cs">
+      <Link>Configuration\ServerSettings.cs</Link>
+    </Compile>
+    <Compile Include="..\Pulsus\DefaultEventDispatcher.cs">
+      <Link>DefaultEventDispatcher.cs</Link>
+    </Compile>
+    <Compile Include="..\Pulsus\DefaultEventFactory.cs">
+      <Link>DefaultEventFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\Pulsus\ErrorLoggingModule.cs">
+      <Link>ErrorLoggingModule.cs</Link>
+    </Compile>
+    <Compile Include="..\Pulsus\ExceptionInformation.cs">
+      <Link>ExceptionInformation.cs</Link>
+    </Compile>
+    <Compile Include="..\Pulsus\HttpContextInformation.cs">
+      <Link>HttpContextInformation.cs</Link>
+    </Compile>
+    <Compile Include="..\Pulsus\IEventDispatcher.cs">
+      <Link>IEventDispatcher.cs</Link>
+    </Compile>
+    <Compile Include="..\Pulsus\IEventFactory.cs">
+      <Link>IEventFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\Pulsus\ILoggingEventBuilder.cs">
+      <Link>ILoggingEventBuilder.cs</Link>
+    </Compile>
+    <Compile Include="..\Pulsus\Internal\Constants.cs">
+      <Link>Internal\Constants.cs</Link>
+    </Compile>
+    <Compile Include="..\Pulsus\Internal\EmailTemplate.cs">
+      <Link>Internal\EmailTemplate.cs</Link>
+    </Compile>
+    <Compile Include="..\Pulsus\Internal\EmailTemplate.generated.cs">
+      <Link>Internal\EmailTemplate.generated.cs</Link>
+      <DependentUpon>EmailTemplate.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="..\Pulsus\Internal\EmailTemplateModel.cs">
+      <Link>Internal\EmailTemplateModel.cs</Link>
+    </Compile>
+    <Compile Include="..\Pulsus\Internal\EnvironmentHelpers.cs">
+      <Link>Internal\EnvironmentHelpers.cs</Link>
+    </Compile>
+    <Compile Include="..\Pulsus\Internal\ExceptionHelpers.cs">
+      <Link>Internal\ExceptionHelpers.cs</Link>
+    </Compile>
+    <Compile Include="..\Pulsus\Internal\FileSizeFormatProvider.cs">
+      <Link>FileSizeFormatProvider.cs</Link>
+    </Compile>
+    <Compile Include="..\Pulsus\Internal\ITimer.cs">
+      <Link>Internal\ITimer.cs</Link>
+    </Compile>
+    <Compile Include="..\Pulsus\Internal\LoggingEventQueue.cs">
+      <Link>Internal\LoggingEventQueue.cs</Link>
+    </Compile>
+    <Compile Include="..\Pulsus\Internal\ObjectHelpers.cs">
+      <Link>Internal\ObjectHelpers.cs</Link>
+    </Compile>
+    <Compile Include="..\Pulsus\Internal\PulsusLogger.cs">
+      <Link>Internal\PulsusLogger.cs</Link>
+    </Compile>
+    <Compile Include="..\Pulsus\Internal\RazorTemplateBase.cs">
+      <Link>Internal\RazorTemplateBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Pulsus\Internal\SqlMapper.cs">
+      <Link>Internal\SqlMapper.cs</Link>
+    </Compile>
+    <Compile Include="..\Pulsus\Internal\StackTraceHelper.cs">
+      <Link>Internal\StackTraceHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\Pulsus\Internal\TagHelpers.cs">
+      <Link>Internal\TagHelpers.cs</Link>
+    </Compile>
+    <Compile Include="..\Pulsus\Internal\TimerWrapper.cs">
+      <Link>Internal\TimerWrapper.cs</Link>
+    </Compile>
+    <Compile Include="..\Pulsus\LoggingEvent.cs">
+      <Link>LoggingEvent.cs</Link>
+    </Compile>
+    <Compile Include="..\Pulsus\LoggingEventBuilder.cs">
+      <Link>LoggingEventBuilder.cs</Link>
+    </Compile>
+    <Compile Include="..\Pulsus\LoggingEventBuilderExtensions.cs">
+      <Link>LoggingEventBuilderExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Pulsus\LoggingEventExtensions.cs">
+      <Link>LoggingEventExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Pulsus\LoggingEventLevel.cs">
+      <Link>LoggingEventLevel.cs</Link>
+    </Compile>
+    <Compile Include="..\Pulsus\LogManager.cs">
+      <Link>LogManager.cs</Link>
+    </Compile>
+    <Compile Include="..\Pulsus\Repositories\ILoggingEventRepository.cs">
+      <Link>Repositories\ILoggingEventRepository.cs</Link>
+    </Compile>
+    <Compile Include="..\Pulsus\Repositories\MsSqlLoggingEvent.cs">
+      <Link>Repositories\MsSqlLoggingEvent.cs</Link>
+    </Compile>
+    <Compile Include="..\Pulsus\Repositories\MsSqlLoggingEventRepository.cs">
+      <Link>Repositories\MsSqlLoggingEventRepository.cs</Link>
+    </Compile>
+    <Compile Include="..\Pulsus\SqlInformation.cs">
+      <Link>SqlInformation.cs</Link>
+    </Compile>
+    <Compile Include="..\Pulsus\Targets\AsyncWrapperTarget.cs">
+      <Link>Targets\AsyncWrapperTarget.cs</Link>
+    </Compile>
+    <Compile Include="..\Pulsus\Targets\EmailTarget.cs">
+      <Link>Targets\EmailTarget.cs</Link>
+    </Compile>
+    <Compile Include="..\Pulsus\Targets\ITarget.cs">
+      <Link>Targets\ITarget.cs</Link>
+    </Compile>
+    <Compile Include="..\Pulsus\Targets\MsSqlTarget.cs">
+      <Link>Targets\MsSqlTarget.cs</Link>
+    </Compile>
+    <Compile Include="..\Pulsus\Targets\ServerTarget.cs">
+      <Link>Targets\ServerTarget.cs</Link>
+    </Compile>
+    <Compile Include="..\Pulsus\Targets\SyncWrapperTarget.cs">
+      <Link>Targets\SyncWrapperTarget.cs</Link>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Pulsus\Internal\EmailTemplate.cshtml">
+      <Link>Internal\EmailTemplate.cshtml</Link>
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>EmailTemplate.generated.cs</LastGenOutput>
+    </None>
+    <None Include="..\Pulsus\packages.config">
+      <Link>packages.config</Link>
+    </None>
+    <None Include="..\Pulsus\Pulsus.snk">
+      <Link>Pulsus.snk</Link>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(BaseDir)\tools\.nuget\nuget.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<VisualState xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ShowCheckBoxes="false">
+  <TopNode>[0-1000]C:\Projects\personal\Pulsus\src\Pulsus.nunit</TopNode>
+  <SelectedNode>[0-1003]Pulsus.Tests.DefaultEventDispatcherTests.CanPushToDefaultTargets</SelectedNode>
+  <ExcludeCategories>false</ExcludeCategories>
+  <Nodes>
+    <Node UniqueName="[0-1000]C:\Projects\personal\Pulsus\src\Pulsus.nunit" Expanded="true" />
+    <Node UniqueName="[0-1005]C:\Projects\personal\Pulsus\src\Pulsus.Tests\bin\Debug\Pulsus.Tests.dll" Expanded="true" />
+    <Node UniqueName="[0-1006]Pulsus" Expanded="true" />
+    <Node UniqueName="[0-1007]Pulsus.Tests" Expanded="true" />
+    <Node UniqueName="[0-1001]Pulsus.Tests.DefaultEventDispatcherTests" Expanded="true" />
+  </Nodes>
+</VisualState>

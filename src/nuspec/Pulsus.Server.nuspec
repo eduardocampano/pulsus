@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+	<id>Pulsus.Server</id>
+	<version>0.1.3</version>
+	<title>Pulsus.Server</title>
+	<authors>Eduardo Campañó, Juan Pedro Elizalde</authors>
+	<owners>Eduardo Campañó</owners>
+	<projectUrl>https://github.com/eduardocampano/Pulsus</projectUrl>
+	<requireLicenseAcceptance>false</requireLicenseAcceptance>
+	<description>The server component to receive pulsus events</description>
+	<tags>log logging log trace tracing error exception pulsus</tags>
+	<dependencies>
+	  <dependency id="Newtonsoft.Json" version="4.5.11" />
+	  <dependency id="WebActivator" version="1.5.2" />
+	  <dependency id="Pulsus" version="1.5.5" />
+	  <dependency id="Microsoft.AspNet.WebApi.WebHost" version="4.0.20710.0" />
+	</dependencies>
+  </metadata>
+</package>

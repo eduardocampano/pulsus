@@ -1,0 +1,36 @@
+# Build Folders (you can keep bin if you'd like, to store dlls and pdbs)
+[Oo]bj/
+[Bb]in/
+
+# Nuget packages folder
+src/packages
+src/nuspec/*.nupkg
+src/nuspec/Packages
+src/nuspec/msbuild.log
+
+# .user and .suo
+*.user
+*.suo
+/TestResults
+*.vspscc
+*.vssscc
+deploy
+deploy/*
+*.cache
+*.docstates
+_ReSharper.*
+*.csproj.user
+*[Rr]e[Ss]harper.user
+_ReSharper.*/
+packages/*
+artifacts/*
+msbuild.log
+PublishProfiles/
+*.psess
+*.vsp
+*.pidb
+*.userprefs
+*DS_Store
+*.ncrunchsolution
+*.log
+TestResult.xml

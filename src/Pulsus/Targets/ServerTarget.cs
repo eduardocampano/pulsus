@@ -11,7 +11,6 @@ namespace Pulsus.Targets
 	public class ServerTarget : Target
 	{
 		private readonly JsonSerializerSettings _serializerSettings;
-		private const string LogKeyHeader = "X-PULSUS-LOGKEY";
 		private const string ApiKeyHeader = "X-PULSUS-APIKEY";
 
 		public ServerTarget()
@@ -72,7 +71,6 @@ namespace Pulsus.Targets
 			request.UserAgent = "Pulsus " + PulsusLogger.Version;
 			request.Method = "POST";
 			request.ContentType = "application/json";
-			request.Headers.Add(LogKeyHeader, LogKey);
 			request.Headers.Add(ApiKeyHeader, ApiKey);
 
 			var bytes = GetRequestBody(loggingEvents, Compress);

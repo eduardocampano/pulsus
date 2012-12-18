@@ -11,7 +11,6 @@ namespace Pulsus.Server
 {
 	public class LogController : ApiController
 	{
-		private const string LogKeyHeader = "X-PULSUS-LOGKEY";
 		private const string ApiKeyHeader = "X-PULSUS-APIKEY";
 
 		public HttpResponseMessage Get([FromUri] LoggingEvent loggingEvent, [FromUri] string apiKey)
@@ -34,7 +33,6 @@ namespace Pulsus.Server
 
 		public HttpResponseMessage Post(LoggingEvent[] loggingEvents)
 		{
-			var logKey = GetHeader(LogKeyHeader);
 			var apiKey = GetHeader(ApiKeyHeader);
 
 			if (loggingEvents == null || !loggingEvents.Any())
@@ -45,7 +43,7 @@ namespace Pulsus.Server
 
 			foreach (var loggingEvent in loggingEvents)
 			{
-				Validate(logKey, loggingEvent);
+				Validate(loggingEvent);
 			}
 			
 			LogManager.Push(loggingEvents);
@@ -53,11 +51,8 @@ namespace Pulsus.Server
 			return Request.CreateResponse(HttpStatusCode.OK);
 		}
 
-		protected void Validate(string logKey, LoggingEvent loggingEvent)
+		protected void Validate(LoggingEvent loggingEvent)
 		{
-			// override log key
-			loggingEvent.LogKey = logKey;
-
 			// ensure EventId
 			if (loggingEvent.EventId == Guid.Empty)
 				loggingEvent.EventId = Guid.NewGuid();

@@ -32,9 +32,6 @@ namespace Pulsus.Targets
 			if (loggingEvents == null)
 				throw new ArgumentNullException("loggingEvents");
 
-			if (!Enabled)
-				return;
-
 			if (string.IsNullOrEmpty(AccessKey))
 				throw new Exception("You must define an AccessKey");
 

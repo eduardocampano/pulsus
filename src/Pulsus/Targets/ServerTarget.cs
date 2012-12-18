@@ -29,9 +29,6 @@ namespace Pulsus.Targets
 			if (loggingEvents == null)
 				throw new ArgumentNullException("loggingEvents");
 
-			//if (!Enabled)
-			//	return;
-
 			//if (string.IsNullOrEmpty(Url))
 			//	throw new Exception("There is no URL defined for the server target.");
 

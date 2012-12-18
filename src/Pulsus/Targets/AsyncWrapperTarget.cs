@@ -49,7 +49,9 @@ namespace Pulsus.Targets
 			set
 			{
 				_timerInterval = value;
-				TimerIntervalChanged(value);
+
+				if (TimerIntervalChanged != null)
+					TimerIntervalChanged(value);
 			}
 		}
 
@@ -91,6 +93,9 @@ namespace Pulsus.Targets
 
 		public override void Push(LoggingEvent[] loggingEvents)
 		{
+			if (loggingEvents == null)
+				throw new ArgumentNullException("loggingEvents");
+
 			_queue.Enqueue(loggingEvents);
 		}
 

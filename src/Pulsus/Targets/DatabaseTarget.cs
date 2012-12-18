@@ -28,9 +28,6 @@ namespace Pulsus.Targets
 			if (loggingEvents == null)
 				throw new ArgumentNullException("loggingEvents");
 
-			if (!Enabled)
-				return;
-
 			var connection = GetConnection();
 
             if (!_initialized)

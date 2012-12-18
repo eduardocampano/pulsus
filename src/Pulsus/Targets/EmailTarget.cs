@@ -22,9 +22,6 @@ namespace Pulsus.Targets
 			if (loggingEvents == null)
 				throw new ArgumentNullException("loggingEvents");
 
-			if (!Enabled)
-				return;
-
 			foreach (var loggingEvent in loggingEvents)
 			{
 				var mailMessage = PrepareEmail(loggingEvent);

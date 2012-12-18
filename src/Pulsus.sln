@@ -18,6 +18,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nuspec", "nuspec", "{3A3400
 		nuspec\Pulsus.Mvc.nuspec = nuspec\Pulsus.Mvc.nuspec
 		nuspec\Pulsus.nuspec = nuspec\Pulsus.nuspec
 		nuspec\Pulsus.Server.nuspec = nuspec\Pulsus.Server.nuspec
+		nuspec\Pulsus.Web.nuspec = nuspec\Pulsus.Web.nuspec
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pulsus.Tests", "Pulsus.Tests\Pulsus.Tests.csproj", "{3B96CB2C-DFE0-4993-B0FD-A881F65FFC0D}"
@@ -31,6 +32,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleServer", "..\samples\SampleServer\SampleServer.csproj", "{8604AE21-0439-474B-91C3-BA462C7CAD17}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleConsole", "..\samples\SampleConsole\SampleConsole.csproj", "{FAFBEF0C-F898-4058-8158-33BB363D96ED}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{67BCDE09-3B50-42CE-ABC9-746872DDE8E0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pulsus.Web", "Pulsus.Web\Pulsus.Web.csproj", "{D7B90DA4-3BC1-4285-899E-674DE0A811CF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -70,8 +75,17 @@ Global
 		{FAFBEF0C-F898-4058-8158-33BB363D96ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FAFBEF0C-F898-4058-8158-33BB363D96ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FAFBEF0C-F898-4058-8158-33BB363D96ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7B90DA4-3BC1-4285-899E-674DE0A811CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7B90DA4-3BC1-4285-899E-674DE0A811CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7B90DA4-3BC1-4285-899E-674DE0A811CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7B90DA4-3BC1-4285-899E-674DE0A811CF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8604AE21-0439-474B-91C3-BA462C7CAD17} = {67BCDE09-3B50-42CE-ABC9-746872DDE8E0}
+		{FAFBEF0C-F898-4058-8158-33BB363D96ED} = {67BCDE09-3B50-42CE-ABC9-746872DDE8E0}
+		{377B7691-D2D9-4451-A7AA-DC478B5F9C25} = {67BCDE09-3B50-42CE-ABC9-746872DDE8E0}
 	EndGlobalSection
 EndGlobal

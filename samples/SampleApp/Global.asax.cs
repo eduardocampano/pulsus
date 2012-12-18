@@ -15,8 +15,8 @@ namespace Pulsus.Sample
 			RouteConfig.RegisterRoutes(RouteTable.Routes);
 			BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-			LogManager.Settings.IncludeHttpContext = true;
-			LogManager.Settings.IncludeStackTrace = true;
+			LogManager.Configuration.IncludeHttpContext = true;
+			LogManager.Configuration.IncludeStackTrace = true;
 		}
 	}
 }

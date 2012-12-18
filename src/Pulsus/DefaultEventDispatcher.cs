@@ -8,9 +8,9 @@ namespace Pulsus
 {
 	public class DefaultEventDispatcher : IEventDispatcher
 	{
-		private readonly IEnumerable<ITarget> _targets; 
+		private readonly IEnumerable<Target> _targets; 
 
-		public DefaultEventDispatcher(IEnumerable<ITarget> targets = null)
+		public DefaultEventDispatcher(IEnumerable<Target> targets = null)
 		{
 			_targets = targets;
 		}
@@ -32,7 +32,7 @@ namespace Pulsus
 			}
 		}
 
-		protected virtual ITarget[] GetTargets()
+		protected virtual Target[] GetTargets()
 		{
 			return _targets.Where(t => t.Enabled).ToArray();
 		}

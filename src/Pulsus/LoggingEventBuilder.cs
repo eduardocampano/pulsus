@@ -106,7 +106,7 @@ namespace Pulsus
 
 		protected void AddConfiguration()
 		{
-			var configurationTags = LogManager.Settings.Tags;
+			var configurationTags = LogManager.Configuration.Tags;
             if (!string.IsNullOrEmpty(configurationTags))
             {
                 foreach (var tag in TagHelpers.Clean(configurationTags))

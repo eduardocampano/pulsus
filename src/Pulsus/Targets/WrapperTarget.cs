@@ -3,13 +3,13 @@ using Pulsus.Internal;
 
 namespace Pulsus.Targets
 {
-	public class SyncWrapperTarget : ITarget, IRegisteredObject
+	public class WrapperTarget : Target, IRegisteredObject
 	{
         private readonly object _locker = new object();
         private bool _shuttingDown;
-		protected readonly ITarget WrappedTarget;
+		protected readonly Target WrappedTarget;
 
-		public SyncWrapperTarget(ITarget wrappedTarget)
+		public WrapperTarget(Target wrappedTarget)
         {
 			WrappedTarget = wrappedTarget;
 
@@ -17,15 +17,20 @@ namespace Pulsus.Targets
 				HostingEnvironment.RegisterObject(this);	
         }
 
-		public virtual bool Enabled
+		public override bool Enabled
 		{
 			get
 			{
 				return WrappedTarget.Enabled;
 			}
+
+			set
+			{
+				WrappedTarget.Enabled = value;
+			}
 		}
 
-		public virtual void Push(LoggingEvent[] loggingEvents)
+		public override void Push(LoggingEvent[] loggingEvents)
 		{
 			if (HostingEnvironment.IsHosted)
 			{
@@ -58,10 +63,5 @@ namespace Pulsus.Targets
 
             HostingEnvironment.UnregisterObject(this);
 	    }
-
-		public override string ToString()
-		{
-			return string.Format("{0} wrapping ({1})", GetType().Name, WrappedTarget);
-		}
 	}
 }

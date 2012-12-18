@@ -14,7 +14,7 @@ namespace Pulsus.Internal
 
 		static PulsusLogger()
 		{
-			DebugFile = LogManager.Settings.Debug ? LogManager.Settings.DebugFile : null;
+			DebugFile = LogManager.Configuration.Debug ? LogManager.Configuration.DebugFile : null;
 			if (DebugFile != null)
 			{
 

@@ -66,19 +66,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Configuration\ConfigurationManager.cs" />
-    <Compile Include="Configuration\EmailElement.cs" />
-    <Compile Include="Configuration\EmailSettings.cs" />
-    <Compile Include="Configuration\IEmailSettings.cs" />
-    <Compile Include="Configuration\IMsSqlSettings.cs" />
-    <Compile Include="Configuration\IPulsusSettings.cs" />
-    <Compile Include="Configuration\IServerSettings.cs" />
-    <Compile Include="Configuration\MsSqlElement.cs" />
-    <Compile Include="Configuration\MsSqlSettings.cs" />
-    <Compile Include="Configuration\PulsusSection.cs" />
-    <Compile Include="Configuration\PulsusSettings.cs" />
-    <Compile Include="Configuration\ServerElement.cs" />
-    <Compile Include="Configuration\ServerSettings.cs" />
+    <Compile Include="Configuration\PulsusConfiguration.cs" />
     <Compile Include="DefaultEventDispatcher.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -88,13 +76,15 @@
     <Compile Include="Internal\EnvironmentHelpers.cs" />
     <Compile Include="Internal\ExceptionHelpers.cs" />
     <Compile Include="Internal\FileSizeFormatProvider.cs" />
+    <Compile Include="Internal\HaackFormatter.cs" />
     <Compile Include="Internal\ITimer.cs" />
     <Compile Include="Internal\ObjectHelpers.cs" />
     <Compile Include="Internal\TagHelpers.cs" />
     <Compile Include="Internal\TimerWrapper.cs" />
     <Compile Include="LoggingEventExtensions.cs" />
     <Compile Include="SqlInformation.cs" />
-    <Compile Include="Targets\SyncWrapperTarget.cs" />
+    <Compile Include="Targets\AmazonS3Target.cs" />
+    <Compile Include="Targets\WrapperTarget.cs" />
     <Compile Include="DefaultEventFactory.cs" />
     <Compile Include="ErrorLoggingModule.cs" />
     <Compile Include="HttpContextInformation.cs" />
@@ -110,22 +100,20 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>EmailTemplate.cshtml</DependentUpon>
     </Compile>
-    <Compile Include="Targets\ITarget.cs" />
     <Compile Include="IEventFactory.cs" />
     <Compile Include="Internal\LoggingEventQueue.cs" />
     <Compile Include="Targets\ServerTarget.cs" />
     <Compile Include="Targets\EmailTarget.cs" />
-    <Compile Include="Targets\MsSqlTarget.cs" />
+    <Compile Include="Targets\DatabaseTarget.cs" />
     <Compile Include="LoggingEventLevel.cs" />
     <Compile Include="LogManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ExceptionInformation.cs" />
     <Compile Include="LoggingEventBuilderExtensions.cs" />
-    <Compile Include="Repositories\ILoggingEventRepository.cs" />
-    <Compile Include="Repositories\MsSqlLoggingEvent.cs" />
-    <Compile Include="Repositories\MsSqlLoggingEventRepository.cs" />
+    <Compile Include="Internal\DatabaseLoggingEvent.cs" />
     <Compile Include="Internal\SqlMapper.cs" />
     <Compile Include="Internal\StackTraceHelper.cs" />
+    <Compile Include="Targets\Target.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

@@ -1,29 +1,23 @@
 ﻿using System;
 using System.Net;
 using System.Net.Mail;
-using Pulsus.Configuration;
 using Pulsus.Internal;
 
 namespace Pulsus.Targets
 {
-	public class EmailTarget : ITarget
+	public class EmailTarget : Target
 	{
-		private readonly IPulsusSettings _settings;
-
-		public EmailTarget(IPulsusSettings settings)
-		{
-			_settings = settings;
-		}
-
-		public bool Enabled
-		{
-			get
-			{
-				return _settings.Email.Enabled;
-			}
-		}
-
-		public void Push(LoggingEvent[] loggingEvents)
+		public string From { get; set; }
+		public string To { get; set; }
+		public string Subject { get; set; }
+		public string Link { get; set; }
+		public string SmtpServer { get; set; }
+		public int SmtpPort { get; set; }
+		public string SmtpUsername { get; set; }
+		public string SmtpPassword { get; set; }
+		public bool SmtpEnableSsl { get; set; }
+		
+		public override void Push(LoggingEvent[] loggingEvents)
 		{
 			if (loggingEvents == null)
 				throw new ArgumentNullException("loggingEvents");
@@ -40,9 +34,10 @@ namespace Pulsus.Targets
 
 		protected MailMessage PrepareEmail(LoggingEvent loggingEvent)
 		{
-			var model = new EmailTemplateModel(loggingEvent, _settings);
+			var model = new EmailTemplateModel(loggingEvent, Subject, Link);
 
-			var mailMessage = new MailMessage(_settings.Email.From, _settings.Email.To);
+			var mailMessage = new MailMessage(From, To);
+
 			mailMessage.Subject = model.Subject;
 			mailMessage.IsBodyHtml = true;
 			mailMessage.Body = PrepareEmailBody(model);
@@ -60,7 +55,7 @@ namespace Pulsus.Targets
 		{
 			var client = new SmtpClient();
 
-			var host = _settings.Email.SmtpServer ?? string.Empty;
+			var host = SmtpServer ?? string.Empty;
 
 			if (host.Length > 0)
 			{
@@ -68,29 +63,24 @@ namespace Pulsus.Targets
 				client.DeliveryMethod = SmtpDeliveryMethod.Network;
 			}
 
-			var port = _settings.Email.SmtpPort;
+			var port = SmtpPort;
 			if (port > 0)
 				client.Port = port;
 
-			client.EnableSsl = _settings.Email.SmtpEnableSsl;
+			client.EnableSsl = SmtpEnableSsl;
 
-			if (string.IsNullOrEmpty(_settings.Email.SmtpUsername))
+			if (string.IsNullOrEmpty(SmtpUsername))
 				client.UseDefaultCredentials = true;
 			else
 			{
-				var userName = _settings.Email.SmtpUsername;
-				var password = _settings.Email.SmtpPassword ?? string.Empty;
+				var userName = SmtpUsername;
+				var password = SmtpPassword ?? string.Empty;
 
 				if (userName.Length > 0 && password.Length > 0)
 					client.Credentials = new NetworkCredential(userName, password);
 			}
 
 			client.Send(mailMessage);
-		}
-
-		public override string ToString()
-		{
-			return string.Format("[Email] From: {0}, To: {1}", _settings.Email.From, _settings.Email.To);
 		}
 	}
 }

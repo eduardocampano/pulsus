@@ -6,9 +6,9 @@ namespace Pulsus.Mvc
 {
 	public class DependencyResolverEventDispatcher : DefaultEventDispatcher
 	{
-		protected override ITarget[] GetTargets()
+		protected override Target[] GetTargets()
 		{
-			var targets = DependencyResolver.Current.GetServices<ITarget>().ToArray();
+			var targets = DependencyResolver.Current.GetServices<Target>().ToArray();
 			if (targets.Any())
 				return targets;
 

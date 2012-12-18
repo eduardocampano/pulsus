@@ -6,15 +6,15 @@ namespace Pulsus
 {
 	public class DefaultEventFactory : IEventFactory
 	{
-        private readonly IPulsusSettings _settings;
+        private readonly PulsusConfiguration _configuration;
 
-        public DefaultEventFactory() : this(LogManager.Settings)
+        public DefaultEventFactory() : this(LogManager.Configuration)
 	    {
 	    }
 
-        public DefaultEventFactory(IPulsusSettings settings)
+        public DefaultEventFactory(PulsusConfiguration configuration)
         {
-            _settings = settings;
+            _configuration = configuration;
         }
 
         public virtual LoggingEventBuilder Create()
@@ -32,16 +32,16 @@ namespace Pulsus
         protected virtual void Initialize<T>(T instance) where T : class, ILoggingEventBuilder<T>
 	    {
 	        var loggingEventBuilder = instance.Date(DateTime.Now, true)
-												.Level(_settings.DefaultEventLevel);
+												.Level(_configuration.DefaultEventLevel);
 
-			loggingEventBuilder.LoggingEvent.LogKey = _settings.LogKey;
+			loggingEventBuilder.LoggingEvent.LogKey = _configuration.LogKey;
 			loggingEventBuilder.LoggingEvent.MachineName = EnvironmentHelpers.TryGetMachineName();
 			loggingEventBuilder.LoggingEvent.Count = 1;
 
-			if (_settings.IncludeHttpContext)
+			if (_configuration.IncludeHttpContext)
 				loggingEventBuilder.AddHttpContext();
 
-            if (_settings.IncludeStackTrace)
+            if (_configuration.IncludeStackTrace)
 				loggingEventBuilder.AddStrackTrace();
 	    }
 	}

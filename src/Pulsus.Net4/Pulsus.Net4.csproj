@@ -53,44 +53,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\Pulsus\Configuration\ConfigurationManager.cs">
-      <Link>Configuration\ConfigurationManager.cs</Link>
-    </Compile>
-    <Compile Include="..\Pulsus\Configuration\EmailElement.cs">
-      <Link>Configuration\EmailElement.cs</Link>
-    </Compile>
-    <Compile Include="..\Pulsus\Configuration\EmailSettings.cs">
-      <Link>Configuration\EmailSettings.cs</Link>
-    </Compile>
-    <Compile Include="..\Pulsus\Configuration\IEmailSettings.cs">
-      <Link>Configuration\IEmailSettings.cs</Link>
-    </Compile>
-    <Compile Include="..\Pulsus\Configuration\IMsSqlSettings.cs">
-      <Link>Configuration\IMsSqlSettings.cs</Link>
-    </Compile>
-    <Compile Include="..\Pulsus\Configuration\IPulsusSettings.cs">
-      <Link>Configuration\IPulsusSettings.cs</Link>
-    </Compile>
-    <Compile Include="..\Pulsus\Configuration\IServerSettings.cs">
-      <Link>Configuration\IServerSettings.cs</Link>
-    </Compile>
-    <Compile Include="..\Pulsus\Configuration\MsSqlElement.cs">
-      <Link>Configuration\MsSqlElement.cs</Link>
-    </Compile>
-    <Compile Include="..\Pulsus\Configuration\MsSqlSettings.cs">
-      <Link>Configuration\MsSqlSettings.cs</Link>
-    </Compile>
-    <Compile Include="..\Pulsus\Configuration\PulsusSection.cs">
-      <Link>Configuration\PulsusSection.cs</Link>
-    </Compile>
-    <Compile Include="..\Pulsus\Configuration\PulsusSettings.cs">
-      <Link>Configuration\PulsusSettings.cs</Link>
-    </Compile>
-    <Compile Include="..\Pulsus\Configuration\ServerElement.cs">
-      <Link>Configuration\ServerElement.cs</Link>
-    </Compile>
-    <Compile Include="..\Pulsus\Configuration\ServerSettings.cs">
-      <Link>Configuration\ServerSettings.cs</Link>
+    <Compile Include="..\Pulsus\Configuration\PulsusConfiguration.cs">
+      <Link>Configuration\PulsusConfiguration.cs</Link>
     </Compile>
     <Compile Include="..\Pulsus\DefaultEventDispatcher.cs">
       <Link>DefaultEventDispatcher.cs</Link>
@@ -119,6 +83,9 @@
     <Compile Include="..\Pulsus\Internal\Constants.cs">
       <Link>Internal\Constants.cs</Link>
     </Compile>
+    <Compile Include="..\Pulsus\Internal\DatabaseLoggingEvent.cs">
+      <Link>Internal\DatabaseLoggingEvent.cs</Link>
+    </Compile>
     <Compile Include="..\Pulsus\Internal\EmailTemplate.cs">
       <Link>Internal\EmailTemplate.cs</Link>
     </Compile>
@@ -139,6 +106,9 @@
     </Compile>
     <Compile Include="..\Pulsus\Internal\FileSizeFormatProvider.cs">
       <Link>FileSizeFormatProvider.cs</Link>
+    </Compile>
+    <Compile Include="..\Pulsus\Internal\HaackFormatter.cs">
+      <Link>Internal\HaackFormatter.cs</Link>
     </Compile>
     <Compile Include="..\Pulsus\Internal\ITimer.cs">
       <Link>Internal\ITimer.cs</Link>
@@ -185,35 +155,29 @@
     <Compile Include="..\Pulsus\LogManager.cs">
       <Link>LogManager.cs</Link>
     </Compile>
-    <Compile Include="..\Pulsus\Repositories\ILoggingEventRepository.cs">
-      <Link>Repositories\ILoggingEventRepository.cs</Link>
-    </Compile>
-    <Compile Include="..\Pulsus\Repositories\MsSqlLoggingEvent.cs">
-      <Link>Repositories\MsSqlLoggingEvent.cs</Link>
-    </Compile>
-    <Compile Include="..\Pulsus\Repositories\MsSqlLoggingEventRepository.cs">
-      <Link>Repositories\MsSqlLoggingEventRepository.cs</Link>
-    </Compile>
     <Compile Include="..\Pulsus\SqlInformation.cs">
       <Link>SqlInformation.cs</Link>
+    </Compile>
+    <Compile Include="..\Pulsus\Targets\AmazonS3Target.cs">
+      <Link>Targets\AmazonS3Target.cs</Link>
     </Compile>
     <Compile Include="..\Pulsus\Targets\AsyncWrapperTarget.cs">
       <Link>Targets\AsyncWrapperTarget.cs</Link>
     </Compile>
+    <Compile Include="..\Pulsus\Targets\DatabaseTarget.cs">
+      <Link>Targets\DatabaseTarget.cs</Link>
+    </Compile>
     <Compile Include="..\Pulsus\Targets\EmailTarget.cs">
       <Link>Targets\EmailTarget.cs</Link>
-    </Compile>
-    <Compile Include="..\Pulsus\Targets\ITarget.cs">
-      <Link>Targets\ITarget.cs</Link>
-    </Compile>
-    <Compile Include="..\Pulsus\Targets\MsSqlTarget.cs">
-      <Link>Targets\MsSqlTarget.cs</Link>
     </Compile>
     <Compile Include="..\Pulsus\Targets\ServerTarget.cs">
       <Link>Targets\ServerTarget.cs</Link>
     </Compile>
-    <Compile Include="..\Pulsus\Targets\SyncWrapperTarget.cs">
-      <Link>Targets\SyncWrapperTarget.cs</Link>
+    <Compile Include="..\Pulsus\Targets\Target.cs">
+      <Link>Targets\Target.cs</Link>
+    </Compile>
+    <Compile Include="..\Pulsus\Targets\WrapperTarget.cs">
+      <Link>Targets\WrapperTarget.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

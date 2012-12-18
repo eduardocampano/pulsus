@@ -32,7 +32,7 @@ namespace Pulsus
 
 		protected virtual bool ShouldLogException(HttpApplication context, Exception exception)
 		{
-			foreach (var evaluator in LogManager.Settings.ExceptionsToIgnore.Values)
+			foreach (var evaluator in LogManager.Configuration.ExceptionsToIgnore.Values)
 			{
 				if (evaluator == null)
 					continue;

@@ -1,5 +1,6 @@
 ﻿using System;
 using Pulsus;
+using Pulsus.Targets;
 
 namespace SampleConsole
 {
@@ -7,12 +8,16 @@ namespace SampleConsole
 	{
 		static void Main(string[] args)
 		{
-			LogManager.Settings.LogKey = "Console";
-			LogManager.Settings.Server.Enabled = true;
-			LogManager.Settings.Server.Url = "http://localhost:5326/api/Log";
-			LogManager.Settings.Server.ApiKey = "11111111";
-			LogManager.Settings.Server.Compress = false;
 
+			LogManager.Configuration.LogKey = "Console";
+			//LogManager.Configuration.Targets.Add("server", new AsyncWrapperTarget(new ServerTarget()
+			//																{
+			//																	Enabled = true,
+			//																	Url = "http://localhost:5326/api/Log",
+			//																	ApiKey = "11111111",
+			//																	Compress = false
+			//																}));
+				
 			LogManager.EventFactory.Create()
 								   .Level(LoggingEventLevel.Trace)
 								   .AddTags("console")

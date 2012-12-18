@@ -34,16 +34,16 @@ namespace Pulsus.Tests
 			Assert.LessOrEqual(diff, 10, "The TimerInterval was not adjusted properly.");
 		}
 
-		private class TargetMock : ITarget
+		private class TargetMock : Target
 		{
 			public int SleepFor { get; set; }
 
-			public bool Enabled
+			public override bool Enabled
 			{
 				get { return true; }
 			}
 
-			public void Push(LoggingEvent[] loggingEvents)
+			public override void Push(LoggingEvent[] loggingEvents)
 			{
 				Thread.Sleep(SleepFor);
 			}

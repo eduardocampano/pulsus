@@ -1,28 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
 using Pulsus.Configuration;
 using Pulsus.Internal;
-using Pulsus.Repositories;
-using Pulsus.Targets;
 
 namespace Pulsus
 {
 	public static class LogManager
 	{
-        private static IPulsusSettings _settings;
+        private static PulsusConfiguration _configuration;
         private static IEventFactory _eventsFactory;
 		private static IEventDispatcher _eventDispatcher;
 
         static LogManager()
         {
-            _settings = ConfigurationManager.GetSettings();
+			_configuration = PulsusConfiguration.Default;
             _eventsFactory = new DefaultEventFactory();
-			_eventDispatcher = new DefaultEventDispatcher(new List<ITarget>()
-			{
-				new SyncWrapperTarget(new MsSqlTarget(_settings, new MsSqlLoggingEventRepository(_settings.MsSql))),
-				new AsyncWrapperTarget(new ServerTarget(_settings)),
-				new AsyncWrapperTarget(new EmailTarget(_settings))
-			});
+			_eventDispatcher = new DefaultEventDispatcher(_configuration.Targets.Values);
         }
 
 		public static IEventFactory EventFactory
@@ -62,6 +54,9 @@ namespace Pulsus
 
 		public static void Push(LoggingEvent[] loggingEvents)
 		{
+			if (!Configuration.Enabled)
+				return;
+
 			try
 			{
 				_eventDispatcher.Push(loggingEvents);
@@ -69,22 +64,21 @@ namespace Pulsus
 			catch (Exception ex)
 			{
 				PulsusLogger.Error(ex);
-				// swallow all exceptions
 			}
 		}
 
-        public static IPulsusSettings Settings
+        public static PulsusConfiguration Configuration
         {
             get 
             { 
-                return _settings; 
+                return _configuration; 
             }
 			set
 			{
 				if (value == null)
 					throw new ArgumentNullException("value");
 
-				_settings = value;
+				_configuration = value;
 			}
         }
 	}

@@ -5,7 +5,7 @@ using Pulsus.Internal;
 
 namespace Pulsus.Targets
 {
-	public class AsyncWrapperTarget : SyncWrapperTarget
+	public class AsyncWrapperTarget : WrapperTarget
 	{
 		private readonly object _locker = new object();
 		private ITimer _batchTimer;
@@ -13,19 +13,33 @@ namespace Pulsus.Targets
 		private long _minTimerInterval;
 		private long _timerInterval;
 
-		public AsyncWrapperTarget(ITarget target) : base(target)
+		public AsyncWrapperTarget(Target target) : base(target)
 		{
 			_batchTimer = new TimerWrapper(ProcessBatchQueue);
 			Initialize();
 		}
 
-		internal AsyncWrapperTarget(ITarget target, ITimer timer) : base(target)
+		internal AsyncWrapperTarget(Target target, ITimer timer) : base(target)
 		{
 			_batchTimer = timer;
 			Initialize();
 		}
 
+		public int MaxQueueSize
+		{
+			get
+			{
+				return _queue.MaxQueueSize;
+			}
+
+			set
+			{
+				_queue.MaxQueueSize = value;
+			}
+		}
+
 		public int BatchSize { get; set; }
+		
 		public long TimerInterval
 		{
 			get

@@ -8,6 +8,8 @@ namespace Pulsus
 		public LoggingEvent()
 		{
 			EventId = Guid.NewGuid();
+			Date = DateTime.UtcNow;
+			Count = 1;
 			Tags = new List<string>();
 			Data = new Dictionary<string, object>();
 		}

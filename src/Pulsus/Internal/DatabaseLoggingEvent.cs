@@ -2,15 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
-using Pulsus.Internal;
 
-namespace Pulsus.Repositories
+namespace Pulsus.Internal
 {
-	internal class MsSqlLoggingEvent
+	internal class DatabaseLoggingEvent
 	{
-		public static MsSqlLoggingEvent Serialize(LoggingEvent loggingEvent)
+		public static DatabaseLoggingEvent Serialize(LoggingEvent loggingEvent)
 		{
-			var result = new MsSqlLoggingEvent();
+			var result = new DatabaseLoggingEvent();
 			result.EventId = loggingEvent.EventId;
 			result.LogKey = loggingEvent.LogKey;
 			result.Date = loggingEvent.Date;
@@ -45,7 +44,7 @@ namespace Pulsus.Repositories
 			return result;
 		}
 
-		public static LoggingEvent Deserialize(MsSqlLoggingEvent mssqlLoggingEvent)
+		public static LoggingEvent Deserialize(DatabaseLoggingEvent mssqlLoggingEvent)
 		{
 			var result = new LoggingEvent();
 			result.EventId = mssqlLoggingEvent.EventId;

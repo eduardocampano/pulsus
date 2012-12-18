@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Net;
@@ -33,6 +34,8 @@ namespace Pulsus.Server
 
 		public HttpResponseMessage Post(LoggingEvent[] loggingEvents)
 		{
+			Debug.Print("Event received");
+
 			var apiKey = GetHeader(ApiKeyHeader);
 
 			if (loggingEvents == null || !loggingEvents.Any())

@@ -9,6 +9,7 @@ namespace Pulsus.Targets
 {
 	public class DatabaseTarget : Target
 	{
+		private readonly object _initializedLock = new object();
         private bool _initialized;
 		private IDbConnection _connection;
 
@@ -32,8 +33,14 @@ namespace Pulsus.Targets
 
             if (!_initialized)
             {
-				EnsureRepository(connection);
-                _initialized = true;
+				lock (_initializedLock)
+				{
+					if (!_initialized)
+					{
+						EnsureRepository(connection);
+						_initialized = true;
+					}
+				}
             }
 
 			Save(connection, loggingEvents);
@@ -90,14 +97,14 @@ namespace Pulsus.Targets
 								[EventId] [uniqueidentifier] not null,
 								[LogKey] [varchar](100) not null,
 								[Date] [datetime] not null,
-								[Level] [int] not null, 
+								[Level] [int] null, 
 								[Value] [decimal](15,4) null,
-								[Text] [varchar](max) not null,
+								[Text] [varchar](max) null,
 								
 								[Tags] [nvarchar](max) null,
 								[Data] [nvarchar](max) null,
 								[User] [nvarchar](max) null,
-								[MachineName] [nvarchar](50) NOT NULL,
+								[MachineName] [nvarchar](50) null,
 								
 								[Host] [nvarchar](100) null,
 								[Url] [nvarchar](500) null,
@@ -120,8 +127,10 @@ namespace Pulsus.Targets
 
 		protected void Save(IDbConnection connection, LoggingEvent[] loggingEvent)
 		{
-			var sql = @"insert into [{0}].[{1}] ([EventId], [LogKey], [Date], [Level], [Value], [Text], [Tags], [Data], [MachineName], [Host], [Url], [HttpMethod], [IpAddress], [User], [Source], [StatusCode], [Hash], [Count])
-						values (@EventId, @LogKey, @Date, @Level, @Value, @Text, @Tags, @Data, @MachineName, @Host, @Url, @HttpMethod, @IpAddress, @User, @Source, @StatusCode, @Hash, @Count)";
+			var sql = @"if not exists (select 1 from [{0}].[{1}] where [EventId] = @EventId) begin
+							insert into [{0}].[{1}] ([EventId], [LogKey], [Date], [Level], [Value], [Text], [Tags], [Data], [MachineName], [Host], [Url], [HttpMethod], [IpAddress], [User], [Source], [StatusCode], [Hash], [Count])
+							values (@EventId, @LogKey, @Date, @Level, @Value, @Text, @Tags, @Data, @MachineName, @Host, @Url, @HttpMethod, @IpAddress, @User, @Source, @StatusCode, @Hash, @Count)
+						end";
 
 			var serialized = Array.ConvertAll(loggingEvent, DatabaseLoggingEvent.Serialize);
 

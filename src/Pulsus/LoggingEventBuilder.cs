@@ -26,11 +26,9 @@ namespace Pulsus
 
 	public abstract class LoggingEventBuilderBase<T> : ILoggingEventBuilder<T> where T : class, ILoggingEventBuilder<T>, new()
 	{
-		protected LoggingEvent _loggingEvent;
-		
 		protected LoggingEventBuilderBase(LoggingEvent loggingEvent = null)
         {
-            _loggingEvent = loggingEvent ?? new LoggingEvent();
+            LoggingEvent = loggingEvent ?? new LoggingEvent();
         }
 
 		internal static T Create()
@@ -38,60 +36,54 @@ namespace Pulsus
 			return new T();
 		}
 
-		public LoggingEvent LoggingEvent
-		{
-			get
-			{
-				return _loggingEvent;
-			}
-		}
+		public LoggingEvent LoggingEvent { get; private set; }
 
 		public virtual T Text(string text, params object[] args)
 		{
 			if (args == null || !args.Any())
-				_loggingEvent.Text = text;
+				LoggingEvent.Text = text;
 			else
-				_loggingEvent.Text = string.Format(text, args);
+				LoggingEvent.Text = string.Format(text, args);
 			return this as T;
 		}
 
 		public virtual T AddData(string key, object value)
 		{
-			_loggingEvent.Data[key] = value;
+			LoggingEvent.Data[key] = value;
 			return this as T;
 		}
 
 		public virtual T Date(DateTime date, bool useUtc)
 		{
-			_loggingEvent.Date = useUtc ? date.ToUniversalTime() : date;
+			LoggingEvent.Date = useUtc ? date.ToUniversalTime() : date;
 			return this as T;
 		}
 
 		public virtual T AddTags(params string[] tags)
 		{
             foreach (var tag in TagHelpers.Clean(tags))
-			    _loggingEvent.Tags.Add(tag);
+				LoggingEvent.Tags.Add(tag);
 			return this as T;
 		}
 
 		public virtual T User(string user, params object[] args)
 		{
 			if (args == null || !args.Any())
-				_loggingEvent.User = user;
+				LoggingEvent.User = user;
 			else
-				_loggingEvent.User = string.Format(user, args);
+				LoggingEvent.User = string.Format(user, args);
 			return this as T;
 		}
 
 		public virtual T Level(LoggingEventLevel level)
 		{
-			_loggingEvent.Level = (int)level;
+			LoggingEvent.Level = (int)level;
 			return this as T;
 		}
 
 		public virtual T Level(int level)
 		{
-			_loggingEvent.Level = level;
+			LoggingEvent.Level = level;
 			return this as T;
 		}
 
@@ -99,7 +91,7 @@ namespace Pulsus
 		{
 			AddConfiguration();
 
-            LogManager.Push(_loggingEvent);
+			LogManager.Push(LoggingEvent);
 
 			return this as T;
 		}
@@ -110,7 +102,7 @@ namespace Pulsus
             if (!string.IsNullOrEmpty(configurationTags))
             {
                 foreach (var tag in TagHelpers.Clean(configurationTags))
-                    _loggingEvent.Tags.Add(tag);
+					LoggingEvent.Tags.Add(tag);
             }
 		}
 	}

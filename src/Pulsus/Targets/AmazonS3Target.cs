@@ -25,6 +25,7 @@ namespace Pulsus.Targets
 		public string SecretKey { get; set; }
 		public string BucketName { get; set; }
 		public string FileNameFormat { get; set; }
+		public string IncludeMetadata { get; set; }
 		public bool Compress { get; set; }
 
 		public override void Push(LoggingEvent[] loggingEvents)

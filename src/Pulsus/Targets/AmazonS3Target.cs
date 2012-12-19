@@ -60,7 +60,8 @@ namespace Pulsus.Targets
 					if (responseStream == null)
 						throw new Exception("GetResponseStream() returned null", ex);
 					var reader = new StreamReader(responseStream);
-					throw new Exception(string.Format("Response Status: {0}, Response Content: {1}", reader.ReadToEnd()), ex);
+					var responseContent = reader.ReadToEnd();
+					throw new Exception(string.Format("Response Status: {0}, Response Content: {1}", ex.Status, responseContent), ex);
 				}
 				catch
 				{
@@ -91,8 +92,8 @@ namespace Pulsus.Targets
 			var contentMd5 = CalculateMd5(bytes);
 
 			request.ContentType = contentType;
-			request.Headers.Add("Host", domain);
-			request.Headers.Add("Date", dateString);
+			//request.Headers.Set("Host", domain);
+			request.Headers.Set("x-amz-date", dateString);
 			request.Headers.Add("Content-MD5", contentMd5);
 			request.Headers.Add("Authorization", string.Format("AWS {0}:{1}", AccessKey, GetSignature(httpVerb, contentMd5, contentType, dateString, BucketName, fileName)));
 
@@ -140,7 +141,7 @@ namespace Pulsus.Targets
 
 		protected string GetSignature(string httpVerb, string contentMd5, string contentType, string dateString, string bucketName, string fileName)
 		{
-			var canonicalString = string.Format("{0}\n{1}\n{2}\n{3}\n/{4}/{5}", httpVerb, contentMd5, contentType, dateString, bucketName, fileName);
+			var canonicalString = string.Format("{0}\n{1}\n{2}\n{3}\nx-amz-date:{4}\n/{5}/{6}", httpVerb, contentMd5, contentType, string.Empty, dateString, bucketName, fileName);
 			var signature = new HMACSHA1(Encoding.ASCII.GetBytes(SecretKey));
 			var bytes = Encoding.ASCII.GetBytes(canonicalString);
 			var hashBytes = signature.ComputeHash(bytes);

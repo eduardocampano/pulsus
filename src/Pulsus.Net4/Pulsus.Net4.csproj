@@ -59,6 +59,9 @@
     <Compile Include="..\Pulsus\Configuration\PulsusConfiguration.cs">
       <Link>Configuration\PulsusConfiguration.cs</Link>
     </Compile>
+    <Compile Include="..\Pulsus\Constants.cs">
+      <Link>Constants.cs</Link>
+    </Compile>
     <Compile Include="..\Pulsus\DefaultEventDispatcher.cs">
       <Link>DefaultEventDispatcher.cs</Link>
     </Compile>
@@ -82,9 +85,6 @@
     </Compile>
     <Compile Include="..\Pulsus\ILoggingEventBuilder.cs">
       <Link>ILoggingEventBuilder.cs</Link>
-    </Compile>
-    <Compile Include="..\Pulsus\Internal\Constants.cs">
-      <Link>Internal\Constants.cs</Link>
     </Compile>
     <Compile Include="..\Pulsus\Internal\DatabaseLoggingEvent.cs">
       <Link>Internal\DatabaseLoggingEvent.cs</Link>

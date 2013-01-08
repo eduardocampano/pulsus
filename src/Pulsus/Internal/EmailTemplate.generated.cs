@@ -142,35 +142,46 @@ WriteLiteral("</a>\r\n");
             
             #line default
             #line hidden
-WriteLiteral(@"					</h1>
-				</td>
-			</tr>
-		</table>
-    
-		<h2>General</h2>
-		<table cellpadding=""0"" cellspacing=""0"">
-			<tr>
-				<th class=""first-col"" align=""left"">Key</th>
-				<th align=""left"">Value</th>
-			</tr>
-			<tr>
-				<td class=""first-col"">Date</td>
-				<td>");
+WriteLiteral("\t\t\t\t\t</h1>\r\n\t\t\t\t</td>\r\n\t\t\t</tr>\r\n\t\t</table>\r\n    \r\n\t\t<h2>General</h2>\r\n\t\t<table c" +
+"ellpadding=\"0\" cellspacing=\"0\">\r\n\t\t\t<tr>\r\n\t\t\t\t<td class=\"first-col\">Date</td>\r\n\t" +
+"\t\t\t<td>");
 
 
             
-            #line 55 "..\..\Internal\EmailTemplate.cshtml"
+            #line 51 "..\..\Internal\EmailTemplate.cshtml"
    Write(Model.LoggingEvent.Date);
 
             
             #line default
             #line hidden
-WriteLiteral(" UTC</td>\r\n\t\t\t</tr>\r\n            <tr class=\"alt\">\r\n\t\t\t\t<td class=\"first-col\">ID</" +
-"td>\r\n\t\t\t\t<td>");
+WriteLiteral(" UTC</td>\r\n\t\t\t</tr>\r\n\t\t\t<tr class=\"alt\">\r\n\t\t\t\t<td class=\"first-col\">LogKey</td>\r\n" +
+"\t\t\t\t<td>");
+
+
+            
+            #line 55 "..\..\Internal\EmailTemplate.cshtml"
+   Write(Model.LoggingEvent.LogKey);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</td>\r\n\t\t\t</tr>\r\n             <tr>\r\n\t\t\t\t<td class=\"first-col\">ApiKey</td>\r\n\t\t\t\t<t" +
+"d>");
 
 
             
             #line 59 "..\..\Internal\EmailTemplate.cshtml"
+   Write(Model.LoggingEvent.ApiKey);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</td>\r\n\t\t\t</tr>\r\n            <tr class=\"alt\">\r\n\t\t\t\t<td class=\"first-col\">ID</td>\r" +
+"\n\t\t\t\t<td>");
+
+
+            
+            #line 63 "..\..\Internal\EmailTemplate.cshtml"
    Write(Model.LoggingEvent.EventId);
 
             
@@ -180,7 +191,7 @@ WriteLiteral("</td>\r\n\t\t\t</tr>\r\n\t\t\t<tr>\r\n\t\t\t\t<td class=\"first-co
 
 
             
-            #line 63 "..\..\Internal\EmailTemplate.cshtml"
+            #line 67 "..\..\Internal\EmailTemplate.cshtml"
    Write(Model.LevelText);
 
             
@@ -191,7 +202,7 @@ WriteLiteral("</td>\r\n\t\t\t</tr>\r\n\t\t\t<tr class=\"alt\">\r\n\t\t\t\t<td cl
 
 
             
-            #line 67 "..\..\Internal\EmailTemplate.cshtml"
+            #line 71 "..\..\Internal\EmailTemplate.cshtml"
     Write(Model.LoggingEvent.User ?? "&nbsp;");
 
             
@@ -201,7 +212,7 @@ WriteLiteral("</td>\r\n\t\t\t</tr>\r\n\t\t\t<tr>\r\n\t\t\t\t<td class=\"first-co
 
 
             
-            #line 71 "..\..\Internal\EmailTemplate.cshtml"
+            #line 75 "..\..\Internal\EmailTemplate.cshtml"
    Write(string.Join(" ", Model.LoggingEvent.Tags.ToArray()));
 
             
@@ -212,8 +223,29 @@ WriteLiteral("</td>\r\n\t\t\t</tr>\r\n\t\t\t<tr class=\"alt\">\r\n\t\t\t\t<td cl
 
 
             
-            #line 75 "..\..\Internal\EmailTemplate.cshtml"
+            #line 79 "..\..\Internal\EmailTemplate.cshtml"
    Write(Model.LoggingEvent.MachineName);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</td>\r\n\t\t\t</tr>\r\n\t\t\t<tr>\r\n\t\t\t\t<td class=\"first-col\">SessionId</td>\r\n\t\t\t\t<td>");
+
+
+            
+            #line 83 "..\..\Internal\EmailTemplate.cshtml"
+   Write(Model.LoggingEvent.Psid);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</td>\r\n\t\t\t</tr>\r\n            <tr class=\"alt\">\r\n\t\t\t\t<td class=\"first-col\">Persiste" +
+"ntSessionId</td>\r\n\t\t\t\t<td>");
+
+
+            
+            #line 87 "..\..\Internal\EmailTemplate.cshtml"
+   Write(Model.LoggingEvent.Ppid);
 
             
             #line default
@@ -222,7 +254,7 @@ WriteLiteral("</td>\r\n\t\t\t</tr>\r\n\t\t</table>\r\n        \r\n");
 
 
             
-            #line 79 "..\..\Internal\EmailTemplate.cshtml"
+            #line 91 "..\..\Internal\EmailTemplate.cshtml"
          if (Model.CustomData != null) {
 
             
@@ -232,20 +264,20 @@ WriteLiteral("\t\t\t<h2>Custom Data</h2>\r\n");
 
 
             
-            #line 81 "..\..\Internal\EmailTemplate.cshtml"
+            #line 93 "..\..\Internal\EmailTemplate.cshtml"
             
             
             #line default
             #line hidden
             
-            #line 81 "..\..\Internal\EmailTemplate.cshtml"
+            #line 93 "..\..\Internal\EmailTemplate.cshtml"
        Write(WriteTable(Model.CustomData));
 
             
             #line default
             #line hidden
             
-            #line 81 "..\..\Internal\EmailTemplate.cshtml"
+            #line 93 "..\..\Internal\EmailTemplate.cshtml"
                                          
 		}
 
@@ -256,7 +288,7 @@ WriteLiteral("    \r\n");
 
 
             
-            #line 84 "..\..\Internal\EmailTemplate.cshtml"
+            #line 96 "..\..\Internal\EmailTemplate.cshtml"
  		if (Model.HttpContextInformation != null) {
 
             
@@ -266,13 +298,12 @@ WriteLiteral("\t\t\t<h2>Request</h2>\r\n");
 
 
 
-WriteLiteral("\t\t\t<table cellpadding=\"0\" cellspacing=\"0\">\r\n\t\t\t\t<tr>\r\n\t\t\t\t\t<th class=\"first-col\" " +
-"align=\"left\">Key</th>\r\n\t\t\t\t\t<th align=\"left\">Value</th>\r\n\t\t\t\t</tr>\r\n\t\t\t\t<tr>\r\n\t\t" +
-"\t\t\t<td class=\"first-col\">URL</td>\r\n\t\t\t\t\t<td>");
+WriteLiteral("\t\t\t<table cellpadding=\"0\" cellspacing=\"0\">\r\n\t\t\t\t<tr>\r\n\t\t\t\t\t<td class=\"first-col\">" +
+"URL</td>\r\n\t\t\t\t\t<td>");
 
 
             
-            #line 93 "..\..\Internal\EmailTemplate.cshtml"
+            #line 101 "..\..\Internal\EmailTemplate.cshtml"
     Write(Model.HttpContextInformation.Url);
 
             
@@ -283,7 +314,7 @@ WriteLiteral("</td>\r\n\t\t\t\t</tr>\r\n\t\t\t\t<tr class=\"alt\">\r\n\t\t\t\t\t
 
 
             
-            #line 97 "..\..\Internal\EmailTemplate.cshtml"
+            #line 105 "..\..\Internal\EmailTemplate.cshtml"
     Write(Model.HttpContextInformation.Method);
 
             
@@ -293,7 +324,7 @@ WriteLiteral("</td>\r\n\t\t\t\t</tr>\r\n\t\t\t\t<tr>\r\n\t\t\t\t\t<td class=\"fi
 
 
             
-            #line 101 "..\..\Internal\EmailTemplate.cshtml"
+            #line 109 "..\..\Internal\EmailTemplate.cshtml"
     Write(Model.HttpContextInformation.Host);
 
             
@@ -304,7 +335,7 @@ WriteLiteral("</td>\r\n\t\t\t\t</tr>\r\n\t\t\t\t<tr class=\"alt\">\r\n\t\t\t\t\t
 
 
             
-            #line 105 "..\..\Internal\EmailTemplate.cshtml"
+            #line 113 "..\..\Internal\EmailTemplate.cshtml"
     Write(Model.HttpContextInformation.Referer);
 
             
@@ -314,7 +345,7 @@ WriteLiteral("</td>\r\n\t\t\t\t</tr>\r\n\t\t\t\t<tr>\r\n\t\t\t\t\t<td class=\"fi
 
 
             
-            #line 109 "..\..\Internal\EmailTemplate.cshtml"
+            #line 117 "..\..\Internal\EmailTemplate.cshtml"
     Write(Model.HttpContextInformation.Method);
 
             
@@ -325,7 +356,7 @@ WriteLiteral("</td>\r\n\t\t\t\t</tr>\r\n\t\t\t\t<tr class=\"alt\">\r\n\t\t\t\t\t
 
 
             
-            #line 113 "..\..\Internal\EmailTemplate.cshtml"
+            #line 121 "..\..\Internal\EmailTemplate.cshtml"
     Write(Model.HttpContextInformation.IpAddress);
 
             
@@ -336,7 +367,7 @@ WriteLiteral("</td>\r\n\t\t\t\t</tr>\r\n\t\t\t\t<tr>\r\n\t\t\t\t\t<td class=\"fi
 
 
             
-            #line 117 "..\..\Internal\EmailTemplate.cshtml"
+            #line 125 "..\..\Internal\EmailTemplate.cshtml"
     Write(Model.HttpContextInformation.UserAgent);
 
             
@@ -346,7 +377,7 @@ WriteLiteral("</td>\r\n\t\t\t\t</tr>\r\n\t\t\t</table>\r\n");
 
 
             
-            #line 120 "..\..\Internal\EmailTemplate.cshtml"
+            #line 128 "..\..\Internal\EmailTemplate.cshtml"
       
             if (Model.HttpContextInformation.RouteValues != null) {
 
@@ -357,20 +388,20 @@ WriteLiteral("\t\t\t\t<h2>Route Values</h2>\r\n");
 
 
             
-            #line 123 "..\..\Internal\EmailTemplate.cshtml"
+            #line 131 "..\..\Internal\EmailTemplate.cshtml"
 				
             
             #line default
             #line hidden
             
-            #line 123 "..\..\Internal\EmailTemplate.cshtml"
+            #line 131 "..\..\Internal\EmailTemplate.cshtml"
 Write(WriteTable(Model.HttpContextInformation.RouteValues));
 
             
             #line default
             #line hidden
             
-            #line 123 "..\..\Internal\EmailTemplate.cshtml"
+            #line 131 "..\..\Internal\EmailTemplate.cshtml"
                                                          
 			}
      
@@ -383,20 +414,20 @@ WriteLiteral("\t\t\t\t<h2>QueryString</h2>\r\n");
 
 
             
-            #line 128 "..\..\Internal\EmailTemplate.cshtml"
+            #line 136 "..\..\Internal\EmailTemplate.cshtml"
 				
             
             #line default
             #line hidden
             
-            #line 128 "..\..\Internal\EmailTemplate.cshtml"
+            #line 136 "..\..\Internal\EmailTemplate.cshtml"
 Write(WriteTable(Model.HttpContextInformation.QueryString));
 
             
             #line default
             #line hidden
             
-            #line 128 "..\..\Internal\EmailTemplate.cshtml"
+            #line 136 "..\..\Internal\EmailTemplate.cshtml"
                                                          
 			}
         
@@ -409,20 +440,20 @@ WriteLiteral("\t\t\t\t<h2>Posted Values</h2>\r\n");
 
 
             
-            #line 133 "..\..\Internal\EmailTemplate.cshtml"
+            #line 141 "..\..\Internal\EmailTemplate.cshtml"
 				
             
             #line default
             #line hidden
             
-            #line 133 "..\..\Internal\EmailTemplate.cshtml"
+            #line 141 "..\..\Internal\EmailTemplate.cshtml"
 Write(WriteTable(Model.HttpContextInformation.PostedValues));
 
             
             #line default
             #line hidden
             
-            #line 133 "..\..\Internal\EmailTemplate.cshtml"
+            #line 141 "..\..\Internal\EmailTemplate.cshtml"
                                                           
 			}
         
@@ -441,7 +472,7 @@ WriteLiteral("\t\t\t\t<table cellpadding=\"0\" cellspacing=\"0\">\r\n\t\t\t\t\t<
 
 
             
-            #line 144 "..\..\Internal\EmailTemplate.cshtml"
+            #line 152 "..\..\Internal\EmailTemplate.cshtml"
                        var i = 0;  
 
             
@@ -449,7 +480,7 @@ WriteLiteral("\t\t\t\t<table cellpadding=\"0\" cellspacing=\"0\">\r\n\t\t\t\t\t<
             #line hidden
 
             
-            #line 145 "..\..\Internal\EmailTemplate.cshtml"
+            #line 153 "..\..\Internal\EmailTemplate.cshtml"
                      foreach (var postedFile in Model.HttpContextInformation.PostedFiles) {
                         var classAtt = i % 2 > 0 ? "class=\"alt\"" : string.Empty;
 
@@ -460,7 +491,7 @@ WriteLiteral("\t\t\t\t\t\t<tr ");
 
 
             
-            #line 147 "..\..\Internal\EmailTemplate.cshtml"
+            #line 155 "..\..\Internal\EmailTemplate.cshtml"
      Write(classAtt);
 
             
@@ -470,7 +501,7 @@ WriteLiteral(">\r\n\t\t\t\t\t\t\t<td class=\"first-col\">");
 
 
             
-            #line 148 "..\..\Internal\EmailTemplate.cshtml"
+            #line 156 "..\..\Internal\EmailTemplate.cshtml"
                         Write(postedFile.Name);
 
             
@@ -480,7 +511,7 @@ WriteLiteral("</td>\r\n\t\t\t\t\t\t\t<td>");
 
 
             
-            #line 149 "..\..\Internal\EmailTemplate.cshtml"
+            #line 157 "..\..\Internal\EmailTemplate.cshtml"
       Write(postedFile.ContentType);
 
             
@@ -490,7 +521,7 @@ WriteLiteral("</td>\r\n\t\t\t\t\t\t\t<td>");
 
 
             
-            #line 150 "..\..\Internal\EmailTemplate.cshtml"
+            #line 158 "..\..\Internal\EmailTemplate.cshtml"
       Write(FileSizeFormatProvider.FileSize(postedFile.ContentLength));
 
             
@@ -500,7 +531,7 @@ WriteLiteral("</td>\r\n\t\t\t\t\t\t</tr>\r\n");
 
 
             
-            #line 152 "..\..\Internal\EmailTemplate.cshtml"
+            #line 160 "..\..\Internal\EmailTemplate.cshtml"
                         i++;
 					}
 
@@ -511,7 +542,7 @@ WriteLiteral("\t\t\t\t</table>\r\n");
 
 
             
-            #line 155 "..\..\Internal\EmailTemplate.cshtml"
+            #line 163 "..\..\Internal\EmailTemplate.cshtml"
 		    }
         
 			if (Model.HttpContextInformation.Cookies != null) {
@@ -523,20 +554,20 @@ WriteLiteral("\t\t\t\t<h2>Cookies</h2>\r\n");
 
 
             
-            #line 159 "..\..\Internal\EmailTemplate.cshtml"
+            #line 167 "..\..\Internal\EmailTemplate.cshtml"
 				
             
             #line default
             #line hidden
             
-            #line 159 "..\..\Internal\EmailTemplate.cshtml"
+            #line 167 "..\..\Internal\EmailTemplate.cshtml"
 Write(WriteTable(Model.HttpContextInformation.Cookies));
 
             
             #line default
             #line hidden
             
-            #line 159 "..\..\Internal\EmailTemplate.cshtml"
+            #line 167 "..\..\Internal\EmailTemplate.cshtml"
                                                      
 			}
         
@@ -549,20 +580,20 @@ WriteLiteral("\t\t\t\t<h2>Headers</h2>\r\n");
 
 
             
-            #line 164 "..\..\Internal\EmailTemplate.cshtml"
+            #line 172 "..\..\Internal\EmailTemplate.cshtml"
 				
             
             #line default
             #line hidden
             
-            #line 164 "..\..\Internal\EmailTemplate.cshtml"
+            #line 172 "..\..\Internal\EmailTemplate.cshtml"
 Write(WriteTable(Model.HttpContextInformation.Headers));
 
             
             #line default
             #line hidden
             
-            #line 164 "..\..\Internal\EmailTemplate.cshtml"
+            #line 172 "..\..\Internal\EmailTemplate.cshtml"
                                                      
 			}
         
@@ -575,20 +606,20 @@ WriteLiteral("\t\t\t\t<h2>Server Variables</h2>\r\n");
 
 
             
-            #line 169 "..\..\Internal\EmailTemplate.cshtml"
+            #line 177 "..\..\Internal\EmailTemplate.cshtml"
 				
             
             #line default
             #line hidden
             
-            #line 169 "..\..\Internal\EmailTemplate.cshtml"
+            #line 177 "..\..\Internal\EmailTemplate.cshtml"
 Write(WriteTable(Model.HttpContextInformation.ServerVariables));
 
             
             #line default
             #line hidden
             
-            #line 169 "..\..\Internal\EmailTemplate.cshtml"
+            #line 177 "..\..\Internal\EmailTemplate.cshtml"
                                                              
 			}
         
@@ -601,20 +632,20 @@ WriteLiteral("\t\t\t\t<h2>Session Variables</h2>\r\n");
 
 
             
-            #line 174 "..\..\Internal\EmailTemplate.cshtml"
+            #line 182 "..\..\Internal\EmailTemplate.cshtml"
 				
             
             #line default
             #line hidden
             
-            #line 174 "..\..\Internal\EmailTemplate.cshtml"
+            #line 182 "..\..\Internal\EmailTemplate.cshtml"
 Write(WriteTable(Model.HttpContextInformation.Session));
 
             
             #line default
             #line hidden
             
-            #line 174 "..\..\Internal\EmailTemplate.cshtml"
+            #line 182 "..\..\Internal\EmailTemplate.cshtml"
                                                      
 			}
 		}
@@ -626,7 +657,7 @@ WriteLiteral("\r\n");
 
 
             
-            #line 178 "..\..\Internal\EmailTemplate.cshtml"
+            #line 186 "..\..\Internal\EmailTemplate.cshtml"
  		if (Model.ExceptionInformation != null) {
 
             
@@ -636,13 +667,12 @@ WriteLiteral("\t\t\t<h2>Exception</h2>\r\n");
 
 
 
-WriteLiteral("\t\t\t<table cellpadding=\"0\" cellspacing=\"0\">\r\n\t\t\t\t<tr>\r\n\t\t\t\t\t<th class=\"first-col\" " +
-"align=\"left\">Key</th>\r\n\t\t\t\t\t<th align=\"left\">Value</th>\r\n\t\t\t\t</tr>\r\n\t\t\t\t<tr>\r\n\t\t" +
-"\t\t\t<td class=\"first-col\">Message</td>\r\n\t\t\t\t\t<td>");
+WriteLiteral("\t\t\t<table cellpadding=\"0\" cellspacing=\"0\">\r\n\t\t\t\t<tr>\r\n\t\t\t\t\t<td class=\"first-col\">" +
+"Message</td>\r\n\t\t\t\t\t<td>");
 
 
             
-            #line 187 "..\..\Internal\EmailTemplate.cshtml"
+            #line 191 "..\..\Internal\EmailTemplate.cshtml"
     Write(Model.ExceptionInformation.Message);
 
             
@@ -653,7 +683,7 @@ WriteLiteral("</td>\r\n\t\t\t\t</tr>\r\n\t\t\t\t<tr class=\"alt\">\r\n\t\t\t\t\t
 
 
             
-            #line 191 "..\..\Internal\EmailTemplate.cshtml"
+            #line 195 "..\..\Internal\EmailTemplate.cshtml"
     Write(Model.ExceptionInformation.Type);
 
             
@@ -663,7 +693,7 @@ WriteLiteral("</td>\r\n\t\t\t\t</tr>\r\n\t\t\t\t<tr>\r\n\t\t\t\t\t<td class=\"fi
 
 
             
-            #line 195 "..\..\Internal\EmailTemplate.cshtml"
+            #line 199 "..\..\Internal\EmailTemplate.cshtml"
     Write(Model.ExceptionInformation.Source);
 
             
@@ -674,7 +704,7 @@ WriteLiteral("</td>\r\n\t\t\t\t</tr>\r\n\t\t\t\t<tr class=\"alt\">\r\n\t\t\t\t\t
 
 
             
-            #line 199 "..\..\Internal\EmailTemplate.cshtml"
+            #line 203 "..\..\Internal\EmailTemplate.cshtml"
     Write(Model.ExceptionInformation.StatusCode);
 
             
@@ -684,7 +714,7 @@ WriteLiteral("</td>\r\n\t\t\t\t</tr>\r\n\t\t\t</table>\r\n");
 
 
             
-            #line 202 "..\..\Internal\EmailTemplate.cshtml"
+            #line 206 "..\..\Internal\EmailTemplate.cshtml"
 		}
 
             
@@ -694,7 +724,7 @@ WriteLiteral("    \r\n");
 
 
             
-            #line 204 "..\..\Internal\EmailTemplate.cshtml"
+            #line 208 "..\..\Internal\EmailTemplate.cshtml"
  		if (Model.StackTrace != null) {
 
             
@@ -708,7 +738,7 @@ WriteLiteral("\t\t\t<pre class=\"stacktrace\">");
 
 
             
-            #line 206 "..\..\Internal\EmailTemplate.cshtml"
+            #line 210 "..\..\Internal\EmailTemplate.cshtml"
                       Write(Model.StackTrace);
 
             
@@ -718,7 +748,7 @@ WriteLiteral("</pre>\r\n");
 
 
             
-            #line 207 "..\..\Internal\EmailTemplate.cshtml"
+            #line 211 "..\..\Internal\EmailTemplate.cshtml"
 		}
 
             
@@ -728,7 +758,7 @@ WriteLiteral("    \r\n");
 
 
             
-            #line 209 "..\..\Internal\EmailTemplate.cshtml"
+            #line 213 "..\..\Internal\EmailTemplate.cshtml"
  		if (Model.SqlInformation != null) {
 
             
@@ -738,20 +768,20 @@ WriteLiteral("\t\t\t<h2>SQL</h2>\r\n");
 
 
             
-            #line 211 "..\..\Internal\EmailTemplate.cshtml"
+            #line 215 "..\..\Internal\EmailTemplate.cshtml"
 			
             
             #line default
             #line hidden
             
-            #line 211 "..\..\Internal\EmailTemplate.cshtml"
+            #line 215 "..\..\Internal\EmailTemplate.cshtml"
 Write(WriteTable(Model.SqlInformation.Parameters));
 
             
             #line default
             #line hidden
             
-            #line 211 "..\..\Internal\EmailTemplate.cshtml"
+            #line 215 "..\..\Internal\EmailTemplate.cshtml"
                                                
 
             
@@ -761,7 +791,7 @@ WriteLiteral("\t\t\t<pre class=\"sql\">");
 
 
             
-            #line 212 "..\..\Internal\EmailTemplate.cshtml"
+            #line 216 "..\..\Internal\EmailTemplate.cshtml"
                Write(Model.SqlInformation.SQL);
 
             
@@ -771,7 +801,7 @@ WriteLiteral("</pre>\r\n");
 
 
             
-            #line 213 "..\..\Internal\EmailTemplate.cshtml"
+            #line 217 "..\..\Internal\EmailTemplate.cshtml"
 		}
 
             
@@ -781,7 +811,7 @@ WriteLiteral("        <br />\r\n        ");
 
 
             
-            #line 215 "..\..\Internal\EmailTemplate.cshtml"
+            #line 219 "..\..\Internal\EmailTemplate.cshtml"
    Write(Model.Footer);
 
             

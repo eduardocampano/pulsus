@@ -29,7 +29,7 @@ namespace Pulsus.Internal
 			else if (loggingEvent.Level > 60000)
 				LevelClass = "red";
 
-			Link = link.Format(loggingEvent);
+			Link = link == null ? null : link.Format(loggingEvent);
 			Subject = string.IsNullOrEmpty(subject) ? string.Format(CultureInfo.InvariantCulture, "[{0}] {1}{2}", LevelText, loggingEvent.Text, loggingEvent.Value.HasValue ? " VALUE: " + loggingEvent.Value : string.Empty) : subject.Format(loggingEvent);
 
 			Title = string.Format(CultureInfo.InvariantCulture, "{0}", loggingEvent.Text);

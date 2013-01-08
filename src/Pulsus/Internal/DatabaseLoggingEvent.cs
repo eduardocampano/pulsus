@@ -49,6 +49,7 @@ namespace Pulsus.Internal
 			var result = new LoggingEvent();
 			result.EventId = mssqlLoggingEvent.EventId;
 			result.LogKey = mssqlLoggingEvent.LogKey;
+			result.ApiKey = mssqlLoggingEvent.ApiKey;
 			result.Date = mssqlLoggingEvent.Date;
 			result.Level = mssqlLoggingEvent.Level;
 			result.Value = mssqlLoggingEvent.Value;
@@ -58,6 +59,8 @@ namespace Pulsus.Internal
 
 			result.MachineName = mssqlLoggingEvent.MachineName;
 			result.User = mssqlLoggingEvent.User;
+			result.Psid = mssqlLoggingEvent.Psid;
+			result.Ppid = mssqlLoggingEvent.Ppid;
 
 			result.Count = mssqlLoggingEvent.Count;
 			result.Hash = mssqlLoggingEvent.Hash;
@@ -68,6 +71,7 @@ namespace Pulsus.Internal
 		public Guid EventId { get; set; }
 		public DateTime Date { get; set; }
 		public string LogKey { get; set; }
+		public string ApiKey { get; set; }
 		public string MachineName { get; set; }
 		public int Level { get; set; }
 		public double? Value { get; set; }
@@ -75,6 +79,8 @@ namespace Pulsus.Internal
 		public string Tags { get; set; }
 		public string Data { get; set; }
 		public string User { get; set; }
+		public string Psid { get; set; }
+		public string Ppid { get; set; }
 
 		// denormalized info for search
 		public string Host { get; set; }

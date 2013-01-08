@@ -1,6 +1,6 @@
-﻿namespace Pulsus.Internal
+﻿namespace Pulsus
 {
-	internal static class Constants
+	public static class Constants
 	{
 		public static class DataKeys
 		{
@@ -10,9 +10,9 @@
 			public static readonly string HttpContext = "MS_HttpContext";
 		}
 
-		public static class Pulsus
+		public static class Info
 		{
-			public static readonly string WebSite = "http://github.com/Pulsus";
+			public static readonly string WebSite = "http://pulsus.codeplex.com";
 		}
 	}
 }

@@ -11,12 +11,15 @@ namespace Pulsus.Configuration
 {
 	public class PulsusConfiguration
 	{
+		private static IDictionary<string, Type> KnownTargetTypes = GetKnownTargetTypes(); 
+
         public PulsusConfiguration()
         {
 			DefaultEventLevel = LoggingEventLevel.Information;
 			Enabled = true;
 			LogKey = "Default";
 			Targets = new Dictionary<string, Target>(StringComparer.OrdinalIgnoreCase);
+			ExceptionsToIgnore = new Dictionary<string, Predicate<Exception>>();
         }
 
 		public static PulsusConfiguration Default
@@ -36,7 +39,7 @@ namespace Pulsus.Configuration
 		public bool IncludeHttpContext { get; set; }
         public bool IncludeStackTrace { get; set; }
 
-        public IDictionary<string, Predicate<Exception>> ExceptionsToIgnore { get; set; }
+        public IDictionary<string, Predicate<Exception>> ExceptionsToIgnore { get; private set; }
         public LoggingEventLevel DefaultEventLevel { get; set; }
 		public IDictionary<string, Target> Targets { get; private set; } 
 
@@ -96,26 +99,26 @@ namespace Pulsus.Configuration
 			if (typeName == null)
 				typeName = name.EndsWith("target", StringComparison.OrdinalIgnoreCase) ? name : name + "Target";
 
-			var type = Type.GetType(typeName, false);
-			if (type == null)
+			var targetType = FindTargetType(typeName);
+			if (targetType == null)
 				return null;
 
-			if (typeof(WrapperTarget).IsAssignableFrom(type))
+			if (typeof(WrapperTarget).IsAssignableFrom(targetType))
 			{
 				var wrappedTargetElement = targetElement.Element("target");
 				if (wrappedTargetElement == null)
 					throw new Exception("No child target element for wrapper target");
 
 				var wrappedTarget = GetTarget(wrappedTargetElement);
-				return CreateTarget(type, targetElement, wrappedTarget);
+				return CreateTarget(targetType, targetElement, wrappedTarget);
 			}
 
-			return CreateTarget(type, targetElement);
+			return CreateTarget(targetType, targetElement);
 		}
 
 		private static Target CreateTarget(Type type, XElement targetAttributes = null, Target wrappedTarget = null)
 		{
-			var target = (Target)Activator.CreateInstance(type, wrappedTarget);
+			var target = wrappedTarget == null ? (Target)Activator.CreateInstance(type) : (Target)Activator.CreateInstance(type, wrappedTarget);
 			LoadDefaultValues(target);
 			LoadAttributes(target, targetAttributes);
 			return target;
@@ -162,6 +165,32 @@ namespace Pulsus.Configuration
 				return null;
 
 			return attribute.Value;
+		}
+
+		private static Type FindTargetType(string name)
+		{
+			Type targetType;
+			if (KnownTargetTypes.TryGetValue(name, out targetType))
+				return targetType;
+
+			return null;
+		}
+
+		private static IDictionary<string, Type> GetKnownTargetTypes()
+		{
+			var targetType = typeof(Target);
+			var dictionary = new Dictionary<string, Type>(StringComparer.OrdinalIgnoreCase);
+			var assemblies = AppDomain.CurrentDomain.GetAssemblies();
+			foreach (var assembly in assemblies)
+			{
+				var targetTypes = assembly.GetTypes().Where(targetType.IsAssignableFrom);
+				foreach (var type in targetTypes)
+				{
+					dictionary.Add(type.Name, type);
+				}
+			}
+
+			return dictionary;
 		}
 	}
 }

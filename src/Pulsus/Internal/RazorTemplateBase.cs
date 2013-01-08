@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Text;
+using System.Web;
 
 namespace Pulsus.Internal
 {
@@ -38,33 +40,22 @@ namespace Pulsus.Internal
 
 		public string WriteTable(KeyValueCollection keyValueCollection)
 		{
-			var sb = new StringBuilder();
-			sb.Append("<table cellpadding=\"0\" cellspacing=\"0\">");
-			sb.Append("<tr><th class=\"first-col\" align=\"left\">Key</th><th align=\"left\">Value</th></tr>");
-
-			var i = 0;
-			foreach (var item in keyValueCollection)
-			{
-				var @class = i % 2 > 0 ? "class=\"alt\"" : string.Empty;
-				sb.Append("<tr " + @class + "><td class=\"first-col\">" + item.Key + "</td><td>" + item.Value + "</td></tr>");
-				i++;
-			}
-
-			sb.Append("</table>");
-			return sb.ToString();
+			return WriteTable(keyValueCollection.Select(x => new KeyValuePair<string, object>(x.Key, x.Value)));
 		}
 
-		public string WriteTable(IDictionary<string, object> dictionary)
+		public string WriteTable(IEnumerable<KeyValuePair<string, object>> items)
 		{
 			var sb = new StringBuilder();
 			sb.Append("<table cellpadding=\"0\" cellspacing=\"0\">");
-			sb.Append("<tr><th class=\"first-col\" align=\"left\">Key</th><th align=\"left\">Value</th></tr>");
+			//sb.Append("<tr><th class=\"first-col\" align=\"left\">Key</th><th align=\"left\">Value</th></tr>");
 
 			var i = 0;
-			foreach (var item in dictionary)
+			foreach (var item in items)
 			{
-				var @class = i % 2 > 0 ? "class=\"alt\"" : string.Empty; 
-				sb.Append("<tr " + @class + "><td class=\"first-col\">" + item.Key + "</td><td>" + item.Value + "</td></tr>");
+				var valueString = item.Value == null ? "&nbsp;" : HttpUtility.HtmlEncode(item.Value.ToString());
+
+				var @class = i % 2 > 0 ? "class=\"alt\"" : string.Empty;
+				sb.Append("<tr " + @class + "><td class=\"first-col\">" + item.Key + "</td><td>" + valueString + "</td></tr>");
 				i++;
 			}
 

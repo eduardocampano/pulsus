@@ -4,13 +4,6 @@ using Pulsus.Internal;
 
 namespace Pulsus
 {
-    public enum PushOptions
-    {
-        Default = 0,
-        Async = 1,
-        Sync = 2
-    }
-
 	public class LoggingEventBuilder : LoggingEventBuilderBase<LoggingEventBuilder>
 	{
         public LoggingEventBuilder()
@@ -37,6 +30,30 @@ namespace Pulsus
 		}
 
 		public LoggingEvent LoggingEvent { get; private set; }
+
+		public virtual T LogKey(string logKey)
+		{
+			LoggingEvent.LogKey = logKey;
+			return this as T;
+		}
+
+		public virtual T ApiKey(string apiKey)
+		{
+			LoggingEvent.ApiKey = apiKey;
+			return this as T;
+		}
+
+		public virtual T SessionId(string psid)
+		{
+			LoggingEvent.Psid = psid;
+			return this as T;
+		}
+
+		public virtual T PersistentSessionId(string ppid)
+		{
+			LoggingEvent.Ppid = ppid;
+			return this as T;
+		}
 
 		public virtual T Text(string text, params object[] args)
 		{
@@ -87,7 +104,7 @@ namespace Pulsus
 			return this as T;
 		}
 
-		public virtual T Push(PushOptions pushOptions = PushOptions.Default)
+		public virtual T Push()
 		{
 			AddConfiguration();
 

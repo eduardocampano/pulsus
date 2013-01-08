@@ -16,6 +16,7 @@ namespace Pulsus
 
 		public virtual Guid EventId { get; set; }
 		public virtual string LogKey { get; set; }
+		public virtual string ApiKey { get; set; }
 		public virtual DateTime Date { get; set; }
 		public virtual int Level { get; set; }
 		public virtual double? Value { get; set; }
@@ -25,6 +26,8 @@ namespace Pulsus
 
 		public virtual string MachineName { get; set; }
 		public virtual string User { get; set; }
+		public virtual string Psid { get; set; }
+		public virtual string Ppid { get; set; }
 
 		public virtual int Hash { get; set; }
 		public virtual int Count { get; set; }

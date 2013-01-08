@@ -9,7 +9,7 @@ namespace Pulsus.Internal
 	internal static class PulsusLogger
 	{
 		public static readonly string Version = Assembly.GetAssembly(typeof(PulsusLogger)).GetName().Version.ToString();
-		public static readonly string WebSite = Constants.Pulsus.WebSite;
+		public static readonly string WebSite = Constants.Info.WebSite;
 		private readonly static string DebugFile;
 
 		static PulsusLogger()

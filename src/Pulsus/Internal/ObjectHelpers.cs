@@ -11,7 +11,7 @@ namespace Pulsus.Internal
 	{
 		private static readonly Dictionary<Type, Func<object, IDictionary<string, object>>> Cache = new Dictionary<Type, Func<object, IDictionary<string, object>>>();
 		private static readonly ReaderWriterLockSlim RwLock = new ReaderWriterLockSlim();
-  
+
 		/// <summary>
 		/// Loads the values of an object's properties into a <see cref="IDictionary{String,Object}"/>.
 		/// </summary>

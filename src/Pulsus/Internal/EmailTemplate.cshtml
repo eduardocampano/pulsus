@@ -47,12 +47,16 @@
 		<h2>General</h2>
 		<table cellpadding="0" cellspacing="0">
 			<tr>
-				<th class="first-col" align="left">Key</th>
-				<th align="left">Value</th>
-			</tr>
-			<tr>
 				<td class="first-col">Date</td>
 				<td>@Model.LoggingEvent.Date UTC</td>
+			</tr>
+			<tr class="alt">
+				<td class="first-col">LogKey</td>
+				<td>@Model.LoggingEvent.LogKey</td>
+			</tr>
+             <tr>
+				<td class="first-col">ApiKey</td>
+				<td>@Model.LoggingEvent.ApiKey</td>
 			</tr>
             <tr class="alt">
 				<td class="first-col">ID</td>
@@ -74,6 +78,14 @@
 				<td class="first-col">MachineName</td>
 				<td>@Model.LoggingEvent.MachineName</td>
 			</tr>
+			<tr>
+				<td class="first-col">SessionId</td>
+				<td>@Model.LoggingEvent.Psid</td>
+			</tr>
+            <tr class="alt">
+				<td class="first-col">PersistentSessionId</td>
+				<td>@Model.LoggingEvent.Ppid</td>
+			</tr>
 		</table>
         
         @if (Model.CustomData != null) {
@@ -84,10 +96,6 @@
 		@if (Model.HttpContextInformation != null) {
 			<h2>Request</h2>
 			<table cellpadding="0" cellspacing="0">
-				<tr>
-					<th class="first-col" align="left">Key</th>
-					<th align="left">Value</th>
-				</tr>
 				<tr>
 					<td class="first-col">URL</td>
 					<td>@Model.HttpContextInformation.Url</td>
@@ -178,10 +186,6 @@
 		@if (Model.ExceptionInformation != null) {
 			<h2>Exception</h2>
 			<table cellpadding="0" cellspacing="0">
-				<tr>
-					<th class="first-col" align="left">Key</th>
-					<th align="left">Value</th>
-				</tr>
 				<tr>
 					<td class="first-col">Message</td>
 					<td>@Model.ExceptionInformation.Message</td>

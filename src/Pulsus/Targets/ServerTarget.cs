@@ -20,7 +20,6 @@ namespace Pulsus.Targets
 		}
 
 		public string Url { get; set; }
-		public string LogKey { get; set; }
 		public string ApiKey { get; set; }
 		public bool Compress { get; set; }
 
@@ -48,12 +47,32 @@ namespace Pulsus.Targets
 		public void Post(LoggingEvent[] loggingEvents)
 		{
 			var request = GetRequest(loggingEvents);
-			var response = request.GetResponse() as HttpWebResponse;
-			if (response == null)
-				throw new Exception("There was an error posting the server");
 
-			if (response.StatusCode != HttpStatusCode.OK && response.StatusCode != HttpStatusCode.Created && response.StatusCode != HttpStatusCode.Accepted)
-				throw new Exception(string.Format("The server returned a {0} status with the message: {1}", response.StatusCode, response.StatusDescription));
+			try
+			{
+				var response = request.GetResponse() as HttpWebResponse;
+
+				if (response == null)
+					throw new Exception("There was an error posting the server");
+
+				if (response.StatusCode != HttpStatusCode.OK && response.StatusCode != HttpStatusCode.Created && response.StatusCode != HttpStatusCode.Accepted)
+					throw new Exception(string.Format("The server returned a {0} status with the message: {1}", response.StatusCode, response.StatusDescription));
+			} 
+			catch (WebException ex)
+			{
+				try
+				{
+					var responseStream = ex.Response.GetResponseStream();
+					if (responseStream == null)
+						throw new Exception("GetResponseStream() returned null", ex);
+					var reader = new StreamReader(responseStream);
+					var responseContent = reader.ReadToEnd();
+					throw new Exception(string.Format("Response Status: {0}, Response Content: {1}", ex.Status, responseContent), ex);
+				}
+				catch
+				{
+				}
+			}
 		}
 
 		protected HttpWebRequest GetRequest(LoggingEvent[] loggingEvents)

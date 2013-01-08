@@ -22,7 +22,7 @@ namespace Pulsus
 				builder.AddTags("error", exceptionInformation.Type);
 
 				builder.AddData(Constants.DataKeys.Exception, exceptionInformation);
-				builder.AddData(Constants.DataKeys.StackTrace, exception.StackTrace);
+				builder.AddData(Constants.DataKeys.StackTrace, exception.ToString());
 
 				if (exception.Data.Contains("SQL"))
 				{

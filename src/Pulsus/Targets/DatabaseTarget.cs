@@ -96,22 +96,25 @@ namespace Pulsus.Targets
 								[Id] [bigint] not null identity,
 								[EventId] [uniqueidentifier] not null,
 								[LogKey] [varchar](100) not null,
+								[ApiKey] [varchar](100) null,
 								[Date] [datetime] not null,
 								[Level] [int] null, 
 								[Value] [decimal](15,4) null,
 								[Text] [varchar](max) null,
 								
-								[Tags] [nvarchar](max) null,
-								[Data] [nvarchar](max) null,
-								[User] [nvarchar](max) null,
+								[Tags] [varchar](max) null,
+								[Data] [varchar](max) null,
+								[User] [varchar](max) null,
+								[Psid] [varchar](max) null,
+								[Ppid] [varchar](max) null,
 								[MachineName] [nvarchar](50) null,
 								
-								[Host] [nvarchar](100) null,
-								[Url] [nvarchar](500) null,
-								[HttpMethod] [nvarchar](10) null,
+								[Host] [varchar](255) null,
+								[Url] [varchar](max) null,
+								[HttpMethod] [varchar](10) null,
 								[IpAddress] [varchar](40) null,
 								
-								[Source] [nvarchar](max) null,
+								[Source] [varchar](max) null,
 								[StatusCode] [int] null,
 
 								[Hash] [int] null,
@@ -128,8 +131,8 @@ namespace Pulsus.Targets
 		protected void Save(IDbConnection connection, LoggingEvent[] loggingEvent)
 		{
 			var sql = @"if not exists (select 1 from [{0}].[{1}] where [EventId] = @EventId) begin
-							insert into [{0}].[{1}] ([EventId], [LogKey], [Date], [Level], [Value], [Text], [Tags], [Data], [MachineName], [Host], [Url], [HttpMethod], [IpAddress], [User], [Source], [StatusCode], [Hash], [Count])
-							values (@EventId, @LogKey, @Date, @Level, @Value, @Text, @Tags, @Data, @MachineName, @Host, @Url, @HttpMethod, @IpAddress, @User, @Source, @StatusCode, @Hash, @Count)
+							insert into [{0}].[{1}] ([EventId], [LogKey], [ApiKey], [Date], [Level], [Value], [Text], [Tags], [Data], [MachineName], [Psid], [Ppid], [Host], [Url], [HttpMethod], [IpAddress], [User], [Source], [StatusCode], [Hash], [Count])
+							values (@EventId, @LogKey, @ApiKey, @Date, @Level, @Value, @Text, @Tags, @Data, @MachineName, @Psid, @Ppid @Host, @Url, @HttpMethod, @IpAddress, @User, @Source, @StatusCode, @Hash, @Count)
 						end";
 
 			var serialized = Array.ConvertAll(loggingEvent, DatabaseLoggingEvent.Serialize);

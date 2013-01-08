@@ -36,6 +36,14 @@ namespace Pulsus
 			if (string.IsNullOrEmpty(httpContextInformation.IpAddress))
 				httpContextInformation.IpAddress = httpContext.Request.ServerVariables["REMOTE_ADDR"];
 
+			try
+			{
+				httpContext.Request.ValidateInput();
+			}
+			catch (HttpRequestValidationException)
+			{
+			}
+			
 			httpContextInformation.Headers = KeyValueCollection.Create(httpContext.Request.Headers);
 			httpContextInformation.Cookies = GetCookies(httpContext.Request.Cookies);
 			httpContextInformation.ServerVariables = KeyValueCollection.Create(httpContext.Request.ServerVariables);

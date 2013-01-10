@@ -84,6 +84,8 @@
     <Compile Include="Internal\ObjectHelpers.cs" />
     <Compile Include="Internal\TagHelpers.cs" />
     <Compile Include="Internal\TimerWrapper.cs" />
+    <Compile Include="Internal\TypeCacheUtil.cs" />
+    <Compile Include="Internal\TypeHelpers.cs" />
     <Compile Include="LoggingEventExtensions.cs" />
     <Compile Include="SqlInformation.cs" />
     <Compile Include="Targets\AmazonS3Target.cs" />

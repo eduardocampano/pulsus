@@ -63,7 +63,10 @@ namespace Pulsus
 			}
 			catch (Exception ex)
 			{
-				PulsusLogger.Error(ex);
+				if (Configuration.ThrowExceptions)
+					throw;
+				
+				PulsusLogger.Error(ex, "Error in {0}", _eventDispatcher.GetType().Name);
 			}
 		}
 

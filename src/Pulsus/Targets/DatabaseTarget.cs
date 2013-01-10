@@ -132,7 +132,7 @@ namespace Pulsus.Targets
 		{
 			var sql = @"if not exists (select 1 from [{0}].[{1}] where [EventId] = @EventId) begin
 							insert into [{0}].[{1}] ([EventId], [LogKey], [ApiKey], [Date], [Level], [Value], [Text], [Tags], [Data], [MachineName], [Psid], [Ppid], [Host], [Url], [HttpMethod], [IpAddress], [User], [Source], [StatusCode], [Hash], [Count])
-							values (@EventId, @LogKey, @ApiKey, @Date, @Level, @Value, @Text, @Tags, @Data, @MachineName, @Psid, @Ppid @Host, @Url, @HttpMethod, @IpAddress, @User, @Source, @StatusCode, @Hash, @Count)
+							values (@EventId, @LogKey, @ApiKey, @Date, @Level, @Value, @Text, @Tags, @Data, @MachineName, @Psid, @Ppid, @Host, @Url, @HttpMethod, @IpAddress, @User, @Source, @StatusCode, @Hash, @Count)
 						end";
 
 			var serialized = Array.ConvertAll(loggingEvent, DatabaseLoggingEvent.Serialize);

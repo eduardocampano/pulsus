@@ -14,10 +14,9 @@ namespace Pulsus.Internal
 
 		static PulsusLogger()
 		{
-			DebugFile = LogManager.Configuration.Debug ? LogManager.Configuration.DebugFile : null;
-			if (DebugFile != null)
+			if (LogManager.Configuration.Debug)
 			{
-
+				DebugFile = LogManager.Configuration.DebugFile;
 				if (HostingEnvironment.IsHosted)
 				{
 					if (string.IsNullOrEmpty(DebugFile))

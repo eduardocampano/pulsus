@@ -7,7 +7,7 @@ namespace Pulsus.Mvc
 		public static void Start()
 		{
 			DynamicModuleUtility.RegisterModule(typeof(ErrorLoggingModule));
-			DynamicModuleUtility.RegisterModule(typeof(ErrorHandlingModule));
+			//DynamicModuleUtility.RegisterModule(typeof(ErrorHandlingModule));
 		}
 	}
 }

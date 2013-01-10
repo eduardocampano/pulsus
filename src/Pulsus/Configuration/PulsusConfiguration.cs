@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Xml.Linq;
+using Pulsus.Internal;
 using Pulsus.Targets;
 
 namespace Pulsus.Configuration
@@ -35,7 +36,7 @@ namespace Pulsus.Configuration
 		public string DebugFile { get; set; }
 		public string LogKey { get; set; }
 		public string Tags { get; set; }
-        
+		public bool ThrowExceptions { get; set; }
 		public bool IncludeHttpContext { get; set; }
         public bool IncludeStackTrace { get; set; }
 
@@ -180,16 +181,13 @@ namespace Pulsus.Configuration
 		{
 			var targetType = typeof(Target);
 			var dictionary = new Dictionary<string, Type>(StringComparer.OrdinalIgnoreCase);
-			var assemblies = AppDomain.CurrentDomain.GetAssemblies();
-			foreach (var assembly in assemblies)
-			{
-				var targetTypes = assembly.GetTypes().Where(targetType.IsAssignableFrom);
-				foreach (var type in targetTypes)
-				{
-					dictionary.Add(type.Name, type);
-				}
-			}
 
+			var targetTypes = TypeHelpers.GetFilteredTypesFromAssemblies(targetType.IsAssignableFrom);
+			foreach (var type in targetTypes)
+			{
+				dictionary.Add(type.Name, type);
+			}
+			
 			return dictionary;
 		}
 	}

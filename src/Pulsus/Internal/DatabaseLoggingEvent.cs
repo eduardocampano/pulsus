@@ -12,6 +12,7 @@ namespace Pulsus.Internal
 			var result = new DatabaseLoggingEvent();
 			result.EventId = loggingEvent.EventId;
 			result.LogKey = loggingEvent.LogKey;
+			result.ApiKey = loggingEvent.ApiKey;
 			result.Date = loggingEvent.Date;
 			result.Level = loggingEvent.Level;
 			result.Value = loggingEvent.Value;
@@ -21,6 +22,8 @@ namespace Pulsus.Internal
 
 			result.MachineName = loggingEvent.MachineName;
 			result.User = loggingEvent.User;
+			result.Psid = loggingEvent.Psid;
+			result.Ppid = loggingEvent.Ppid;
 
 			var httpContextInfo = loggingEvent.GetData<HttpContextInformation>(Constants.DataKeys.HttpContext);
 			if (httpContextInfo != null)

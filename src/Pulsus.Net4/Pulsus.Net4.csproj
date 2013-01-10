@@ -140,6 +140,12 @@
     <Compile Include="..\Pulsus\Internal\TimerWrapper.cs">
       <Link>Internal\TimerWrapper.cs</Link>
     </Compile>
+    <Compile Include="..\Pulsus\Internal\TypeCacheUtil.cs">
+      <Link>Internal\TypeCacheUtil.cs</Link>
+    </Compile>
+    <Compile Include="..\Pulsus\Internal\TypeHelpers.cs">
+      <Link>Internal\TypeHelpers.cs</Link>
+    </Compile>
     <Compile Include="..\Pulsus\LoggingEvent.cs">
       <Link>LoggingEvent.cs</Link>
     </Compile>

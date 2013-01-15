@@ -16,7 +16,7 @@ namespace Pulsus
 		public static bool IncludePasswords { get; set; }
 		public static bool IncludeSessionInformation { get; set; }
 
-		private static PropertyInfo RequestContextProperty = GetRequestContextProperty();
+		private static readonly PropertyInfo RequestContextProperty = GetRequestContextProperty();
 
 		public static HttpContextInformation Create(HttpContextBase httpContext, RouteValueDictionary routeValues = null)
 		{

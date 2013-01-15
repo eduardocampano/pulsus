@@ -74,7 +74,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="IEventDispatcher.cs" />
-    <Compile Include="Constants.cs" />
+    <Compile Include="Internal\Constants.cs" />
     <Compile Include="Internal\EmailTemplate.cs" />
     <Compile Include="Internal\EnvironmentHelpers.cs" />
     <Compile Include="Internal\ExceptionHelpers.cs" />
@@ -87,6 +87,7 @@
     <Compile Include="Internal\TypeCacheUtil.cs" />
     <Compile Include="Internal\TypeHelpers.cs" />
     <Compile Include="LoggingEventExtensions.cs" />
+    <Compile Include="PushOptions.cs" />
     <Compile Include="SqlInformation.cs" />
     <Compile Include="Targets\AmazonS3Target.cs" />
     <Compile Include="Targets\WrapperTarget.cs" />

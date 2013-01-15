@@ -1,4 +1,4 @@
-﻿namespace Pulsus
+﻿namespace Pulsus.Internal
 {
 	public static class Constants
 	{

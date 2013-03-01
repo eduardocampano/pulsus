@@ -17,19 +17,6 @@ namespace Pulsus.Targets
 				HostingEnvironment.RegisterObject(this);	
         }
 
-		public override bool Enabled
-		{
-			get
-			{
-				return WrappedTarget.Enabled;
-			}
-
-			set
-			{
-				WrappedTarget.Enabled = value;
-			}
-		}
-
 		public override void Push(LoggingEvent[] loggingEvents)
 		{
 			if (HostingEnvironment.IsHosted)

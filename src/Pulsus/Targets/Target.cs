@@ -12,9 +12,6 @@ namespace Pulsus.Targets
 				return GetType().Name;
 			}
 		}
-
-		[DefaultValue(true)]
-		public virtual bool Enabled { get; set; }
 		
 		public abstract void Push(LoggingEvent[] loggingEvents);
 

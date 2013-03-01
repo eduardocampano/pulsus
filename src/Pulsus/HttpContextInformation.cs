@@ -25,8 +25,8 @@ namespace Pulsus
 
 			var httpContextInformation = new HttpContextInformation();
 
-			httpContextInformation.Url = httpContext.Request.Url.ToString();
-			httpContextInformation.User = httpContext.User.Identity.IsAuthenticated ? httpContext.User.Identity.Name : string.Empty;
+			httpContextInformation.Url = httpContext.Request.Url != null ? httpContext.Request.Url.ToString() : string.Empty;
+			httpContextInformation.User = httpContext.User != null && httpContext.User.Identity.IsAuthenticated ? httpContext.User.Identity.Name : string.Empty;
 			httpContextInformation.UserAgent = httpContext.Request.ServerVariables["HTTP_USER_AGENT"];
 			httpContextInformation.Host = HostingEnvironment.IsHosted ? HostingEnvironment.SiteName : EnvironmentHelpers.TryGetMachineName(httpContext);
 			httpContextInformation.Referer = httpContext.Request.ServerVariables["HTTP_REFERER"];
@@ -95,9 +95,12 @@ namespace Pulsus
 		private static List<HttpFileInformation> GetFiles(HttpFileCollectionBase files)
 		{
 			var result = new List<HttpFileInformation>();
-			foreach (HttpPostedFile file in files)
+			for (var i = 0; i < files.Count; i++)
+			{
+				var file = files[i];
 				result.Add(HttpFileInformation.Create(file.FileName, file.ContentLength, file.ContentType));
-
+			}
+				
 			return result.Any() ? result : null;
 		}
 

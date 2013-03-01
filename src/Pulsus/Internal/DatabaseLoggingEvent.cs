@@ -11,34 +11,34 @@ namespace Pulsus.Internal
 		{
 			var result = new DatabaseLoggingEvent();
 			result.EventId = loggingEvent.EventId;
-			result.LogKey = loggingEvent.LogKey;
-			result.ApiKey = loggingEvent.ApiKey;
+			result.LogKey = Truncate(loggingEvent.LogKey, 100);
+			result.ApiKey = Truncate(loggingEvent.ApiKey, 100);
 			result.Date = loggingEvent.Date;
 			result.Level = loggingEvent.Level;
 			result.Value = loggingEvent.Value;
-			result.Text = loggingEvent.Text;
-			result.Tags = string.Join(" ", loggingEvent.Tags.ToArray());
+			result.Text = Truncate(loggingEvent.Text, 5000);
+			result.Tags = Truncate(string.Join(" ", loggingEvent.Tags.ToArray()), 1000);
 			result.Data = JsonConvert.SerializeObject(loggingEvent.Data);
 
-			result.MachineName = loggingEvent.MachineName;
-			result.User = loggingEvent.User;
-			result.Psid = loggingEvent.Psid;
-			result.Ppid = loggingEvent.Ppid;
+			result.MachineName = Truncate(loggingEvent.MachineName, 100);
+			result.User = Truncate(loggingEvent.User, 500);
+			result.Psid = Truncate(loggingEvent.Psid, 50);
+			result.Ppid = Truncate(loggingEvent.Ppid, 50);
 
 			var httpContextInfo = loggingEvent.GetData<HttpContextInformation>(Constants.DataKeys.HttpContext);
 			if (httpContextInfo != null)
 			{
-				result.Host = httpContextInfo.Host;
-				result.Url = httpContextInfo.Url;
-				result.HttpMethod = httpContextInfo.Method;
-				result.IpAddress = httpContextInfo.IpAddress;
+				result.Host = Truncate(httpContextInfo.Host, 255);
+				result.Url = Truncate(httpContextInfo.Url, 2000);
+				result.HttpMethod = Truncate(httpContextInfo.Method, 10);
+				result.IpAddress = Truncate(httpContextInfo.IpAddress, 40);
 			}
 
 			var exceptionInfo = loggingEvent.GetData<ExceptionInformation>(Constants.DataKeys.Exception);
 			if (exceptionInfo != null)
 			{
 				result.StatusCode = exceptionInfo.StatusCode;
-				result.Source = exceptionInfo.Source;
+				result.Source = Truncate(exceptionInfo.Source, 500);
 			}
 
 			result.Count = loggingEvent.Count;
@@ -69,6 +69,17 @@ namespace Pulsus.Internal
 			result.Hash = mssqlLoggingEvent.Hash;
 
 			return result;
+		}
+
+		private static string Truncate(string value, int length)
+		{
+			if (value == null)
+				return null;
+
+			if (value.Length > length)
+				return value.Substring(0, length);
+
+			return value;
 		}
 
 		public Guid EventId { get; set; }

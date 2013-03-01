@@ -38,11 +38,6 @@ namespace Pulsus.Tests
 		{
 			public int SleepFor { get; set; }
 
-			public override bool Enabled
-			{
-				get { return true; }
-			}
-
 			public override void Push(LoggingEvent[] loggingEvents)
 			{
 				Thread.Sleep(SleepFor);

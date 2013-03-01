@@ -110,7 +110,7 @@ namespace Pulsus.Targets
 				if (eventsToPush.Length <= 0) 
 					return;
 
-				PulsusLogger.Write("[AsyncSyncWrapper] Pushing {0} events to {1}.", eventsToPush.Length, WrappedTarget);
+				PulsusLogger.Write("[AsyncWrapper] Pushing {0} events to {1}.", eventsToPush.Length, WrappedTarget);
 
 				var stopWatch = Stopwatch.StartNew();
 				PushInternal(eventsToPush);
@@ -123,7 +123,7 @@ namespace Pulsus.Targets
 			}
 			catch (Exception ex)
 			{
-				PulsusLogger.Error(ex, "[AsyncSyncWrapper] Error pushing {0} events to {1}", eventsToPush.Length, WrappedTarget);
+				PulsusLogger.Error(ex, "[AsyncWrapper] Error pushing {0} events to {1}", eventsToPush.Length, WrappedTarget);
 
 				// Add the events to the queue again to try again
 				if (eventsToPush.Length > 0)
@@ -137,7 +137,7 @@ namespace Pulsus.Targets
 
 		public override string ToString()
 		{
-			return string.Format("[AsyncSyncWrapper] {0}", WrappedTarget);
+			return string.Format("[AsyncWrapper] {0}", WrappedTarget);
 		}
 	}
 }

@@ -36,7 +36,7 @@ namespace Pulsus
 
 		protected virtual Target[] GetTargets()
 		{
-			return _targets.Where(t => t.Enabled).ToArray();
+			return _targets.ToArray();
 		}
 	}
 }

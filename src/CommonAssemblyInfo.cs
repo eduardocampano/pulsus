@@ -6,11 +6,11 @@ using System;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyDescription("Simple REST and HTTP API Client")]
+[assembly: AssemblyDescription("A simple logging library for modern applications")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("restsharp.org")]
-[assembly: AssemblyProduct("RestSharp")]
-[assembly: AssemblyCopyright("Copyright © RestSharp Project 2009-2012")]
+[assembly: AssemblyCompany("http://pulsus.codeplex.com")]
+[assembly: AssemblyProduct("Pulsus")]
+[assembly: AssemblyCopyright("Copyright © Pulsus Project 2012-2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: CLSCompliant(true)]

@@ -198,10 +198,9 @@ namespace Pulsus.Targets
 							Hash int null,
 							Count int not null default 1,
 
-							CONSTRAINT PK_{0} PRIMARY KEY CLUSTERED (Id ASC)
-						);
-
-						CREATE UNIQUE INDEX UX_{0}_EventId ON {0}(EventId);";
+							CONSTRAINT PK_{0} PRIMARY KEY CLUSTERED (Id ASC),
+							UNIQUE INDEX UX_{0}_EventId (EventId)
+						)";
 
 			return string.Format(sql, Table);
 		}

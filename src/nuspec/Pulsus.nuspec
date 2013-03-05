@@ -2,9 +2,9 @@
 <package >
   <metadata>
 	<id>Pulsus</id>
-	<version>1.6.6</version>
+	<version>1.6.7</version>
 	<title>Pulsus</title>
-	<authors>Eduardo Campañó, Juan Pedro Elizalde</authors>
+	<authors>Eduardo Campañó, Juan Pedro Elizalde, Brian Jenkins</authors>
 	<owners>Eduardo Campañó</owners>
 	<projectUrl>http://pulsus.codeplex.com</projectUrl>
 	<requireLicenseAcceptance>false</requireLicenseAcceptance>

@@ -10,7 +10,7 @@ namespace Pulsus.Internal
 		public static DatabaseLoggingEvent Serialize(LoggingEvent loggingEvent)
 		{
 			var result = new DatabaseLoggingEvent();
-			result.EventId = loggingEvent.EventId;
+			result.EventId = Truncate(loggingEvent.EventId, 38);
 			result.LogKey = Truncate(loggingEvent.LogKey, 100);
 			result.ApiKey = Truncate(loggingEvent.ApiKey, 100);
 			result.Date = loggingEvent.Date;
@@ -82,7 +82,7 @@ namespace Pulsus.Internal
 			return value;
 		}
 
-		public Guid EventId { get; set; }
+		public string EventId { get; set; }
 		public DateTime Date { get; set; }
 		public string LogKey { get; set; }
 		public string ApiKey { get; set; }

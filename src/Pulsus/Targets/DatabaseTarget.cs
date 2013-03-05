@@ -133,7 +133,7 @@ namespace Pulsus.Targets
 			var sql = @"if (not exists (select 1 from information_schema.tables where table_schema = '{0}' and table_name = '{1}')) begin
 							create table [{0}].[{1}] (
 								[Id] [bigint] not null identity,
-								[EventId] [uniqueidentifier] not null,
+								[EventId] [varchar](38) not null,
 								[LogKey] [varchar](100) not null,
 								[ApiKey] [varchar](100) null,
 								[Date] [datetime] not null,

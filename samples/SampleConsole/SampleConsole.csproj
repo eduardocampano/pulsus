@@ -46,12 +46,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-    <None Include="Pulsus.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\..\src\Pulsus.Net4\Pulsus.Net4.csproj">
       <Project>{a0ac0a9a-0145-43fe-a850-9bbdf5701b60}</Project>
       <Name>Pulsus.Net4</Name>

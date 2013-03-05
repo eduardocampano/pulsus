@@ -8,15 +8,9 @@ namespace SampleConsole
 	{
 		static void Main(string[] args)
 		{
-
 			LogManager.Configuration.LogKey = "Console";
-			LogManager.Configuration.Targets.Add("server", new ServerTarget()
-			{
-				Enabled = true,
-				Url = "http://localhost:5326/api/Log",
-				ApiKey = "11111111",
-				Compress = false
-			});
+			LogManager.Configuration.Targets.Clear();
+			LogManager.Configuration.Targets.Add("database", new DatabaseTarget());
 
 			LogManager.EventFactory.Create()
 								   .Level(LoggingEventLevel.Trace)
@@ -24,6 +18,7 @@ namespace SampleConsole
 								   .Text("Pushing from console")
 								   .Push();
 
+			Console.WriteLine("Press any key to finish...");
 			Console.ReadKey();
 		}
 	}

@@ -54,8 +54,8 @@ namespace Pulsus.Server
 		protected void Validate(LoggingEvent loggingEvent)
 		{
 			// ensure EventId
-			if (loggingEvent.EventId == Guid.Empty)
-				loggingEvent.EventId = Guid.NewGuid();
+			if (string.IsNullOrEmpty(loggingEvent.EventId))
+				loggingEvent.EventId = Guid.NewGuid().ToString();
 
 			if (loggingEvent.Date == DateTime.MinValue)
 				loggingEvent.Date = DateTime.UtcNow;

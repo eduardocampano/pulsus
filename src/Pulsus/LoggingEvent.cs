@@ -7,14 +7,14 @@ namespace Pulsus
 	{
 		public LoggingEvent()
 		{
-			EventId = Guid.NewGuid();
+			EventId = Guid.NewGuid().ToString();
 			Date = DateTime.UtcNow;
 			Count = 1;
 			Tags = new List<string>();
 			Data = new Dictionary<string, object>();
 		}
 
-		public virtual Guid EventId { get; set; }
+		public virtual string EventId { get; set; }
 		public virtual string LogKey { get; set; }
 		public virtual string ApiKey { get; set; }
 		public virtual DateTime Date { get; set; }

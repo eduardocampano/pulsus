@@ -9,8 +9,6 @@ namespace SampleConsole
 		static void Main(string[] args)
 		{
 			LogManager.Configuration.LogKey = "Console";
-			LogManager.Configuration.Targets.Clear();
-			LogManager.Configuration.Targets.Add("database", new DatabaseTarget());
 
 			LogManager.EventFactory.Create()
 								   .Level(LoggingEventLevel.Trace)

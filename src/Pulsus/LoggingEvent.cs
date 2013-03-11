@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Pulsus
 {
-	public class LoggingEvent
+	public partial class LoggingEvent
 	{
 		public LoggingEvent()
 		{

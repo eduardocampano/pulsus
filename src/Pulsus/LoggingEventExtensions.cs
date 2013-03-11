@@ -3,27 +3,27 @@ using Newtonsoft.Json.Linq;
 
 namespace Pulsus
 {
-	public static class LoggingEventExtensions
+	public partial class LoggingEvent
 	{
-		public static T GetData<T>(this LoggingEvent loggingEvent, string key)
+		public T GetData<T>(string key)
 		{
 			T output;
 
-			if (loggingEvent.TryGetData(key, out output))
+			if (this.TryGetData(key, out output))
 				return output;
 
 			return default(T);
 		}
 
-		public static bool TryGetData<T>(this LoggingEvent loggingEvent, string key, out T output)
+		public bool TryGetData<T>(string key, out T output)
 		{
-			if (!loggingEvent.Data.ContainsKey(key))
+			if (!this.Data.ContainsKey(key))
 			{
 				output = default(T);
 				return false;
 			}
 
-			var value = loggingEvent.Data[key];
+			var value = this.Data[key];
 
 			// value type matches requested type
 			if (value.GetType() == typeof(T))

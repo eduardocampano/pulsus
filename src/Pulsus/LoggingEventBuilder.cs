@@ -106,11 +106,6 @@ namespace Pulsus
 
 		public virtual T Push()
 		{
-			return Push(PushOptions.Dummy);
-		}
-
-		public virtual T Push(PushOptions pushOptions)
-		{
 			AddConfiguration();
 
 			LogManager.Push(LoggingEvent);

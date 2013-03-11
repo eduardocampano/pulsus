@@ -164,9 +164,6 @@
     <Compile Include="..\Pulsus\LogManager.cs">
       <Link>LogManager.cs</Link>
     </Compile>
-    <Compile Include="..\Pulsus\PushOptions.cs">
-      <Link>PushOptions.cs</Link>
-    </Compile>
     <Compile Include="..\Pulsus\SqlInformation.cs">
       <Link>SqlInformation.cs</Link>
     </Compile>

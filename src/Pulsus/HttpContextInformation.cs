@@ -43,7 +43,7 @@ namespace Pulsus
 			catch (HttpRequestValidationException)
 			{
 			}
-			
+
 			httpContextInformation.Headers = KeyValueCollection.Create(httpContext.Request.Headers);
 			httpContextInformation.Cookies = GetCookies(httpContext.Request.Cookies);
 			httpContextInformation.ServerVariables = KeyValueCollection.Create(httpContext.Request.ServerVariables);
@@ -55,7 +55,8 @@ namespace Pulsus
 			if (routeValues == null)
 				routeValues = GetRouteValues(httpContext);
 
-			httpContextInformation.RouteValues = GetRouteValues(routeValues);
+			if (routeValues != null)
+				httpContextInformation.RouteValues = GetRouteValues(routeValues);
 
 			return httpContextInformation;
 		}

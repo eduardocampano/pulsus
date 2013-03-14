@@ -45,7 +45,7 @@ namespace Pulsus.SharePoint.ApplicationPages
 			if (application != null)
 			{
 				string pulsusConfigDefaultContent =
-					@"<pulsus logKey=""" + application.Name + @""" debug=""false"">
+					@"<pulsus logKey=""" + application.Name + @""" includeHttpContext=""true"" debug=""false"">
 	<targets>
 		<target name=""email"" type=""EmailTarget"" from=""" + emailTargetFromAddress.Text + @""" to=""" + emailTargetToAddress.Text + @""" smtpServer=""" + emailTargetServer.Text + @""" smtpPort=""" + emailTargetServerPort.Text + @""" />
 	</targets>

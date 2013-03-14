@@ -26,7 +26,8 @@ namespace Pulsus
 				}
 				catch (Exception ex)
 				{
-					// TODO check ThrowExceptions
+                    if (LogManager.Configuration.ThrowExceptions)
+                        throw;
 
 					// a target may fail but we need to continue with the others
 					PulsusLogger.Error(ex);

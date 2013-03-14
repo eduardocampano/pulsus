@@ -57,17 +57,7 @@ namespace Pulsus
 			if (!Configuration.Enabled)
 				return;
 
-			try
-			{
-				_eventDispatcher.Push(loggingEvents);
-			}
-			catch (Exception ex)
-			{
-				if (Configuration.ThrowExceptions)
-					throw;
-				
-				PulsusLogger.Error(ex, "Error in {0}", _eventDispatcher.GetType().Name);
-			}
+			_eventDispatcher.Push(loggingEvents);
 		}
 
         public static PulsusConfiguration Configuration

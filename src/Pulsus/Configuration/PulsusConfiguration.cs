@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Web;
 using System.Xml.Linq;
 using Pulsus.Internal;
 using Pulsus.Targets;
@@ -20,7 +21,7 @@ namespace Pulsus.Configuration
 			Enabled = true;
 			LogKey = "Default";
 			Targets = new Dictionary<string, Target>(StringComparer.OrdinalIgnoreCase);
-			ExceptionsToIgnore = new Dictionary<string, Predicate<Exception>>();
+            ExceptionsToIgnore = new Dictionary<string, Predicate<Exception>>(StringComparer.OrdinalIgnoreCase);
         }
 
 		public static PulsusConfiguration Default
@@ -39,8 +40,9 @@ namespace Pulsus.Configuration
 		public bool ThrowExceptions { get; set; }
 		public bool IncludeHttpContext { get; set; }
         public bool IncludeStackTrace { get; set; }
+        public bool IgnoreNotFound { get; set; }
 
-        public IDictionary<string, Predicate<Exception>> ExceptionsToIgnore { get; private set; }
+	    public IDictionary<string, Predicate<Exception>> ExceptionsToIgnore { get; private set; }
         public LoggingEventLevel DefaultEventLevel { get; set; }
 		public IDictionary<string, Target> Targets { get; private set; } 
 
@@ -68,7 +70,10 @@ namespace Pulsus.Configuration
 				configuration.Targets.Add("database", wrapperTarget);
 			}
 
-			return configuration;
+            if (configuration.IgnoreNotFound)
+                configuration.ExceptionsToIgnore.Add("notfound", IsNotFoundException);
+
+		    return configuration;
 		}
 
 		private static IDictionary<string, Target> GetTargets(XElement xElement)
@@ -190,5 +195,11 @@ namespace Pulsus.Configuration
 			
 			return dictionary;
 		}
+
+        private static bool IsNotFoundException(Exception ex)
+        {
+            var httpException = ex as HttpException;
+            return httpException != null && httpException.GetHttpCode() == 404;
+        }
 	}
 }

@@ -27,8 +27,13 @@ namespace Pulsus.Configuration
 		{
 			get
 			{
-				return GetConfiguration();
+				return GetConfiguration(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Pulsus.config"));
 			}
+		}
+
+		public static PulsusConfiguration Load(string fileName)
+		{
+			return GetConfiguration(fileName);
 		}
 
 		public bool Enabled { get; set; }
@@ -44,10 +49,8 @@ namespace Pulsus.Configuration
         public LoggingEventLevel DefaultEventLevel { get; set; }
 		public IDictionary<string, Target> Targets { get; private set; } 
 
-		private static PulsusConfiguration GetConfiguration()
+		private static PulsusConfiguration GetConfiguration(string fileName)
 		{
-			var fileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Pulsus.config");
-
 			var configuration = new PulsusConfiguration();
 
 			if (File.Exists(fileName))

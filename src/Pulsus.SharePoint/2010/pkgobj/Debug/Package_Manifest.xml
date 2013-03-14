@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Solution xmlns="http://schemas.microsoft.com/sharepoint/" SolutionId="bc97feee-8941-4cd0-b29e-a1016d55d429" SharePointProductVersion="14.0">
+  <Assemblies>
+    <Assembly Location="Pulsus.dll" DeploymentTarget="GlobalAssemblyCache" />
+    <Assembly Location="Newtonsoft.Json.dll" DeploymentTarget="GlobalAssemblyCache" />
+    <Assembly Location="Pulsus.SharePoint.dll" DeploymentTarget="GlobalAssemblyCache" />
+  </Assemblies>
+  <TemplateFiles>
+    <TemplateFile Location="ADMIN\admin.sitemap.pulsus.xml" />
+    <TemplateFile Location="ADMIN\PulsusSettings.aspx" />
+  </TemplateFiles>
+  <FeatureManifests>
+    <FeatureManifest Location="Pulsus Module\Feature.xml" />
+    <FeatureManifest Location="Pulsus\Feature.xml" />
+  </FeatureManifests>
+</Solution>

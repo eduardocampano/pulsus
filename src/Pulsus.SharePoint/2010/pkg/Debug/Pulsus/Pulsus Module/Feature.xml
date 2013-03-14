@@ -1,0 +1,2 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Feature xmlns="http://schemas.microsoft.com/sharepoint/" Title="Pulsus Module" ActivateOnDefault="FALSE" AlwaysForceInstall="TRUE" Hidden="TRUE" Id="7465ed3a-f5cc-46ba-8205-0ba5fc0e8b35" ReceiverAssembly="Pulsus.SharePoint, Version=1.0.0.0, Culture=neutral, PublicKeyToken=80e8440141debbd5" ReceiverClass="Pulsus.SharePoint.Features.Pulsus.PulsusFeatureEventReceiver" Scope="WebApplication"></Feature>

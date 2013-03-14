@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="bc97feee-8941-4cd0-b29e-a1016d55d429" solutionId="bc97feee-8941-4cd0-b29e-a1016d55d429" resetWebServer="false" name="Pulsus" xmlns="http://schemas.microsoft.com/VisualStudio/2008/SharePointTools/PackageModel">
+  <assemblies>
+    <projectOutputAssembly location="Pulsus.dll" deploymentTarget="GlobalAssemblyCache" projectPath="..\..\Pulsus\Pulsus.csproj" />
+    <customAssembly location="Newtonsoft.Json.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="packages\Newtonsoft.Json.4.5.8\lib\net35\Newtonsoft.Json.dll" />
+  </assemblies>
+  <features>
+    <featureReference itemId="f1f0aa11-b245-4b1c-b3a2-b8c3f22131f2" />
+    <featureReference itemId="d374148e-0e15-4586-a5b7-ddaffbb52160" />
+  </features>
+  <projectItems>
+    <projectItemReference itemId="e3b7ee37-ce66-42a8-9b1e-fde80df8e308" />
+    <projectItemReference itemId="5157b592-5494-4c7f-907b-43c5aa117dc1" />
+  </projectItems>
+</package>

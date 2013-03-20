@@ -16,12 +16,12 @@ copy ..\Pulsus.Web\bin\Release\Pulsus.Web.dll Packages\Pulsus.Web\lib\net4\
 copy ..\Pulsus.Web\bin\Release\Pulsus.Web.pdb Packages\Pulsus.Web\lib\net4\
 REM copy ..\Pulsus.Web\bin\Release\Pulsus.Web.xml Packages\Pulsus.Web\lib\net4\
 
-copy ..\Pulsus.Server\bin\Release\Pulsus.Server.dll Packages\Pulsus.Server\lib\net45\
-copy ..\Pulsus.Server\bin\Release\Pulsus.Server.pdb Packages\Pulsus.Server\lib\net45\
+REM copy ..\Pulsus.Server\bin\Release\Pulsus.Server.dll Packages\Pulsus.Server\lib\net45\
+REM copy ..\Pulsus.Server\bin\Release\Pulsus.Server.pdb Packages\Pulsus.Server\lib\net45\
 REM copy ..\Pulsus.Server\bin\Release\Pulsus.Server.xml Packages\Pulsus.Server\lib\net45\
 
-..\..\tools\.nuget\nuget.exe update -self
-..\..\tools\.nuget\nuget.exe pack Pulsus.nuspec -BasePath Packages\Pulsus -Output Packages
-..\..\tools\.nuget\nuget.exe pack Pulsus.Web.nuspec -BasePath Packages\Pulsus.Web -Output Packages
-..\..\tools\.nuget\nuget.exe pack Pulsus.Mvc.nuspec -BasePath Packages\Pulsus.Mvc -Output Packages
-..\..\tools\.nuget\nuget.exe pack Pulsus.Server.nuspec -BasePath Packages\Pulsus.Server -Output Packages
+..\.nuget\nuget.exe update -self
+..\.nuget\nuget.exe pack Pulsus.nuspec -BasePath Packages\Pulsus -Output Packages
+..\.nuget\nuget.exe pack Pulsus.Web.nuspec -BasePath Packages\Pulsus.Web -Output Packages
+..\.nuget\nuget.exe pack Pulsus.Mvc.nuspec -BasePath Packages\Pulsus.Mvc -Output Packages
+REM ..\.nuget\nuget.exe pack Pulsus.Server.nuspec -BasePath Packages\Pulsus.Server -Output Packages

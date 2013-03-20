@@ -13,7 +13,7 @@
 	<dependencies>
 	  <dependency id="Newtonsoft.Json" version="4.5.11" />
 	  <dependency id="WebActivator" version="1.5.2" />
-	  <dependency id="Pulsus" version="1.6.4" />
+	  <dependency id="Pulsus" version="1.6.8" />
 	  <dependency id="Microsoft.AspNet.WebApi.WebHost" version="4.0.20710.0" />
 	</dependencies>
   </metadata>

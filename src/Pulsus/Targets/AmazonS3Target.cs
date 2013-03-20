@@ -55,18 +55,17 @@ namespace Pulsus.Targets
 			}
 			catch (WebException ex)
 			{
-				try
-				{
-					var responseStream = ex.Response.GetResponseStream();
-					if (responseStream == null)
-						throw new Exception("GetResponseStream() returned null", ex);
-					var reader = new StreamReader(responseStream);
-					var responseContent = reader.ReadToEnd();
-					throw new Exception(string.Format("Response Status: {0}, Response Content: {1}", ex.Status, responseContent), ex);
-				}
-				catch
-				{
-				}
+                if (ex.Response == null)
+                    throw new Exception(string.Format("Response Status: {0}, Description: {1}", ex.Status, ex.Message), ex);
+
+                var responseStream = ex.Response.GetResponseStream();
+                if (responseStream == null)
+                    throw new Exception("GetResponseStream() returned null", ex);
+
+                var reader = new StreamReader(responseStream);
+                var responseContent = reader.ReadToEnd();
+
+                throw new Exception(string.Format("Response Status: {0}, Content: {1}", ex.Status, responseContent), ex);
 			}
 		}
 

@@ -17,6 +17,30 @@ namespace Pulsus.Targets
 				HostingEnvironment.RegisterObject(this);	
         }
 
+        public override LoggingEventLevel MinLevel
+        {
+            get
+            {
+                return WrappedTarget.MinLevel;
+            }
+            set
+            {
+                WrappedTarget.MinLevel = value;
+            }
+        }
+
+        public override LoggingEventLevel MaxLevel
+        {
+            get
+            {
+                return WrappedTarget.MaxLevel;
+            }
+            set
+            {
+                WrappedTarget.MaxLevel = value;
+            }
+        }
+
 		public override void Push(LoggingEvent[] loggingEvents)
 		{
 			if (HostingEnvironment.IsHosted)

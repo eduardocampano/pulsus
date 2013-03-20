@@ -22,11 +22,13 @@ namespace Pulsus
 			{
 				try
 				{
-					target.Push(loggingEvents);
+				    var loggingEventsToPush = loggingEvents.Where(x => MustPushToTarget(x, target)).ToArray();
+                    target.Push(loggingEventsToPush);
 				}
 				catch (Exception ex)
 				{
-					// TODO check ThrowExceptions
+                    if (LogManager.Configuration.ThrowExceptions)
+                        throw;
 
 					// a target may fail but we need to continue with the others
 					PulsusLogger.Error(ex);
@@ -34,7 +36,18 @@ namespace Pulsus
 			}
 		}
 
-		protected virtual Target[] GetTargets()
+	    protected virtual bool MustPushToTarget(LoggingEvent loggingEvent, Target target)
+	    {
+            if (target.MinLevel > 0 && loggingEvent.Level < (int)target.MinLevel)
+                return false;
+
+            if (target.MaxLevel > 0 && loggingEvent.Level > (int)target.MaxLevel)
+                return false;
+
+	        return true;
+	    }
+
+	    protected virtual Target[] GetTargets()
 		{
 			return _targets.ToArray();
 		}

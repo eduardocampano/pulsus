@@ -11,7 +11,6 @@ namespace Pulsus.Targets
 	public class ServerTarget : Target
 	{
 		private readonly JsonSerializerSettings _serializerSettings;
-		private const string ApiKeyHeader = "X-PULSUS-APIKEY";
 
 		public ServerTarget()
 		{
@@ -20,7 +19,6 @@ namespace Pulsus.Targets
 		}
 
 		public string Url { get; set; }
-		public string ApiKey { get; set; }
 		public bool Compress { get; set; }
 
 		public override void Push(LoggingEvent[] loggingEvents)
@@ -28,18 +26,12 @@ namespace Pulsus.Targets
 			if (loggingEvents == null)
 				throw new ArgumentNullException("loggingEvents");
 
-			//if (string.IsNullOrEmpty(Url))
-			//	throw new Exception("There is no URL defined for the server target.");
+            if (string.IsNullOrEmpty(Url))
+                throw new Exception("There is no URL defined for the server target.");
 
-			//Uri uri;
-			//if (!Uri.TryCreate(_settings.Server.Url, UriKind.Absolute, out uri))
-			//	throw new Exception("The URL defined for the server target is not valid");
-
-			//if (string.IsNullOrEmpty(_settings.LogKey))
-			//	throw new Exception("There is no LogKey defined");
-
-			//if (string.IsNullOrEmpty(_settings.Server.ApiKey))
-			//	throw new Exception("There is no ApiKey defined for the server target");
+            Uri uri;
+            if (!Uri.TryCreate(Url, UriKind.Absolute, out uri))
+                throw new Exception("The URL defined for the server target is not valid");
 
 			Post(loggingEvents);			
 		}
@@ -86,7 +78,6 @@ namespace Pulsus.Targets
 			request.UserAgent = "Pulsus " + PulsusLogger.Version;
 			request.Method = "POST";
 			request.ContentType = "application/json";
-			request.Headers.Add(ApiKeyHeader, ApiKey);
 
 			var bytes = GetRequestBody(loggingEvents, Compress);
 			request.ContentLength = bytes.Length;

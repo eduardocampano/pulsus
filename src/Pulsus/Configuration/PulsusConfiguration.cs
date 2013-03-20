@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Web;
+using System.Web.Hosting;
 using System.Xml.Linq;
 using Pulsus.Internal;
 using Pulsus.Targets;
@@ -52,7 +53,10 @@ namespace Pulsus.Configuration
 
 			var configuration = new PulsusConfiguration();
 
-			if (File.Exists(fileName))
+            if (HostingEnvironment.IsHosted)
+                configuration.LogKey = HostingEnvironment.SiteName;
+
+		    if (File.Exists(fileName))
 			{
 				var xDocument = XDocument.Load(fileName);
 				var root = xDocument.Root;
@@ -151,7 +155,21 @@ namespace Pulsus.Configuration
 
 				try
 				{
-					var value = Convert.ChangeType(xAttribute.Value, property.PropertyType);
+                    if (property.PropertyType == typeof(LoggingEventLevel))
+                    {
+                        try
+                        {
+                            var enumValue = Enum.Parse(typeof (LoggingEventLevel), xAttribute.Value);
+                            property.SetValue(instance, enumValue, null);
+                        }
+                        catch (Exception)
+                        {
+                        }
+                        
+                        continue;
+                    }
+
+				    var value = Convert.ChangeType(xAttribute.Value, property.PropertyType);
 					property.SetValue(instance, value, null);
 				}
 				catch (Exception)

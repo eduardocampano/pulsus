@@ -25,6 +25,7 @@ namespace Pulsus
 
 			var httpContextInformation = new HttpContextInformation();
 
+            
 			httpContextInformation.Url = httpContext.Request.Url != null ? httpContext.Request.Url.ToString() : string.Empty;
 			httpContextInformation.User = httpContext.User != null && httpContext.User.Identity.IsAuthenticated ? httpContext.User.Identity.Name : string.Empty;
 			httpContextInformation.UserAgent = httpContext.Request.ServerVariables["HTTP_USER_AGENT"];
@@ -36,14 +37,6 @@ namespace Pulsus
 			if (string.IsNullOrEmpty(httpContextInformation.IpAddress))
 				httpContextInformation.IpAddress = httpContext.Request.ServerVariables["REMOTE_ADDR"];
 
-			try
-			{
-				httpContext.Request.ValidateInput();
-			}
-			catch (HttpRequestValidationException)
-			{
-			}
-			
 			httpContextInformation.Headers = KeyValueCollection.Create(httpContext.Request.Headers);
 			httpContextInformation.Cookies = GetCookies(httpContext.Request.Cookies);
 			httpContextInformation.ServerVariables = KeyValueCollection.Create(httpContext.Request.ServerVariables);
@@ -163,7 +156,17 @@ namespace Pulsus
 			
 			foreach (var key in collection.AllKeys)
 			{
-				var value = collection[key];
+			    string value;
+			    try
+			    {
+                    value = collection[key];
+			    }
+			    catch (HttpRequestValidationException ex)
+			    {
+                    // TODO fix this
+                    value = "[HttpRequestValidationException]";
+			    }
+				
 				if (obfuscatePasswords && key.IndexOf("password", StringComparison.InvariantCultureIgnoreCase) >= 0)
 					value = new string('*', value.Length);
 

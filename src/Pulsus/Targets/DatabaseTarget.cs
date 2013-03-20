@@ -35,6 +35,7 @@ namespace Pulsus.Targets
 		[DefaultValue("LoggingEvents")]
 		public string Table { get; set; }
 
+        [DefaultValue(true)]
 		public bool KeepConnection { get; set; }
 		
 		public override void Push(LoggingEvent[] loggingEvents)
@@ -42,29 +43,29 @@ namespace Pulsus.Targets
 			if (loggingEvents == null)
 				throw new ArgumentNullException("loggingEvents");
 
-			var connection = GetConnection();
-
-            if (!_initialized)
-            {
-				lock (_initializedLock)
-				{
-					if (!_initialized)
-					{
-						EnsureRepository(connection);
-						_initialized = true;
-					}
-				}
+		    try
+		    {
+                EnsureConnection();
+                Save(loggingEvents);
+		    }
+		    catch (Exception)
+		    {
+                CloseConnection();
+		        throw;
+		    }
+            finally
+		    {
+		        if (!KeepConnection)
+                    CloseConnection();
             }
-
-			Save(connection, loggingEvents);
 		}
 
-		protected IDbConnection GetConnection()
+		protected void EnsureConnection()
 		{
-			if (_connection != null && _connection.State == ConnectionState.Open)
-				return _connection;
+            if (_connection != null && _connection.State == ConnectionState.Open)
+                return;
 
-			ConnectionStringSettings connectionStringSettings;
+		    ConnectionStringSettings connectionStringSettings;
 
 			if (string.IsNullOrEmpty(ConnectionName))
 			{
@@ -98,23 +99,41 @@ namespace Pulsus.Targets
 
 			connection.Open();
 
-			if (KeepConnection)
-				_connection = connection;
+            if (!_initialized)
+            {
+                lock (_initializedLock)
+                {
+                    if (!_initialized)
+                    {
+                        EnsureRepository(connection);
+                        _initialized = true;
+                    }
+                }
+            }
 
-			return connection;
+            _connection = connection;
 		}
 
-		protected void EnsureRepository(IDbConnection connection)
+        protected void CloseConnection()
+        {
+            if (_connection != null)
+            {
+                _connection.Close();
+                _connection = null;
+            }
+        }
+
+	    protected void EnsureRepository(IDbConnection connection)
 		{
 			var sql = _dbProviderType == DbProviderType.MySql ? GetMySqlEnsureRepository() : GetMsSqlEnsureRepository();
 			connection.Execute(sql, new { });
 		}
 
-		protected void Save(IDbConnection connection, LoggingEvent[] loggingEvent)
+		protected void Save(LoggingEvent[] loggingEvent)
 		{
 			var sql = _dbProviderType == DbProviderType.MySql ? GetMySqlInsert() : GetMsSqlInsert();
 			var serialized = Array.ConvertAll(loggingEvent, DatabaseLoggingEvent.Serialize);
-			connection.Execute(sql, serialized);
+			_connection.Execute(sql, serialized);
 		}
 
 		protected override void Dispose(bool disposing)

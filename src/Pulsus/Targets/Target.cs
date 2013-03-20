@@ -12,8 +12,11 @@ namespace Pulsus.Targets
 				return GetType().Name;
 			}
 		}
-		
-		public abstract void Push(LoggingEvent[] loggingEvents);
+
+        public virtual LoggingEventLevel MinLevel { get; set; }
+        public virtual LoggingEventLevel MaxLevel { get; set; }
+
+	    public abstract void Push(LoggingEvent[] loggingEvents);
 
         public void Dispose()
         {

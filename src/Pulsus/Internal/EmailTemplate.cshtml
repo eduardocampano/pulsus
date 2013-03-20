@@ -32,15 +32,15 @@
 		<table cellpadding="0" cellspacing="0" class="title">
 			<tr>
 				<td width="8" style="" class="first-col level @Model.LevelClass">&nbsp;</td>
-				<td>
-					<h1>
-						@if (Model.Link != null) {
-							<a class="link" href="@Model.Link">@Model.Title</a>
-						} else {
-							@Model.Title
-						}
-					</h1>
-				</td>
+                <td>
+                    <h1>
+                        @if (Model.Link != null) {
+                            <a class="link" href="@Model.Link">@Model.Title</a>
+                        } else {
+                            @Model.Title
+                        }
+                    </h1>
+                </td>
 			</tr>
 		</table>
     
@@ -98,7 +98,7 @@
 			<table cellpadding="0" cellspacing="0">
 				<tr>
 					<td class="first-col">URL</td>
-					<td>@Model.HttpContextInformation.Url</td>
+					<td><a href="@Model.HttpContextInformation.Url">@Model.HttpContextInformation.Url</a></td>
 				</tr>
 				<tr class="alt">
 					<td class="first-col">Method</td>

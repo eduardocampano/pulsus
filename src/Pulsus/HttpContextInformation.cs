@@ -75,6 +75,9 @@ namespace Pulsus
 			var result = new KeyValueCollection();
 			foreach (var key in cookies.AllKeys)
 			{
+				if (key == null)
+					continue;
+
 				var cookie = cookies[key];
 				if (cookie == null)
 					continue;;
@@ -91,6 +94,9 @@ namespace Pulsus
 			for (var i = 0; i < files.Count; i++)
 			{
 				var file = files[i];
+				if (file == null)
+					continue;
+
 				result.Add(HttpFileInformation.Create(file.FileName, file.ContentLength, file.ContentType));
 			}
 				
@@ -156,6 +162,9 @@ namespace Pulsus
 			
 			foreach (var key in collection.AllKeys)
 			{
+				if (key == null)
+					continue;
+
 			    string value;
 			    try
 			    {
@@ -168,7 +177,7 @@ namespace Pulsus
 			    }
 				
 				if (obfuscatePasswords && key.IndexOf("password", StringComparison.InvariantCultureIgnoreCase) >= 0)
-					value = new string('*', value.Length);
+					value = new string('*', (value ?? string.Empty).Length);
 
 				result.Add(key, value);
 			}

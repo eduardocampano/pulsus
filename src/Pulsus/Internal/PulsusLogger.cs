@@ -2,7 +2,6 @@
 using System.Globalization;
 using System.IO;
 using System.Reflection;
-using System.Web.Hosting;
 
 namespace Pulsus.Internal
 {
@@ -10,28 +9,7 @@ namespace Pulsus.Internal
 	{
 		public static readonly string Version = Assembly.GetAssembly(typeof(PulsusLogger)).GetName().Version.ToString();
 		public static readonly string WebSite = Constants.Info.WebSite;
-		private readonly static string DebugFile;
-
-		static PulsusLogger()
-		{
-			if (LogManager.Configuration.Debug)
-			{
-				DebugFile = LogManager.Configuration.DebugFile;
-				if (HostingEnvironment.IsHosted)
-				{
-					if (string.IsNullOrEmpty(DebugFile))
-						DebugFile = "~/App_Data/pulsus_log.txt";
-
-					DebugFile = HostingEnvironment.MapPath(DebugFile);
-				}
-				else
-				{
-					if (string.IsNullOrEmpty(DebugFile))
-						DebugFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "pulsus_log.txt");
-				}
-			}
-		}
-
+		
 		public static void Error(Exception ex, string message = null, params object[] args)
 		{
 			if (message == null)
@@ -42,17 +20,22 @@ namespace Pulsus.Internal
 
 		public static void Write(string message, params object[] args)
 		{
+			if (!LogManager.Configuration.DebugVerbose)
+				return;
+
 			WriteInternal(string.Format(CultureInfo.InvariantCulture, message, args));
 		}
 
 		private static void WriteInternal(string message)
 		{
-			if (DebugFile == null)
+			var configuration = LogManager.Configuration;
+
+			if (configuration.DebugFile == null)
 				return;
 
 			try
 			{
-				using (var textWriter = File.AppendText(DebugFile))
+				using (var textWriter = File.AppendText(configuration.DebugFile))
 				{
 					textWriter.WriteLine("{0} {1}", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.ffff", CultureInfo.InvariantCulture), message);
 				}

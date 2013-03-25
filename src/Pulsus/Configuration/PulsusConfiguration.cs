@@ -20,6 +20,8 @@ namespace Pulsus.Configuration
         {
 			DefaultEventLevel = LoggingEventLevel.Information;
 			Enabled = true;
+			Debug = false;
+			DebugVerbose = false;
 			LogKey = "Default";
 			Targets = new Dictionary<string, Target>(StringComparer.OrdinalIgnoreCase);
             ExceptionsToIgnore = new Dictionary<string, Predicate<Exception>>(StringComparer.OrdinalIgnoreCase);
@@ -41,6 +43,7 @@ namespace Pulsus.Configuration
 		public bool Enabled { get; set; }
 		public bool Debug { get; set; }
 		public string DebugFile { get; set; }
+		public bool DebugVerbose { get; set; }
 		public string LogKey { get; set; }
 		public string Tags { get; set; }
 		public bool ThrowExceptions { get; set; }
@@ -80,7 +83,28 @@ namespace Pulsus.Configuration
             if (configuration.IgnoreNotFound)
                 configuration.ExceptionsToIgnore.Add("notfound", IsNotFoundException);
 
+			SetupDebugging(configuration);
+
 		    return configuration;
+		}
+
+		private static void SetupDebugging(PulsusConfiguration configuration)
+		{
+			if (configuration.Debug)
+			{
+				if (HostingEnvironment.IsHosted)
+				{
+					if (string.IsNullOrEmpty(configuration.DebugFile))
+						configuration.DebugFile = "~/App_Data/pulsus_log.txt";
+
+					configuration.DebugFile = HostingEnvironment.MapPath(configuration.DebugFile);
+				}
+				else
+				{
+					if (string.IsNullOrEmpty(configuration.DebugFile))
+						configuration.DebugFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "pulsus_log.txt");
+				}
+			}
 		}
 
 		private static IDictionary<string, Target> GetTargets(XElement xElement)

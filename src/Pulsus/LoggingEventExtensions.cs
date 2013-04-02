@@ -17,13 +17,19 @@ namespace Pulsus
 
 		public bool TryGetData<T>(string key, out T output)
 		{
-			if (!this.Data.ContainsKey(key))
+			if (!Data.ContainsKey(key))
 			{
 				output = default(T);
 				return false;
 			}
 
-			var value = this.Data[key];
+			var value = Data[key];
+
+			if (value == null)
+			{
+				output = default(T);
+				return false;
+			}
 
 			// value type matches requested type
 			if (value.GetType() == typeof(T))

@@ -63,6 +63,7 @@
     <Compile Include="AsyncWrapperTargetTests.cs" />
     <Compile Include="DefaultEventDispatcherTests.cs" />
     <Compile Include="LoggingEventBuilderTests.cs" />
+    <Compile Include="LoggingEventTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

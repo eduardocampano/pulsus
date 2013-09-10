@@ -72,6 +72,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="IEventDispatcher.cs" />
+    <Compile Include="Ignore.cs" />
     <Compile Include="Internal\Constants.cs" />
     <Compile Include="Internal\EmailTemplate.cs" />
     <Compile Include="Internal\EnvironmentHelpers.cs" />

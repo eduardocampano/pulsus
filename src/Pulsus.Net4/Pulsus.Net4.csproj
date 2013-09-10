@@ -79,6 +79,9 @@
     <Compile Include="..\Pulsus\IEventFactory.cs">
       <Link>IEventFactory.cs</Link>
     </Compile>
+    <Compile Include="..\Pulsus\Ignore.cs">
+      <Link>Ignore.cs</Link>
+    </Compile>
     <Compile Include="..\Pulsus\ILoggingEventBuilder.cs">
       <Link>ILoggingEventBuilder.cs</Link>
     </Compile>

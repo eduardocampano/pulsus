@@ -1,10 +1,15 @@
 ﻿using System;
-using System.ComponentModel;
+using System.Collections.Generic;
 
 namespace Pulsus.Targets
 {
 	public abstract class Target : IDisposable
 	{
+	    protected Target()
+	    {
+	        Ignores = new List<Ignore>();
+	    }
+
 		public virtual string Name
 		{
 			get
@@ -13,8 +18,17 @@ namespace Pulsus.Targets
 			}
 		}
 
-        public virtual LoggingEventLevel MinLevel { get; set; }
+	    public virtual IEnumerable<Ignore> Ignores { get; private set; }
+
+	    public virtual LoggingEventLevel MinLevel { get; set; }
         public virtual LoggingEventLevel MaxLevel { get; set; }
+	    public virtual string LogKeyContains { get; set; }
+	    public virtual string LogKeyStartsWith { get; set; }
+	    public virtual string TextContains { get; set; }
+	    public virtual string TextStartsWith { get; set; }
+        public virtual string TagsContains { get; set; }
+	    public virtual double? MinValue { get; set; }
+	    public virtual double? MaxValue { get; set; }
 
 	    public abstract void Push(LoggingEvent[] loggingEvents);
 

@@ -49,10 +49,6 @@
     <AssemblyOriginatorKeyFile>Pulsus.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Newtonsoft.Json.4.5.8\lib\net35\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
@@ -86,6 +82,7 @@
     <Compile Include="Internal\TypeCacheUtil.cs" />
     <Compile Include="Internal\TypeHelpers.cs" />
     <Compile Include="LoggingEventExtensions.cs" />
+    <Compile Include="SimpleJson.cs" />
     <Compile Include="SqlInformation.cs" />
     <Compile Include="Targets\AmazonS3Target.cs" />
     <Compile Include="Targets\WrapperTarget.cs" />
@@ -119,7 +116,6 @@
     <Compile Include="Internal\StackTraceHelper.cs" />
     <Compile Include="Targets\Target.cs" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="Pulsus.snk" />

@@ -10,8 +10,5 @@
 	<requireLicenseAcceptance>false</requireLicenseAcceptance>
 	<description>A simple and extensible logging library built for modern applications.</description>
 	<tags>log logging log trace tracing error exception pulsus</tags>
-	<dependencies>
-	  <dependency id="Newtonsoft.Json" version="4.5.8" />
-	</dependencies>
   </metadata>
 </package>

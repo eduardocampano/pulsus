@@ -64,10 +64,12 @@
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Configuration\PulsusConfiguration.cs" />
+    <Compile Include="Configuration\XmlConfiguration.cs" />
     <Compile Include="DefaultEventDispatcher.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="IEventDispatcher.cs" />
+    <Compile Include="IFilter.cs" />
     <Compile Include="Ignore.cs" />
     <Compile Include="Internal\Constants.cs" />
     <Compile Include="Internal\EmailTemplate.cs" />
@@ -77,6 +79,7 @@
     <Compile Include="Internal\HaackFormatter.cs" />
     <Compile Include="Internal\ITimer.cs" />
     <Compile Include="Internal\ObjectHelpers.cs" />
+    <Compile Include="Internal\StringExtensions.cs" />
     <Compile Include="Internal\TagHelpers.cs" />
     <Compile Include="Internal\TimerWrapper.cs" />
     <Compile Include="Internal\TypeCacheUtil.cs" />

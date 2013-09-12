@@ -55,6 +55,9 @@
     <Compile Include="..\Pulsus\Configuration\PulsusConfiguration.cs">
       <Link>Configuration\PulsusConfiguration.cs</Link>
     </Compile>
+    <Compile Include="..\Pulsus\Configuration\XmlConfiguration.cs">
+      <Link>Configuration\XmlConfiguration.cs</Link>
+    </Compile>
     <Compile Include="..\Pulsus\DefaultEventDispatcher.cs">
       <Link>DefaultEventDispatcher.cs</Link>
     </Compile>
@@ -75,6 +78,9 @@
     </Compile>
     <Compile Include="..\Pulsus\IEventFactory.cs">
       <Link>IEventFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\Pulsus\IFilter.cs">
+      <Link>IFilter.cs</Link>
     </Compile>
     <Compile Include="..\Pulsus\Ignore.cs">
       <Link>Ignore.cs</Link>
@@ -132,6 +138,9 @@
     </Compile>
     <Compile Include="..\Pulsus\Internal\StackTraceHelper.cs">
       <Link>Internal\StackTraceHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\Pulsus\Internal\StringExtensions.cs">
+      <Link>Internal\StringExtensions.cs</Link>
     </Compile>
     <Compile Include="..\Pulsus\Internal\TagHelpers.cs">
       <Link>Internal\TagHelpers.cs</Link>

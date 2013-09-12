@@ -2,10 +2,10 @@
 
 namespace Pulsus.Mvc
 {
-	public class DependencyResolverEventFactory : DefaultEventFactory
-	{
-		public override T Create<T>()
-		{
+    public class DependencyResolverEventFactory : DefaultEventFactory
+    {
+        public override T Create<T>()
+        {
             var dependencyResolver = DependencyResolver.Current;
             
             // WORKAROUND: this is because in ASP.NET MVC 4 the DefaultDependencyResolver will try to use
@@ -15,10 +15,10 @@ namespace Pulsus.Mvc
 
             var instance = dependencyResolver.GetService<T>();
 
-			if (instance == null)
-				instance = base.Create<T>();
+            if (instance == null)
+                instance = base.Create<T>();
 
-			return instance;
-		}
-	}
+            return instance;
+        }
+    }
 }

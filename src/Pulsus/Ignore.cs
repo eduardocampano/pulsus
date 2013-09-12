@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Pulsus
+﻿namespace Pulsus
 {
-    public class Ignore
+    public class Ignore : IFilter
     {
         public virtual LoggingEventLevel MinLevel { get; set; }
         public virtual LoggingEventLevel MaxLevel { get; set; }
-        public virtual LoggingEventLevel Level { get; set; }
         public virtual string LogKeyContains { get; set; }
         public virtual string LogKeyStartsWith { get; set; }
         public virtual string TextContains { get; set; }

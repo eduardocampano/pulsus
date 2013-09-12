@@ -33,28 +33,24 @@ namespace Pulsus.Configuration
         protected void Initialize(XElement pulsusElement)
         {
             LoadAttributes(this, pulsusElement);
-            Targets = GetTargets(pulsusElement);
+            AddTargets(pulsusElement);
         }
 
-        protected IDictionary<string, Target> GetTargets(XElement xElement)
+        protected void AddTargets(XElement xElement)
         {
-            var targets = new Dictionary<string, Target>(StringComparer.OrdinalIgnoreCase);
-
             var targetsElement = xElement.Element("targets");
             if (targetsElement == null)
-                return targets;
+                return;
 
             foreach (var targetElement in targetsElement.Elements("target"))
             {
-                var target = GetTarget(targetElement);
+                var target = ParseTarget(targetElement);
                 if (target != null)
-                    targets.Add(target.Name, target);
+                    AddTarget(target.Name, target);
             }
-
-            return targets;
         }
 
-        protected Target GetTarget(XElement targetElement)
+        protected Target ParseTarget(XElement targetElement)
         {
             if (targetElement == null)
                 return null;
@@ -75,7 +71,7 @@ namespace Pulsus.Configuration
                 if (wrappedTargetElement == null)
                     throw new Exception("No child target element for wrapper target");
 
-                var wrappedTarget = GetTarget(wrappedTargetElement);
+                var wrappedTarget = ParseTarget(wrappedTargetElement);
                 return CreateTarget(targetType, targetElement, wrappedTarget);
             }
 
@@ -179,14 +175,6 @@ namespace Pulsus.Configuration
             }
 
             return dictionary;
-        }
-
-        private static Target WrapWithWrapperAsyncTarget(Target target)
-        {
-            var asyncTargetWrapper = new AsyncWrapperTarget(target);
-            PulsusLogger.Write("Wrapped target '{0}' with AsyncWrapperTarget", asyncTargetWrapper.Name);
-            target = asyncTargetWrapper;
-            return target;
         }
     }
 }

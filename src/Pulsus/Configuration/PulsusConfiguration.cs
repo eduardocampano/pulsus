@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Web;
 using System.Web.Hosting;
-using System.Xml.Linq;
 using Pulsus.Internal;
 using Pulsus.Targets;
 
@@ -44,78 +41,99 @@ namespace Pulsus.Configuration
         /// <summary>
         /// Gets or sets whether Pulsus is enabled. If set to false no events will be pushed to any target. The default value is true.
         /// </summary>
-        public bool Enabled { get; set; }
+        public virtual bool Enabled { get; set; }
 
         /// <summary>
         /// Gets or sets whether Pulsus is in debug mode. The default valus is false. This is useful for finding errors in pulsus or targets configuration.
         /// </summary>
-        public bool Debug { get; set; }
+        public virtual bool Debug { get; set; }
         
         /// <summary>
         /// Gets or sets the path 
         /// </summary>
-        public string DebugFile { get; set; }
+        public virtual string DebugFile { get; set; }
 
         /// <summary>
         /// Gets or sets whether the debug information should be sent to the Windows Event Log. The default value is false.
         /// </summary>
-        public bool DebugToEventLog { get; set; }
+        public virtual bool DebugToEventLog { get; set; }
 
         /// <summary>
         /// Gets or sets whether the debug file must include detailed information. If set to true detailed information will be logged to the debug file, if not, only errors will be logged. The default value is false.
         /// </summary>
-        public bool DebugVerbose { get; set; }
+        public virtual bool DebugVerbose { get; set; }
 
         /// <summary>
         /// Gets or sets the default LogKey for all the events. The default value is the name of the application or IIS application.
         /// </summary>
-        public string LogKey { get; set; }
+        public virtual string LogKey { get; set; }
         
         /// <summary>
         /// Gets or sets the tags to be added to all the events.
         /// </summary>
-        public string Tags { get; set; }
+        public virtual string Tags { get; set; }
 
         /// <summary>
         /// Gets or sets whether Pulsus must throw exceptions when an intenal error happens. The default value is false.
         /// </summary>
-        public bool ThrowExceptions { get; set; }
+        public virtual bool ThrowExceptions { get; set; }
 
         /// <summary>
         /// Gets or sets whether the HttpContext information must be included for all the events when available. The default value is false.
         /// </summary>
-        public bool IncludeHttpContext { get; set; }
+        public virtual bool IncludeHttpContext { get; set; }
 
         /// <summary>
         /// Gets or sets whether the Stack Trace must be included for all the events. The default value is false.
         /// </summary>
-        public bool IncludeStackTrace { get; set; }
+        public virtual bool IncludeStackTrace { get; set; }
 
         /// <summary>
         /// Gets or sets whether 404 status code HttpExceptions must be ignored. The default value is false.
         /// </summary>
-        public bool IgnoreNotFound { get; set; }
+        public virtual bool IgnoreNotFound { get; set; }
 
         /// <summary>
         /// Gets or sets whether all the targets must be wrapped with an AsyncWrapperTarget. The default value is false.
         /// </summary>
-        public bool Async { get; set; }
+        public virtual bool Async { get; set; }
 
         /// <summary>
         /// Gets or sets the default event level. The default value is LoggingEventLevel.None.
         /// </summary>
-        public LoggingEventLevel DefaultEventLevel { get; set; }
+        public virtual LoggingEventLevel DefaultEventLevel { get; set; }
 
         /// <summary>
         /// Returns a dictionary of exception evaluators which will evaluate if the exception must be ignored or not. 
         /// </summary>
-        public IDictionary<string, Predicate<Exception>> ExceptionsToIgnore { get; private set; }
+        public virtual IDictionary<string, Predicate<Exception>> ExceptionsToIgnore { get; private set; }
 
         /// <summary>
         /// Returns a dictionary of the destination targets where the logging events may be pushed. A logging event may not necessary be pushed to all
         /// the targets in the dictionary because a Target can have filter and ignore conditions. 
         /// </summary>
-        public IDictionary<string, Target> Targets { get; protected set; } 
+        public virtual IDictionary<string, Target> Targets { get; protected set; }
+
+        /// <summary>
+        /// Adds a target to the target collection. If the Async property in the target instance is set to true or if the Async property in this class is set to
+        /// true, the target instance will be wrapped in an AsyncWrapperTarget instance.
+        /// </summary>
+        /// <param name="name">The name of the target</param>
+        /// <param name="target">The target instance</param>
+        public virtual void AddTarget(string name, Target target)
+        {
+            if (Async || target.Async)
+                target = WrapWithAsyncWrapperTarget(target);
+
+            Targets.Add(name, target);
+        }
+
+        protected virtual Target WrapWithAsyncWrapperTarget(Target target)
+        {
+            var asyncTargetWrapper = new AsyncWrapperTarget(target);
+            PulsusLogger.Write("Wrapped target '{0}' with AsyncWrapperTarget", asyncTargetWrapper.Name);
+            return asyncTargetWrapper;
+        }
 
         private static PulsusConfiguration GetConfiguration(string fileName)
         {

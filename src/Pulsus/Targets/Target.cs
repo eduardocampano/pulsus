@@ -18,6 +18,8 @@ namespace Pulsus.Targets
             }
         }
 
+        public virtual bool Async { get; set; }
+
         public virtual ICollection<Ignore> Ignores { get; private set; }
         
         public virtual LoggingEventLevel MinLevel { get; set; }

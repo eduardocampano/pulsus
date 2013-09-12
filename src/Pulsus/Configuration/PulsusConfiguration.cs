@@ -122,7 +122,7 @@ namespace Pulsus.Configuration
             PulsusConfiguration configuration;
 
             if (File.Exists(fileName))
-                configuration = new XmlConfiguration(fileName);
+                configuration = new PulsusXmlConfiguration(fileName);
             else
                 configuration = new PulsusConfiguration();
 

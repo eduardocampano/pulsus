@@ -55,8 +55,8 @@
     <Compile Include="..\Pulsus\Configuration\PulsusConfiguration.cs">
       <Link>Configuration\PulsusConfiguration.cs</Link>
     </Compile>
-    <Compile Include="..\Pulsus\Configuration\XmlConfiguration.cs">
-      <Link>Configuration\XmlConfiguration.cs</Link>
+    <Compile Include="..\Pulsus\Configuration\PulsusXmlConfiguration.cs">
+      <Link>Configuration\PulsusXmlConfiguration.cs</Link>
     </Compile>
     <Compile Include="..\Pulsus\DefaultEventDispatcher.cs">
       <Link>DefaultEventDispatcher.cs</Link>

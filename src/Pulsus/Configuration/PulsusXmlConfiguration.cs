@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
 using System.Reflection;
 using System.Xml.Linq;
 using Pulsus.Internal;
@@ -9,17 +7,33 @@ using Pulsus.Targets;
 
 namespace Pulsus.Configuration
 {
-    public class XmlConfiguration : PulsusConfiguration
+    public class PulsusXmlConfiguration : PulsusConfiguration
     {
         private static IDictionary<string, Type> KnownTargetTypes = GetKnownTargetTypes();
-        private string _file;
 
-        public XmlConfiguration(string fileName)
+        public PulsusXmlConfiguration(string fileName)
         {
+            if (fileName == null)
+                throw new ArgumentNullException("fileName");
+
+            if (fileName.IsNullOrEmpty())
+                throw new ArgumentException("The fileName is not valid", "fileName");
+
             var xDocument = XDocument.Load(fileName);
-            var root = xDocument.Root;
-            LoadAttributes(this, root);
-            Targets = GetTargets(root);
+            var pulsusElement = xDocument.Root;
+            
+            Initialize(pulsusElement);
+        }
+
+        public PulsusXmlConfiguration(XElement pulsusElement)
+        {
+            Initialize(pulsusElement);
+        }
+
+        protected void Initialize(XElement pulsusElement)
+        {
+            LoadAttributes(this, pulsusElement);
+            Targets = GetTargets(pulsusElement);
         }
 
         protected IDictionary<string, Target> GetTargets(XElement xElement)
@@ -165,6 +179,14 @@ namespace Pulsus.Configuration
             }
 
             return dictionary;
+        }
+
+        private static Target WrapWithWrapperAsyncTarget(Target target)
+        {
+            var asyncTargetWrapper = new AsyncWrapperTarget(target);
+            PulsusLogger.Write("Wrapped target '{0}' with AsyncWrapperTarget", asyncTargetWrapper.Name);
+            target = asyncTargetWrapper;
+            return target;
         }
     }
 }

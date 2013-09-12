@@ -64,7 +64,7 @@
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Configuration\PulsusConfiguration.cs" />
-    <Compile Include="Configuration\XmlConfiguration.cs" />
+    <Compile Include="Configuration\PulsusXmlConfiguration.cs" />
     <Compile Include="DefaultEventDispatcher.cs">
       <SubType>Code</SubType>
     </Compile>

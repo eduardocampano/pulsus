@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Reflection;
 using System.Xml.Linq;
 using Pulsus.Internal;
@@ -10,6 +11,8 @@ namespace Pulsus.Configuration
     public class PulsusXmlConfiguration : PulsusConfiguration
     {
         private static IDictionary<string, Type> KnownTargetTypes = GetKnownTargetTypes();
+        private FileSystemWatcher _fileWatcher;
+        private bool _disposing;
 
         public PulsusXmlConfiguration(string fileName)
         {
@@ -19,14 +22,58 @@ namespace Pulsus.Configuration
             if (fileName.IsNullOrEmpty())
                 throw new ArgumentException("The fileName is not valid", "fileName");
 
-            var xDocument = XDocument.Load(fileName);
-            var pulsusElement = xDocument.Root;
-            
-            Initialize(pulsusElement);
+            Initialize(fileName);
         }
 
         public PulsusXmlConfiguration(XElement pulsusElement)
         {
+            Initialize(pulsusElement);
+        }
+
+        protected void StartFileWatching(string fileName)
+        {
+            PulsusLogger.Write("Watching file '{0}'", fileName);
+            _fileWatcher = new FileSystemWatcher()
+            {
+                Path = Path.GetDirectoryName(fileName),
+                Filter = Path.GetFileName(fileName),
+                NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.CreationTime | NotifyFilters.Size | NotifyFilters.Security | NotifyFilters.Attributes
+            };
+
+            _fileWatcher.Created += OnWatcherChanged;
+            _fileWatcher.Changed += OnWatcherChanged;
+            _fileWatcher.EnableRaisingEvents = true;
+        }
+
+        protected void StopFileWatching()
+        {
+            if (_fileWatcher != null)
+            {
+                PulsusLogger.Write("Stopped watching file '{0}'", Path.Combine(_fileWatcher.Path, _fileWatcher.Filter));
+                _fileWatcher.EnableRaisingEvents = false;
+                _fileWatcher.Dispose();
+            }
+        }
+
+        protected void OnWatcherChanged(object source, FileSystemEventArgs e)
+        {
+            
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                StopFileWatching();
+            }
+
+            base.Dispose(disposing);
+        }
+
+        protected void Initialize(string fileName)
+        {
+            var xDocument = XDocument.Load(fileName);
+            var pulsusElement = xDocument.Root;
             Initialize(pulsusElement);
         }
 

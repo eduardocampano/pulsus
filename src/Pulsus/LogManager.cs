@@ -1,6 +1,5 @@
 ﻿using System;
 using Pulsus.Configuration;
-using Pulsus.Internal;
 
 namespace Pulsus
 {

@@ -9,8 +9,10 @@ using Pulsus.Targets;
 
 namespace Pulsus.Configuration
 {
-    public class PulsusConfiguration
+    public class PulsusConfiguration : IDisposable
     {
+        private static PulsusConfiguration _defaultConfiguration;
+
         public PulsusConfiguration()
         {
             DefaultEventLevel = LoggingEventLevel.Information;
@@ -25,19 +27,6 @@ namespace Pulsus.Configuration
                 LogKey = HostingEnvironment.SiteName;
         }
 
-        public static PulsusConfiguration Default
-        {
-            get
-            {
-                return GetConfiguration(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Pulsus.config"));
-            }
-        }
-
-        public static PulsusConfiguration Load(string fileName)
-        {
-            return GetConfiguration(fileName);
-        }
-
         /// <summary>
         /// Gets or sets whether Pulsus is enabled. If set to false no events will be pushed to any target. The default value is true.
         /// </summary>
@@ -49,7 +38,7 @@ namespace Pulsus.Configuration
         public virtual bool Debug { get; set; }
         
         /// <summary>
-        /// Gets or sets the path 
+        /// Gets or sets the path for the debugging file
         /// </summary>
         public virtual string DebugFile { get; set; }
 
@@ -128,6 +117,34 @@ namespace Pulsus.Configuration
             Targets.Add(name, target);
         }
 
+        protected virtual void Initialize()
+        {
+            // default targets
+            if (!Targets.Any())
+            {
+                var databaseTarget = new DatabaseTarget();
+                TypeHelpers.LoadDefaultValues(databaseTarget);
+                var wrapperTarget = new WrapperTarget(databaseTarget);
+                TypeHelpers.LoadDefaultValues(wrapperTarget);
+                AddTarget("database", wrapperTarget);
+            }
+
+            if (IgnoreNotFound)
+                ExceptionsToIgnore.Add("notfound", IsNotFoundException);
+
+            SetupDebugging();
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+        }
+
         protected virtual Target WrapWithAsyncWrapperTarget(Target target)
         {
             var asyncTargetWrapper = new AsyncWrapperTarget(target);
@@ -135,50 +152,47 @@ namespace Pulsus.Configuration
             return asyncTargetWrapper;
         }
 
-        private static PulsusConfiguration GetConfiguration(string fileName)
+        protected void SetupDebugging()
         {
-            PulsusConfiguration configuration;
-
-            if (File.Exists(fileName))
-                configuration = new PulsusXmlConfiguration(fileName);
-            else
-                configuration = new PulsusConfiguration();
-
-            // default targets
-            if (!configuration.Targets.Any())
-            {
-                var databaseTarget = new DatabaseTarget();
-                TypeHelpers.LoadDefaultValues(databaseTarget);
-                var wrapperTarget = new WrapperTarget(databaseTarget);
-                TypeHelpers.LoadDefaultValues(wrapperTarget);
-                configuration.Targets.Add("database", wrapperTarget);
-            }
-
-            if (configuration.IgnoreNotFound)
-                configuration.ExceptionsToIgnore.Add("notfound", IsNotFoundException);
-
-            SetupDebugging(configuration);
-
-            return configuration;
-        }
-
-        private static void SetupDebugging(PulsusConfiguration configuration)
-        {
-            if (configuration.Debug)
+            if (Debug)
             {
                 if (HostingEnvironment.IsHosted)
                 {
-                    if (string.IsNullOrEmpty(configuration.DebugFile))
-                        configuration.DebugFile = "~/App_Data/pulsus_log.txt";
+                    if (string.IsNullOrEmpty(DebugFile))
+                        DebugFile = "~/App_Data/pulsus_log.txt";
 
-                    configuration.DebugFile = HostingEnvironment.MapPath(configuration.DebugFile);
+                    DebugFile = HostingEnvironment.MapPath(DebugFile);
                 }
                 else
                 {
-                    if (string.IsNullOrEmpty(configuration.DebugFile))
-                        configuration.DebugFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "pulsus_log.txt");
+                    if (string.IsNullOrEmpty(DebugFile))
+                        DebugFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "pulsus_log.txt");
                 }
             }
+        }
+
+        public static PulsusConfiguration Default
+        {
+            get
+            {
+                if (_defaultConfiguration == null)
+                    _defaultConfiguration = Load(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Pulsus.config"));
+
+                return _defaultConfiguration;
+            }
+        }
+
+        public static PulsusConfiguration Load(string fileName)
+        {
+            return GetConfiguration(fileName);
+        }
+
+        private static PulsusConfiguration GetConfiguration(string fileName)
+        {
+            if (File.Exists(fileName))
+                return new PulsusXmlConfiguration(fileName);
+            
+            return new PulsusConfiguration();
         }
 
         private static bool IsNotFoundException(Exception ex)

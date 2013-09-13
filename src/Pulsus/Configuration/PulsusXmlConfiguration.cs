@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Xml.Linq;
 using Pulsus.Internal;
@@ -12,6 +13,7 @@ namespace Pulsus.Configuration
     {
         private static IDictionary<string, Type> KnownTargetTypes = GetKnownTargetTypes();
         private FileSystemWatcher _fileWatcher;
+        private string _fileName;
         private bool _disposing;
 
         public PulsusXmlConfiguration(string fileName)
@@ -22,42 +24,17 @@ namespace Pulsus.Configuration
             if (fileName.IsNullOrEmpty())
                 throw new ArgumentException("The fileName is not valid", "fileName");
 
-            Initialize(fileName);
+            _fileName = fileName;
+
+            Initialize();
         }
 
         public PulsusXmlConfiguration(XElement pulsusElement)
         {
+            if (pulsusElement == null)
+                throw new ArgumentNullException("pulsusElement");
+
             Initialize(pulsusElement);
-        }
-
-        protected void StartFileWatching(string fileName)
-        {
-            PulsusLogger.Write("Watching file '{0}'", fileName);
-            _fileWatcher = new FileSystemWatcher()
-            {
-                Path = Path.GetDirectoryName(fileName),
-                Filter = Path.GetFileName(fileName),
-                NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.CreationTime | NotifyFilters.Size | NotifyFilters.Security | NotifyFilters.Attributes
-            };
-
-            _fileWatcher.Created += OnWatcherChanged;
-            _fileWatcher.Changed += OnWatcherChanged;
-            _fileWatcher.EnableRaisingEvents = true;
-        }
-
-        protected void StopFileWatching()
-        {
-            if (_fileWatcher != null)
-            {
-                PulsusLogger.Write("Stopped watching file '{0}'", Path.Combine(_fileWatcher.Path, _fileWatcher.Filter));
-                _fileWatcher.EnableRaisingEvents = false;
-                _fileWatcher.Dispose();
-            }
-        }
-
-        protected void OnWatcherChanged(object source, FileSystemEventArgs e)
-        {
-            
         }
 
         protected override void Dispose(bool disposing)
@@ -70,17 +47,21 @@ namespace Pulsus.Configuration
             base.Dispose(disposing);
         }
 
-        protected void Initialize(string fileName)
+        protected override void Initialize()
         {
-            var xDocument = XDocument.Load(fileName);
+            var xDocument = XDocument.Load(_fileName);
             var pulsusElement = xDocument.Root;
+            
             Initialize(pulsusElement);
+            
+            StartFileWatching();
         }
 
         protected void Initialize(XElement pulsusElement)
         {
             LoadAttributes(this, pulsusElement);
             AddTargets(pulsusElement);
+            base.Initialize();
         }
 
         protected void AddTargets(XElement xElement)
@@ -89,10 +70,19 @@ namespace Pulsus.Configuration
             if (targetsElement == null)
                 return;
 
+            var targetsToAdd = new List<Target>();
             foreach (var targetElement in targetsElement.Elements("target"))
             {
                 var target = ParseTarget(targetElement);
                 if (target != null)
+                    targetsToAdd.Add(target);
+            }
+
+            if (targetsToAdd.Any())
+            {
+                // TODO: implement read-write lock here
+                Targets.Clear();
+                foreach (var target in targetsToAdd)
                     AddTarget(target.Name, target);
             }
         }
@@ -222,6 +212,41 @@ namespace Pulsus.Configuration
             }
 
             return dictionary;
+        }
+
+        protected void StartFileWatching()
+        {
+            if (_fileWatcher != null)
+                return;
+
+            PulsusLogger.Write("Watching file '{0}'", _fileName);
+            _fileWatcher = new FileSystemWatcher()
+            {
+                Path = Path.GetDirectoryName(_fileName),
+                Filter = Path.GetFileName(_fileName),
+                NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.CreationTime | NotifyFilters.Size | NotifyFilters.Security | NotifyFilters.Attributes
+            };
+
+            _fileWatcher.Created += OnWatcherChanged;
+            _fileWatcher.Changed += OnWatcherChanged;
+            _fileWatcher.EnableRaisingEvents = true;
+        }
+
+        protected void StopFileWatching()
+        {
+            if (_fileWatcher != null)
+            {
+                PulsusLogger.Write("Stopped watching file '{0}'", _fileName);
+                _fileWatcher.EnableRaisingEvents = false;
+                _fileWatcher.Dispose();
+                _fileWatcher = null;
+            }
+        }
+
+        protected void OnWatcherChanged(object source, FileSystemEventArgs e)
+        {
+            PulsusLogger.Write("Watched file '{0}' has changed", _fileName);
+            Initialize();
         }
     }
 }

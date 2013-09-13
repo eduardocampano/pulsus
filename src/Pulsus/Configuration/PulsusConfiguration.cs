@@ -129,7 +129,7 @@ namespace Pulsus.Configuration
                 AddTarget("database", wrapperTarget);
             }
 
-            if (IgnoreNotFound)
+            if (IgnoreNotFound && !ExceptionsToIgnore.ContainsKey("notfound"))
                 ExceptionsToIgnore.Add("notfound", IsNotFoundException);
 
             SetupDebugging();

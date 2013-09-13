@@ -11,8 +11,6 @@ namespace Pulsus.Server
 {
 	public class LogController : ApiController
 	{
-		private const string ApiKeyHeader = "X-PULSUS-APIKEY";
-
 		public HttpResponseMessage Get([FromUri] LoggingEvent loggingEvent, [FromUri] string apiKey)
 		{
 			loggingEvent.MachineName = EnvironmentHelpers.TryGetMachineName();
@@ -33,8 +31,6 @@ namespace Pulsus.Server
 
 		public HttpResponseMessage Post(LoggingEvent[] loggingEvents)
 		{
-			var apiKey = GetHeader(ApiKeyHeader);
-
 			if (loggingEvents == null || !loggingEvents.Any())
 				ModelState.AddModelError("Events", "No events to process");
 

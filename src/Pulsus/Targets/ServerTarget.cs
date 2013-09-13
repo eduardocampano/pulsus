@@ -67,7 +67,7 @@ namespace Pulsus.Targets
             request.ServicePoint.MaxIdleTime = 5000;
             request.ServicePoint.ConnectionLimit = 50;
             request.Accept = "application/json";
-            request.UserAgent = "Pulsus " + PulsusLogger.Version;
+            request.UserAgent = "Pulsus " + PulsusDebugger.Version;
             request.Method = "POST";
             request.ContentType = "application/json";
 

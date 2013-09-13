@@ -40,7 +40,7 @@ namespace Pulsus
             }
             catch (Exception ex)
             {
-                PulsusLogger.Error(ex);
+                PulsusDebugger.Error(ex);
             }
 
             return builder;
@@ -83,7 +83,7 @@ namespace Pulsus
             }
             catch (Exception ex)
             {
-                PulsusLogger.Error(ex);
+                PulsusDebugger.Error(ex);
             }
            
             return builder;
@@ -98,7 +98,7 @@ namespace Pulsus
             }
             catch (Exception ex)
             {
-                PulsusLogger.Error(ex);
+                PulsusDebugger.Error(ex);
             }
             
             return builder;

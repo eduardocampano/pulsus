@@ -76,7 +76,7 @@ namespace Pulsus.Targets
             var request = (HttpWebRequest)WebRequest.Create(url);
             request.KeepAlive = false;
             request.Timeout = 5000;
-            request.UserAgent = "Pulsus " + PulsusLogger.Version;
+            request.UserAgent = "Pulsus " + PulsusDebugger.Version;
             request.Method = httpVerb;
                 
             var bytes = GetRequestBody(loggingEvent, Compress);

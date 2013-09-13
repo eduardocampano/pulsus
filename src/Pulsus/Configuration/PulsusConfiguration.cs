@@ -13,6 +13,8 @@ namespace Pulsus.Configuration
     {
         private static PulsusConfiguration _defaultConfiguration;
 
+        protected bool _debug;
+
         public PulsusConfiguration()
         {
             DefaultEventLevel = LoggingEventLevel.Information;
@@ -35,22 +37,29 @@ namespace Pulsus.Configuration
         /// <summary>
         /// Gets or sets whether Pulsus is in debug mode. The default valus is false. This is useful for finding errors in pulsus or targets configuration.
         /// </summary>
-        public virtual bool Debug { get; set; }
-        
+        public virtual bool Debug
+        {
+            get { return PulsusDebugger.Debug; }
+            set { PulsusDebugger.Debug = value; }
+        }
+
         /// <summary>
         /// Gets or sets the path for the debugging file
         /// </summary>
-        public virtual string DebugFile { get; set; }
-
-        /// <summary>
-        /// Gets or sets whether the debug information should be sent to the Windows Event Log. The default value is false.
-        /// </summary>
-        public virtual bool DebugToEventLog { get; set; }
+        public virtual string DebugFile
+        {
+            get { return PulsusDebugger.DebugFile; }
+            set { PulsusDebugger.DebugFile = value; }
+        }
 
         /// <summary>
         /// Gets or sets whether the debug file must include detailed information. If set to true detailed information will be logged to the debug file, if not, only errors will be logged. The default value is false.
         /// </summary>
-        public virtual bool DebugVerbose { get; set; }
+        public virtual bool DebugVerbose
+        {
+            get { return PulsusDebugger.DebugVerbose; }
+            set { PulsusDebugger.DebugVerbose = value; }
+        }
 
         /// <summary>
         /// Gets or sets the default LogKey for all the events. The default value is the name of the application or IIS application.
@@ -131,8 +140,6 @@ namespace Pulsus.Configuration
 
             if (IgnoreNotFound && !ExceptionsToIgnore.ContainsKey("notfound"))
                 ExceptionsToIgnore.Add("notfound", IsNotFoundException);
-
-            SetupDebugging();
         }
 
         public void Dispose()
@@ -148,27 +155,8 @@ namespace Pulsus.Configuration
         protected virtual Target WrapWithAsyncWrapperTarget(Target target)
         {
             var asyncTargetWrapper = new AsyncWrapperTarget(target);
-            PulsusLogger.Write("Wrapped target '{0}' with AsyncWrapperTarget", asyncTargetWrapper.Name);
+            PulsusDebugger.Write("Wrapped target '{0}' with AsyncWrapperTarget", asyncTargetWrapper.Name);
             return asyncTargetWrapper;
-        }
-
-        protected void SetupDebugging()
-        {
-            if (Debug)
-            {
-                if (HostingEnvironment.IsHosted)
-                {
-                    if (string.IsNullOrEmpty(DebugFile))
-                        DebugFile = "~/App_Data/pulsus_log.txt";
-
-                    DebugFile = HostingEnvironment.MapPath(DebugFile);
-                }
-                else
-                {
-                    if (string.IsNullOrEmpty(DebugFile))
-                        DebugFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "pulsus_log.txt");
-                }
-            }
         }
 
         public static PulsusConfiguration Default

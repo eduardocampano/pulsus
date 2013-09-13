@@ -1,23 +1,26 @@
 ﻿using System;
 using Pulsus;
-using Pulsus.Targets;
 
 namespace SampleConsole
 {
-	class Program
-	{
-		static void Main(string[] args)
-		{
-			LogManager.Configuration.LogKey = "Console";
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Please enter something to log and press return (enter nothing to exit)");
 
-			LogManager.EventFactory.Create()
-								   .Level(LoggingEventLevel.Trace)
-								   .AddTags("console")
-								   .Text("Pushing from console")
-								   .Push();
+            var textToLog = Console.ReadLine();
 
-			Console.WriteLine("Press any key to finish...");
-			Console.ReadKey();
-		}
-	}
+            while (!string.IsNullOrEmpty(textToLog))
+            {
+                LogManager.EventFactory.Create()
+                                   .Level(LoggingEventLevel.Trace)
+                                   .AddTags("console")
+                                   .Text(textToLog)
+                                   .Push();
+
+                textToLog = Console.ReadLine();
+            }
+        }
+    }
 }

@@ -12,7 +12,7 @@
 	<tags>log logging log trace tracing error exception pulsus</tags>
 	<dependencies>
 	  <dependency id="WebActivator" version="1.5.2" />
-	  <dependency id="Pulsus" version="1.6.8" />
+	  <dependency id="Pulsus" version="1.7-Beta" />
 	  <dependency id="Microsoft.AspNet.WebApi.WebHost" version="4.0.20710.0" />
 	</dependencies>
   </metadata>

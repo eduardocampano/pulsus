@@ -1,6 +1,4 @@
 using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
 using System;
 
 // General Information about an assembly is controlled through the following 
@@ -24,5 +22,6 @@ using System;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.6.9.0")]
-[assembly: AssemblyFileVersion("1.6.9.0")]
+[assembly: AssemblyVersion("1.7")]
+[assembly: AssemblyFileVersion("1.7.0")]
+[assembly: AssemblyInformationalVersion("1.7.0 Beta")]

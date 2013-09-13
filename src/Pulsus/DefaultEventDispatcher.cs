@@ -33,7 +33,7 @@ namespace Pulsus
                         throw;
 
                     // a target may fail but we need to continue with the others
-                    PulsusLogger.Error(ex);
+                    PulsusDebugger.Error(ex);
                 }
             }
         }
@@ -49,10 +49,10 @@ namespace Pulsus
             if (!MatchesFilterConditions(loggingEvent, target))
                 return false;
 
-            if (target.Ignores == null)
+            if (target.Ignores == null || target.Ignores.Count == 0)
                 return true;
 
-            return target.Ignores.Any(ignoreFilter => MatchesFilterConditions(loggingEvent, ignoreFilter));
+            return !target.Ignores.Any(ignoreFilter => MatchesFilterConditions(loggingEvent, ignoreFilter));
         }
 
         protected virtual bool MatchesFilterConditions(LoggingEvent loggingEvent, IFilter filter)
@@ -84,7 +84,7 @@ namespace Pulsus
             if (!filter.TagsContains.IsNullOrEmpty())
             {
                 var requiredTags = TagHelpers.Clean(filter.TagsContains);
-                if (requiredTags.All(x => loggingEvent.Tags.Contains(x)))
+                if (!requiredTags.All(x => loggingEvent.Tags.Contains(x)))
                     return false;
             }
 

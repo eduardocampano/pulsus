@@ -33,7 +33,7 @@ namespace Pulsus.Internal
 			Subject = string.IsNullOrEmpty(subject) ? string.Format(CultureInfo.InvariantCulture, "[{0}] {1}{2}", LevelText, loggingEvent.Text, loggingEvent.Value.HasValue ? " VALUE: " + loggingEvent.Value : string.Empty) : subject.Format(loggingEvent);
 
 			Title = string.Format(CultureInfo.InvariantCulture, "{0}", loggingEvent.Text);
-			Footer = string.Format(CultureInfo.InvariantCulture, "Pulsus | {0} | {1}", PulsusLogger.Version, PulsusLogger.WebSite);
+			Footer = string.Format(CultureInfo.InvariantCulture, "Pulsus | {0} | {1}", PulsusDebugger.Version, PulsusDebugger.WebSite);
 		}
 
 		public string Title { get; private set; }

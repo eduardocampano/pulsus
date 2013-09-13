@@ -219,7 +219,7 @@ namespace Pulsus.Configuration
             if (_fileWatcher != null)
                 return;
 
-            PulsusLogger.Write("Watching file '{0}'", _fileName);
+            PulsusDebugger.Write("Watching file '{0}'", _fileName);
             _fileWatcher = new FileSystemWatcher()
             {
                 Path = Path.GetDirectoryName(_fileName),
@@ -236,7 +236,7 @@ namespace Pulsus.Configuration
         {
             if (_fileWatcher != null)
             {
-                PulsusLogger.Write("Stopped watching file '{0}'", _fileName);
+                PulsusDebugger.Write("Stopped watching file '{0}'", _fileName);
                 _fileWatcher.EnableRaisingEvents = false;
                 _fileWatcher.Dispose();
                 _fileWatcher = null;
@@ -245,7 +245,7 @@ namespace Pulsus.Configuration
 
         protected void OnWatcherChanged(object source, FileSystemEventArgs e)
         {
-            PulsusLogger.Write("Watched file '{0}' has changed", _fileName);
+            PulsusDebugger.Write("Watched file '{0}' has changed", _fileName);
             Initialize();
         }
     }

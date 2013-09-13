@@ -29,8 +29,7 @@ namespace Pulsus.Server
 			set { _callbackQueryParameter = value; }
 		}
 
-		public override Task WriteToStreamAsync(Type type, object value, Stream writeStream, HttpContent content,
-												TransportContext transportContext)
+		public override Task WriteToStreamAsync(Type type, object value, Stream writeStream, HttpContent content, TransportContext transportContext)
 		{
 			var callback = GetCallbackName();
 

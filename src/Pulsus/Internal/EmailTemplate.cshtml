@@ -5,16 +5,16 @@
 <html>
 <head>
     <meta charset="utf-8" />
-	<title>@Model.Title</title>
-	<style type="text/css"><!--
+    <title>@Model.Title</title>
+    <style type="text/css"><!--
         body { font-family:"Segoe UI",Verdana,arial,sans-serif;font-size:8pt;color:#444;padding:5px;background-color:#fff; }
         pre { display:block;width:100%;font-family:Consolas,"Courier New";background:#f4f4f4;border:1px solid #999;padding:10px;word-break:break-all;word-wrap:break-word;display:block; }
-		h1,h2,h3 { font-family:"Segoe UI",Verdana,arial,sans-serif;color:#666; }
-		h1 { font-size:18pt; }
+        h1,h2,h3 { font-family:"Segoe UI",Verdana,arial,sans-serif;color:#666; }
+        h1 { font-size:18pt; }
         h2 { font-size:10pt;margin:10px 4px 5px 4px; }
-		table { display:table;width:100%;border:1px solid #999;width:100%;table-layout:fixed; }
-		table th { background:#333;color:#fff;padding:5px;min-width:100px;text-align:left; }
-		table td { padding:5px;word-break:break-all; }
+        table { display:table;width:100%;border:1px solid #999;width:100%;table-layout:fixed; }
+        table th { background:#333;color:#fff;padding:5px;min-width:100px;text-align:left; }
+        table td { padding:5px;word-break:break-all; }
         table td.first-col { word-break:normal;word-wrap:normal; }
         table tr.alt td { background-color:#f4f4f4; }
         table.title { border:0; }
@@ -26,12 +26,12 @@
         table.title td { padding-left:12px; }
         table.title h1 { color:#444; }
         a.link, a.link:hover, a.link:visited { color:#444; }
-	--></style>
+    --></style>
 </head>
-	<body>
-		<table cellpadding="0" cellspacing="0" class="title">
-			<tr>
-				<td width="8" style="" class="first-col level @Model.LevelClass">&nbsp;</td>
+    <body>
+        <table cellpadding="0" cellspacing="0" class="title">
+            <tr>
+                <td width="8" style="" class="first-col level @Model.LevelClass">&nbsp;</td>
                 <td>
                     <h1>
                         @if (Model.Link != null) {
@@ -41,177 +41,183 @@
                         }
                     </h1>
                 </td>
-			</tr>
-		</table>
+            </tr>
+        </table>
     
-		<h2>General</h2>
-		<table cellpadding="0" cellspacing="0">
-			<tr>
-				<td class="first-col">Date</td>
-				<td>@Model.LoggingEvent.Date UTC</td>
-			</tr>
-			<tr class="alt">
-				<td class="first-col">LogKey</td>
-				<td>@Model.LoggingEvent.LogKey</td>
-			</tr>
-             <tr>
-				<td class="first-col">ApiKey</td>
-				<td>@Model.LoggingEvent.ApiKey</td>
-			</tr>
+        <h2>General</h2>
+        <table cellpadding="0" cellspacing="0">
+            <tr>
+                <td class="first-col">Date</td>
+                <td>@Model.LoggingEvent.Date UTC</td>
+            </tr>
             <tr class="alt">
-				<td class="first-col">ID</td>
-				<td>@Model.LoggingEvent.EventId</td>
-			</tr>
-			<tr>
-				<td class="first-col">Level</td>
-				<td>@Model.LevelText</td>
-			</tr>
-			<tr class="alt">
-				<td class="first-col">User</td>
-				<td>@(Model.LoggingEvent.User ?? "&nbsp;")</td>
-			</tr>
-			<tr>
-				<td class="first-col">Tags</td>
-				<td>@string.Join(" ", Model.LoggingEvent.Tags.ToArray())</td>
-			</tr>
-			<tr class="alt">
-				<td class="first-col">MachineName</td>
-				<td>@Model.LoggingEvent.MachineName</td>
-			</tr>
-			<tr>
-				<td class="first-col">SessionId</td>
-				<td>@Model.LoggingEvent.Psid</td>
-			</tr>
+                <td class="first-col">LogKey</td>
+                <td>@Model.LoggingEvent.LogKey</td>
+            </tr>
+            @if (!Model.LoggingEvent.ApiKey.IsNullOrEmpty()) {
+                <tr>
+                    <td class="first-col">ApiKey</td>
+                    <td>@Model.LoggingEvent.ApiKey</td>
+                </tr>
+            }
             <tr class="alt">
-				<td class="first-col">PersistentSessionId</td>
-				<td>@Model.LoggingEvent.Ppid</td>
-			</tr>
-		</table>
+                <td class="first-col">ID</td>
+                <td>@Model.LoggingEvent.EventId</td>
+            </tr>
+            <tr>
+                <td class="first-col">Level</td>
+                <td>@Model.LevelText</td>
+            </tr>
+            <tr class="alt">
+                <td class="first-col">User</td>
+                <td>@(Model.LoggingEvent.User ?? "(none)")</td>
+            </tr>
+            <tr>
+                <td class="first-col">Tags</td>
+                <td>@string.Join(" ", Model.LoggingEvent.Tags.ToArray())</td>
+            </tr>
+            <tr class="alt">
+                <td class="first-col">MachineName</td>
+                <td>@Model.LoggingEvent.MachineName</td>
+            </tr>
+            @if (!Model.LoggingEvent.Psid.IsNullOrEmpty()) {
+                <tr>
+                    <td class="first-col"><abbr title="Session ID">PSID</abbr></td>
+                    <td>@Model.LoggingEvent.Psid</td>
+                </tr>
+            }
+            @if (!Model.LoggingEvent.Ppid.IsNullOrEmpty()) {
+                <tr class="alt">
+                    <td class="first-col"><abbr title="Persistent Session ID">PPID</abbr></td>
+                    <td>@Model.LoggingEvent.Ppid</td>
+                </tr>
+            }
+        </table>
         
         @if (Model.CustomData != null) {
-			<h2>Custom Data</h2>
+            <h2>Custom Data</h2>
             @WriteTable(Model.CustomData)
-		}
+        }
     
-		@if (Model.HttpContextInformation != null) {
-			<h2>Request</h2>
-			<table cellpadding="0" cellspacing="0">
-				<tr>
-					<td class="first-col">URL</td>
-					<td><a href="@Model.HttpContextInformation.Url">@Model.HttpContextInformation.Url</a></td>
-				</tr>
-				<tr class="alt">
-					<td class="first-col">Method</td>
-					<td>@Model.HttpContextInformation.Method</td>
-				</tr>
-				<tr>
-					<td class="first-col">Host</td>
-					<td>@Model.HttpContextInformation.Host</td>
-				</tr>
-				<tr class="alt">
-					<td class="first-col">Referer</td>
-					<td>@Model.HttpContextInformation.Referer</td>
-				</tr>
-				<tr>
-					<td class="first-col">IP Address</td>
-					<td>@Model.HttpContextInformation.IpAddress</td>
-				</tr>
-				<tr class="alt">
-					<td class="first-col">User Agent</td>
-					<td>@Model.HttpContextInformation.UserAgent</td>
-				</tr>
-			</table>
+        @if (Model.HttpContextInformation != null) {
+            <h2>Request</h2>
+            <table cellpadding="0" cellspacing="0">
+                <tr>
+                    <td class="first-col">URL</td>
+                    <td><a href="@Model.HttpContextInformation.Url">@Model.HttpContextInformation.Url</a></td>
+                </tr>
+                <tr class="alt">
+                    <td class="first-col">Method</td>
+                    <td>@Model.HttpContextInformation.Method</td>
+                </tr>
+                <tr>
+                    <td class="first-col">Host</td>
+                    <td>@Model.HttpContextInformation.Host</td>
+                </tr>
+                <tr class="alt">
+                    <td class="first-col">Referer</td>
+                    <td>@Model.HttpContextInformation.Referer</td>
+                </tr>
+                <tr>
+                    <td class="first-col">IP Address</td>
+                    <td>@Model.HttpContextInformation.IpAddress</td>
+                </tr>
+                <tr class="alt">
+                    <td class="first-col">User Agent</td>
+                    <td>@Model.HttpContextInformation.UserAgent</td>
+                </tr>
+            </table>
       
             if (Model.HttpContextInformation.RouteValues != null) {
-				<h2>Route Values</h2>
-				@WriteTable(Model.HttpContextInformation.RouteValues)
-			}
+                <h2>Route Values</h2>
+                @WriteTable(Model.HttpContextInformation.RouteValues)
+            }
      
-			if (Model.HttpContextInformation.QueryString != null) {
-				<h2>QueryString</h2>
-				@WriteTable(Model.HttpContextInformation.QueryString)
-			}
+            if (Model.HttpContextInformation.QueryString != null) {
+                <h2>QueryString</h2>
+                @WriteTable(Model.HttpContextInformation.QueryString)
+            }
         
-			if (Model.HttpContextInformation.PostedValues != null) {
-				<h2>Posted Values</h2>
-				@WriteTable(Model.HttpContextInformation.PostedValues)
-			}
+            if (Model.HttpContextInformation.PostedValues != null) {
+                <h2>Posted Values</h2>
+                @WriteTable(Model.HttpContextInformation.PostedValues)
+            }
         
-		    if (Model.HttpContextInformation.PostedFiles != null) {
-				<h2>Posted Files</h2>
-				<table cellpadding="0" cellspacing="0">
-					<tr>
-						<th class="first-col" align="left">Name</th>
-						<th align="left">Content Type</th>
-						<th align="left">Size</th>
-					</tr>
+            if (Model.HttpContextInformation.PostedFiles != null) {
+                <h2>Posted Files</h2>
+                <table cellpadding="0" cellspacing="0">
+                    <tr>
+                        <th class="first-col" align="left">Name</th>
+                        <th align="left">Content Type</th>
+                        <th align="left">Size</th>
+                    </tr>
                     @{ var i = 0; } 
                     @foreach (var postedFile in Model.HttpContextInformation.PostedFiles) {
                         var classAtt = i % 2 > 0 ? "class=\"alt\"" : string.Empty;
-						<tr @classAtt>
-							<td class="first-col">@postedFile.Name</td>
-							<td>@postedFile.ContentType</td>
-							<td>@FileSizeFormatProvider.FileSize(postedFile.ContentLength)</td>
-						</tr>
+                        <tr @classAtt>
+                            <td class="first-col">@postedFile.Name</td>
+                            <td>@postedFile.ContentType</td>
+                            <td>@FileSizeFormatProvider.FileSize(postedFile.ContentLength)</td>
+                        </tr>
                         i++;
-					}
-				</table>
-		    }
+                    }
+                </table>
+            }
         
-			if (Model.HttpContextInformation.Cookies != null) {
-				<h2>Cookies</h2>
-				@WriteTable(Model.HttpContextInformation.Cookies)
-			}
+            if (Model.HttpContextInformation.Cookies != null) {
+                <h2>Cookies</h2>
+                @WriteTable(Model.HttpContextInformation.Cookies)
+            }
         
-			if (Model.HttpContextInformation.Headers != null) {
-				<h2>Headers</h2>
-				@WriteTable(Model.HttpContextInformation.Headers)
-			}
+            if (Model.HttpContextInformation.Headers != null) {
+                <h2>Headers</h2>
+                @WriteTable(Model.HttpContextInformation.Headers)
+            }
         
-			if (Model.HttpContextInformation.ServerVariables != null) {
-				<h2>Server Variables</h2>
-				@WriteTable(Model.HttpContextInformation.ServerVariables)
-			}
+            if (Model.HttpContextInformation.ServerVariables != null) {
+                <h2>Server Variables</h2>
+                @WriteTable(Model.HttpContextInformation.ServerVariables)
+            }
         
-			if (Model.HttpContextInformation.Session != null) {
-				<h2>Session Variables</h2>
-				@WriteTable(Model.HttpContextInformation.Session)
-			}
-		}
+            if (Model.HttpContextInformation.Session != null) {
+                <h2>Session Variables</h2>
+                @WriteTable(Model.HttpContextInformation.Session)
+            }
+        }
 
-		@if (Model.ExceptionInformation != null) {
-			<h2>Exception</h2>
-			<table cellpadding="0" cellspacing="0">
-				<tr>
-					<td class="first-col">Message</td>
-					<td>@Model.ExceptionInformation.Message</td>
-				</tr>
-				<tr class="alt">
-					<td class="first-col">Type</td>
-					<td>@Model.ExceptionInformation.Type</td>
-				</tr>
-				<tr>
-					<td class="first-col">Source</td>
-					<td>@Model.ExceptionInformation.Source</td>
-				</tr>
-				<tr class="alt">
-					<td class="first-col">StatusCode</td>
-					<td>@Model.ExceptionInformation.StatusCode</td>
-				</tr>
-			</table>
-		}
+        @if (Model.ExceptionInformation != null) {
+            <h2>Exception</h2>
+            <table cellpadding="0" cellspacing="0">
+                <tr>
+                    <td class="first-col">Message</td>
+                    <td>@Model.ExceptionInformation.Message</td>
+                </tr>
+                <tr class="alt">
+                    <td class="first-col">Type</td>
+                    <td>@Model.ExceptionInformation.Type</td>
+                </tr>
+                <tr>
+                    <td class="first-col">Source</td>
+                    <td>@Model.ExceptionInformation.Source</td>
+                </tr>
+                <tr class="alt">
+                    <td class="first-col">StatusCode</td>
+                    <td>@Model.ExceptionInformation.StatusCode</td>
+                </tr>
+            </table>
+        }
     
-		@if (Model.StackTrace != null) {
-			<h2>StackTrace</h2>
-			<pre class="stacktrace">@Model.StackTrace</pre>
-		}
+        @if (Model.StackTrace != null) {
+            <h2>StackTrace</h2>
+            <pre class="stacktrace">@Model.StackTrace</pre>
+        }
     
-		@if (Model.SqlInformation != null) {
-			<h2>SQL</h2>
-			@WriteTable(Model.SqlInformation.Parameters)
-			<pre class="sql">@Model.SqlInformation.SQL</pre>
-		}
+        @if (Model.SqlInformation != null) {
+            <h2>SQL</h2>
+            @WriteTable(Model.SqlInformation.Parameters)
+            <pre class="sql">@Model.SqlInformation.SQL</pre>
+        }
         <br />
         @Model.Footer
-	</body>
+    </body>
 </html>

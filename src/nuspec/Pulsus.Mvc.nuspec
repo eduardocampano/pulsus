@@ -13,6 +13,7 @@
 	<dependencies>
 		<dependency id="Pulsus" version="1.7-Beta" />
 		<dependency id="Microsoft.Web.Infrastructure" version="1.0.0.0" />
+    <dependency id="Microsoft.AspNet.Mvc" version="4.0.30506.0" />
 	</dependencies>
   </metadata>
 </package>

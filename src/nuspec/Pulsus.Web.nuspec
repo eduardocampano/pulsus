@@ -2,7 +2,7 @@
 <package >
   <metadata>
 	<id>Pulsus.Web</id>
-	<version>1.7-Beta</version>
+	<version>1.7.0-beta2</version>
 	<title>Pulsus.Web</title>
 	<authors>Eduardo Campañó, Juan Pedro Elizalde, Brian Jenkins</authors>
 	<owners>Eduardo Campañó</owners>
@@ -11,7 +11,7 @@
 	<description>ASP.NET (webforms) integration for Pulsus logging library</description>
 	<tags>log logging log trace tracing error exception pulsus</tags>
 	<dependencies>
-		<dependency id="Pulsus" version="1.7-Beta" />
+		<dependency id="Pulsus" version="1.7.0-beta2" />
 		<dependency id="Microsoft.Web.Infrastructure" version="1.0.0.0" />
 	</dependencies>
   </metadata>

@@ -30,7 +30,7 @@ namespace Pulsus.Internal
 				LevelClass = "red";
 
 			Link = link == null ? null : link.Format(loggingEvent);
-			Subject = string.IsNullOrEmpty(subject) ? string.Format(CultureInfo.InvariantCulture, "[{0}] {1}{2}", LevelText, loggingEvent.Text, loggingEvent.Value.HasValue ? " VALUE: " + loggingEvent.Value : string.Empty) : subject.Format(loggingEvent);
+		    Subject = PrepareSubject(loggingEvent, subject);
 
 			Title = string.Format(CultureInfo.InvariantCulture, "{0}", loggingEvent.Text);
 			Footer = string.Format(CultureInfo.InvariantCulture, "Pulsus | {0} | {1}", PulsusDebugger.Version, PulsusDebugger.WebSite);
@@ -49,5 +49,21 @@ namespace Pulsus.Internal
 		public ExceptionInformation ExceptionInformation { get; private set; }
 		public SqlInformation SqlInformation { get; private set; }
 		public IDictionary<string, object> CustomData { get; private set; }
+
+	    protected string PrepareSubject(LoggingEvent loggingEvent, string subject)
+	    {
+            if (string.IsNullOrEmpty(subject))
+                subject = string.Format(CultureInfo.InvariantCulture, "[{0}] {1}{2}", LevelText, loggingEvent.Text, loggingEvent.Value.HasValue ? " VALUE: " + loggingEvent.Value : string.Empty);
+            else
+                subject = subject.Format(loggingEvent);
+
+            // remove invalid line breaks
+            subject = subject.Replace('\r', ' ').Replace('\n', ' ');
+
+	        if (subject.Length > 168)
+	            subject = subject.Substring(0, 168);
+
+	        return subject;
+	    }
 	}
 }

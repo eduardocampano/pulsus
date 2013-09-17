@@ -13,8 +13,7 @@ namespace Pulsus.Configuration
     {
         private static IDictionary<string, Type> KnownTargetTypes = GetKnownTargetTypes();
         private FileSystemWatcher _fileWatcher;
-        private string _fileName;
-        private bool _disposing;
+        private readonly string _fileName;
 
         public PulsusXmlConfiguration(string fileName)
         {
@@ -49,11 +48,14 @@ namespace Pulsus.Configuration
 
         protected override void Initialize()
         {
-            var xDocument = XDocument.Load(_fileName);
-            var pulsusElement = xDocument.Root;
-            
-            Initialize(pulsusElement);
-            
+            if (File.Exists(_fileName))
+            {
+                var xDocument = XDocument.Load(_fileName);
+                var pulsusElement = xDocument.Root;
+
+                Initialize(pulsusElement);
+            }
+
             StartFileWatching();
         }
 

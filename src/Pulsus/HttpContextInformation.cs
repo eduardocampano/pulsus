@@ -169,9 +169,9 @@ namespace Pulsus
                 {
                     value = collection[key];
                 }
-                catch (HttpRequestValidationException ex)
+                catch (HttpRequestValidationException)
                 {
-                    // TODO fix this
+                    // TODO the value cannot be retrieved because of the HttpRequestValidationException, is there a better way to do this?
                     value = "[HttpRequestValidationException]";
                 }
                 

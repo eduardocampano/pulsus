@@ -13,8 +13,6 @@ namespace Pulsus.Configuration
     {
         private static PulsusConfiguration _defaultConfiguration;
 
-        protected bool _debug;
-
         public PulsusConfiguration()
         {
             DefaultEventLevel = LoggingEventLevel.Information;
@@ -172,15 +170,7 @@ namespace Pulsus.Configuration
 
         public static PulsusConfiguration Load(string fileName)
         {
-            return GetConfiguration(fileName);
-        }
-
-        private static PulsusConfiguration GetConfiguration(string fileName)
-        {
-            if (File.Exists(fileName))
-                return new PulsusXmlConfiguration(fileName);
-            
-            return new PulsusConfiguration();
+            return new PulsusXmlConfiguration(fileName);
         }
 
         private static bool IsNotFoundException(Exception ex)

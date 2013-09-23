@@ -13,7 +13,7 @@ namespace Pulsus
     public class HttpContextInformation
     {
         public static bool IncludePasswords { get; set; }
-        public static bool IncludeSessionInformation { get; set; }
+        public static bool IncludeSession { get; set; }
 
         private static readonly PropertyInfo RequestContextProperty = GetRequestContextProperty();
 
@@ -104,7 +104,7 @@ namespace Pulsus
 
         private static KeyValueCollection GetSession(HttpSessionStateBase session)
         {
-            if (!IncludeSessionInformation)
+            if (!IncludeSession)
                 return null;
 
             var collection = new KeyValueCollection();

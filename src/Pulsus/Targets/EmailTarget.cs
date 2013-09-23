@@ -10,14 +10,18 @@ namespace Pulsus.Targets
 		public string From { get; set; }
 		public string To { get; set; }
 		public string Subject { get; set; }
-		public string Link { get; set; }
-		public string SmtpServer { get; set; }
+		public string Title { get; set; }
+	    public string TitleUri { get; set; }
+	    public string SmtpServer { get; set; }
 		public int SmtpPort { get; set; }
 		public string SmtpUsername { get; set; }
 		public string SmtpPassword { get; set; }
 		public bool SmtpEnableSsl { get; set; }
-		
-		public override void Push(LoggingEvent[] loggingEvents)
+
+	    public string IpAddressInfoUri { get; set; }
+	    public string UserAgentInfoUri { get; set; }
+
+	    public override void Push(LoggingEvent[] loggingEvents)
 		{
 			if (loggingEvents == null)
 				throw new ArgumentNullException("loggingEvents");
@@ -31,11 +35,17 @@ namespace Pulsus.Targets
 
 		protected MailMessage PrepareEmail(LoggingEvent loggingEvent)
 		{
-			var model = new EmailTemplateModel(loggingEvent, Subject, Link);
+		    var model = new EmailTemplateModel(loggingEvent)
+		    {
+                Title = Title,
+                TitleUri = TitleUri,
+                IpAddressInfoUri = IpAddressInfoUri,
+                UserAgentInfoUri = UserAgentInfoUri
+		    };
 
 			var mailMessage = new MailMessage(From, To);
 
-			mailMessage.Subject = model.Subject;
+			mailMessage.Subject = model.GetFormattedSubject();
 			mailMessage.IsBodyHtml = true;
 			mailMessage.Body = PrepareEmailBody(model);
 			

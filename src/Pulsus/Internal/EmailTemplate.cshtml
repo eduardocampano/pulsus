@@ -32,15 +32,7 @@
         <table cellpadding="0" cellspacing="0" class="title">
             <tr>
                 <td width="8" style="" class="first-col level @Model.LevelClass">&nbsp;</td>
-                <td>
-                    <h1>
-                        @if (Model.Link != null) {
-                            <a class="link" href="@Model.Link">@Model.Title</a>
-                        } else {
-                            @Model.Title
-                        }
-                    </h1>
-                </td>
+                <td><h1>@Model.GetFormattedTitle()</h1></td>
             </tr>
         </table>
     
@@ -120,11 +112,11 @@
                 </tr>
                 <tr>
                     <td class="first-col">IP Address</td>
-                    <td>@Model.HttpContextInformation.IpAddress</td>
+                    <td>@Model.GetFormattedIpAddress(Model.HttpContextInformation.IpAddress)</td>
                 </tr>
                 <tr class="alt">
                     <td class="first-col">User Agent</td>
-                    <td>@Model.HttpContextInformation.UserAgent</td>
+                    <td>@Model.GetFormattedUserAgent(Model.HttpContextInformation.UserAgent)</td>
                 </tr>
             </table>
       

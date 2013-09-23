@@ -100,6 +100,25 @@ namespace Pulsus.Configuration
         public virtual LoggingEventLevel DefaultEventLevel { get; set; }
 
         /// <summary>
+        /// Gets or sets whether passwords must be included with the HttpContext information. The default value is false and entries from both
+        /// Request.Form and Request.QueryString with a key containing the string 'password' its value will be replaced with stars (*).
+        /// </summary>
+        public virtual bool IncludeHttpContextPasswords
+        {
+            get { return HttpContextInformation.IncludePasswords; }
+            set { HttpContextInformation.IncludePasswords = value; }
+        }
+
+        /// <summary>
+        /// Gets or sets whether session information must be included with the HttpContext information. The default value is false.
+        /// </summary>
+        public virtual bool IncludeHttpContextSession
+        {
+            get { return HttpContextInformation.IncludeSession; }
+            set { HttpContextInformation.IncludeSession = value; }
+        }
+
+        /// <summary>
         /// Returns a dictionary of exception evaluators which will evaluate if the exception must be ignored or not. 
         /// </summary>
         public virtual IDictionary<string, Predicate<Exception>> ExceptionsToIgnore { get; private set; }

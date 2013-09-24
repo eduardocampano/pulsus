@@ -137,7 +137,7 @@ namespace Pulsus.Configuration
         /// <param name="target">The target instance</param>
         public virtual void AddTarget(string name, Target target)
         {
-            if (Async || target.Async)
+            if ((Async && !target.Async.HasValue) || (target.Async.HasValue && target.Async.Value))
                 target = WrapWithAsyncWrapperTarget(target);
 
             Targets.Add(name, target);

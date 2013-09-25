@@ -13,6 +13,8 @@ namespace Pulsus.Configuration
     {
         private static PulsusConfiguration _defaultConfiguration;
 
+        
+
         public PulsusConfiguration()
         {
             DefaultEventLevel = LoggingEventLevel.Information;

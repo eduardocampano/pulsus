@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 using NUnit.Framework;
 using SharpTestsEx;
 
@@ -40,7 +41,7 @@ namespace Pulsus.Tests
         {
             const string serializedData = "{ \"custom-data\" : { \"StringField\" : \"test\", \"IntField\" : 9 } }";
             var loggingEvent = new LoggingEvent();
-            loggingEvent.Data = SimpleJson.DeserializeObject<IDictionary<string, object>>(serializedData);
+            loggingEvent.Data = JsonConvert.DeserializeObject<IDictionary<string, object>>(serializedData);
 
             var result = loggingEvent.GetData<CustomData>("custom-data");
             result.Should().Not.Be.Null();

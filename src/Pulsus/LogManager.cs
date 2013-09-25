@@ -8,12 +8,14 @@ namespace Pulsus
         private static PulsusConfiguration _configuration;
         private static IEventFactory _eventsFactory;
         private static IEventDispatcher _eventDispatcher;
+        private static IJsonSerializer _jsonSerializer;
 
         static LogManager()
         {
             _configuration = PulsusConfiguration.Default;
             _eventsFactory = new DefaultEventFactory();
             _eventDispatcher = new DefaultEventDispatcher(_configuration.Targets.Values);
+            _jsonSerializer = new JsonNetSerializer();
         }
 
         public static IEventFactory EventFactory
@@ -43,6 +45,21 @@ namespace Pulsus
                     throw new ArgumentNullException("value");
 
                 _eventDispatcher = value;
+            }
+        }
+
+        public static IJsonSerializer JsonSerializer
+        {
+            get
+            {
+                return _jsonSerializer;
+            }
+            set
+            {
+                if (value == null)
+                    throw new ArgumentNullException("value");
+
+                _jsonSerializer = value;
             }
         }
 

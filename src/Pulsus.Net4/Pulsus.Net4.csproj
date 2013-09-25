@@ -18,7 +18,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;NET4</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -37,6 +37,9 @@
     <AssemblyOriginatorKeyFile>..\Pulsus\Pulsus.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.5.0.6\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
@@ -83,6 +86,9 @@
     <Compile Include="..\Pulsus\Ignore.cs">
       <Link>Ignore.cs</Link>
     </Compile>
+    <Compile Include="..\Pulsus\IJsonSerializer.cs">
+      <Link>IJsonSerializer.cs</Link>
+    </Compile>
     <Compile Include="..\Pulsus\ILoggingEventBuilder.cs">
       <Link>ILoggingEventBuilder.cs</Link>
     </Compile>
@@ -119,9 +125,6 @@
     <Compile Include="..\Pulsus\Internal\ITimer.cs">
       <Link>Internal\ITimer.cs</Link>
     </Compile>
-    <Compile Include="..\Pulsus\Internal\JsonSerializer.cs">
-      <Link>Internal\JsonSerializer.cs</Link>
-    </Compile>
     <Compile Include="..\Pulsus\Internal\LoggingEventQueue.cs">
       <Link>Internal\LoggingEventQueue.cs</Link>
     </Compile>
@@ -154,6 +157,9 @@
     </Compile>
     <Compile Include="..\Pulsus\Internal\TypeHelpers.cs">
       <Link>Internal\TypeHelpers.cs</Link>
+    </Compile>
+    <Compile Include="..\Pulsus\JsonNetSerializer.cs">
+      <Link>JsonNetSerializer.cs</Link>
     </Compile>
     <Compile Include="..\Pulsus\LoggingEvent.cs">
       <Link>LoggingEvent.cs</Link>
@@ -201,7 +207,6 @@
       <Link>Targets\WrapperTarget.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SimpleJson.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Pulsus\Internal\EmailTemplate.cshtml">

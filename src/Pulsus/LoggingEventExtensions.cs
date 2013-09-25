@@ -52,15 +52,9 @@ namespace Pulsus
                 return false;
             }
 
-            // value is a non deserialized jsonObject
-            var jsonObject = value as JsonObject;
-            if (jsonObject == null)
-            {
-                output = default(T);
-                return false;
-            }
-
-            output = JsonSerializer.Deserialize<T>(jsonObject.ToString());
+            // finally try to deserialize it to the type
+            var valueToDeserialize = value.ToString();
+            output = LogManager.JsonSerializer.DeserializeObject<T>(valueToDeserialize);
             return output != null;
         }
     }

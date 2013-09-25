@@ -86,7 +86,7 @@ namespace Pulsus.Targets
 
         protected byte[] GetRequestBody(LoggingEvent[] loggingEvents, bool compress)
         {
-            var serialized = SimpleJson.SerializeObject(loggingEvents);
+            var serialized = JsonSerializer.Serialize(loggingEvents);
             var bytes = Encoding.UTF8.GetBytes(serialized);
 
             if (compress)

@@ -76,6 +76,7 @@
     <Compile Include="Internal\FileSizeFormatProvider.cs" />
     <Compile Include="Internal\HaackFormatter.cs" />
     <Compile Include="Internal\ITimer.cs" />
+    <Compile Include="Internal\JsonSerializer.cs" />
     <Compile Include="Internal\ObjectHelpers.cs" />
     <Compile Include="Internal\StringExtensions.cs" />
     <Compile Include="Internal\TagHelpers.cs" />

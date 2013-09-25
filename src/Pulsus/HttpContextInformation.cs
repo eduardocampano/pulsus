@@ -109,7 +109,7 @@ namespace Pulsus
 
             var collection = new KeyValueCollection();
             foreach (var key in session.Keys)
-                collection.Add(key.ToString(), SimpleJson.SerializeObject(session[key.ToString()]));
+                collection.Add(key.ToString(), JsonSerializer.Serialize(session[key.ToString()]));
 
             return collection.Any() ? collection : null;
         }
@@ -132,7 +132,7 @@ namespace Pulsus
         {
             var collection = new KeyValueCollection();
             foreach (var item in routeValues)
-                collection.Add(item.Key, SimpleJson.SerializeObject(item.Value));
+                collection.Add(item.Key, JsonSerializer.Serialize(item.Value));
 
             return collection.Any() ? collection : null;
         }

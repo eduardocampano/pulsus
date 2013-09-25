@@ -48,21 +48,27 @@ namespace Pulsus.Configuration
 
         protected override void Initialize()
         {
+            XElement pulsusElement = null;
+
             if (File.Exists(_fileName))
             {
                 var xDocument = XDocument.Load(_fileName);
-                var pulsusElement = xDocument.Root;
-
-                Initialize(pulsusElement);
+                pulsusElement = xDocument.Root;
             }
+
+            Initialize(pulsusElement);
 
             StartFileWatching();
         }
 
         protected void Initialize(XElement pulsusElement)
         {
-            LoadAttributes(this, pulsusElement);
-            AddTargets(pulsusElement);
+            if (pulsusElement != null)
+            {
+                LoadAttributes(this, pulsusElement);
+                AddTargets(pulsusElement);
+            }
+
             base.Initialize();
         }
 

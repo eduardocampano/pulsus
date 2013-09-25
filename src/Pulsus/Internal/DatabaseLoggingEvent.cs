@@ -16,7 +16,7 @@ namespace Pulsus.Internal
 			result.Value = loggingEvent.Value;
 			result.Text = Truncate(loggingEvent.Text, 5000);
 			result.Tags = Truncate(string.Join(" ", loggingEvent.Tags.ToArray()), 1000);
-			result.Data = SimpleJson.SerializeObject(loggingEvent.Data);
+			result.Data = JsonSerializer.Serialize(loggingEvent.Data);
 
 			result.MachineName = Truncate(loggingEvent.MachineName, 100);
 			result.User = Truncate(loggingEvent.User, 500);

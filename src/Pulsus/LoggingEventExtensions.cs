@@ -1,4 +1,5 @@
 ﻿using System;
+using Pulsus.Internal;
 
 namespace Pulsus
 {
@@ -59,7 +60,7 @@ namespace Pulsus
                 return false;
             }
 
-            output = SimpleJson.DeserializeObject<T>(jsonObject.ToString());
+            output = JsonSerializer.Deserialize<T>(jsonObject.ToString());
             return output != null;
         }
     }

@@ -1,16 +1,12 @@
 ﻿using System;
 using System.Globalization;
 using System.IO;
-using System.Reflection;
 using System.Web.Hosting;
 
 namespace Pulsus.Internal
 {
     internal static class PulsusDebugger
     {
-        public static readonly string Version = Assembly.GetAssembly(typeof(PulsusDebugger)).GetName().Version.ToString();
-        public static readonly string WebSite = Constants.Info.WebSite;
-
         public static bool Debug { get; set; }
         public static bool DebugVerbose { get; set; }
         public static string DebugFile { get; set; }

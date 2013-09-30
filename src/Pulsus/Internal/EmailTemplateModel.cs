@@ -30,7 +30,7 @@ namespace Pulsus.Internal
 			else if (loggingEvent.Level > 60000)
 				LevelClass = "red";
 
-			Footer = string.Format(CultureInfo.InvariantCulture, "Pulsus | {0} | {1}", PulsusDebugger.Version, PulsusDebugger.WebSite);
+			Footer = string.Format(CultureInfo.InvariantCulture, "Pulsus | {0} | {1}", Constants.Version, Constants.WebSite);
 		}
 
 		public string Title { get; set; }

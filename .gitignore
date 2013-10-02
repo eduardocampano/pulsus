@@ -34,3 +34,4 @@ PublishProfiles/
 *.ncrunchsolution
 *.log
 TestResult.xml
+/src/Build

@@ -1,28 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.20827.3
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pulsus.Mvc", "Pulsus.Mvc\Pulsus.Mvc.csproj", "{F7489518-4A5C-4285-9A23-61E89F34EEE2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pulsus", "Pulsus\Pulsus.csproj", "{65BEE1C8-459A-46FA-90C6-4467EDE2E012}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nuspec", "nuspec", "{3A340036-EA3C-4FDE-8909-77312C08C4EB}"
-	ProjectSection(SolutionItems) = preProject
-		nuspec\pack.cmd = nuspec\pack.cmd
-		nuspec\Pulsus.Mvc.nuspec = nuspec\Pulsus.Mvc.nuspec
-		nuspec\Pulsus.nuspec = nuspec\Pulsus.nuspec
-		nuspec\Pulsus.Server.nuspec = nuspec\Pulsus.Server.nuspec
-		nuspec\Pulsus.Web.nuspec = nuspec\Pulsus.Web.nuspec
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pulsus.Tests", "Pulsus.Tests\Pulsus.Tests.csproj", "{3B96CB2C-DFE0-4993-B0FD-A881F65FFC0D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pulsus.Net4", "Pulsus.Net4\Pulsus.Net4.csproj", "{A0AC0A9A-0145-43FE-A850-9BBDF5701B60}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pulsus.Server", "Pulsus.Server\Pulsus.Server.csproj", "{2672BD6D-1D55-4AEC-86F2-AEB05F548FF5}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleConsole", "..\samples\SampleConsole\SampleConsole.csproj", "{FAFBEF0C-F898-4058-8158-33BB363D96ED}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{67BCDE09-3B50-42CE-ABC9-746872DDE8E0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pulsus.Web", "Pulsus.Web\Pulsus.Web.csproj", "{D7B90DA4-3BC1-4285-899E-674DE0A811CF}"
 EndProject
@@ -52,10 +41,6 @@ Global
 		{2672BD6D-1D55-4AEC-86F2-AEB05F548FF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2672BD6D-1D55-4AEC-86F2-AEB05F548FF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2672BD6D-1D55-4AEC-86F2-AEB05F548FF5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FAFBEF0C-F898-4058-8158-33BB363D96ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FAFBEF0C-F898-4058-8158-33BB363D96ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FAFBEF0C-F898-4058-8158-33BB363D96ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FAFBEF0C-F898-4058-8158-33BB363D96ED}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D7B90DA4-3BC1-4285-899E-674DE0A811CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D7B90DA4-3BC1-4285-899E-674DE0A811CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D7B90DA4-3BC1-4285-899E-674DE0A811CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -63,8 +48,5 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{FAFBEF0C-F898-4058-8158-33BB363D96ED} = {67BCDE09-3B50-42CE-ABC9-746872DDE8E0}
 	EndGlobalSection
 EndGlobal

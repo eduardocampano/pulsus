@@ -8,6 +8,7 @@
 	<owners>Eduardo Campañó</owners>
 	<projectUrl>http://pulsus.codeplex.com</projectUrl>
 	<requireLicenseAcceptance>false</requireLicenseAcceptance>
+	<licenseUrl>https://pulsus.codeplex.com/license</licenseUrl>
 	<description>The server component to receive pulsus events</description>
 	<tags>log logging log trace tracing error exception pulsus</tags>
 	<dependencies>

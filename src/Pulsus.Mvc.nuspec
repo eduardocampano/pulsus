@@ -8,6 +8,7 @@
 	<owners>Eduardo Campañó</owners>
 	<projectUrl>http://pulsus.codeplex.com</projectUrl>
 	<requireLicenseAcceptance>false</requireLicenseAcceptance>
+	<licenseUrl>https://pulsus.codeplex.com/license</licenseUrl>
 	<description>ASP.NET MVC integration for Pulsus logging library</description>
 	<tags>log logging log trace tracing error exception pulsus</tags>
 	<dependencies>

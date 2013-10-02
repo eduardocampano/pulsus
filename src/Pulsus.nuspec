@@ -8,10 +8,16 @@
 	  <owners>Eduardo Campañó</owners>
 	  <projectUrl>https://pulsus.codeplex.com</projectUrl>
 	  <requireLicenseAcceptance>false</requireLicenseAcceptance>
+	  <licenseUrl>https://pulsus.codeplex.com/license</licenseUrl>
 	  <description>A simple and extensible logging library built for modern applications.</description>
 	  <tags>log logging log trace tracing error exception pulsus</tags>
-    <dependencies>
-      <dependency id="Newtonsoft.Json" version="4.5.1" />
-    </dependencies>
+	  <dependencies>
+	    <dependency id="Newtonsoft.Json" version="4.5.1" />
+	  </dependencies>
+	  <frameworkAssemblies>
+	  	<frameworkAssembly assemblyName="System.configuration" />
+  		<frameworkAssembly assemblyName="System.Web.Abstraction" />
+  		<frameworkAssembly assemblyName="System.Web.Routing" />
+  	  </frameworkAssemblies>
   </metadata>
 </package>

@@ -2,35 +2,58 @@
 using System.Globalization;
 using System.IO;
 using System.Web.Hosting;
+using Pulsus.Targets;
 
 namespace Pulsus.Internal
 {
-    internal static class PulsusDebugger
+    public static class PulsusDebugger
     {
-        public static bool Debug { get; set; }
-        public static bool DebugVerbose { get; set; }
-        public static string DebugFile { get; set; }
+        internal static bool Debug { get; set; }
+        internal static bool DebugVerbose { get; set; }
+        internal static string DebugFile { get; set; }
+
+        public static void Error(string message, params object[] args)
+        {
+            Error(null, null, message, args);
+        }
+
+        public static void Error(Target target, string message, params object[] args)
+        {
+            Error(target, null, message, args);
+        }
 
         public static void Error(Exception ex, string message = null, params object[] args)
         {
-            if (message == null)
-                WriteInternal("Error: " + ex);
-            else
-                WriteInternal("Error " + string.Format(CultureInfo.InvariantCulture, message, args) +  " " + ex);
+            Error(null, ex, message, args);
+        }
+
+        public static void Error(Target target, Exception ex, string message = null, params object[] args)
+        {
+            WriteInternal("[Error] " + message, args, target, ex);
         }
 
         public static void Write(string message, params object[] args)
         {
+            Write(null, message, args);
+        }
+
+        public static void Write(Target target, string message, params object[] args)
+        {
             if (!DebugVerbose)
                 return;
 
-            WriteInternal(string.Format(CultureInfo.InvariantCulture, message, args));
+            WriteInternal(message, args, target, null);
         }
 
-        private static void WriteInternal(string message)
+        private static void WriteInternal(string message, object[] args, Target target, Exception ex)
         {
             if (!Debug)
                 return;
+            
+            var dateString = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.ffff", CultureInfo.InvariantCulture);
+            var targetString = target != null ? string.Format("[{0}] ", target.Name) : string.Empty;
+            var messageString = args != null && args.Length > 0 ? string.Format(CultureInfo.InvariantCulture, message, args) : message;
+            var exceptionString = ex != null ? Environment.NewLine + ex : string.Empty;
 
             try
             {
@@ -52,7 +75,7 @@ namespace Pulsus.Internal
 
                 using (var textWriter = File.AppendText(debugFile))
                 {
-                    textWriter.WriteLine("{0} {1}", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.ffff", CultureInfo.InvariantCulture), message);
+                    textWriter.WriteLine("{0} {1}{2}{3}", dateString, targetString, messageString, exceptionString);
                 }
             }
             catch (Exception)

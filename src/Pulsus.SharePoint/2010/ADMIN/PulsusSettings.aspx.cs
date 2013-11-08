@@ -10,6 +10,7 @@ using System.Linq;
 using System.IO;
 using Pulsus.Targets;
 using Pulsus.Configuration;
+using System.Text;
 
 namespace Pulsus.SharePoint.ApplicationPages
 {
@@ -44,18 +45,25 @@ namespace Pulsus.SharePoint.ApplicationPages
 			var application = SPWebService.ContentService.WebApplications.Where(a => a.Id.Equals(currentApplicationId)).FirstOrDefault();
 			if (application != null)
 			{
-				string pulsusConfigDefaultContent =
-					@"<pulsus logKey=""" + application.Name + @""" includeHttpContext=""true"" debug=""false"">
-	<targets>
-		<target name=""email"" type=""EmailTarget"" from=""" + emailTargetFromAddress.Text + @""" to=""" + emailTargetToAddress.Text + @""" smtpServer=""" + emailTargetServer.Text + @""" smtpPort=""" + emailTargetServerPort.Text + @""" />
-	</targets>
-</pulsus>";
+				StringBuilder pulsusConfigBuilder = new StringBuilder();
+				pulsusConfigBuilder.Append(@"<pulsus logKey=""" + application.Name + @""" includeHttpContext=""true"" debug=""false""><targets>");
+				if (enableULSLogging.Checked)
+					pulsusConfigBuilder.Append(@"<target name=""uls"" type=""ULSTarget"" />");
+
+				if (!String.IsNullOrEmpty(emailTargetServer.Text))
+					pulsusConfigBuilder.Append(@"<target name=""email"" type=""EmailTarget"" from=""" + emailTargetFromAddress.Text + @""" to=""" + emailTargetToAddress.Text + @""" smtpServer=""" + emailTargetServer.Text + @""" smtpPort=""" + emailTargetServerPort.Text + @""" />");
+
+				if (!String.IsNullOrEmpty(targetApplicationId.Text))
+					pulsusConfigBuilder.Append(@"<target name=""sssdata"" type=""SecureStoreDatabaseTarget"" AppId=""" + targetApplicationId.Text + @""" />");
+
+				pulsusConfigBuilder.Append(@"</targets></pulsus>");
+
 				Enum.GetValues(typeof(SPUrlZone)).Cast<SPUrlZone>().ToList().ForEach(z =>
 				{
 					string pulsusConfigPath = Path.Combine(application.GetIisSettingsWithFallback(z).Path.FullName, "Pulsus.config");
-					File.WriteAllText(pulsusConfigPath, pulsusConfigDefaultContent);
+					File.WriteAllText(pulsusConfigPath, pulsusConfigBuilder.ToString());
 				});
-				
+
 				Guid pulsusFeatureId = new Guid("7465ed3a-f5cc-46ba-8205-0ba5fc0e8b35");
 				if (!application.Features.Any(f => f.DefinitionId.Equals(pulsusFeatureId)))
 					application.Features.Add(pulsusFeatureId);

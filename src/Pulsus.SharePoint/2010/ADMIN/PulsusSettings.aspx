@@ -55,8 +55,19 @@
 			</td></tr>
 		</template_inputformcontrols>
 		</wssuc:InputFormSection>
+		<wssuc:InputFormSection runat="server" Id="InputFormSection1"
+			Title="ULS Target Settings"
+			Description="">
+			<template_inputformcontrols>
+				<tr>
+					<td>
+						<asp:CheckBox ID="enableULSLogging" runat="server" Text="Enable ULS Logging" />
+					</td>
+				</tr>
+			</template_inputformcontrols>
+		</wssuc:InputFormSection>
 		<wssuc:InputFormSection runat="server" Id="emailSettingsSection"
-			Title="Email Settings"
+			Title="Email Target Settings"
 			Description="">
 			<template_inputformcontrols>
 				<tr>
@@ -81,6 +92,18 @@
 					<td>
 						<asp:Label ID="emailTargetServerPortLabel" runat="server" Text="Port:" AssociatedControlID="emailTargetServerPort"></asp:Label><br />
 						<asp:TextBox ID="emailTargetServerPort" runat="server"></asp:TextBox>
+					</td>
+				</tr>
+			</template_inputformcontrols>
+		</wssuc:InputFormSection>
+		<wssuc:InputFormSection runat="server" Id="secureStoreDatabaseTargetSettings"
+			Title="Secure Store Database Target Settings"
+			Description="">
+			<template_inputformcontrols>
+				<tr>
+					<td>
+						<asp:Label ID="targetApplicationIdLabel" runat="server" Text="Target Application:" AssociatedControlID="targetApplicationId"></asp:Label><br />
+						<asp:TextBox ID="targetApplicationId" runat="server"></asp:TextBox>
 					</td>
 				</tr>
 			</template_inputformcontrols>

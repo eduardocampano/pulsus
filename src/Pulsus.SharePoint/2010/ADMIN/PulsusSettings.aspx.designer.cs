@@ -67,6 +67,24 @@ namespace Pulsus.SharePoint.ApplicationPages {
         protected global::Microsoft.SharePoint.WebControls.WebApplicationSelector Selector;
         
         /// <summary>
+        /// InputFormSection1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UserControl InputFormSection1;
+        
+        /// <summary>
+        /// enableULSLogging control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox enableULSLogging;
+        
+        /// <summary>
         /// emailSettingsSection control.
         /// </summary>
         /// <remarks>
@@ -146,6 +164,33 @@ namespace Pulsus.SharePoint.ApplicationPages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox emailTargetServerPort;
+        
+        /// <summary>
+        /// secureStoreDatabaseTargetSettings control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UserControl secureStoreDatabaseTargetSettings;
+        
+        /// <summary>
+        /// targetApplicationIdLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label targetApplicationIdLabel;
+        
+        /// <summary>
+        /// targetApplicationId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox targetApplicationId;
         
         /// <summary>
         /// okButton control.

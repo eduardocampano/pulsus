@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+    <Module Name="Style Library" Url="Style Library/Pulsus">
+        <File Path="Style Library\Pulsus\scripts\lib\jquery-1.10.2.min.js" Url="scripts/lib/jquery-1.10.2.min.js" Type="GhostableInLibrary" IgnoreIfAlreadyExists="True" />
+        <File Path="Style Library\Pulsus\scripts\lib\jquery-1.10.2.min.map" Url="scripts/lib/jquery-1.10.2.min.map" Type="GhostableInLibrary" IgnoreIfAlreadyExists="True" />
+        <File Path="Style Library\Pulsus\scripts\lib\jquery.daterangepicker.js" Url="scripts/lib/jquery.daterangepicker.js" Type="GhostableInLibrary" IgnoreIfAlreadyExists="True" />
+        <File Path="Style Library\Pulsus\scripts\pulsus.js" Url="scripts/pulsus.js" Type="GhostableInLibrary" IgnoreIfAlreadyExists="True" />
+        <File Path="Style Library\Pulsus\styles\pulsus.css" Url="styles/pulsus.css" Type="GhostableInLibrary" IgnoreIfAlreadyExists="True" />
+    </Module>
+</Elements>

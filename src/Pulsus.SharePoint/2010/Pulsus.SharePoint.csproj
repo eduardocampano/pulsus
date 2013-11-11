@@ -19,7 +19,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;CSHARP30</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <UseVSHostingProcess>false</UseVSHostingProcess>
@@ -61,6 +61,10 @@
     <Reference Include="Microsoft.SharePoint" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\Data\LoggingEventListItem.cs" />
+    <Compile Include="Core\Data\DatabaseLoggingEventRepository.cs" />
+    <Compile Include="Core\Data\SqlMapper.cs" />
+    <Compile Include="Core\Extensions.cs" />
     <Compile Include="Features\Pulsus Module\Pulsus Module.EventReceiver.cs">
       <DependentUpon>Pulsus Module.feature</DependentUpon>
     </Compile>
@@ -70,6 +74,13 @@
     </Compile>
     <Compile Include="ADMIN\PulsusSettings.aspx.designer.cs">
       <DependentUpon>PulsusSettings.aspx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Layouts\PulsusLogViewer.aspx.cs">
+      <DependentUpon>PulsusLogViewer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Layouts\PulsusLogViewer.aspx.designer.cs">
+      <DependentUpon>PulsusLogViewer.aspx.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Targets\SecureStoreDatabaseTarget.cs" />
@@ -81,6 +92,9 @@
     </None>
     <None Include="Feature Elements\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{9c110014-38a8-409a-a3dc-4eb3ee534a44}</SharePointProjectItemId>
+    </None>
+    <None Include="Features\Pulsus Log Viewer\Pulsus Log Viewer.feature">
+      <FeatureId>{04f56728-ec23-4d8b-845e-a241598f3a36}</FeatureId>
     </None>
     <None Include="Features\Pulsus\Pulsus.feature">
       <FeatureId>{d374148e-0e15-4586-a5b7-ddaffbb52160}</FeatureId>
@@ -98,8 +112,17 @@
     <None Include="Package\Package.Template.xml">
       <DependentUpon>Package.package</DependentUpon>
     </None>
+    <None Include="Pulsus Log Viewer\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{f7ea1d91-8ac3-44bf-930e-bef80087dd0c}</SharePointProjectItemId>
+    </None>
+    <None Include="Style Library\Pulsus\scripts\lib\jquery-1.10.2.min.map" />
+    <None Include="Style Library\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{7c1549b1-4d70-4e1f-bb02-ee0022ee358c}</SharePointProjectItemId>
+    </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Style Library\Pulsus\images\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Pulsus\Pulsus.csproj">
       <Project>{65bee1c8-459a-46fa-90c6-4467ede2e012}</Project>
@@ -109,6 +132,9 @@
   <ItemGroup>
     <Content Include="ADMIN\admin.sitemap.pulsus.xml" />
     <Content Include="Feature Elements\Elements.xml" />
+    <Content Include="Features\Pulsus Log Viewer\Pulsus Log Viewer.Template.xml">
+      <DependentUpon>Pulsus Log Viewer.feature</DependentUpon>
+    </Content>
     <Content Include="Features\Pulsus\Pulsus.Template.xml">
       <DependentUpon>Pulsus.feature</DependentUpon>
     </Content>
@@ -116,6 +142,13 @@
       <DependentUpon>Pulsus Module.feature</DependentUpon>
     </Content>
     <Content Include="ADMIN\PulsusSettings.aspx" />
+    <Content Include="Layouts\PulsusLogViewer.aspx" />
+    <Content Include="Pulsus Log Viewer\Elements.xml" />
+    <Content Include="Style Library\Elements.xml" />
+    <Content Include="Style Library\Pulsus\scripts\lib\jquery-1.10.2.min.js" />
+    <Content Include="Style Library\Pulsus\scripts\lib\jquery.daterangepicker.js" />
+    <Content Include="Style Library\Pulsus\scripts\pulsus.js" />
+    <Content Include="Style Library\Pulsus\styles\pulsus.css" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

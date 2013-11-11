@@ -66,33 +66,9 @@ namespace Pulsus.Targets
             if (Connection != null && Connection.State == ConnectionState.Open)
                 return;
 
-            var connectionSettings = GetConnectionSettings();
-
-            if (connectionSettings == null)
-            {
-                PulsusDebugger.Error(this, "Unable to resolve connection settings. Please check configuration.");
-                return;
-            }
-
-            var providerFactory = DbProviderFactories.GetFactory(connectionSettings.ProviderName);
-            
-            var connection = providerFactory.CreateConnection();
+            var connection = GetConnection();
             if (connection == null)
-            {
-                PulsusDebugger.Error(this, "Unable to create connection for provider '{0}'.", connectionSettings.ProviderName);
                 return;
-            }
-
-            connection.ConnectionString = connectionSettings.ConnectionString;
-
-            if (!string.IsNullOrEmpty(DatabaseName))
-            {
-                connection.ChangeDatabase(DatabaseName);
-                PulsusDebugger.Write(this, "Changed database to '{0}'", DatabaseName);
-            }
-
-            connection.Open();
-            PulsusDebugger.Write(this, "Opened connection to database");
 
             if (!Initialized)
             {
@@ -117,6 +93,39 @@ namespace Pulsus.Targets
                 Connection = null;
                 PulsusDebugger.Write(this, "Closed connection");
             }
+        }
+
+        public virtual IDbConnection GetConnection()
+        {
+            var connectionSettings = GetConnectionSettings();
+
+            if (connectionSettings == null)
+            {
+                PulsusDebugger.Error(this, "Unable to resolve connection settings. Please check configuration.");
+                return null;
+            }
+
+            var providerFactory = DbProviderFactories.GetFactory(connectionSettings.ProviderName);
+
+            var connection = providerFactory.CreateConnection();
+            if (connection == null)
+            {
+                PulsusDebugger.Error(this, "Unable to create connection for provider '{0}'.", connectionSettings.ProviderName);
+                return null;
+            }
+
+            connection.ConnectionString = connectionSettings.ConnectionString;
+
+            if (!string.IsNullOrEmpty(DatabaseName))
+            {
+                connection.ChangeDatabase(DatabaseName);
+                PulsusDebugger.Write(this, "Changed database to '{0}'", DatabaseName);
+            }
+
+            connection.Open();
+            PulsusDebugger.Write(this, "Opened connection to database");
+
+            return connection;
         }
 
         protected virtual ConnectionSettings GetConnectionSettings()
@@ -161,10 +170,16 @@ namespace Pulsus.Targets
 
         protected virtual void Save(LoggingEvent[] loggingEvents)
         {
+            if (Connection == null || Connection.State != ConnectionState.Open)
+            {
+                PulsusDebugger.Error(this, "Cannot save events, connection to database is not open");
+                return;
+            }
+
             var sql = CurrentConnectionSettings.IsMySql() ? GetMySqlInsert() : GetMsSqlInsert();
             var serialized = Array.ConvertAll(loggingEvents, DatabaseLoggingEvent.Serialize);
             Connection.Execute(sql, serialized);
-            PulsusDebugger.Write(this, "Stored {0} events", loggingEvents.Length);
+            PulsusDebugger.Write(this, "Saved {0} events", loggingEvents.Length);
         }
 
         protected override void Dispose(bool disposing)
@@ -173,6 +188,7 @@ namespace Pulsus.Targets
             {
                 Connection.Dispose();
                 Connection = null;
+                PulsusDebugger.Write(this, "Closed connection to database");
             }
 
             base.Dispose(disposing);

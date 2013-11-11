@@ -6,11 +6,13 @@
     <Assembly Location="Pulsus.SharePoint.dll" DeploymentTarget="GlobalAssemblyCache" />
   </Assemblies>
   <TemplateFiles>
+    <TemplateFile Location="Layouts\PulsusLogViewer.aspx" />
     <TemplateFile Location="ADMIN\admin.sitemap.pulsus.xml" />
     <TemplateFile Location="ADMIN\PulsusSettings.aspx" />
   </TemplateFiles>
   <FeatureManifests>
     <FeatureManifest Location="Pulsus Module\Feature.xml" />
     <FeatureManifest Location="Pulsus\Feature.xml" />
+    <FeatureManifest Location="Pulsus.SharePoint_Pulsus Log Viewer\Feature.xml" />
   </FeatureManifests>
 </Solution>

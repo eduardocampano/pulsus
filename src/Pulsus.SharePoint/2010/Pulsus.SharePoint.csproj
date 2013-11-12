@@ -76,6 +76,9 @@
     <Compile Include="ADMIN\PulsusSettings.aspx.designer.cs">
       <DependentUpon>PulsusSettings.aspx.cs</DependentUpon>
     </Compile>
+    <Compile Include="Features\Pulsus\Pulsus.EventReceiver.cs">
+      <DependentUpon>Pulsus.feature</DependentUpon>
+    </Compile>
     <Compile Include="Layouts\PulsusLogViewer.aspx.cs">
       <DependentUpon>PulsusLogViewer.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -116,7 +119,7 @@
     <None Include="Pulsus Log Viewer\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{f7ea1d91-8ac3-44bf-930e-bef80087dd0c}</SharePointProjectItemId>
     </None>
-    <None Include="Style Library\Pulsus\scripts\lib\jquery-1.10.2.min.map" />
+    <None Include="Style Library\Pulsus\scripts\jquery-1.10.2.min.map" />
     <None Include="Style Library\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{7c1549b1-4d70-4e1f-bb02-ee0022ee358c}</SharePointProjectItemId>
     </None>
@@ -146,9 +149,21 @@
     <Content Include="Layouts\PulsusLogViewer.aspx" />
     <Content Include="Pulsus Log Viewer\Elements.xml" />
     <Content Include="Style Library\Elements.xml" />
-    <Content Include="Style Library\Pulsus\scripts\lib\jquery-1.10.2.min.js" />
-    <Content Include="Style Library\Pulsus\scripts\lib\jquery.daterangepicker.js" />
+    <Content Include="Style Library\Pulsus\scripts\jquery-1.10.2.min.js" />
+    <Content Include="Style Library\Pulsus\scripts\jquery.daterangepicker.js" />
+    <Content Include="Style Library\Pulsus\scripts\kendo.all.min.js" />
     <Content Include="Style Library\Pulsus\scripts\pulsus.js" />
+    <Content Include="Style Library\Pulsus\styles\Default\editor.png" />
+    <Content Include="Style Library\Pulsus\styles\Default\imagebrowser.png" />
+    <Content Include="Style Library\Pulsus\styles\Default\loading-image.gif" />
+    <Content Include="Style Library\Pulsus\styles\Default\loading.gif" />
+    <Content Include="Style Library\Pulsus\styles\Default\loading_2x.gif" />
+    <Content Include="Style Library\Pulsus\styles\Default\slider-h.gif" />
+    <Content Include="Style Library\Pulsus\styles\Default\slider-v.gif" />
+    <Content Include="Style Library\Pulsus\styles\Default\sprite.png" />
+    <Content Include="Style Library\Pulsus\styles\Default\sprite_2x.png" />
+    <Content Include="Style Library\Pulsus\styles\kendo.common.min.css" />
+    <Content Include="Style Library\Pulsus\styles\kendo.default.min.css" />
     <Content Include="Style Library\Pulsus\styles\pulsus.css" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

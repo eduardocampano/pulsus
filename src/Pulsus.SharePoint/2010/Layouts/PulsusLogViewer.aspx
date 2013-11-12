@@ -8,15 +8,23 @@
 <%@ Page Language="C#" AutoEventWireup="true" CodeBehind="PulsusLogViewer.aspx.cs" Inherits="UTC.com.Layouts.PulsusLogViewer" DynamicMasterPageFile="~masterurl/default.master" %>
 
 <asp:Content ID="PageHead" ContentPlaceHolderID="PlaceHolderAdditionalPageHead" runat="server">
-    <link rel="stylesheet" href="/Style Library/Pulsus/styles/pulsus.css?v=2" />
+    <link rel="stylesheet" href="/Style Library/Pulsus/styles/pulsus.css?v=<%= DateTime.Now.Millisecond %>" />
+    <link rel="stylesheet" href="/Style Library/Pulsus/styles/kendo.common.min.css" />
+    <link rel="stylesheet" href="/Style Library/Pulsus/styles/kendo.default.min.css" />
 </asp:Content>
 
 <asp:Content ID="Main" ContentPlaceHolderID="PlaceHolderMain" runat="server">
+    <div class="parameters clearfix">
+        <label for="pulsus-period">Period</label>
+        <input type="text" id="pulsus-period" />
+        <div class="clearfix"></div>
+    </div>
+    <div id="pulsus-grid" class="pulsus-grid"></div>
+    <div id="pulsus-details" class="pulsus-details"></div>
     
-    <asp:Label runat="server" ID="error"></asp:Label>
-
-    <script src="/Style Library/Pulsus/scripts/lib/jquery.daterangepicker.js"></script>
-    <script src="/Style Library/Pulsus/scripts/pulsus.js?v=3"></script>
+    <script src="/Style Library/Pulsus/scripts/jquery.daterangepicker.js"></script>
+    <script src="/Style Library/Pulsus/scripts/kendo.all.min.js"></script>
+    <script src="/Style Library/Pulsus/scripts/pulsus.js?v=<%= DateTime.Now.Millisecond %>"></script>
 </asp:Content>
 
 <asp:Content ID="PageTitle" ContentPlaceHolderID="PlaceHolderPageTitle" runat="server">

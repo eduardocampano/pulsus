@@ -5,7 +5,7 @@ using Microsoft.SharePoint.Administration;
 
 namespace Pulsus.SharePoint.Core
 {
-    [Guid("D64DEDE4-3D1D-42CC-AF40-DB09F0DFB309")]
+    [Guid("D64DEDE4-3D1D-42CC-AF40-DB19F0DFB309")]
     public class ULSLoggingService : SPDiagnosticsServiceBase
     {
         public static class Categories

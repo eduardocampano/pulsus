@@ -22,11 +22,13 @@ namespace Pulsus.SharePoint.Core.Data
 
             const string sql = @"select top 100
                                         EventId,
+                                        Level,
                                         Date,
                                         Text,
                                         Tags
                                  from [LoggingEvents]
-                                 where Date >= @from and Date < @to";
+                                 where Date >= @from and Date < @to
+                                 order by Date desc";
 
             using (var connection = GetConnection())
             {
@@ -38,7 +40,7 @@ namespace Pulsus.SharePoint.Core.Data
         {
             // search for a database target
             var databaseTargetType = typeof (DatabaseTarget);
-            var target = LogManager.Configuration.Targets.Values.FirstOrDefault(x => x.GetType().IsAssignableFrom(databaseTargetType)) as DatabaseTarget;
+            var target = LogManager.Configuration.Targets.Values.FirstOrDefault(x => databaseTargetType.IsAssignableFrom(x.GetType())) as DatabaseTarget;
             
             if (target == null)
                 throw new Exception("Unabled to find a DatabaseTarget to query Pulsus logging events");

@@ -39,7 +39,7 @@ namespace UTC.com.Layouts
             if (!eventId.IsNullOrEmpty())
                 HandleEventDetailsRequest(eventId);
             else
-                HandleAjaxRequest();
+                HandleGridDataRequest();
         }
 
         protected void HandleEventDetailsRequest(string eventId)

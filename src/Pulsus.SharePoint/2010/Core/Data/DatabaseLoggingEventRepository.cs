@@ -8,7 +8,7 @@ namespace Pulsus.SharePoint.Core.Data
 {
     internal class DatabaseLoggingEventRepository
     {
-        public IEnumerable<LoggingEventListItem> List(DateTime from, DateTime to, int skip, int take)
+        public PageResult<LoggingEventListItem> List(DateTime from, DateTime to, string search, int skip, int take)
         {
             var minSqlDate = new DateTime(1753, 1, 1);
 
@@ -20,19 +20,36 @@ namespace Pulsus.SharePoint.Core.Data
             if (to < minSqlDate)
                 to = minSqlDate;
 
-            const string sql = @"select top 100
-                                        EventId,
-                                        Level,
-                                        Date,
-                                        Text,
-                                        Tags
-                                 from [LoggingEvents]
-                                 where Date >= @from and Date < @to
-                                 order by Date desc";
+            var searchWhere = string.IsNullOrEmpty(search) ? string.Empty : "and Text like '%' + @search + '%'";
+
+            var countSql = string.Format(@"select count(1) as Total
+                                                 from [LoggingEvents]
+                                                 where Date >= @from and Date < @to
+                                                 {0}", searchWhere);
+
+            var sql = string.Format(@"select top {0} *
+                                      from (
+                                        select  ROW_NUMBER() OVER (ORDER BY Date desc) AS RowNum,
+                                                EventId,
+                                                Level,
+                                                Date,
+                                                Text,
+                                                Tags
+                                         from [LoggingEvents]
+                                         where Date >= @from and Date < @to
+                                         {2}
+                                      ) X
+                                      where X.RowNum >= {1}", take, skip + 1, searchWhere);
+
+            var parameters = new {from, to, search};
 
             using (var connection = GetConnection())
             {
-                return connection.Query<LoggingEventListItem>(sql, new {from, to, skip, take});
+                var countResult = connection.Query<CountResult>(countSql, parameters).FirstOrDefault();
+                var total = countResult == null ? 0 : countResult.Total;
+                var page = connection.Query<LoggingEventListItem>(sql, parameters);
+
+                return new PageResult<LoggingEventListItem>(page, total);
             }
         }
 

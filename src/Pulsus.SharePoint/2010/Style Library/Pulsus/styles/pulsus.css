@@ -103,5 +103,6 @@
 }
 
 /* pulsus */
-.pulsus-grid { float: left; width: 40%;font-size: 10px;}
-.pulsus-details { float: left;width: 60%;height: 500px;overflow: auto;font-size: 10px;}
+.pulsus-container { display:block;margin:10px;font-size:12px; }
+.pulsus-container .grid { float:left;width:40%; }
+.pulsus-container .details { float:left;width:60%;height:500px;overflow:auto;font-size:12px; }

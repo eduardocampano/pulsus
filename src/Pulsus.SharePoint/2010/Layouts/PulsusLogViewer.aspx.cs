@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Web;
 using Microsoft.SharePoint;
 using Microsoft.SharePoint.Utilities;
@@ -24,11 +25,26 @@ namespace UTC.com.Layouts
 
         protected void HandleAjaxRequest()
         {
-            var to = DateTime.Now;
-            var from = to.AddDays(-30);
+            var to = DateTime.Now.Date;
+            var from = to.AddMonths(-1);
+
+            var skip = int.Parse(HttpContext.Current.Request.Form["skip"] ?? "0");
+            var take = int.Parse(HttpContext.Current.Request.Form["take"] ?? "100");
+            var search = HttpContext.Current.Request.Form["search"] ?? string.Empty;
+            var periodString = HttpContext.Current.Request.Form["period"];
+            if (periodString != null)
+            {
+                var periodDates = periodString.Split(new[] { " - " }, 2, StringSplitOptions.None);
+                if (periodDates.Length == 2)
+                {
+                    from = DateTime.ParseExact(periodDates[0], "MM/dd/yyyy", CultureInfo.CurrentCulture);
+                    to = DateTime.ParseExact(periodDates[1], "MM/dd/yyyy", CultureInfo.CurrentCulture);
+                }
+            }
+
             var repository = new DatabaseLoggingEventRepository();
-            var items = repository.List(from, to, 0, 100);
-            Response.JsonResult(items);
+            var result = repository.List(from, to, search, skip, take);
+            Response.JsonResult(result);
         }
     }
 }

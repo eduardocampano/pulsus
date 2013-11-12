@@ -14,14 +14,19 @@
 </asp:Content>
 
 <asp:Content ID="Main" ContentPlaceHolderID="PlaceHolderMain" runat="server">
-    <div class="parameters clearfix">
-        <label for="pulsus-period">Period</label>
-        <input type="text" id="pulsus-period" />
-        <div class="clearfix"></div>
-    </div>
-    <div id="pulsus-grid" class="pulsus-grid"></div>
-    <div id="pulsus-details" class="pulsus-details"></div>
     
+    <div class="pulsus-container">
+        <div class="parameters clearfix">
+            <label for="pulsus-period">Period</label>
+            <input type="text" id="pulsus-period" />
+            <label for="pulsus-search">Search</label>
+            <input type="text" id="pulsus-search" />
+            <div class="clearfix"></div>
+        </div>
+        <div id="pulsus-grid" class="grid"></div>
+        <div id="pulsus-details" class="details"></div>
+    </div>
+
     <script src="/Style Library/Pulsus/scripts/jquery.daterangepicker.js"></script>
     <script src="/Style Library/Pulsus/scripts/kendo.all.min.js"></script>
     <script src="/Style Library/Pulsus/scripts/pulsus.js?v=<%= DateTime.Now.Millisecond %>"></script>

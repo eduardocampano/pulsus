@@ -61,8 +61,10 @@
     <Reference Include="Microsoft.SharePoint" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\Data\CountResult.cs" />
     <Compile Include="Core\Data\LoggingEventListItem.cs" />
     <Compile Include="Core\Data\DatabaseLoggingEventRepository.cs" />
+    <Compile Include="Core\Data\PageResult.cs" />
     <Compile Include="Core\Data\SqlMapper.cs" />
     <Compile Include="Core\Extensions.cs" />
     <Compile Include="Core\ULSLoggingService.cs" />

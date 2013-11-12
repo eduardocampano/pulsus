@@ -7,7 +7,8 @@
             type: 'post',
             data: function () {
                 return {
-                    period: $('#pulsus-period').val()
+                    period: $('#pulsus-period').val(),
+                    search: $('#pulsus-search').val()
                 };
             }
         }
@@ -21,9 +22,16 @@
                 Text: { type: 'string' },
                 Tags: { type: 'string' }
             }
+        },
+        total: function (response) {
+            return response.Total;
+        },
+        data: function(response) {
+            return response.Data;
         }
     },
-    serverPaging: false,
+    serverPaging: true,
+    pageSize: 100,
     serverFiltering: false,
     serverSorting: false
 });
@@ -53,7 +61,12 @@ $().ready(function () {
             refresh();
         }
     }).val(initialDateRange);
-    
+
+    $('#pulsus-search').on("keypress", function(e) {
+        if (e.keyCode == 13)
+            refresh();
+    });
+
     refresh();
     
     $("#pulsus-grid").kendoGrid({
@@ -62,11 +75,12 @@ $().ready(function () {
         height: 400,
         filterable: false,
         sortable: false,
-        pageable: false,
+        pageable: true,
+        selectable: true,
         columns: [
-            { field: "Date", width: 100, format: "{0: MMM dd HH:mm}" },
-            { field: "Text", width: 200 },
-            { field: "Level", width: 100 },
+            { field: "Date", width: 80, format: "{0: MMM dd HH:mm}" },
+            { field: "Text", width: 300 },
+            { field: "Level", width: 70 },
             { field: "Tags", width: 100 }
         ]
     });

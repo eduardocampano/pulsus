@@ -106,3 +106,17 @@
 .pulsus-container { display:block;margin:10px;font-size:12px; }
 .pulsus-container .grid { float:left;width:40%; }
 .pulsus-container .details { float:left;width:60%;height:500px;overflow:auto;font-size:12px; }
+.pulsus-container .details table { display:table;width:100%;border:1px solid #999;width:100%;table-layout:fixed; }
+.pulsus-container .details table th { background:#333;color:#fff;padding:5px;min-width:100px;text-align:left; }
+.pulsus-container .details table td { padding:5px;word-break:break-all; }
+.pulsus-container .details table td.first-col { word-break:normal;word-wrap:normal; }
+.pulsus-container .details table tr.alt td { background-color:#f4f4f4; }
+.pulsus-container .details table.title { border:0; }
+.pulsus-container .details table.title td.level { width:8px; }
+.pulsus-container .details table.title td.red { background-color:#ff2727; }
+.pulsus-container .details table.title td.yellow { background-color:#ffcb00; }
+.pulsus-container .details table.title td.green { background-color:#008e1d; }
+.pulsus-container .details table.title td.blue { background-color:#1f2aef; }
+.pulsus-container .details table.title td { padding-left:12px; }
+.pulsus-container .details table.title h1 { color:#444; }
+.pulsus-container .details a.link, a.link:hover, a.link:visited { color:#444; }

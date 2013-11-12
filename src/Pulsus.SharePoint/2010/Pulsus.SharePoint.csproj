@@ -61,12 +61,23 @@
     <Reference Include="Microsoft.SharePoint" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\DatabaseLoggingEvent.cs" />
     <Compile Include="Core\Data\CountResult.cs" />
     <Compile Include="Core\Data\LoggingEventListItem.cs" />
     <Compile Include="Core\Data\DatabaseLoggingEventRepository.cs" />
     <Compile Include="Core\Data\PageResult.cs" />
     <Compile Include="Core\Data\SqlMapper.cs" />
+    <Compile Include="Core\LoggingEventTemplate.cs" />
+    <Compile Include="Core\FileSizeFormatProvider.cs" />
+    <Compile Include="Core\LoggingEventTemplate.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LoggingEventTemplate.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Core\LoggingEventTemplateModel.cs" />
     <Compile Include="Core\Extensions.cs" />
+    <Compile Include="Core\ObjectHelpers.cs" />
+    <Compile Include="Core\RazorTemplateBase.cs" />
     <Compile Include="Core\ULSLoggingService.cs" />
     <Compile Include="Features\Pulsus Module\Pulsus Module.EventReceiver.cs">
       <DependentUpon>Pulsus Module.feature</DependentUpon>
@@ -95,6 +106,10 @@
   <ItemGroup>
     <None Include="ADMIN\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{5157b592-5494-4c7f-907b-43c5aa117dc1}</SharePointProjectItemId>
+    </None>
+    <None Include="Core\LoggingEventTemplate.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>LoggingEventTemplate.generated.cs</LastGenOutput>
     </None>
     <None Include="Feature Elements\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{9c110014-38a8-409a-a3dc-4eb3ee534a44}</SharePointProjectItemId>

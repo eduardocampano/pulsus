@@ -4,6 +4,7 @@ using System.Web;
 using Microsoft.SharePoint;
 using Microsoft.SharePoint.Utilities;
 using Microsoft.SharePoint.WebControls;
+using Pulsus;
 using Pulsus.SharePoint.Core;
 using Pulsus.SharePoint.Core.Data;
 
@@ -21,9 +22,43 @@ namespace UTC.com.Layouts
 
             if (Request.QueryString["throw"] != null)
                 throw new ApplicationException("This is a test exception, please ignore");
+
+            if (Request.QueryString["log"] != null)
+            {
+                LogManager.EventFactory.Create()
+                    .Level(LoggingEventLevel.Debug)
+                    .AddData("customKey", "customValue")
+                    .Text(Request.QueryString["log"])
+                    .Push();
+            }
         }
 
         protected void HandleAjaxRequest()
+        {
+            var eventId = Request.QueryString["EventId"];
+            if (!eventId.IsNullOrEmpty())
+                HandleEventDetailsRequest(eventId);
+            else
+                HandleAjaxRequest();
+        }
+
+        protected void HandleEventDetailsRequest(string eventId)
+        {
+            var repository = new DatabaseLoggingEventRepository();
+            var loggingEvent = repository.Get(eventId);
+            if (loggingEvent == null)
+            {
+                Response.HtmlResult("<h1>Not Found</h1>");
+                return;
+            }
+
+            var loggingEventTemplateModel = new LoggingEventTemplateModel(loggingEvent);
+            var loggingEventTemplate = new LoggingEventTemplate(loggingEventTemplateModel);
+            var htmlResponse = loggingEventTemplate.TransformText();
+            Response.HtmlResult(htmlResponse);
+        }
+
+        protected void HandleGridDataRequest()
         {
             var to = DateTime.Now.Date;
             var from = to.AddMonths(-1);

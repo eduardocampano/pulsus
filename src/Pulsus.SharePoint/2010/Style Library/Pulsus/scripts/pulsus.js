@@ -37,10 +37,18 @@
 });
 
 var refresh = function () {
+    var grid = $('#pulsus-grid').data("kendoGrid");
+    if (grid != null)
+        grid.clearSelection();
+    
+    $('#pulsus-details').empty();
     dataSource.read();
 };
 
-var view = function (e) {
+var view = function (eventdId) {
+    $.get(window.location, { eventId: eventId }, function(result) {
+        $('#pulsus-details').html(result);
+    });
 };
 
 var formatDate = function (date) {
@@ -82,6 +90,11 @@ $().ready(function () {
             { field: "Text", width: 300 },
             { field: "Level", width: 70 },
             { field: "Tags", width: 100 }
-        ]
+        ],
+        change: function(e) {
+            var selectedRow = this.select();
+            var selectedData = this.dataItem(selectedRow);
+            view(selectedData.EventId);
+        }
     });
 });

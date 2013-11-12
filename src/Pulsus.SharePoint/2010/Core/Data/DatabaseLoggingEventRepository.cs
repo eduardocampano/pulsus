@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using Pulsus.Targets;
@@ -8,6 +7,17 @@ namespace Pulsus.SharePoint.Core.Data
 {
     internal class DatabaseLoggingEventRepository
     {
+        public LoggingEvent Get(string eventId)
+        {
+            const string sql = @"select * from [LoggingEvents] where EventId = @eventId";
+            using (var connection = GetConnection())
+            {
+                return connection.Query<DatabaseLoggingEvent>(sql, new {eventId})
+                                 .Select(x => DatabaseLoggingEvent.Deserialize(x))
+                                 .FirstOrDefault();
+            }
+        }
+
         public PageResult<LoggingEventListItem> List(DateTime from, DateTime to, string search, int skip, int take)
         {
             var minSqlDate = new DateTime(1753, 1, 1);

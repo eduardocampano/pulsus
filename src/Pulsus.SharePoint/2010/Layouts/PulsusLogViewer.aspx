@@ -24,7 +24,9 @@
             <div class="clearfix"></div>
         </div>
         <div id="pulsus-grid" class="grid"></div>
-        <div id="pulsus-details" class="details"></div>
+        <div id="pulsus-details" class="details">
+            
+        </div>
     </div>
 
     <script src="/Style Library/Pulsus/scripts/jquery.daterangepicker.js"></script>

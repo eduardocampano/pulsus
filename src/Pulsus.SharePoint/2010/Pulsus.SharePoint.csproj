@@ -65,6 +65,7 @@
     <Compile Include="Core\Data\DatabaseLoggingEventRepository.cs" />
     <Compile Include="Core\Data\SqlMapper.cs" />
     <Compile Include="Core\Extensions.cs" />
+    <Compile Include="Core\ULSLoggingService.cs" />
     <Compile Include="Features\Pulsus Module\Pulsus Module.EventReceiver.cs">
       <DependentUpon>Pulsus Module.feature</DependentUpon>
     </Compile>

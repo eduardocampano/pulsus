@@ -1,41 +1,49 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using Microsoft.SharePoint.Administration;
+using Pulsus.Internal;
+using Pulsus.SharePoint.Core;
 using Pulsus.Targets;
 
 namespace Pulsus.SharePoint.Targets
 {
     public class ULSTarget : Target
     {
+        private const string DefaultFormat = "{EventId} [{Level}] {Text}";
+        
         [DefaultValue(true)]
         public bool WriteTrace { get; set; }
 
         [DefaultValue(false)]
         public bool WriteEvent { get; set; }
 
+        [DefaultValue(DefaultFormat)]
+        public string Format { get; set; }
+
         public override void Push(LoggingEvent[] loggingEvents)
         {
             foreach (var loggingEvent in loggingEvents)
             {
-                var category = new SPDiagnosticsCategory(loggingEvent.LogKey, TraceSeverity.None, EventSeverity.None);
+                var messageString = (string.IsNullOrEmpty(Format) ? DefaultFormat : Format).Format(loggingEvent);
 
                 if (WriteTrace)
                 {
                     var traceSeverity = GetTraceSeverity(loggingEvent);
-                    SPDiagnosticsService.Local.WriteTrace(0, category, traceSeverity, loggingEvent.Text, loggingEvent.EventId);
+                    ULSLoggingService.WriteTrace(traceSeverity, messageString);
+                    PulsusDebugger.Write(this, "WriteTrace for event {0}", loggingEvent.EventId);
                 }
 
                 if (WriteEvent)
                 {
                     var eventSeverity = GetEventSeverity(loggingEvent);
-                    SPDiagnosticsService.Local.WriteEvent(0, category, eventSeverity, loggingEvent.Text, loggingEvent.EventId);
+                    ULSLoggingService.WriteEvent(eventSeverity, messageString);
+                    PulsusDebugger.Write(this, "WriteEvent for event {0}", loggingEvent.EventId);
                 }
             }
         }
 
         private TraceSeverity GetTraceSeverity(LoggingEvent loggingEvent)
         {
-            var loggingEventLevel = (LoggingEventLevel)Enum.Parse(typeof(LoggingEventLevel), loggingEvent.Level.ToString());
+            var loggingEventLevel = loggingEvent.Level;
 
             if (loggingEventLevel == LoggingEventLevel.None)
                 return TraceSeverity.None;
@@ -57,7 +65,7 @@ namespace Pulsus.SharePoint.Targets
 
         private EventSeverity GetEventSeverity(LoggingEvent loggingEvent)
         {
-            var loggingEventLevel = (LoggingEventLevel)Enum.Parse(typeof(LoggingEventLevel), loggingEvent.Level.ToString());
+            var loggingEventLevel = loggingEvent.Level;
 
             if (loggingEventLevel == LoggingEventLevel.None)
                 return EventSeverity.None;

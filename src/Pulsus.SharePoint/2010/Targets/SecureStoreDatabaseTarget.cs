@@ -51,6 +51,9 @@ namespace Pulsus.SharePoint.Targets
                     {
                         var connectionString = ReadSecureString(credential.Credential);
 
+                        if (string.IsNullOrEmpty(connectionString))
+                            continue;
+
                         try
                         {
                             connectionStringBuilder.ConnectionString = connectionString;
@@ -61,7 +64,7 @@ namespace Pulsus.SharePoint.Targets
                             continue;
                         }
                         
-                        return  new ConnectionSettings(connectionString);
+                        return new ConnectionSettings(connectionString);
                     }
                 }
             }

@@ -18,7 +18,7 @@ namespace Pulsus
 		public virtual string LogKey { get; set; }
 		public virtual string ApiKey { get; set; }
 		public virtual DateTime Date { get; set; }
-		public virtual int Level { get; set; }
+		public virtual LoggingEventLevel Level { get; set; }
 		public virtual double? Value { get; set; }
 		public virtual string Text { get; set; }
 		public virtual IList<string> Tags { get; set; }

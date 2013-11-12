@@ -13,7 +13,7 @@
 
 <asp:Content ID="Main" ContentPlaceHolderID="PlaceHolderMain" runat="server">
     
-    
+    <asp:Label runat="server" ID="error"></asp:Label>
 
     <script src="/Style Library/Pulsus/scripts/lib/jquery.daterangepicker.js"></script>
     <script src="/Style Library/Pulsus/scripts/pulsus.js?v=3"></script>

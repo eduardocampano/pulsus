@@ -785,17 +785,6 @@ WriteLiteral("</pre>\r\n");
             
             #line 185 "..\..\Core\LoggingEventTemplate.cshtml"
 }
-
-            
-            #line default
-            #line hidden
-WriteLiteral("<br />\r\n");
-
-
-            
-            #line 187 "..\..\Core\LoggingEventTemplate.cshtml"
-Write(Model.Footer);
-
             
             #line default
             #line hidden

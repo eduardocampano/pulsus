@@ -18,7 +18,7 @@
             fields: {
                 EventId: { type: 'string' },
                 Date: { type: 'date' },
-                Level: { type: 'string' },
+                LevelString: { type: 'string' },
                 Text: { type: 'string' },
                 Tags: { type: 'string' }
             }
@@ -45,7 +45,7 @@ var refresh = function () {
     dataSource.read();
 };
 
-var view = function (eventdId) {
+var view = function (eventId) {
     $.get(window.location, { eventId: eventId }, function(result) {
         $('#pulsus-details').html(result);
     });
@@ -80,7 +80,7 @@ $().ready(function () {
     $("#pulsus-grid").kendoGrid({
         dataSource: dataSource,
         autoBind: false,
-        height: 400,
+        height: 500,
         filterable: false,
         sortable: false,
         pageable: true,
@@ -88,7 +88,7 @@ $().ready(function () {
         columns: [
             { field: "Date", width: 80, format: "{0: MMM dd HH:mm}" },
             { field: "Text", width: 300 },
-            { field: "Level", width: 70 },
+            { field: "LevelString", width: 70 },
             { field: "Tags", width: 100 }
         ],
         change: function(e) {

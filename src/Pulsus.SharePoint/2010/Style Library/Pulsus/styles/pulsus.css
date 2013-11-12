@@ -104,8 +104,14 @@
 
 /* pulsus */
 .pulsus-container { display:block;margin:10px;font-size:12px; }
+.pulsus-container .clearfix {display:block;clear:both;}
+.pulsus-container .parameters { display: block;background: #f0f0f0;border: 1px solid #eee;padding: 10px; }
+.pulsus-container .parameters label { float:left;font-size:10pt;font-weight:bold;margin-top:3px; }
+.pulsus-container .parameters input { float:left;margin:-3px 10px 0 10px;padding: 1px 5px;font-size: 10pt; }
 .pulsus-container .grid { float:left;width:40%; }
-.pulsus-container .details { float:left;width:60%;height:500px;overflow:auto;font-size:12px; }
+.pulsus-container .details { float:left;width:50%;margin-left:10px;padding:0 10px;height:500px;overflow:auto;font-size:12px;border:1px solid #e3e3e3; }
+.pulsus-container .details h1 { font-size:16px;}
+.pulsus-container .details h2 { font-size:12px;margin:5px 0; }
 .pulsus-container .details table { display:table;width:100%;border:1px solid #999;width:100%;table-layout:fixed; }
 .pulsus-container .details table th { background:#333;color:#fff;padding:5px;min-width:100px;text-align:left; }
 .pulsus-container .details table td { padding:5px;word-break:break-all; }

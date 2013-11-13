@@ -31,6 +31,25 @@
     <script src="/Style Library/Pulsus/scripts/jquery.daterangepicker.js"></script>
     <script src="/Style Library/Pulsus/scripts/kendo.all.min.js"></script>
     <script src="/Style Library/Pulsus/scripts/pulsus.js?v=<%= DateTime.Now.Millisecond %>"></script>
+    <script id="level-template" type="text/x-kendo-template">
+        #if(Level >= 70000){#
+            <span class="label label-red">#=LevelString#</span>
+        #}else if(Level >= 60000) {#
+            <span class="label label-yellow">#=LevelString#</span>
+        #}else if(Level >= 40000) {#
+            <span class="label label-blue">#=LevelString#</span>
+        #}else{#
+            <span class="label label-green">#=LevelString#</span>
+        #}#
+    </script>
+    <script id="tags-template" type="text/x-kendo-template">
+        #var tags = Tags.split(' ');#
+        #for(var i in tags){#
+            #if (tags[i] != null && tags[i] != '') {#
+                <span class="label label-default">#=tags[i]#</span>
+            #}#
+        #}#
+    </script>
 </asp:Content>
 
 <asp:Content ID="PageTitle" ContentPlaceHolderID="PlaceHolderPageTitle" runat="server">

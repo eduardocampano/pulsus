@@ -88,8 +88,8 @@ $().ready(function () {
         columns: [
             { field: "Date", width: 80, format: "{0: MMM dd HH:mm}" },
             { field: "Text", width: 300 },
-            { field: "LevelString", width: 70 },
-            { field: "Tags", width: 100 }
+            { field: "LevelString", width: 70, title: "Level", template: kendo.template($("#level-template").html()) },
+            { field: "Tags", width: 100, template: kendo.template($("#tags-template").html()) }
         ],
         change: function(e) {
             var selectedRow = this.select();

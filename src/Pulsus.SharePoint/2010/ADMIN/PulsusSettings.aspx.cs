@@ -11,6 +11,7 @@ using System.IO;
 using Pulsus.Targets;
 using Pulsus.Configuration;
 using System.Text;
+using System.Threading;
 
 namespace Pulsus.SharePoint.ApplicationPages
 {

@@ -26,7 +26,13 @@ namespace Pulsus.SharePoint.Features.Pulsus
 				Owner = _owner, 
 				Type = SPWebConfigModification.SPWebConfigModificationType.EnsureChildNode, 
 				Path = "/configuration/system.webServer/modules", 
-				Value = "<add name=\"PulsusErrorLoggingModule\" preCondition=\"integratedMode\" type=\"" + typeof(ErrorLoggingModule).AssemblyQualifiedName + "\" /> "}
+				Value = "<add name=\"PulsusErrorLoggingModule\" preCondition=\"integratedMode\" type=\"" + typeof(ErrorLoggingModule).AssemblyQualifiedName + "\" /> "},
+			new SPWebConfigModification() { 
+				Name = "add[@assembly='" + typeof(PulsusFeatureEventReceiver).Assembly.FullName +"']", 
+				Owner = _owner, 
+				Type = SPWebConfigModification.SPWebConfigModificationType.EnsureChildNode, 
+				Path = "/configuration/system.web/compilation/assemblies",
+				Value = "<add assembly=\"" + typeof(PulsusFeatureEventReceiver).Assembly.FullName + "\" /> "}
 		};
 
 		public override void FeatureActivated(SPFeatureReceiverProperties properties)

@@ -36,7 +36,13 @@
     serverSorting: false
 });
 
+var previousPeriod = '';
+var previousSearch = '';
+
 var refresh = function () {
+    if (previousPeriod == $('#pulsus-period').val() && previousSearch == $('#pulsus-search').val())
+        return;
+
     var grid = $('#pulsus-grid').data("kendoGrid");
     if (grid != null)
         grid.clearSelection();
@@ -66,7 +72,7 @@ var resize = function() {
     var newHeight = $(window).height() - $container.offset().top - 10;
     $container.height(newHeight);
     $details.height(newHeight);
-    var gridHeight = newHeight - $('.pulsus-container .parameters').height() - 15;
+    var gridHeight = newHeight - $('.pulsus-container .parameters').height() - 20;
     $grid.height(gridHeight);
     var heightDiff = gridHeight - $grid.height();
     var $gridContent = $grid.find(".k-grid-content");
@@ -74,7 +80,7 @@ var resize = function() {
 
     var $left = $container.find('.left');
     var $right = $container.find('.right');
-    var rightWidth = $(window).width() - $left.offset().left - $left.width() - 18;
+    var rightWidth = $(window).width() - $left.offset().left - $left.width() - 22;
     $right.width(rightWidth);
 };
 
@@ -92,11 +98,7 @@ $().ready(function () {
         }
     }).val(initialDateRange);
 
-    $('#pulsus-search').on("keypress", function(e) {
-        if (e.keyCode == 13)
-            refresh();
-    });
-
+    $('#pulsus-search').on("keypress focusout", refresh);
     refresh();
 
     $("#pulsus-grid").kendoGrid({
@@ -127,6 +129,5 @@ $().ready(function () {
 
     $("#pulsus-grid").data("kendoGrid").bind('dataBound', function (e) {
         this.select("tr:eq(1)");
-        this.change();
     });
 });

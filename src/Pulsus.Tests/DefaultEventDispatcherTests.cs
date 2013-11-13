@@ -35,7 +35,7 @@ namespace Pulsus.Tests
 
             var loggingEvent = new LoggingEvent()
             {
-                Level = (int)LoggingEventLevel.Error
+                Level = LoggingEventLevel.Error
             };
 
             var eventDispatcher = new DefaultEventDispatcher(new[] { targetMock.Object });
@@ -52,7 +52,7 @@ namespace Pulsus.Tests
             
             var loggingEvent = new LoggingEvent()
             {
-                Level = (int)LoggingEventLevel.Information
+                Level = LoggingEventLevel.Information
             };
 
             var eventDispatcher = new DefaultEventDispatcher(new[] { targetMock.Object });

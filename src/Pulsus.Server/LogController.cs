@@ -15,7 +15,7 @@ namespace Pulsus.Server
 			loggingEvent.Count = 1;
 
 			if (loggingEvent.Level <= 0)
-				loggingEvent.Level = (int)LoggingEventLevel.Information;
+				loggingEvent.Level = LoggingEventLevel.Information;
 
 			if (loggingEvent.Date == DateTime.MinValue)
 				loggingEvent.Date = DateTime.UtcNow;

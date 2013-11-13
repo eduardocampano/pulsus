@@ -8,7 +8,7 @@
 <%@ Page Language="C#" AutoEventWireup="true" CodeBehind="PulsusLogViewer.aspx.cs" Inherits="UTC.com.Layouts.PulsusLogViewer" DynamicMasterPageFile="~masterurl/default.master" %>
 
 <asp:Content ID="PageHead" ContentPlaceHolderID="PlaceHolderAdditionalPageHead" runat="server">
-    <link rel="stylesheet" href="/Style Library/Pulsus/styles/pulsus.css?v=<%= DateTime.Now.Millisecond %>" />
+    <link rel="stylesheet" href="/Style Library/Pulsus/styles/pulsus.css" />
     <link rel="stylesheet" href="/Style Library/Pulsus/styles/kendo.common.min.css" />
     <link rel="stylesheet" href="/Style Library/Pulsus/styles/kendo.default.min.css" />
 </asp:Content>
@@ -34,7 +34,7 @@
 
     <script src="/Style Library/Pulsus/scripts/jquery.daterangepicker.js"></script>
     <script src="/Style Library/Pulsus/scripts/kendo.all.min.js"></script>
-    <script src="/Style Library/Pulsus/scripts/pulsus.js?v=<%= DateTime.Now.Millisecond %>"></script>
+    <script src="/Style Library/Pulsus/scripts/pulsus.js"></script>
     <script id="level-template" type="text/x-kendo-template">
         #if(Level >= 70000){#
             <span class="label label-red">#=LevelString#</span>

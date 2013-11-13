@@ -59,9 +59,31 @@ var formatDate = function (date) {
     return $.datepicker.formatDate(dateFormat, date);
 };
 
+var resize = function() {
+    var $container = $('.pulsus-container');
+    var $grid = $('#pulsus-grid');
+    var $details = $('#pulsus-details');
+    var newHeight = $(window).height() - $container.offset().top - 10;
+    $container.height(newHeight);
+    $details.height(newHeight);
+    var gridHeight = newHeight - $('.pulsus-container .parameters').height() - 15;
+    $grid.height(gridHeight);
+    var heightDiff = gridHeight - $grid.height();
+    var $gridContent = $grid.find(".k-grid-content");
+    $gridContent.height($gridContent.height() + heightDiff);
+
+    var $left = $container.find('.left');
+    var $right = $container.find('.right');
+    var rightWidth = $(window).width() - $left.offset().left - $left.width() - 18;
+    $right.width(rightWidth);
+};
+
 $().ready(function () {
 
-    var initialDateRange = formatDate(Date.parse('today').moveToFirstDayOfMonth()) + ' - ' + formatDate(Date.parse('today'));
+    resize();
+    $(window).resize(resize);
+    
+    var initialDateRange = formatDate(Date.parse('today').addDays(-30)) + ' - ' + formatDate(Date.parse('today'));
 
     $('#pulsus-period').daterangepicker({
         dateFormat: 'mm/dd/yy',
@@ -76,11 +98,10 @@ $().ready(function () {
     });
 
     refresh();
-    
+
     $("#pulsus-grid").kendoGrid({
         dataSource: dataSource,
         autoBind: false,
-        height: 500,
         filterable: false,
         sortable: false,
         pageable: true,
@@ -91,10 +112,21 @@ $().ready(function () {
             { field: "LevelString", width: 70, title: "Level", template: kendo.template($("#level-template").html()) },
             { field: "Tags", width: 100, template: kendo.template($("#tags-template").html()) }
         ],
+
         change: function(e) {
             var selectedRow = this.select();
+            if (selectedRow == null)
+                return;
             var selectedData = this.dataItem(selectedRow);
+            if (selectedData == null)
+                return;
+
             view(selectedData.EventId);
         }
+    });
+
+    $("#pulsus-grid").data("kendoGrid").bind('dataBound', function (e) {
+        this.select("tr:eq(1)");
+        this.change();
     });
 });

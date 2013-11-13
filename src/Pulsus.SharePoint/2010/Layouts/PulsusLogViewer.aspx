@@ -16,15 +16,19 @@
 <asp:Content ID="Main" ContentPlaceHolderID="PlaceHolderMain" runat="server">
     
     <div class="pulsus-container">
-        <div class="parameters clearfix">
-            <label for="pulsus-period">Period</label>
-            <input type="text" id="pulsus-period" />
-            <label for="pulsus-search">Search</label>
-            <input type="text" id="pulsus-search" />
-            <div class="clearfix"></div>
+        <div class="left">
+            <div class="parameters clearfix">
+                <label for="pulsus-period">Period</label>
+                <input type="text" id="pulsus-period" />
+                <label for="pulsus-search">Search</label>
+                <input type="text" id="pulsus-search" />
+                <div class="clearfix"></div>
+            </div>
+            <div id="pulsus-grid" class="grid"></div>
         </div>
-        <div id="pulsus-grid" class="grid"></div>
-        <div id="pulsus-details" class="details"></div>
+        <div class="right">
+            <div id="pulsus-details" class="details"></div>
+        </div>
         <div class="clearfix"></div>
     </div>
 
@@ -56,6 +60,5 @@
     Pulsus Log Viewer
 </asp:Content>
 
-<asp:Content ID="PageTitleInTitleArea" ContentPlaceHolderID="PlaceHolderPageTitleInTitleArea" runat="server" >
-    <h1>Pulsus Log Viewer</h1>
+<asp:Content ID="PageTitleInTitleArea" ContentPlaceHolderID="PlaceHolderPageTitleInTitleArea" runat="server">
 </asp:Content>

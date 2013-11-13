@@ -108,10 +108,7 @@
 /* pulsus */
 .pulsus-container { display:block;margin:10px;font-size:12px; }
 .pulsus-container .clearfix { display:block;clear:both; }
-.pulsus-container .parameters { display:block;background:#f0f0f0;border:1px solid #eee;padding:10px;margin:10px 0; }
-.pulsus-container .parameters label { float:left;font-size:10pt;font-weight:bold;margin-top:3px; }
-.pulsus-container .parameters input { float:left;margin:-3px 10px 0 10px;padding: 1px 5px;font-size: 10pt; }
-.pulsus-container .grid { float:left;width:40%; }
+
 .pulsus-container .label{ font-size:10px;text-transform:lowercase;display:inline;padding: .2em .6em .3em;font-weight:bold;line-height:1;color:#fff;text-align:center;white-space:nowrap;vertical-align:baseline;border-radius: .25em;}
 .pulsus-container .label.label-default{background-color:#999999;}
 .pulsus-container .label.label-green{background-color:#5cb85c;}
@@ -119,20 +116,27 @@
 .pulsus-container .label.label-red{background-color:#d9534f;}
 .pulsus-container .label.label-blue{background-color:#5bc0de;}
 
-.pulsus-container .details { float:left;width:50%;margin-left:10px;padding:0 10px;height:500px;overflow:auto;font-size:12px;border:1px solid #e3e3e3; }
-.pulsus-container .details h1 { font-size:20px;margin:8px 0;}
-.pulsus-container .details h2 { font-size:12px;margin:10px 0 5px 0; }
-.pulsus-container .details table { display:table;width:100%;border:1px solid #999;width:100%;table-layout:fixed; }
-.pulsus-container .details table th { background:#333;color:#fff;padding:5px;min-width:100px;text-align:left; }
-.pulsus-container .details table td { padding:5px;word-break:break-all; }
-.pulsus-container .details table td.first-col { word-break:normal;word-wrap:normal; }
-.pulsus-container .details table tr.alt td { background-color:#f4f4f4; }
-.pulsus-container .details table.title { border:0; }
-.pulsus-container .details table.title td.level { width:8px; }
-.pulsus-container .details table.title td.red { background-color:#d9534f; }
-.pulsus-container .details table.title td.yellow { background-color:#f0ad4e; }
-.pulsus-container .details table.title td.green { background-color:#5cb85c; }
-.pulsus-container .details table.title td.blue { background-color:#5bc0de; }
-.pulsus-container .details table.title td { padding-left:12px; }
-.pulsus-container .details table.title h1 { color:#444; }
-.pulsus-container .details a.link, a.link:hover, a.link:visited { color:#444; }
+.pulsus-container .left { float:left;width:40%; }
+.pulsus-container .left .parameters { display:block;background:#f0f0f0;border:1px solid #eee;padding:10px;margin:0;border:1px solid #c5c5c5;border-bottom:0; }
+.pulsus-container .left .parameters label { float:left;font-size:10pt;font-weight:bold;margin-top:3px; }
+.pulsus-container .left .parameters input { float:left;margin:-3px 10px 0 10px;padding: 1px 5px;font-size: 10pt; }
+.pulsus-container .grid { }
+
+.pulsus-container .right { float:left; }
+.pulsus-container .right .details { margin-left:10px;padding:0 10px;overflow:auto;font-size:12px;border:1px solid #e3e3e3; }
+.pulsus-container .right .details h1 { font-size:20px;margin:8px 0;}
+.pulsus-container .right .details h2 { font-size:12px;margin:10px 0 5px 0; }
+.pulsus-container .right .details table { display:table;width:100%;border:1px solid #999;width:100%;table-layout:fixed; }
+.pulsus-container .right .details table th { background:#333;color:#fff;padding:5px;min-width:100px;text-align:left; }
+.pulsus-container .right .details table td { padding:5px;word-break:break-all; }
+.pulsus-container .right .details table td.first-col { word-break:normal;word-wrap:normal; }
+.pulsus-container .right .details table tr.alt td { background-color:#f4f4f4; }
+.pulsus-container .right .details table.title { border:0; }
+.pulsus-container .right .details table.title td.level { width:8px; }
+.pulsus-container .right .details table.title td.red { background-color:#d9534f; }
+.pulsus-container .right .details table.title td.yellow { background-color:#f0ad4e; }
+.pulsus-container .right .details table.title td.green { background-color:#5cb85c; }
+.pulsus-container .right .details table.title td.blue { background-color:#5bc0de; }
+.pulsus-container .right .details table.title td { padding-left:12px; }
+.pulsus-container .right .details table.title h1 { color:#444; }
+.pulsus-container .right .details a.link, a.link:hover, a.link:visited { color:#444; }

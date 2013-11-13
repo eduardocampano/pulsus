@@ -1,8 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Elements xmlns="http://schemas.microsoft.com/sharepoint/">
     <Module Name="Style Library" Url="Style Library/Pulsus">
-        <File Path="Style Library\Pulsus\scripts\jquery-1.10.2.min.js" Url="scripts/jquery-1.10.2.min.js" Type="GhostableInLibrary" IgnoreIfAlreadyExists="True" />
-        <File Path="Style Library\Pulsus\scripts\jquery-1.10.2.min.map" Url="scripts/jquery-1.10.2.min.map" Type="GhostableInLibrary" IgnoreIfAlreadyExists="True" />
         <File Path="Style Library\Pulsus\scripts\jquery.daterangepicker.js" Url="scripts/jquery.daterangepicker.js" Type="GhostableInLibrary" IgnoreIfAlreadyExists="True" />
         <File Path="Style Library\Pulsus\scripts\kendo.all.min.js" Url="scripts/kendo.all.min.js" Type="GhostableInLibrary" IgnoreIfAlreadyExists="True" />
         <File Path="Style Library\Pulsus\scripts\pulsus.js" Url="scripts/pulsus.js" Type="GhostableInLibrary" IgnoreIfAlreadyExists="True" />

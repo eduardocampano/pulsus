@@ -2,8 +2,6 @@
 <ProjectItem Type="Microsoft.VisualStudio.SharePoint.Module" DefaultFile="Elements.xml" SupportedTrustLevels="All" SupportedDeploymentScopes="Web, Site" xmlns="http://schemas.microsoft.com/VisualStudio/2010/SharePointTools/SharePointProjectItemModel">
   <Files>
     <ProjectItemFile Source="Elements.xml" Target="Style Library\" Type="ElementManifest" />
-    <ProjectItemFile Source="Pulsus\scripts\jquery-1.10.2.min.js" Target="Style Library\Pulsus\scripts\" Type="ElementFile" />
-    <ProjectItemFile Source="Pulsus\scripts\jquery-1.10.2.min.map" Target="Style Library\Pulsus\scripts\" Type="ElementFile" />
     <ProjectItemFile Source="Pulsus\scripts\jquery.daterangepicker.js" Target="Style Library\Pulsus\scripts\" Type="ElementFile" />
     <ProjectItemFile Source="Pulsus\scripts\pulsus.js" Target="Style Library\Pulsus\scripts\" Type="ElementFile" />
     <ProjectItemFile Source="Pulsus\styles\pulsus.css" Target="Style Library\Pulsus\styles\" Type="ElementFile" />

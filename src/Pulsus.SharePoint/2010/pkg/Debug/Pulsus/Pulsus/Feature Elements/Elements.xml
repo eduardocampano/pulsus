@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
-	<CustomAction Id="PulsusSettingsLink" Location="Microsoft.SharePoint.Administration.Monitoring" GroupId="Reporting" Title="Configure Pulsus logging"
-				  Sequence="50">
-		<UrlAction Url="_admin/PulsusSettings.aspx"/>
-	</CustomAction>
-</Elements>

@@ -1,6 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<siteMap>
-	<siteMapNode url="/_admin/PulsusSettings.aspx"
-				 parentUrl="/_admin/applications.aspx"
-				 title="Pulsus Settings" />
-</siteMap>

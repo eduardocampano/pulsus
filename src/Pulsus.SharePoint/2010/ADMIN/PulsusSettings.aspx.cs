@@ -1,22 +1,17 @@
 ﻿using System;
-using Microsoft.SharePoint;
-using Microsoft.SharePoint.WebControls;
-using System.Web;
-using System.Reflection;
-using Microsoft.SharePoint.Administration;
-using System.Data.SqlClient;
-using Microsoft.SharePoint.ApplicationPages;
-using System.Linq;
 using System.IO;
-using Pulsus.Targets;
-using Pulsus.Configuration;
-using System.Text;
-using System.Threading;
+using System.Linq;
+using System.Xml;
+using System.Xml.Linq;
+using Microsoft.SharePoint.Administration;
+using Microsoft.SharePoint.ApplicationPages;
 
 namespace Pulsus.SharePoint.ApplicationPages
 {
 	public partial class PulsusSettings : DialogAdminPageBase
 	{
+		private static readonly Guid PulsusFeatureId = new Guid("7465ed3a-f5cc-46ba-8205-0ba5fc0e8b35");
+
 		protected override void OnLoad(EventArgs e)
 		{
 			base.OnLoad(e);
@@ -24,52 +19,61 @@ namespace Pulsus.SharePoint.ApplicationPages
 		
 		protected void Selector_ContextChange(object sender, EventArgs e)
 		{
-			Guid currentApplicationId = new Guid(Selector.CurrentId);
-			var application = SPWebService.ContentService.WebApplications.Where(a => a.Id.Equals(currentApplicationId)).FirstOrDefault();
-			if (application != null)
-			{
-				string pulsusConfigPath = Path.Combine(application.GetIisSettingsWithFallback(SPUrlZone.Default).Path.FullName, "Pulsus.config");
-				var emailTarget = PulsusConfiguration.Load(pulsusConfigPath).Targets.Where(t => t.Value is EmailTarget).Select(t => t.Value).FirstOrDefault();
-				if (emailTarget != null)
-				{
-					emailTargetFromAddress.Text = ((EmailTarget)emailTarget).From;
-					emailTargetToAddress.Text = ((EmailTarget)emailTarget).To;
-					emailTargetServer.Text = ((EmailTarget)emailTarget).SmtpServer;
-					emailTargetServerPort.Text = ((EmailTarget)emailTarget).SmtpPort.ToString();
-				}
-			}
+			var application = GetApplication();
+			var applicationConfig = GetApplicationConfig(application);
+			if (File.Exists(applicationConfig))
+				configuration.Text = File.ReadAllText(applicationConfig);
 		}
 
 		protected void okButton_Click(object sender, EventArgs e)
 		{
-			Guid currentApplicationId = new Guid(Selector.CurrentId);
-			var application = SPWebService.ContentService.WebApplications.Where(a => a.Id.Equals(currentApplicationId)).FirstOrDefault();
-			if (application != null)
+			var application = GetApplication();
+
+			try
 			{
-				StringBuilder pulsusConfigBuilder = new StringBuilder();
-				pulsusConfigBuilder.Append(@"<pulsus logKey=""" + application.Name + @""" includeHttpContext=""true"" debug=""false""><targets>");
-				if (enableULSLogging.Checked)
-					pulsusConfigBuilder.Append(@"<target name=""uls"" type=""ULSTarget"" />");
-
-				if (!String.IsNullOrEmpty(emailTargetServer.Text))
-					pulsusConfigBuilder.Append(@"<target name=""email"" type=""EmailTarget"" from=""" + emailTargetFromAddress.Text + @""" to=""" + emailTargetToAddress.Text + @""" smtpServer=""" + emailTargetServer.Text + @""" smtpPort=""" + emailTargetServerPort.Text + @""" />");
-
-				if (!String.IsNullOrEmpty(targetApplicationId.Text))
-					pulsusConfigBuilder.Append(@"<target name=""sssdata"" type=""SecureStoreDatabaseTarget"" AppId=""" + targetApplicationId.Text + @""" />");
-
-				pulsusConfigBuilder.Append(@"</targets></pulsus>");
-
-				Enum.GetValues(typeof(SPUrlZone)).Cast<SPUrlZone>().ToList().ForEach(z =>
-				{
-					string pulsusConfigPath = Path.Combine(application.GetIisSettingsWithFallback(z).Path.FullName, "Pulsus.config");
-					File.WriteAllText(pulsusConfigPath, pulsusConfigBuilder.ToString());
-				});
-
-				Guid pulsusFeatureId = new Guid("7465ed3a-f5cc-46ba-8205-0ba5fc0e8b35");
-				if (!application.Features.Any(f => f.DefinitionId.Equals(pulsusFeatureId)))
-					application.Features.Add(pulsusFeatureId);
+				var xDocument = XDocument.Parse(configuration.Text);
 			}
+			catch (Exception)
+			{
+				// TODO: show error
+				LabelErrorMessage.Text = "Invalid XML condfiguration";
+				return;
+			}
+			
+			Enum.GetValues(typeof(SPUrlZone)).Cast<SPUrlZone>().ToList().ForEach(z =>
+			{
+				var applicationConfig = GetApplicationConfig(application, z);
+				File.WriteAllText(applicationConfig, configuration.Text);
+			});
+
+			ReloadPulsusFeature(application);
+			
 			base.EndOperation(0);
+		}
+
+		protected void ReloadPulsusFeature(SPWebApplication application)
+		{
+			application.Features.Add(PulsusFeatureId, true);
+		}
+
+		protected string GetApplicationConfig(SPWebApplication application)
+		{
+			return GetApplicationConfig(application, SPUrlZone.Default);
+		}
+
+		protected string GetApplicationConfig(SPWebApplication application, SPUrlZone zone)
+		{
+			return Path.Combine(application.GetIisSettingsWithFallback(zone).Path.FullName, "Pulsus.config");
+		}
+
+		protected SPWebApplication GetApplication()
+		{
+			var currentApplicationId = new Guid(Selector.CurrentId);
+			var application = SPWebService.ContentService.WebApplications.FirstOrDefault(a => a.Id.Equals(currentApplicationId));
+			if (application == null)
+				throw new Exception("Could not find application " + currentApplicationId);
+
+			return application;
 		}
 	}
 }

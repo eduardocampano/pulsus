@@ -55,6 +55,9 @@ namespace Pulsus.Internal
             var messageString = args != null && args.Length > 0 ? string.Format(CultureInfo.InvariantCulture, message, args) : message;
             var exceptionString = ex != null ? Environment.NewLine + ex : string.Empty;
 
+            if (string.IsNullOrEmpty(messageString) && ex != null)
+                messageString = ex.Message;
+
             try
             {
                 var debugFile = DebugFile;

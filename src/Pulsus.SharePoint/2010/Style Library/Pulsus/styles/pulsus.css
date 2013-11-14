@@ -1,0 +1,142 @@
+﻿/*styles for jquery ui daterangepicker plugin */
+
+.ui-daterangepickercontain {
+	position: absolute;
+	z-index: 999;
+}
+.ui-daterangepickercontain .ui-daterangepicker {
+	float: left;
+	padding: 5px !important;
+	width: auto;
+	display: inline;
+	background-image: none !important;
+	clear: left;
+}
+.ui-daterangepicker ul, .ui-daterangepicker .ranges, .ui-daterangepicker .range-start, .ui-daterangepicker .range-end {
+	float: left;
+	padding: 0;
+	margin: 0;
+}
+.ui-daterangepicker .ranges {
+	width: auto;
+	position: relative;
+	padding: 5px 5px 40px 0;
+	margin-left: 10px;
+}
+.ui-daterangepicker .range-start, .ui-daterangepicker .range-end {
+	margin-left: 5px;
+}
+.ui-daterangepicker button.btnDone {
+	margin: 0 5px 5px 0;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	clear: both;
+	cursor: pointer;
+	font-size: 1.1em;
+}
+.ui-daterangepicker ul {
+	width: 17.6em;
+	background: none;
+	border: 0;
+}
+.ui-daterangepicker li {
+	list-style: none;
+	padding: 1px;
+	cursor: pointer;
+	margin: 1px 0;
+}
+.ui-daterangepicker li.ui-state-hover, .ui-daterangepicker li.ui-state-active {
+	padding: 0;
+}
+.ui-daterangepicker li.preset_0 {
+	margin-top: 1.5em !important;
+}
+.ui-daterangepicker .ui-widget-content a {
+	text-decoration: none !important;
+}
+.ui-daterangepicker li a {
+	font-weight: normal;
+	margin: .3em .5em;
+	display: block;
+}
+.ui-daterangepicker li span {
+	float: right;
+	margin: .3em .2em;
+}
+.ui-daterangepicker .title-start, .ui-daterangepicker .title-end {
+	display: block;
+	margin: 0 0 .2em;
+	font-size: 1em;
+	padding: 0 4px 2px;
+}
+.ui-daterangepicker .ui-datepicker-inline {
+	font-size: 1em;
+}
+.ui-daterangepicker-arrows {
+	padding: 2px;
+	width: 204px;
+	position: relative;
+}
+.ui-daterangepicker-arrows input.ui-rangepicker-input {
+	width: 158px;
+	margin: 0 2px 0 20px;
+	padding: 2px;
+	height: 1.1em;
+}
+.ui-daterangepicker-arrows .ui-daterangepicker-prev, .ui-daterangepicker-arrows .ui-daterangepicker-next {
+	position: absolute;
+	top: 2px; 
+	padding: 1px;
+}
+.ui-daterangepicker-arrows .ui-daterangepicker-prev {
+	left: 2px;
+}
+.ui-daterangepicker-arrows .ui-daterangepicker-next {
+	right: 2px;
+}
+.ui-daterangepicker-arrows .ui-daterangepicker-prev:hover, 
+.ui-daterangepicker-arrows .ui-daterangepicker-next:hover,
+.ui-daterangepicker-arrows .ui-daterangepicker-prev:focus, 
+.ui-daterangepicker-arrows .ui-daterangepicker-next:focus {
+	padding: 0;
+}
+
+/* kendo override */
+.k-state-selected { background-image:none !important;background-color:#555555 !important;color:#ffffff; }
+
+/* pulsus */
+.pulsus-container { display:block;margin:10px;font-size:12px; }
+.pulsus-container .clearfix { display:block;clear:both; }
+
+.pulsus-container .label{ font-size:10px;text-transform:lowercase;display:inline;padding: .2em .6em .3em;font-weight:bold;line-height:1;color:#fff;text-align:center;white-space:nowrap;vertical-align:baseline;border-radius: .25em;}
+.pulsus-container .label.label-default{background-color:#999999;}
+.pulsus-container .label.label-green{background-color:#5cb85c;}
+.pulsus-container .label.label-yellow{background-color:#f0ad4e;}
+.pulsus-container .label.label-red{background-color:#d9534f;}
+.pulsus-container .label.label-blue{background-color:#5bc0de;}
+
+.pulsus-container .left { float:left;width:40%;min-width:500px; }
+.pulsus-container .left .parameters { display:block;background:#f0f0f0;border:1px solid #eee;padding:10px;margin:0;border:1px solid #c5c5c5;border-bottom:0; }
+.pulsus-container .left .parameters label { float:left;font-size:10pt;font-weight:bold;margin-top:3px; }
+.pulsus-container .left .parameters input { float:left;margin:-3px 10px 0 10px;padding: 1px 5px;font-size: 10pt; }
+.pulsus-container .grid { }
+
+.pulsus-container .right { float:left; }
+.pulsus-container .right .details { margin-left:10px;padding:0 10px;overflow:auto;font-size:12px;border:1px solid #e3e3e3; }
+.pulsus-container .right .details h1 { font-size:20px;margin:8px 0;}
+.pulsus-container .right .details h2 { font-size:12px;margin:10px 0 5px 0; }
+.pulsus-container .right .details table { display:table;width:100%;border:1px solid #999;width:100%;table-layout:fixed; }
+.pulsus-container .right .details table th { background:#333;color:#fff;padding:5px;min-width:100px;text-align:left; }
+.pulsus-container .right .details table td { padding:5px;word-break:break-all; }
+.pulsus-container .right .details table td.first-col { word-break:normal;word-wrap:normal; }
+.pulsus-container .right .details table tr.alt td { background-color:#f4f4f4; }
+.pulsus-container .right .details table.title { border:0; }
+.pulsus-container .right .details table.title td.level { width:8px; }
+.pulsus-container .right .details table.title td.red { background-color:#d9534f; }
+.pulsus-container .right .details table.title td.yellow { background-color:#f0ad4e; }
+.pulsus-container .right .details table.title td.green { background-color:#5cb85c; }
+.pulsus-container .right .details table.title td.blue { background-color:#5bc0de; }
+.pulsus-container .right .details table.title td { padding-left:12px; }
+.pulsus-container .right .details table.title h1 { color:#444; }
+.pulsus-container .right .details a.link, a.link:hover, a.link:visited { color:#444; }

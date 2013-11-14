@@ -1,6 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Feature xmlns="http://schemas.microsoft.com/sharepoint/" Title="Pulsus" AlwaysForceInstall="TRUE" AutoActivateInCentralAdmin="TRUE" Id="d2785be7-3cf8-4293-8cf9-fae6e0cce011" Scope="Farm">
-  <ElementManifests>
-    <ElementManifest Location="Feature Elements\Elements.xml" />
-  </ElementManifests>
-</Feature>

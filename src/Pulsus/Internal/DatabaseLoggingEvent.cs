@@ -12,7 +12,7 @@ namespace Pulsus.Internal
 			result.LogKey = Truncate(loggingEvent.LogKey, 100);
 			result.ApiKey = Truncate(loggingEvent.ApiKey, 100);
 			result.Date = loggingEvent.Date;
-			result.Level = loggingEvent.Level;
+			result.Level = (int)loggingEvent.Level;
 			result.Value = loggingEvent.Value;
 			result.Text = Truncate(loggingEvent.Text, 5000);
 			result.Tags = Truncate(string.Join(" ", loggingEvent.Tags.ToArray()), 1000);
@@ -44,7 +44,6 @@ namespace Pulsus.Internal
 
 			return result;
 		}
-
 
 		private static string Truncate(string value, int length)
 		{

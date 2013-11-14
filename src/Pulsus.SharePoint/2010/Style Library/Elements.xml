@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+    <Module Name="Style Library" Url="Style Library/Pulsus">
+        <File Path="Style Library\Pulsus\scripts\jquery.daterangepicker.js" Url="scripts/jquery.daterangepicker.js" Type="GhostableInLibrary" IgnoreIfAlreadyExists="True" />
+        <File Path="Style Library\Pulsus\scripts\kendo.all.min.js" Url="scripts/kendo.all.min.js" Type="GhostableInLibrary" IgnoreIfAlreadyExists="True" />
+        <File Path="Style Library\Pulsus\scripts\pulsus.js" Url="scripts/pulsus.js" Type="GhostableInLibrary" IgnoreIfAlreadyExists="True" />
+        <File Path="Style Library\Pulsus\styles\kendo.common.min.css" Url="styles/kendo.common.min.css" Type="GhostableInLibrary" IgnoreIfAlreadyExists="True" />
+        <File Path="Style Library\Pulsus\styles\kendo.default.min.css" Url="styles/kendo.default.min.css" Type="GhostableInLibrary" IgnoreIfAlreadyExists="True" />
+        <File Path="Style Library\Pulsus\styles\Default\editor.png" Url="styles/Default/editor.png" Type="GhostableInLibrary" IgnoreIfAlreadyExists="True" />
+        <File Path="Style Library\Pulsus\styles\Default\imagebrowser.png" Url="styles/Default/imagebrowser.png" Type="GhostableInLibrary" IgnoreIfAlreadyExists="True" />
+        <File Path="Style Library\Pulsus\styles\Default\loading-image.gif" Url="styles/Default/loading-image.gif" Type="GhostableInLibrary" IgnoreIfAlreadyExists="True" />
+        <File Path="Style Library\Pulsus\styles\Default\loading.gif" Url="styles/Default/loading.gif" Type="GhostableInLibrary" IgnoreIfAlreadyExists="True" />
+        <File Path="Style Library\Pulsus\styles\Default\loading_2x.gif" Url="styles/Default/loading_2x.gif" Type="GhostableInLibrary" IgnoreIfAlreadyExists="True" />
+        <File Path="Style Library\Pulsus\styles\Default\slider-h.gif" Url="styles/Default/slider-h.gif" Type="GhostableInLibrary" IgnoreIfAlreadyExists="True" />
+        <File Path="Style Library\Pulsus\styles\Default\slider-v.gif" Url="styles/Default/slider-v.gif" Type="GhostableInLibrary" IgnoreIfAlreadyExists="True" />
+        <File Path="Style Library\Pulsus\styles\Default\sprite.png" Url="styles/Default/sprite.png" Type="GhostableInLibrary" IgnoreIfAlreadyExists="True" />
+        <File Path="Style Library\Pulsus\styles\Default\sprite_2x.png" Url="styles/Default/sprite_2x.png" Type="GhostableInLibrary" IgnoreIfAlreadyExists="True" />
+        <File Path="Style Library\Pulsus\styles\pulsus.css" Url="styles/pulsus.css" Type="GhostableInLibrary" IgnoreIfAlreadyExists="True" />
+    </Module>
+</Elements>

@@ -34,4 +34,6 @@ PublishProfiles/
 *.ncrunchsolution
 *.log
 TestResult.xml
-/src/Build
+src/Build/
+src/Pulsus.SharePoint/2010/pkg/
+src/Pulsus.SharePoint/2010/pkgobj/

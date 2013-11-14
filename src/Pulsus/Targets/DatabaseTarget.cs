@@ -15,8 +15,6 @@ namespace Pulsus.Targets
         protected bool Initialized;
         protected IDbConnection Connection;
 
-        protected ConnectionSettings CurrentConnectionSettings;
-
         public DatabaseTarget()
         {
             Schema = "dbo";
@@ -44,19 +42,21 @@ namespace Pulsus.Targets
             if (loggingEvents == null)
                 throw new ArgumentNullException("loggingEvents");
 
+            Exception exception = null;
+
             try
             {
                 EnsureConnection();
                 Save(loggingEvents);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                CloseConnection();
+                exception = ex;
                 throw;
             }
             finally
             {
-                if (!KeepConnection)
+                if (!KeepConnection || exception != null)
                     CloseConnection();
             }
         }
@@ -66,21 +66,52 @@ namespace Pulsus.Targets
             if (Connection != null && Connection.State == ConnectionState.Open)
                 return;
 
+            var connection = GetConnection();
+            if (connection == null)
+                return;
+
+            Connection = connection;
+
+            if (!Initialized)
+            {
+                lock (InitializedLock)
+                {
+                    if (!Initialized)
+                    {
+                        EnsureRepository();
+                        Initialized = true;
+                    }
+                }
+            }
+        }
+
+        protected virtual void CloseConnection()
+        {
+            if (Connection != null)
+            {
+                Connection.Close();
+                Connection = null;
+                PulsusDebugger.Write(this, "Closed connection");
+            }
+        }
+
+        public virtual IDbConnection GetConnection()
+        {
             var connectionSettings = GetConnectionSettings();
 
             if (connectionSettings == null)
             {
                 PulsusDebugger.Error(this, "Unable to resolve connection settings. Please check configuration.");
-                return;
+                return null;
             }
 
             var providerFactory = DbProviderFactories.GetFactory(connectionSettings.ProviderName);
-            
+
             var connection = providerFactory.CreateConnection();
             if (connection == null)
             {
                 PulsusDebugger.Error(this, "Unable to create connection for provider '{0}'.", connectionSettings.ProviderName);
-                return;
+                return null;
             }
 
             connection.ConnectionString = connectionSettings.ConnectionString;
@@ -94,29 +125,7 @@ namespace Pulsus.Targets
             connection.Open();
             PulsusDebugger.Write(this, "Opened connection to database");
 
-            if (!Initialized)
-            {
-                lock (InitializedLock)
-                {
-                    if (!Initialized)
-                    {
-                        EnsureRepository(connection);
-                        Initialized = true;
-                    }
-                }
-            }
-
-            Connection = connection;
-        }
-
-        protected virtual void CloseConnection()
-        {
-            if (Connection != null)
-            {
-                Connection.Close();
-                Connection = null;
-                PulsusDebugger.Write(this, "Closed connection");
-            }
+            return connection;
         }
 
         protected virtual ConnectionSettings GetConnectionSettings()
@@ -152,19 +161,31 @@ namespace Pulsus.Targets
             return null;
         }
 
-        protected virtual void EnsureRepository(IDbConnection connection)
+        protected virtual void EnsureRepository()
         {
-            var sql = CurrentConnectionSettings.IsMySql() ? GetMySqlEnsureRepository() : GetMsSqlEnsureRepository();
-            connection.Execute(sql, new { });
+            if (Connection == null || Connection.State != ConnectionState.Open)
+            {
+                PulsusDebugger.Error(this, "Cannot ensure repository, connection to database is not open");
+                return;
+            }
+
+            var sql = IsMySqlConnection(Connection) ? GetMySqlEnsureRepository() : GetMsSqlEnsureRepository();
+            Connection.Execute(sql, new { });
             PulsusDebugger.Write(this, "Repository initialized");
         }
 
         protected virtual void Save(LoggingEvent[] loggingEvents)
         {
-            var sql = CurrentConnectionSettings.IsMySql() ? GetMySqlInsert() : GetMsSqlInsert();
+            if (Connection == null || Connection.State != ConnectionState.Open)
+            {
+                PulsusDebugger.Error(this, "Cannot save events, connection to database is not open");
+                return;
+            }
+
+            var sql = IsMySqlConnection(Connection) ? GetMySqlInsert() : GetMsSqlInsert();
             var serialized = Array.ConvertAll(loggingEvents, DatabaseLoggingEvent.Serialize);
             Connection.Execute(sql, serialized);
-            PulsusDebugger.Write(this, "Stored {0} events", loggingEvents.Length);
+            PulsusDebugger.Write(this, "Saved {0} events", loggingEvents.Length);
         }
 
         protected override void Dispose(bool disposing)
@@ -173,6 +194,7 @@ namespace Pulsus.Targets
             {
                 Connection.Dispose();
                 Connection = null;
+                PulsusDebugger.Write(this, "Closed connection to database");
             }
 
             base.Dispose(disposing);
@@ -273,6 +295,11 @@ namespace Pulsus.Targets
             return string.Format(sql, Table);
         }
 
+        protected virtual bool IsMySqlConnection(IDbConnection connection)
+        {
+            return connection.GetType().FullName.IndexOf("mysql", StringComparison.OrdinalIgnoreCase) >= 0;
+        }
+
         protected class ConnectionSettings
         {
             public ConnectionSettings(string connectionString) : this(DefaultProviderName, connectionString)
@@ -281,17 +308,19 @@ namespace Pulsus.Targets
 
             public ConnectionSettings(string providerName, string connectionString)
             {
+                if (string.IsNullOrEmpty(connectionString))
+                    throw new ArgumentNullException("connectionString");
+
                 ProviderName = string.IsNullOrEmpty(providerName) ? DefaultProviderName : providerName;
                 ConnectionString = connectionString;
             }
 
-            public string ProviderName { get; set; }
-            public string ConnectionString { get; set; }
+            public string ProviderName { get; private set; }
+            public string ConnectionString { get; private set; }
 
-            public bool IsMySql()
-            {
-                return ProviderName.IndexOf("mysql", StringComparison.OrdinalIgnoreCase) >= 0;
-            }
+            
         }
+
+        
     }
 }

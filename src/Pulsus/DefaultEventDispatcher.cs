@@ -33,7 +33,7 @@ namespace Pulsus
                         throw;
 
                     // a target may fail but we need to continue with the others
-                    PulsusDebugger.Error(ex);
+                    PulsusDebugger.Error(target, ex);
                 }
             }
         }
@@ -57,10 +57,10 @@ namespace Pulsus
 
         protected virtual bool MatchesFilterConditions(LoggingEvent loggingEvent, IFilter filter)
         {
-            if (filter.MinLevel != LoggingEventLevel.None && loggingEvent.Level < (int) filter.MinLevel)
+            if (filter.MinLevel != LoggingEventLevel.None && loggingEvent.Level < filter.MinLevel)
                 return false;
 
-            if (filter.MaxLevel != LoggingEventLevel.None && loggingEvent.Level > (int) filter.MaxLevel)
+            if (filter.MaxLevel != LoggingEventLevel.None && loggingEvent.Level > filter.MaxLevel)
                 return false;
 
             if (!filter.LogKeyContains.IsNullOrEmpty() && loggingEvent.LogKey.Contains(filter.LogKeyContains))

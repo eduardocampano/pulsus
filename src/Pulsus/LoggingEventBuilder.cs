@@ -94,14 +94,14 @@ namespace Pulsus
 
         public virtual T Level(LoggingEventLevel level)
         {
-            LoggingEvent.Level = (int)level;
+            LoggingEvent.Level = level;
             return this as T;
         }
 
+        [Obsolete("Use the overload with the LoggingEventLevel enum instead")]
         public virtual T Level(int level)
         {
-            LoggingEvent.Level = level;
-            return this as T;
+            throw new InvalidOperationException("Use the overload with the LoggingEventLevel enum instead");
         }
 
         public virtual T Push()

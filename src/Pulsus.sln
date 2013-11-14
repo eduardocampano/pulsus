@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.20827.3
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pulsus.Mvc", "Pulsus.Mvc\Pulsus.Mvc.csproj", "{F7489518-4A5C-4285-9A23-61E89F34EEE2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pulsus", "Pulsus\Pulsus.csproj", "{65BEE1C8-459A-46FA-90C6-4467EDE2E012}"
@@ -14,6 +12,16 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pulsus.Server", "Pulsus.Server\Pulsus.Server.csproj", "{2672BD6D-1D55-4AEC-86F2-AEB05F548FF5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pulsus.Web", "Pulsus.Web\Pulsus.Web.csproj", "{D7B90DA4-3BC1-4285-899E-674DE0A811CF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{037A2C3D-A6B5-4689-BD71-253BA83034A5}"
+	ProjectSection(SolutionItems) = preProject
+		build.bat = build.bat
+		LICENSE.md = LICENSE.md
+		Pulsus.Mvc.nuspec = Pulsus.Mvc.nuspec
+		Pulsus.nuspec = Pulsus.nuspec
+		Pulsus.Server.nuspec = Pulsus.Server.nuspec
+		Pulsus.Web.nuspec = Pulsus.Web.nuspec
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

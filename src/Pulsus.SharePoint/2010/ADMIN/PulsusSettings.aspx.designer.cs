@@ -40,15 +40,6 @@ namespace Pulsus.SharePoint.ApplicationPages {
         protected global::System.Web.UI.WebControls.ValidationSummary ValSummary;
         
         /// <summary>
-        /// HidVirtualServerUrl control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputHidden HidVirtualServerUrl;
-        
-        /// <summary>
         /// idWebApplicationSelectorSection control.
         /// </summary>
         /// <remarks>
@@ -67,130 +58,22 @@ namespace Pulsus.SharePoint.ApplicationPages {
         protected global::Microsoft.SharePoint.WebControls.WebApplicationSelector Selector;
         
         /// <summary>
-        /// InputFormSection1 control.
+        /// configurationSection control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UserControl InputFormSection1;
+        protected global::System.Web.UI.UserControl configurationSection;
         
         /// <summary>
-        /// enableULSLogging control.
+        /// configuration control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox enableULSLogging;
-        
-        /// <summary>
-        /// emailSettingsSection control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UserControl emailSettingsSection;
-        
-        /// <summary>
-        /// emailTargetFromAddressLabel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label emailTargetFromAddressLabel;
-        
-        /// <summary>
-        /// emailTargetFromAddress control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox emailTargetFromAddress;
-        
-        /// <summary>
-        /// emailTargetToAddressLabel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label emailTargetToAddressLabel;
-        
-        /// <summary>
-        /// emailTargetToAddress control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox emailTargetToAddress;
-        
-        /// <summary>
-        /// emailTargetServerLabel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label emailTargetServerLabel;
-        
-        /// <summary>
-        /// emailTargetServer control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox emailTargetServer;
-        
-        /// <summary>
-        /// emailTargetServerPortLabel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label emailTargetServerPortLabel;
-        
-        /// <summary>
-        /// emailTargetServerPort control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox emailTargetServerPort;
-        
-        /// <summary>
-        /// secureStoreDatabaseTargetSettings control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UserControl secureStoreDatabaseTargetSettings;
-        
-        /// <summary>
-        /// targetApplicationIdLabel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label targetApplicationIdLabel;
-        
-        /// <summary>
-        /// targetApplicationId control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox targetApplicationId;
+        protected global::System.Web.UI.WebControls.TextBox configuration;
         
         /// <summary>
         /// okButton control.

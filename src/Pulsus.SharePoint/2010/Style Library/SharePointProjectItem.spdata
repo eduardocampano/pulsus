@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ProjectItem Type="Microsoft.VisualStudio.SharePoint.Module" DefaultFile="Elements.xml" SupportedTrustLevels="All" SupportedDeploymentScopes="Web, Site" xmlns="http://schemas.microsoft.com/VisualStudio/2010/SharePointTools/SharePointProjectItemModel">
+  <Files>
+    <ProjectItemFile Source="Elements.xml" Target="Style Library\" Type="ElementManifest" />
+    <ProjectItemFile Source="Pulsus\scripts\jquery.daterangepicker.js" Target="Style Library\Pulsus\scripts\" Type="ElementFile" />
+    <ProjectItemFile Source="Pulsus\scripts\pulsus.js" Target="Style Library\Pulsus\scripts\" Type="ElementFile" />
+    <ProjectItemFile Source="Pulsus\styles\pulsus.css" Target="Style Library\Pulsus\styles\" Type="ElementFile" />
+    <ProjectItemFile Source="Pulsus\scripts\kendo.all.min.js" Target="Style Library\Pulsus\scripts\" Type="ElementFile" />
+    <ProjectItemFile Source="Pulsus\styles\kendo.common.min.css" Target="Style Library\Pulsus\styles\" Type="ElementFile" />
+    <ProjectItemFile Source="Pulsus\styles\Default\editor.png" Target="Style Library\Pulsus\styles\Default\" Type="ElementFile" />
+    <ProjectItemFile Source="Pulsus\styles\Default\imagebrowser.png" Target="Style Library\Pulsus\styles\Default\" Type="ElementFile" />
+    <ProjectItemFile Source="Pulsus\styles\Default\loading-image.gif" Target="Style Library\Pulsus\styles\Default\" Type="ElementFile" />
+    <ProjectItemFile Source="Pulsus\styles\Default\loading.gif" Target="Style Library\Pulsus\styles\Default\" Type="ElementFile" />
+    <ProjectItemFile Source="Pulsus\styles\Default\loading_2x.gif" Target="Style Library\Pulsus\styles\Default\" Type="ElementFile" />
+    <ProjectItemFile Source="Pulsus\styles\Default\slider-h.gif" Target="Style Library\Pulsus\styles\Default\" Type="ElementFile" />
+    <ProjectItemFile Source="Pulsus\styles\Default\slider-v.gif" Target="Style Library\Pulsus\styles\Default\" Type="ElementFile" />
+    <ProjectItemFile Source="Pulsus\styles\Default\sprite.png" Target="Style Library\Pulsus\styles\Default\" Type="ElementFile" />
+    <ProjectItemFile Source="Pulsus\styles\Default\sprite_2x.png" Target="Style Library\Pulsus\styles\Default\" Type="ElementFile" />
+    <ProjectItemFile Source="Pulsus\styles\kendo.default.min.css" Target="Style Library\Pulsus\styles\" Type="ElementFile" />
+  </Files>
+</ProjectItem>

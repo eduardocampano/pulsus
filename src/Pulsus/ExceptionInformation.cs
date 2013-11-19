@@ -12,8 +12,8 @@ namespace Pulsus
 		{
 			// if it's not a .Net core exception, usually more information is being added
 			// so use the wrapper for the message, type, etc.
-			// if it's a .Net core exception type, drill down and get the innermost exception
-			if (exception.IsBuiltInException())
+			// if it's a .Net core exception type or an HttpUnhandledException, drill down and get the innermost exception
+			if (exception.IsBuiltInException() || exception.IsHttpUnhandledException())
 				exception = exception.GetBaseException();
 
 			var exceptionInformation = new ExceptionInformation();

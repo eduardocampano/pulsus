@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Web;
 
 namespace Pulsus.Internal
 {
@@ -8,5 +9,10 @@ namespace Pulsus.Internal
 		{
 			return e.GetType().Module.ScopeName == "CommonLanguageRuntimeLibrary";
 		}
+
+	    public static bool IsHttpUnhandledException(this Exception e)
+	    {
+	        return e is HttpUnhandledException;
+	    }
 	}
 }

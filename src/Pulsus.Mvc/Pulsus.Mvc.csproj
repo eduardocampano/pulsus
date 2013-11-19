@@ -44,7 +44,7 @@
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>Pulsus.Mvc.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>..\Pulsus\Pulsus.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -96,8 +96,10 @@
     <Compile Include="AppStart.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\Pulsus\Pulsus.snk">
+      <Link>Pulsus.snk</Link>
+    </None>
     <None Include="packages.config" />
-    <None Include="Pulsus.Mvc.snk" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Pulsus\Pulsus.csproj">

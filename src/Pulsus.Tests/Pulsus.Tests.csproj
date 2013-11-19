@@ -33,7 +33,7 @@
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>Pulsus.Tests.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>..\Pulsus\Pulsus.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Moq">
@@ -69,9 +69,11 @@
     <Compile Include="PulsusConfigurationTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\Pulsus\Pulsus.snk">
+      <Link>Pulsus.snk</Link>
+    </None>
     <None Include="App.config" />
     <None Include="packages.config" />
-    <None Include="Pulsus.Tests.snk" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Pulsus\Pulsus.csproj">

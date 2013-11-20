@@ -2,15 +2,21 @@
     transport: {
         contentType: "application/json",
         dataType: "json",
-        read: {
-            url: window.location,
-            type: 'post',
-            data: function () {
-                return {
+        read: function(options) {
+            $.ajax({
+                url: window.location,
+                type: 'post',
+                dataType: "json",
+                data: {
                     period: $('#pulsus-period').val(),
-                    search: $('#pulsus-search').val()
-                };
-            }
+                    search: $('#pulsus-search').val(),
+                    skip: options.data.skip,
+                    take: options.data.take
+                },
+                success: function(result) {
+                    options.success(result);
+                }
+            });
         }
     },
     schema: {

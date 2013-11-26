@@ -14,7 +14,7 @@ namespace Pulsus
         {
             _configuration = PulsusConfiguration.Default;
             _eventsFactory = new DefaultEventFactory();
-            _eventDispatcher = new DefaultEventDispatcher(_configuration.Targets.Values);
+            _eventDispatcher = new DefaultEventDispatcher(_configuration);
             _jsonSerializer = new JsonNetSerializer();
         }
 

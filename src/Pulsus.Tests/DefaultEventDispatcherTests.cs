@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using Moq;
 using NUnit.Framework;
+using Pulsus.Configuration;
 using Pulsus.Targets;
 
 namespace Pulsus.Tests
@@ -15,7 +16,11 @@ namespace Pulsus.Tests
             var target1Mock = new Mock<Target>();
             var target2Mock = new Mock<Target>();
 
-            var eventDispatcher = new DefaultEventDispatcher(new []{ target1Mock.Object, target2Mock.Object });
+            var configuration = new PulsusConfiguration();
+            configuration.AddTarget("1", target1Mock.Object);
+            configuration.AddTarget("2", target2Mock.Object);
+
+            var eventDispatcher = new DefaultEventDispatcher(configuration);
 
             var loggingEvent = new LoggingEvent { Text = "Event" };
             var loggingEvents = new[] { loggingEvent };
@@ -38,7 +43,10 @@ namespace Pulsus.Tests
                 Level = LoggingEventLevel.Error
             };
 
-            var eventDispatcher = new DefaultEventDispatcher(new[] { targetMock.Object });
+            var configuration = new PulsusConfiguration();
+            configuration.AddTarget("1", targetMock.Object);
+
+            var eventDispatcher = new DefaultEventDispatcher(configuration);
             eventDispatcher.Push(new[] { loggingEvent });
 
             targetMock.Verify(x => x.Push(It.IsAny<LoggingEvent[]>()), Times.Once);
@@ -55,7 +63,10 @@ namespace Pulsus.Tests
                 Level = LoggingEventLevel.Information
             };
 
-            var eventDispatcher = new DefaultEventDispatcher(new[] { targetMock.Object });
+            var configuration = new PulsusConfiguration();
+            configuration.AddTarget("1", targetMock.Object);
+
+            var eventDispatcher = new DefaultEventDispatcher(configuration);
             eventDispatcher.Push(new[] { loggingEvent });
 
             targetMock.Verify(x => x.Push(It.IsAny<LoggingEvent[]>()), Times.Never);
@@ -78,7 +89,10 @@ namespace Pulsus.Tests
                 Tags = new List<string>() { "tag1", "tag2", "tag3", "tag4" }
             };
 
-            var eventDispatcher = new DefaultEventDispatcher(new[] { targetMock.Object });
+            var configuration = new PulsusConfiguration();
+            configuration.AddTarget("1", targetMock.Object);
+
+            var eventDispatcher = new DefaultEventDispatcher(configuration);
             eventDispatcher.Push(new[] { loggingEvent });
 
             targetMock.Verify(x => x.Push(It.IsAny<LoggingEvent[]>()), Times.Never);

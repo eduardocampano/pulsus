@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
+using Pulsus.Configuration;
 using Pulsus.Internal;
 using Pulsus.Targets;
 
@@ -8,11 +8,11 @@ namespace Pulsus
 {
     public class DefaultEventDispatcher : IEventDispatcher
     {
-        private readonly IEnumerable<Target> _targets; 
+        private readonly PulsusConfiguration _configuration; 
 
-        public DefaultEventDispatcher(IEnumerable<Target> targets = null)
+        public DefaultEventDispatcher(PulsusConfiguration configuration)
         {
-            _targets = targets;
+            _configuration = configuration;
         }
 
         public virtual void Push(LoggingEvent[] loggingEvents)
@@ -93,7 +93,7 @@ namespace Pulsus
 
         protected virtual Target[] GetTargets()
         {
-            return _targets.ToArray();
+            return _configuration.Targets.Values.ToArray();
         }
     }
 }

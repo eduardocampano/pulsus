@@ -77,7 +77,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Pulsus\Pulsus.csproj">
-      <Project>{65BEE1C8-459A-46FA-90C6-4467EDE2E012}</Project>
+      <Project>{65bee1c8-459a-46fa-90c6-4467ede2e012}</Project>
       <Name>Pulsus</Name>
     </ProjectReference>
   </ItemGroup>

@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace UTC.com.Layouts {
+namespace Pulsus.SharePoint.Layouts {
     
     
     public partial class PulsusLogViewer {

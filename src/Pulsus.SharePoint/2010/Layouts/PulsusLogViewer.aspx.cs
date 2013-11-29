@@ -8,7 +8,7 @@ using Pulsus;
 using Pulsus.SharePoint.Core;
 using Pulsus.SharePoint.Core.Data;
 
-namespace UTC.com.Layouts
+namespace Pulsus.SharePoint.Layouts
 {
     public partial class PulsusLogViewer : LayoutsPageBase
     {

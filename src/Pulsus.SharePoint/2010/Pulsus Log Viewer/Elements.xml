@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Elements xmlns="http://schemas.microsoft.com/sharepoint/">
     <CustomAction Id="PususLogViewer" GroupId="SiteCollectionAdmin" Location="Microsoft.SharePoint.SiteSettings" Sequence="1000" Title="Pulsus Log Viewer">
-        <UrlAction Url="_layouts/PulsusLogViewer.aspx"/>
+        <UrlAction Url="_layouts/Pulsus/PulsusLogViewer.aspx"/>
     </CustomAction>
 </Elements>

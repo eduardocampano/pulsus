@@ -92,11 +92,11 @@
     <Compile Include="Features\Pulsus\Pulsus.EventReceiver.cs">
       <DependentUpon>Pulsus.feature</DependentUpon>
     </Compile>
-    <Compile Include="Layouts\PulsusLogViewer.aspx.cs">
+    <Compile Include="Layouts\Pulsus\PulsusLogViewer.aspx.cs">
       <DependentUpon>PulsusLogViewer.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Layouts\PulsusLogViewer.aspx.designer.cs">
+    <Compile Include="Layouts\Pulsus\PulsusLogViewer.aspx.designer.cs">
       <DependentUpon>PulsusLogViewer.aspx.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -162,7 +162,7 @@
       <DependentUpon>Pulsus Module.feature</DependentUpon>
     </Content>
     <Content Include="ADMIN\PulsusSettings.aspx" />
-    <Content Include="Layouts\PulsusLogViewer.aspx" />
+    <Content Include="Layouts\Pulsus\PulsusLogViewer.aspx" />
     <Content Include="Pulsus Log Viewer\Elements.xml" />
     <Content Include="Style Library\Elements.xml" />
     <Content Include="Style Library\Pulsus\scripts\jquery.daterangepicker.js" />

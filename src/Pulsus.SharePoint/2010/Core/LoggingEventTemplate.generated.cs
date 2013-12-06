@@ -62,178 +62,21 @@ WriteLiteral("\">&nbsp;</td>\r\n        <td><h1>");
             
             #line default
             #line hidden
-WriteLiteral("</h1></td>\r\n    </tr>\r\n</table>\r\n    \r\n<h2>General</h2>\r\n<table cellpadding=\"0\" c" +
-"ellspacing=\"0\">\r\n    <tr>\r\n        <td class=\"first-col\">Date</td>\r\n        <td>" +
-"");
+WriteLiteral("</h1></td>\r\n    </tr>\r\n</table>\r\n    \r\n<h2>General</h2>\r\n");
 
 
             
-            #line 17 "..\..\Core\LoggingEventTemplate.cshtml"
-       Write(Model.LoggingEvent.Date);
+            #line 14 "..\..\Core\LoggingEventTemplate.cshtml"
+Write(WriteTable(Model.GeneralSection));
 
             
             #line default
             #line hidden
-WriteLiteral(" UTC</td>\r\n    </tr>\r\n    <tr class=\"alt\">\r\n        <td class=\"first-col\">LogKey<" +
-"/td>\r\n        <td>");
+WriteLiteral("\r\n        \r\n");
 
 
             
-            #line 21 "..\..\Core\LoggingEventTemplate.cshtml"
-       Write(Model.LoggingEvent.LogKey);
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</td>\r\n    </tr>\r\n");
-
-
-            
-            #line 23 "..\..\Core\LoggingEventTemplate.cshtml"
-     if (!Model.LoggingEvent.ApiKey.IsNullOrEmpty()) {
-
-            
-            #line default
-            #line hidden
-WriteLiteral("        <tr>\r\n            <td class=\"first-col\">ApiKey</td>\r\n            <td>");
-
-
-            
-            #line 26 "..\..\Core\LoggingEventTemplate.cshtml"
-           Write(Model.LoggingEvent.ApiKey);
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</td>\r\n        </tr>\r\n");
-
-
-            
-            #line 28 "..\..\Core\LoggingEventTemplate.cshtml"
-    }
-
-            
-            #line default
-            #line hidden
-WriteLiteral("    <tr class=\"alt\">\r\n        <td class=\"first-col\">ID</td>\r\n        <td>");
-
-
-            
-            #line 31 "..\..\Core\LoggingEventTemplate.cshtml"
-       Write(Model.LoggingEvent.EventId);
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</td>\r\n    </tr>\r\n    <tr>\r\n        <td class=\"first-col\">Level</td>\r\n        <td" +
-">");
-
-
-            
-            #line 35 "..\..\Core\LoggingEventTemplate.cshtml"
-       Write(Model.LevelText);
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</td>\r\n    </tr>\r\n    <tr class=\"alt\">\r\n        <td class=\"first-col\">User</td>\r\n" +
-"        <td>");
-
-
-            
-            #line 39 "..\..\Core\LoggingEventTemplate.cshtml"
-        Write(Model.LoggingEvent.User ?? "(none)");
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</td>\r\n    </tr>\r\n    <tr>\r\n        <td class=\"first-col\">Tags</td>\r\n        <td>" +
-"");
-
-
-            
-            #line 43 "..\..\Core\LoggingEventTemplate.cshtml"
-       Write(string.Join(" ", Model.LoggingEvent.Tags.ToArray()));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</td>\r\n    </tr>\r\n    <tr class=\"alt\">\r\n        <td class=\"first-col\">MachineName" +
-"</td>\r\n        <td>");
-
-
-            
-            #line 47 "..\..\Core\LoggingEventTemplate.cshtml"
-       Write(Model.LoggingEvent.MachineName);
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</td>\r\n    </tr>\r\n");
-
-
-            
-            #line 49 "..\..\Core\LoggingEventTemplate.cshtml"
-     if (!Model.LoggingEvent.Psid.IsNullOrEmpty()) {
-
-            
-            #line default
-            #line hidden
-WriteLiteral("        <tr>\r\n            <td class=\"first-col\"><abbr title=\"Session ID\">PSID</ab" +
-"br></td>\r\n            <td>");
-
-
-            
-            #line 52 "..\..\Core\LoggingEventTemplate.cshtml"
-           Write(Model.LoggingEvent.Psid);
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</td>\r\n        </tr>\r\n");
-
-
-            
-            #line 54 "..\..\Core\LoggingEventTemplate.cshtml"
-    }
-
-            
-            #line default
-            #line hidden
-
-            
-            #line 55 "..\..\Core\LoggingEventTemplate.cshtml"
-     if (!Model.LoggingEvent.Ppid.IsNullOrEmpty()) {
-
-            
-            #line default
-            #line hidden
-WriteLiteral("        <tr class=\"alt\">\r\n            <td class=\"first-col\"><abbr title=\"Persiste" +
-"nt Session ID\">PPID</abbr></td>\r\n            <td>");
-
-
-            
-            #line 58 "..\..\Core\LoggingEventTemplate.cshtml"
-           Write(Model.LoggingEvent.Ppid);
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</td>\r\n        </tr>\r\n");
-
-
-            
-            #line 60 "..\..\Core\LoggingEventTemplate.cshtml"
-    }
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</table>\r\n        \r\n");
-
-
-            
-            #line 63 "..\..\Core\LoggingEventTemplate.cshtml"
+            #line 16 "..\..\Core\LoggingEventTemplate.cshtml"
  if (Model.CustomData != null) {
 
             
@@ -243,20 +86,20 @@ WriteLiteral("    <h2>Custom Data</h2>\r\n");
 
 
             
-            #line 65 "..\..\Core\LoggingEventTemplate.cshtml"
+            #line 18 "..\..\Core\LoggingEventTemplate.cshtml"
     
             
             #line default
             #line hidden
             
-            #line 65 "..\..\Core\LoggingEventTemplate.cshtml"
+            #line 18 "..\..\Core\LoggingEventTemplate.cshtml"
 Write(WriteTable(Model.CustomData));
 
             
             #line default
             #line hidden
             
-            #line 65 "..\..\Core\LoggingEventTemplate.cshtml"
+            #line 18 "..\..\Core\LoggingEventTemplate.cshtml"
                                  
 }
 
@@ -267,7 +110,7 @@ WriteLiteral("    \r\n");
 
 
             
-            #line 68 "..\..\Core\LoggingEventTemplate.cshtml"
+            #line 21 "..\..\Core\LoggingEventTemplate.cshtml"
  if (Model.HttpContextInformation != null) {
 
             
@@ -276,88 +119,22 @@ WriteLiteral("    \r\n");
 WriteLiteral("    <h2>Request</h2>\r\n");
 
 
-
-WriteLiteral("    <table cellpadding=\"0\" cellspacing=\"0\">\r\n        <tr>\r\n            <td class=" +
-"\"first-col\">URL</td>\r\n            <td><a href=\"");
-
-
             
-            #line 73 "..\..\Core\LoggingEventTemplate.cshtml"
-                    Write(Model.HttpContextInformation.Url);
+            #line 23 "..\..\Core\LoggingEventTemplate.cshtml"
+    
+            
+            #line default
+            #line hidden
+            
+            #line 23 "..\..\Core\LoggingEventTemplate.cshtml"
+Write(WriteTable(Model.RequestSection));
 
             
             #line default
             #line hidden
-WriteLiteral("\">");
-
-
             
-            #line 73 "..\..\Core\LoggingEventTemplate.cshtml"
-                                                       Write(Model.HttpContextInformation.Url);
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</a></td>\r\n        </tr>\r\n        <tr class=\"alt\">\r\n            <td class=\"first-" +
-"col\">Method</td>\r\n            <td>");
-
-
-            
-            #line 77 "..\..\Core\LoggingEventTemplate.cshtml"
-           Write(Model.HttpContextInformation.Method);
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</td>\r\n        </tr>\r\n        <tr>\r\n            <td class=\"first-col\">Host</td>\r\n" +
-"            <td>");
-
-
-            
-            #line 81 "..\..\Core\LoggingEventTemplate.cshtml"
-           Write(Model.HttpContextInformation.Host);
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</td>\r\n        </tr>\r\n        <tr class=\"alt\">\r\n            <td class=\"first-col\"" +
-">Referer</td>\r\n            <td>");
-
-
-            
-            #line 85 "..\..\Core\LoggingEventTemplate.cshtml"
-           Write(Model.HttpContextInformation.Referer);
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</td>\r\n        </tr>\r\n        <tr>\r\n            <td class=\"first-col\">IP Address<" +
-"/td>\r\n            <td>");
-
-
-            
-            #line 89 "..\..\Core\LoggingEventTemplate.cshtml"
-           Write(Model.GetFormattedIpAddress(Model.HttpContextInformation.IpAddress));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</td>\r\n        </tr>\r\n        <tr class=\"alt\">\r\n            <td class=\"first-col\"" +
-">User Agent</td>\r\n            <td>");
-
-
-            
-            #line 93 "..\..\Core\LoggingEventTemplate.cshtml"
-           Write(Model.GetFormattedUserAgent(Model.HttpContextInformation.UserAgent));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</td>\r\n        </tr>\r\n    </table>\r\n");
-
-
-            
-            #line 96 "..\..\Core\LoggingEventTemplate.cshtml"
+            #line 23 "..\..\Core\LoggingEventTemplate.cshtml"
+                                     
       
     if (Model.HttpContextInformation.RouteValues != null) {
 
@@ -368,20 +145,20 @@ WriteLiteral("        <h2>Route Values</h2>\r\n");
 
 
             
-            #line 99 "..\..\Core\LoggingEventTemplate.cshtml"
+            #line 27 "..\..\Core\LoggingEventTemplate.cshtml"
         
             
             #line default
             #line hidden
             
-            #line 99 "..\..\Core\LoggingEventTemplate.cshtml"
+            #line 27 "..\..\Core\LoggingEventTemplate.cshtml"
    Write(WriteTable(Model.HttpContextInformation.RouteValues));
 
             
             #line default
             #line hidden
             
-            #line 99 "..\..\Core\LoggingEventTemplate.cshtml"
+            #line 27 "..\..\Core\LoggingEventTemplate.cshtml"
                                                              
     }
      
@@ -394,20 +171,20 @@ WriteLiteral("        <h2>QueryString</h2>\r\n");
 
 
             
-            #line 104 "..\..\Core\LoggingEventTemplate.cshtml"
+            #line 32 "..\..\Core\LoggingEventTemplate.cshtml"
         
             
             #line default
             #line hidden
             
-            #line 104 "..\..\Core\LoggingEventTemplate.cshtml"
+            #line 32 "..\..\Core\LoggingEventTemplate.cshtml"
    Write(WriteTable(Model.HttpContextInformation.QueryString));
 
             
             #line default
             #line hidden
             
-            #line 104 "..\..\Core\LoggingEventTemplate.cshtml"
+            #line 32 "..\..\Core\LoggingEventTemplate.cshtml"
                                                              
     }
         
@@ -420,20 +197,20 @@ WriteLiteral("        <h2>Posted Values</h2>\r\n");
 
 
             
-            #line 109 "..\..\Core\LoggingEventTemplate.cshtml"
+            #line 37 "..\..\Core\LoggingEventTemplate.cshtml"
         
             
             #line default
             #line hidden
             
-            #line 109 "..\..\Core\LoggingEventTemplate.cshtml"
+            #line 37 "..\..\Core\LoggingEventTemplate.cshtml"
    Write(WriteTable(Model.HttpContextInformation.PostedValues));
 
             
             #line default
             #line hidden
             
-            #line 109 "..\..\Core\LoggingEventTemplate.cshtml"
+            #line 37 "..\..\Core\LoggingEventTemplate.cshtml"
                                                               
     }
         
@@ -453,7 +230,7 @@ WriteLiteral("        <table cellpadding=\"0\" cellspacing=\"0\">\r\n           
 
 
             
-            #line 120 "..\..\Core\LoggingEventTemplate.cshtml"
+            #line 48 "..\..\Core\LoggingEventTemplate.cshtml"
                var i = 0;  
 
             
@@ -461,7 +238,7 @@ WriteLiteral("        <table cellpadding=\"0\" cellspacing=\"0\">\r\n           
             #line hidden
 
             
-            #line 121 "..\..\Core\LoggingEventTemplate.cshtml"
+            #line 49 "..\..\Core\LoggingEventTemplate.cshtml"
              foreach (var postedFile in Model.HttpContextInformation.PostedFiles) {
                 var classAtt = i % 2 > 0 ? "class=\"alt\"" : string.Empty;
 
@@ -472,7 +249,7 @@ WriteLiteral("                <tr ");
 
 
             
-            #line 123 "..\..\Core\LoggingEventTemplate.cshtml"
+            #line 51 "..\..\Core\LoggingEventTemplate.cshtml"
                Write(classAtt);
 
             
@@ -482,7 +259,7 @@ WriteLiteral(">\r\n                    <td class=\"first-col\">");
 
 
             
-            #line 124 "..\..\Core\LoggingEventTemplate.cshtml"
+            #line 52 "..\..\Core\LoggingEventTemplate.cshtml"
                                      Write(postedFile.Name);
 
             
@@ -492,7 +269,7 @@ WriteLiteral("</td>\r\n                    <td>");
 
 
             
-            #line 125 "..\..\Core\LoggingEventTemplate.cshtml"
+            #line 53 "..\..\Core\LoggingEventTemplate.cshtml"
                    Write(postedFile.ContentType);
 
             
@@ -502,7 +279,7 @@ WriteLiteral("</td>\r\n                    <td>");
 
 
             
-            #line 126 "..\..\Core\LoggingEventTemplate.cshtml"
+            #line 54 "..\..\Core\LoggingEventTemplate.cshtml"
                    Write(FileSizeFormatProvider.FileSize(postedFile.ContentLength));
 
             
@@ -512,7 +289,7 @@ WriteLiteral("</td>\r\n                </tr>\r\n");
 
 
             
-            #line 128 "..\..\Core\LoggingEventTemplate.cshtml"
+            #line 56 "..\..\Core\LoggingEventTemplate.cshtml"
                 i++;
             }
 
@@ -523,7 +300,7 @@ WriteLiteral("        </table>\r\n");
 
 
             
-            #line 131 "..\..\Core\LoggingEventTemplate.cshtml"
+            #line 59 "..\..\Core\LoggingEventTemplate.cshtml"
     }
         
     if (Model.HttpContextInformation.Cookies != null) {
@@ -535,20 +312,20 @@ WriteLiteral("        <h2>Cookies</h2>\r\n");
 
 
             
-            #line 135 "..\..\Core\LoggingEventTemplate.cshtml"
+            #line 63 "..\..\Core\LoggingEventTemplate.cshtml"
         
             
             #line default
             #line hidden
             
-            #line 135 "..\..\Core\LoggingEventTemplate.cshtml"
+            #line 63 "..\..\Core\LoggingEventTemplate.cshtml"
    Write(WriteTable(Model.HttpContextInformation.Cookies));
 
             
             #line default
             #line hidden
             
-            #line 135 "..\..\Core\LoggingEventTemplate.cshtml"
+            #line 63 "..\..\Core\LoggingEventTemplate.cshtml"
                                                          
     }
         
@@ -561,20 +338,20 @@ WriteLiteral("        <h2>Headers</h2>\r\n");
 
 
             
-            #line 140 "..\..\Core\LoggingEventTemplate.cshtml"
+            #line 68 "..\..\Core\LoggingEventTemplate.cshtml"
         
             
             #line default
             #line hidden
             
-            #line 140 "..\..\Core\LoggingEventTemplate.cshtml"
+            #line 68 "..\..\Core\LoggingEventTemplate.cshtml"
    Write(WriteTable(Model.HttpContextInformation.Headers));
 
             
             #line default
             #line hidden
             
-            #line 140 "..\..\Core\LoggingEventTemplate.cshtml"
+            #line 68 "..\..\Core\LoggingEventTemplate.cshtml"
                                                          
     }
         
@@ -587,20 +364,20 @@ WriteLiteral("        <h2>Server Variables</h2>\r\n");
 
 
             
-            #line 145 "..\..\Core\LoggingEventTemplate.cshtml"
+            #line 73 "..\..\Core\LoggingEventTemplate.cshtml"
         
             
             #line default
             #line hidden
             
-            #line 145 "..\..\Core\LoggingEventTemplate.cshtml"
+            #line 73 "..\..\Core\LoggingEventTemplate.cshtml"
    Write(WriteTable(Model.HttpContextInformation.ServerVariables));
 
             
             #line default
             #line hidden
             
-            #line 145 "..\..\Core\LoggingEventTemplate.cshtml"
+            #line 73 "..\..\Core\LoggingEventTemplate.cshtml"
                                                                  
     }
         
@@ -613,20 +390,20 @@ WriteLiteral("        <h2>Session Variables</h2>\r\n");
 
 
             
-            #line 150 "..\..\Core\LoggingEventTemplate.cshtml"
+            #line 78 "..\..\Core\LoggingEventTemplate.cshtml"
         
             
             #line default
             #line hidden
             
-            #line 150 "..\..\Core\LoggingEventTemplate.cshtml"
+            #line 78 "..\..\Core\LoggingEventTemplate.cshtml"
    Write(WriteTable(Model.HttpContextInformation.Session));
 
             
             #line default
             #line hidden
             
-            #line 150 "..\..\Core\LoggingEventTemplate.cshtml"
+            #line 78 "..\..\Core\LoggingEventTemplate.cshtml"
                                                          
     }
 }
@@ -638,7 +415,7 @@ WriteLiteral("\r\n");
 
 
             
-            #line 154 "..\..\Core\LoggingEventTemplate.cshtml"
+            #line 82 "..\..\Core\LoggingEventTemplate.cshtml"
  if (Model.ExceptionInformation != null) {
 
             
@@ -653,7 +430,7 @@ WriteLiteral("    <table cellpadding=\"0\" cellspacing=\"0\">\r\n        <tr>\r\
 
 
             
-            #line 159 "..\..\Core\LoggingEventTemplate.cshtml"
+            #line 87 "..\..\Core\LoggingEventTemplate.cshtml"
            Write(Model.ExceptionInformation.Message);
 
             
@@ -664,7 +441,7 @@ WriteLiteral("</td>\r\n        </tr>\r\n        <tr class=\"alt\">\r\n          
 
 
             
-            #line 163 "..\..\Core\LoggingEventTemplate.cshtml"
+            #line 91 "..\..\Core\LoggingEventTemplate.cshtml"
            Write(Model.ExceptionInformation.Type);
 
             
@@ -675,7 +452,7 @@ WriteLiteral("</td>\r\n        </tr>\r\n        <tr>\r\n            <td class=\"
 
 
             
-            #line 167 "..\..\Core\LoggingEventTemplate.cshtml"
+            #line 95 "..\..\Core\LoggingEventTemplate.cshtml"
            Write(Model.ExceptionInformation.Source);
 
             
@@ -686,7 +463,7 @@ WriteLiteral("</td>\r\n        </tr>\r\n        <tr class=\"alt\">\r\n          
 
 
             
-            #line 171 "..\..\Core\LoggingEventTemplate.cshtml"
+            #line 99 "..\..\Core\LoggingEventTemplate.cshtml"
            Write(Model.ExceptionInformation.StatusCode);
 
             
@@ -696,7 +473,7 @@ WriteLiteral("</td>\r\n        </tr>\r\n    </table>\r\n");
 
 
             
-            #line 174 "..\..\Core\LoggingEventTemplate.cshtml"
+            #line 102 "..\..\Core\LoggingEventTemplate.cshtml"
 }
 
             
@@ -706,7 +483,7 @@ WriteLiteral("    \r\n");
 
 
             
-            #line 176 "..\..\Core\LoggingEventTemplate.cshtml"
+            #line 104 "..\..\Core\LoggingEventTemplate.cshtml"
  if (Model.StackTrace != null) {
 
             
@@ -720,7 +497,7 @@ WriteLiteral("    <pre class=\"stacktrace\">");
 
 
             
-            #line 178 "..\..\Core\LoggingEventTemplate.cshtml"
+            #line 106 "..\..\Core\LoggingEventTemplate.cshtml"
                        Write(Model.StackTrace);
 
             
@@ -730,7 +507,7 @@ WriteLiteral("</pre>\r\n");
 
 
             
-            #line 179 "..\..\Core\LoggingEventTemplate.cshtml"
+            #line 107 "..\..\Core\LoggingEventTemplate.cshtml"
 }
 
             
@@ -740,7 +517,7 @@ WriteLiteral("    \r\n");
 
 
             
-            #line 181 "..\..\Core\LoggingEventTemplate.cshtml"
+            #line 109 "..\..\Core\LoggingEventTemplate.cshtml"
  if (Model.SqlInformation != null) {
 
             
@@ -750,21 +527,21 @@ WriteLiteral("    <h2>SQL</h2>\r\n");
 
 
             
-            #line 183 "..\..\Core\LoggingEventTemplate.cshtml"
+            #line 111 "..\..\Core\LoggingEventTemplate.cshtml"
     
             
             #line default
             #line hidden
             
-            #line 183 "..\..\Core\LoggingEventTemplate.cshtml"
-Write(WriteTable(Model.SqlInformation.Parameters));
+            #line 111 "..\..\Core\LoggingEventTemplate.cshtml"
+Write(WriteTable(ObjectHelpers.ToDictionary(Model.SqlInformation.Parameters)));
 
             
             #line default
             #line hidden
             
-            #line 183 "..\..\Core\LoggingEventTemplate.cshtml"
-                                                
+            #line 111 "..\..\Core\LoggingEventTemplate.cshtml"
+                                                                            
 
             
             #line default
@@ -773,7 +550,7 @@ WriteLiteral("    <pre class=\"sql\">");
 
 
             
-            #line 184 "..\..\Core\LoggingEventTemplate.cshtml"
+            #line 112 "..\..\Core\LoggingEventTemplate.cshtml"
                 Write(Model.SqlInformation.SQL);
 
             
@@ -783,7 +560,7 @@ WriteLiteral("</pre>\r\n");
 
 
             
-            #line 185 "..\..\Core\LoggingEventTemplate.cshtml"
+            #line 113 "..\..\Core\LoggingEventTemplate.cshtml"
 }
             
             #line default

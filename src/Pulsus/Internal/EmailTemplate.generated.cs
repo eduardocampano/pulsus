@@ -91,179 +91,21 @@ WriteLiteral("\">&nbsp;</td>\r\n                <td><h1>");
             #line default
             #line hidden
 WriteLiteral("</h1></td>\r\n            </tr>\r\n        </table>\r\n    \r\n        <h2>General</h2>\r\n" +
-"        <table cellpadding=\"0\" cellspacing=\"0\">\r\n            <tr>\r\n             " +
-"   <td class=\"first-col\">Date</td>\r\n                <td>");
+"        ");
 
 
             
-            #line 43 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
-               Write(Model.LoggingEvent.Date);
-
-            
-            #line default
-            #line hidden
-WriteLiteral(" UTC</td>\r\n            </tr>\r\n            <tr class=\"alt\">\r\n                <td c" +
-"lass=\"first-col\">LogKey</td>\r\n                <td>");
-
-
-            
-            #line 47 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
-               Write(Model.LoggingEvent.LogKey);
+            #line 40 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
+   Write(WriteTable(Model.GeneralSection));
 
             
             #line default
             #line hidden
-WriteLiteral("</td>\r\n            </tr>\r\n");
+WriteLiteral("\r\n        \r\n");
 
 
             
-            #line 49 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
-             if (!Model.LoggingEvent.ApiKey.IsNullOrEmpty()) {
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                <tr>\r\n                    <td class=\"first-col\">ApiKey</td>\r\n    " +
-"                <td>");
-
-
-            
-            #line 52 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
-                   Write(Model.LoggingEvent.ApiKey);
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</td>\r\n                </tr>\r\n");
-
-
-            
-            #line 54 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
-            }
-
-            
-            #line default
-            #line hidden
-WriteLiteral("            <tr class=\"alt\">\r\n                <td class=\"first-col\">ID</td>\r\n    " +
-"            <td>");
-
-
-            
-            #line 57 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
-               Write(Model.LoggingEvent.EventId);
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</td>\r\n            </tr>\r\n            <tr>\r\n                <td class=\"first-col\"" +
-">Level</td>\r\n                <td>");
-
-
-            
-            #line 61 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
-               Write(Model.LevelText);
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</td>\r\n            </tr>\r\n            <tr class=\"alt\">\r\n                <td class" +
-"=\"first-col\">User</td>\r\n                <td>");
-
-
-            
-            #line 65 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
-                Write(Model.LoggingEvent.User ?? "(none)");
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</td>\r\n            </tr>\r\n            <tr>\r\n                <td class=\"first-col\"" +
-">Tags</td>\r\n                <td>");
-
-
-            
-            #line 69 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
-               Write(string.Join(" ", Model.LoggingEvent.Tags.ToArray()));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</td>\r\n            </tr>\r\n            <tr class=\"alt\">\r\n                <td class" +
-"=\"first-col\">MachineName</td>\r\n                <td>");
-
-
-            
-            #line 73 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
-               Write(Model.LoggingEvent.MachineName);
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</td>\r\n            </tr>\r\n");
-
-
-            
-            #line 75 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
-             if (!Model.LoggingEvent.Psid.IsNullOrEmpty()) {
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                <tr>\r\n                    <td class=\"first-col\"><abbr title=\"Sess" +
-"ion ID\">PSID</abbr></td>\r\n                    <td>");
-
-
-            
-            #line 78 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
-                   Write(Model.LoggingEvent.Psid);
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</td>\r\n                </tr>\r\n");
-
-
-            
-            #line 80 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
-            }
-
-            
-            #line default
-            #line hidden
-
-            
-            #line 81 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
-             if (!Model.LoggingEvent.Ppid.IsNullOrEmpty()) {
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                <tr class=\"alt\">\r\n                    <td class=\"first-col\"><abbr" +
-" title=\"Persistent Session ID\">PPID</abbr></td>\r\n                    <td>");
-
-
-            
-            #line 84 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
-                   Write(Model.LoggingEvent.Ppid);
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</td>\r\n                </tr>\r\n");
-
-
-            
-            #line 86 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
-            }
-
-            
-            #line default
-            #line hidden
-WriteLiteral("        </table>\r\n        \r\n");
-
-
-            
-            #line 89 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
+            #line 42 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
          if (Model.CustomData != null) {
 
             
@@ -273,20 +115,20 @@ WriteLiteral("            <h2>Custom Data</h2>\r\n");
 
 
             
-            #line 91 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
+            #line 44 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
             
             
             #line default
             #line hidden
             
-            #line 91 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
+            #line 44 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
        Write(WriteTable(Model.CustomData));
 
             
             #line default
             #line hidden
             
-            #line 91 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
+            #line 44 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
                                          
         }
 
@@ -297,7 +139,7 @@ WriteLiteral("    \r\n");
 
 
             
-            #line 94 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
+            #line 47 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
          if (Model.HttpContextInformation != null) {
 
             
@@ -306,88 +148,22 @@ WriteLiteral("    \r\n");
 WriteLiteral("            <h2>Request</h2>\r\n");
 
 
-
-WriteLiteral("            <table cellpadding=\"0\" cellspacing=\"0\">\r\n                <tr>\r\n      " +
-"              <td class=\"first-col\">URL</td>\r\n                    <td><a href=\"");
-
-
             
-            #line 99 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
-                            Write(Model.HttpContextInformation.Url);
+            #line 49 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
+            
+            
+            #line default
+            #line hidden
+            
+            #line 49 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
+       Write(WriteTable(Model.RequestSection));
 
             
             #line default
             #line hidden
-WriteLiteral("\">");
-
-
             
-            #line 99 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
-                                                               Write(Model.HttpContextInformation.Url);
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</a></td>\r\n                </tr>\r\n                <tr class=\"alt\">\r\n             " +
-"       <td class=\"first-col\">Method</td>\r\n                    <td>");
-
-
-            
-            #line 103 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
-                   Write(Model.HttpContextInformation.Method);
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</td>\r\n                </tr>\r\n                <tr>\r\n                    <td class" +
-"=\"first-col\">Host</td>\r\n                    <td>");
-
-
-            
-            #line 107 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
-                   Write(Model.HttpContextInformation.Host);
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</td>\r\n                </tr>\r\n                <tr class=\"alt\">\r\n                 " +
-"   <td class=\"first-col\">Referer</td>\r\n                    <td>");
-
-
-            
-            #line 111 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
-                   Write(Model.HttpContextInformation.Referer);
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</td>\r\n                </tr>\r\n                <tr>\r\n                    <td class" +
-"=\"first-col\">IP Address</td>\r\n                    <td>");
-
-
-            
-            #line 115 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
-                   Write(Model.GetFormattedIpAddress(Model.HttpContextInformation.IpAddress));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</td>\r\n                </tr>\r\n                <tr class=\"alt\">\r\n                 " +
-"   <td class=\"first-col\">User Agent</td>\r\n                    <td>");
-
-
-            
-            #line 119 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
-                   Write(Model.GetFormattedUserAgent(Model.HttpContextInformation.UserAgent));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</td>\r\n                </tr>\r\n            </table>\r\n");
-
-
-            
-            #line 122 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
+            #line 49 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
+                                             
       
             if (Model.HttpContextInformation.RouteValues != null) {
 
@@ -398,20 +174,20 @@ WriteLiteral("                <h2>Route Values</h2>\r\n");
 
 
             
-            #line 125 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
+            #line 53 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
                 
             
             #line default
             #line hidden
             
-            #line 125 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
+            #line 53 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
            Write(WriteTable(Model.HttpContextInformation.RouteValues));
 
             
             #line default
             #line hidden
             
-            #line 125 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
+            #line 53 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
                                                                      
             }
      
@@ -424,20 +200,20 @@ WriteLiteral("                <h2>QueryString</h2>\r\n");
 
 
             
-            #line 130 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
+            #line 58 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
                 
             
             #line default
             #line hidden
             
-            #line 130 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
+            #line 58 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
            Write(WriteTable(Model.HttpContextInformation.QueryString));
 
             
             #line default
             #line hidden
             
-            #line 130 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
+            #line 58 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
                                                                      
             }
         
@@ -450,20 +226,20 @@ WriteLiteral("                <h2>Posted Values</h2>\r\n");
 
 
             
-            #line 135 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
+            #line 63 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
                 
             
             #line default
             #line hidden
             
-            #line 135 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
+            #line 63 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
            Write(WriteTable(Model.HttpContextInformation.PostedValues));
 
             
             #line default
             #line hidden
             
-            #line 135 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
+            #line 63 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
                                                                       
             }
         
@@ -486,7 +262,7 @@ WriteLiteral(@"                <table cellpadding=""0"" cellspacing=""0"">
 
 
             
-            #line 146 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
+            #line 74 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
                        var i = 0;  
 
             
@@ -494,7 +270,7 @@ WriteLiteral(@"                <table cellpadding=""0"" cellspacing=""0"">
             #line hidden
 
             
-            #line 147 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
+            #line 75 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
                      foreach (var postedFile in Model.HttpContextInformation.PostedFiles) {
                         var classAtt = i % 2 > 0 ? "class=\"alt\"" : string.Empty;
 
@@ -505,7 +281,7 @@ WriteLiteral("                        <tr ");
 
 
             
-            #line 149 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
+            #line 77 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
                        Write(classAtt);
 
             
@@ -515,7 +291,7 @@ WriteLiteral(">\r\n                            <td class=\"first-col\">");
 
 
             
-            #line 150 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
+            #line 78 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
                                              Write(postedFile.Name);
 
             
@@ -525,7 +301,7 @@ WriteLiteral("</td>\r\n                            <td>");
 
 
             
-            #line 151 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
+            #line 79 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
                            Write(postedFile.ContentType);
 
             
@@ -535,7 +311,7 @@ WriteLiteral("</td>\r\n                            <td>");
 
 
             
-            #line 152 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
+            #line 80 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
                            Write(FileSizeFormatProvider.FileSize(postedFile.ContentLength));
 
             
@@ -545,7 +321,7 @@ WriteLiteral("</td>\r\n                        </tr>\r\n");
 
 
             
-            #line 154 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
+            #line 82 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
                         i++;
                     }
 
@@ -556,7 +332,7 @@ WriteLiteral("                </table>\r\n");
 
 
             
-            #line 157 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
+            #line 85 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
             }
         
             if (Model.HttpContextInformation.Cookies != null) {
@@ -568,20 +344,20 @@ WriteLiteral("                <h2>Cookies</h2>\r\n");
 
 
             
-            #line 161 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
+            #line 89 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
                 
             
             #line default
             #line hidden
             
-            #line 161 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
+            #line 89 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
            Write(WriteTable(Model.HttpContextInformation.Cookies));
 
             
             #line default
             #line hidden
             
-            #line 161 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
+            #line 89 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
                                                                  
             }
         
@@ -594,20 +370,20 @@ WriteLiteral("                <h2>Headers</h2>\r\n");
 
 
             
-            #line 166 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
+            #line 94 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
                 
             
             #line default
             #line hidden
             
-            #line 166 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
+            #line 94 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
            Write(WriteTable(Model.HttpContextInformation.Headers));
 
             
             #line default
             #line hidden
             
-            #line 166 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
+            #line 94 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
                                                                  
             }
         
@@ -620,20 +396,20 @@ WriteLiteral("                <h2>Server Variables</h2>\r\n");
 
 
             
-            #line 171 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
+            #line 99 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
                 
             
             #line default
             #line hidden
             
-            #line 171 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
+            #line 99 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
            Write(WriteTable(Model.HttpContextInformation.ServerVariables));
 
             
             #line default
             #line hidden
             
-            #line 171 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
+            #line 99 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
                                                                          
             }
         
@@ -646,20 +422,20 @@ WriteLiteral("                <h2>Session Variables</h2>\r\n");
 
 
             
-            #line 176 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
+            #line 104 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
                 
             
             #line default
             #line hidden
             
-            #line 176 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
+            #line 104 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
            Write(WriteTable(Model.HttpContextInformation.Session));
 
             
             #line default
             #line hidden
             
-            #line 176 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
+            #line 104 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
                                                                  
             }
         }
@@ -671,7 +447,7 @@ WriteLiteral("\r\n");
 
 
             
-            #line 180 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
+            #line 108 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
          if (Model.ExceptionInformation != null) {
 
             
@@ -686,7 +462,7 @@ WriteLiteral("            <table cellpadding=\"0\" cellspacing=\"0\">\r\n       
 
 
             
-            #line 185 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
+            #line 113 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
                    Write(Model.ExceptionInformation.Message);
 
             
@@ -697,7 +473,7 @@ WriteLiteral("</td>\r\n                </tr>\r\n                <tr class=\"alt\
 
 
             
-            #line 189 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
+            #line 117 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
                    Write(Model.ExceptionInformation.Type);
 
             
@@ -708,7 +484,7 @@ WriteLiteral("</td>\r\n                </tr>\r\n                <tr>\r\n        
 
 
             
-            #line 193 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
+            #line 121 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
                    Write(Model.ExceptionInformation.Source);
 
             
@@ -719,7 +495,7 @@ WriteLiteral("</td>\r\n                </tr>\r\n                <tr class=\"alt\
 
 
             
-            #line 197 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
+            #line 125 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
                    Write(Model.ExceptionInformation.StatusCode);
 
             
@@ -729,7 +505,7 @@ WriteLiteral("</td>\r\n                </tr>\r\n            </table>\r\n");
 
 
             
-            #line 200 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
+            #line 128 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
         }
 
             
@@ -739,7 +515,7 @@ WriteLiteral("    \r\n");
 
 
             
-            #line 202 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
+            #line 130 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
          if (Model.StackTrace != null) {
 
             
@@ -753,7 +529,7 @@ WriteLiteral("            <pre class=\"stacktrace\">");
 
 
             
-            #line 204 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
+            #line 132 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
                                Write(Model.StackTrace);
 
             
@@ -763,7 +539,7 @@ WriteLiteral("</pre>\r\n");
 
 
             
-            #line 205 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
+            #line 133 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
         }
 
             
@@ -773,7 +549,7 @@ WriteLiteral("    \r\n");
 
 
             
-            #line 207 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
+            #line 135 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
          if (Model.SqlInformation != null) {
 
             
@@ -783,21 +559,21 @@ WriteLiteral("            <h2>SQL</h2>\r\n");
 
 
             
-            #line 209 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
+            #line 137 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
             
             
             #line default
             #line hidden
             
-            #line 209 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
-       Write(WriteTable(Model.SqlInformation.Parameters));
+            #line 137 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
+       Write(WriteTable(ObjectHelpers.ToDictionary(Model.SqlInformation.Parameters)));
 
             
             #line default
             #line hidden
             
-            #line 209 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
-                                                        
+            #line 137 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
+                                                                                    
 
             
             #line default
@@ -806,7 +582,7 @@ WriteLiteral("            <pre class=\"sql\">");
 
 
             
-            #line 210 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
+            #line 138 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
                         Write(Model.SqlInformation.SQL);
 
             
@@ -816,7 +592,7 @@ WriteLiteral("</pre>\r\n");
 
 
             
-            #line 211 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
+            #line 139 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
         }
 
             
@@ -826,7 +602,7 @@ WriteLiteral("        <br />\r\n        ");
 
 
             
-            #line 213 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
+            #line 141 "E:\Projects\codeplex\pulsus\src\Pulsus\Internal\EmailTemplate.cshtml"
    Write(Model.Footer);
 
             

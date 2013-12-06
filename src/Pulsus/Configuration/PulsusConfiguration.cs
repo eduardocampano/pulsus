@@ -13,8 +13,6 @@ namespace Pulsus.Configuration
     {
         private static PulsusConfiguration _defaultConfiguration;
 
-        
-
         public PulsusConfiguration()
         {
             DefaultEventLevel = LoggingEventLevel.Information;
@@ -100,6 +98,12 @@ namespace Pulsus.Configuration
         /// Gets or sets the default event level. The default value is LoggingEventLevel.None.
         /// </summary>
         public virtual LoggingEventLevel DefaultEventLevel { get; set; }
+
+        /// <summary>
+        /// Gets or sets the keys (separated by comma) that will be hidden by default in visualization. This is useful to hide sensitive information in 
+        /// the EmailTarget or other event details visualization tool.
+        /// </summary>
+        public virtual string HideKeys { get; set; }
 
         /// <summary>
         /// Gets or sets whether passwords must be included with the HttpContext information. The default value is false and entries from both

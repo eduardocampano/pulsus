@@ -26,7 +26,7 @@ namespace Pulsus
 				return;
 
 			LogManager.EventFactory.Create()
-								.AddException(exception)
+								.AddException(exception, typeof(ErrorLoggingModule).Name)
 								.Push();
 		}
 

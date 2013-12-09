@@ -86,7 +86,7 @@ var resize = function() {
 
     var $left = $container.find('.left');
     var $right = $container.find('.right');
-    var rightWidth = $(window).width() - $left.offset().left - $left.width() - 22;
+    var rightWidth = $(window).width() - $left.offset().left - $left.width() - 44;
     $right.width(rightWidth);
 };
 

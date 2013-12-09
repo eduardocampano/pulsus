@@ -117,36 +117,44 @@ namespace Pulsus.Targets
 
             lock (_lock)
             {
+                // if the throttling is activated we ignore everything
                 if (_throttlingStarted.HasValue && DateTime.UtcNow.Subtract(_throttlingStarted.Value).TotalMinutes < ThrottlingDuration)
                     return false;
 
-                if (window == _currentWindow)
-                {
-                    _currentCount++;
-                    if (_currentCount > ThrottlingThreshold)
-                    {
-                        _throttlingStarted = DateTime.UtcNow;
-                        PulsusDebugger.Write(this, "Throttling stated at {0}", _throttlingStarted);
-                        return false;
-                    }
-                }
-                else
+                // if the current window changes we start counting again
+                if (window != _currentWindow)
                 {
                     _currentWindow = window;
                     _currentCount = 1;
                     _throttlingStarted = null;
+                    return true;
                 }
 
-                return true;
+                _currentCount++;
+
+                // count is below the threshold
+                if (_currentCount <= ThrottlingThreshold)
+                    return true;
+
+                // start throttling
+                _throttlingStarted = DateTime.UtcNow;
             }
+
+            PulsusDebugger.Write(this, "Throttling started at {0}", _throttlingStarted);
+            SendThrottlingEmail();
+            return false;
         }
 
         protected virtual void SendThrottlingEmail()
         {
-            var mailMessage = new MailMessage();
-            mailMessage.Subject = "Email throttling started";
-            mailMessage.IsBodyHtml = true;
-            mailMessage.Body = string.Format("<html><body>Email throttling has started at {0} UTC for {1} minutes.</body></html>", DateTime.UtcNow, ThrottlingDuration);
+            var loggingEvent = new LoggingEvent()
+            {
+                Level = LoggingEventLevel.Error,
+                Text = string.Format("Email throttling has started at {0} UTC for {1} minutes", DateTime.UtcNow, ThrottlingDuration),
+                Tags = new[] { "email-throttling" }
+            };
+
+            var mailMessage = PrepareEmail(loggingEvent);
             Send(mailMessage);
             PulsusDebugger.Write(this, "Throttling email sent");
         }

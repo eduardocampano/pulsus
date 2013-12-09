@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom;
 using System.Net.Mail;
 using NUnit.Framework;
 using Pulsus.Targets;
@@ -35,11 +36,16 @@ namespace Pulsus.Tests
 
         protected override MailMessage PrepareEmail(LoggingEvent loggingEvent)
         {
-            return new MailMessage();
+            var mailMessage = new MailMessage();
+            mailMessage.Subject = loggingEvent.Text;
+            return mailMessage;
         }
 
         protected override void Send(MailMessage mailMessage)
         {
+            if (mailMessage.Subject.IndexOf("throttling", StringComparison.OrdinalIgnoreCase) >= 0)
+                return;
+
             Counter += 1;
             if (Counter > ThrottlingThreshold)
                 throw new InvalidOperationException("The counter should not pass the threshold");

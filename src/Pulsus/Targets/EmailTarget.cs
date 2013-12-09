@@ -1,25 +1,97 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Net;
 using System.Net.Mail;
+using System.Threading;
 using Pulsus.Internal;
 
 namespace Pulsus.Targets
 {
     public class EmailTarget : Target
     {
-        public string From { get; set; }
-        public string To { get; set; }
-        public string Subject { get; set; }
-        public string Title { get; set; }
-        public string TitleUri { get; set; }
-        public string SmtpServer { get; set; }
-        public int SmtpPort { get; set; }
-        public string SmtpUsername { get; set; }
-        public string SmtpPassword { get; set; }
-        public bool SmtpEnableSsl { get; set; }
+        private static object _lock = new object();
 
-        public string IpAddressInfoUri { get; set; }
-        public string UserAgentInfoUri { get; set; }
+        private DateTime? _throttlingStarted;
+        private DateTime _currentWindow = DateTime.MinValue;
+        private int _currentCount = 0;
+
+        /// <summary>
+        /// Gets or sets the from address for the sent emails
+        /// </summary>
+        public virtual string From { get; set; }
+
+        /// <summary>
+        /// Gets or sets the destination address for the emails. Use comma (,) to specify more than one.
+        /// </summary>
+        public virtual string To { get; set; }
+
+        /// <summary>
+        /// Gets or sets the subject for the emails. Wildcard can be use to build it like {Level}, {Text}, etc. 
+        /// </summary>
+        public virtual string Subject { get; set; }
+
+        /// <summary>
+        /// Gets or sets the title shown at the begining of the email.
+        /// </summary>
+        public virtual string Title { get; set; }
+
+        /// <summary>
+        /// Gets or sets the URI used to link to an external event visualization tool. For example: http://pulsus.mycompany.com/Event/{EventId}
+        /// </summary>
+        public virtual string TitleUri { get; set; }
+
+        /// <summary>
+        /// Gets or sets the SMTP server IP or hostname
+        /// </summary>
+        public virtual string SmtpServer { get; set; }
+
+        /// <summary>
+        /// Gets or sets the SMTP server port
+        /// </summary>
+        public virtual int SmtpPort { get; set; }
+
+        /// <summary>
+        /// Gets or sets the SMTP server username
+        /// </summary>
+        public virtual string SmtpUsername { get; set; }
+
+        /// <summary>
+        /// Gets or sets the SMTP server password
+        /// </summary>
+        public virtual string SmtpPassword { get; set; }
+
+        /// <summary>
+        /// Gets or sets whether SMTP server a SSL connection 
+        /// </summary>
+        public virtual bool SmtpEnableSsl { get; set; }
+
+        /// <summary>
+        /// Gets or sets the URL used for the IP Address rendering for linking to an IP address information service. For example: http://iplocationinformationservice.com/?ip={0}.
+        /// </summary>
+        public virtual string IpAddressInfoUri { get; set; }
+
+        /// <summary>
+        /// Gets or sets the URL used for the User Agent rendering for linking to an User Agent information service. For example: http://usergentinfo.com/?ua={0}
+        /// </summary>
+        public virtual string UserAgentInfoUri { get; set; }
+
+        /// <summary>
+        /// Get or sets 
+        /// </summary>
+        [DefaultValue(1)]
+        public virtual int ThrottlingWindow { get; set; }
+
+        /// <summary>
+        /// Gets or sets the threshold of emails sent within the throttling window
+        /// </summary>
+        [DefaultValue(60)]
+        public virtual int ThrottlingThreshold { get; set; }
+
+        /// <summary>
+        /// Gets or sets the throttling duration in minutes after the threshold has been reached
+        /// </summary>
+        [DefaultValue(10)]
+        public virtual int ThrottlingDuration { get; set; }
 
         public override void Push(LoggingEvent[] loggingEvents)
         {
@@ -28,12 +100,58 @@ namespace Pulsus.Targets
 
             foreach (var loggingEvent in loggingEvents)
             {
+                if (!ShouldSendEmail())
+                {
+                    PulsusDebugger.Write(this, "Event '{0}' was not pushed because email throttling is activated", loggingEvent.Text);
+                    continue;
+                }
+
                 var mailMessage = PrepareEmail(loggingEvent);
                 Send(mailMessage);
             }
         }
 
-        protected MailMessage PrepareEmail(LoggingEvent loggingEvent)
+        protected virtual bool ShouldSendEmail()
+        {
+            var window = RoundUp(DateTime.UtcNow, TimeSpan.FromMinutes(ThrottlingWindow));
+
+            lock (_lock)
+            {
+                if (_throttlingStarted.HasValue && DateTime.UtcNow.Subtract(_throttlingStarted.Value).TotalMinutes < ThrottlingDuration)
+                    return false;
+
+                if (window == _currentWindow)
+                {
+                    _currentCount++;
+                    if (_currentCount > ThrottlingThreshold)
+                    {
+                        _throttlingStarted = DateTime.UtcNow;
+                        PulsusDebugger.Write(this, "Throttling stated at {0}", _throttlingStarted);
+                        return false;
+                    }
+                }
+                else
+                {
+                    _currentWindow = window;
+                    _currentCount = 1;
+                    _throttlingStarted = null;
+                }
+
+                return true;
+            }
+        }
+
+        protected virtual void SendThrottlingEmail()
+        {
+            var mailMessage = new MailMessage();
+            mailMessage.Subject = "Email throttling started";
+            mailMessage.IsBodyHtml = true;
+            mailMessage.Body = string.Format("<html><body>Email throttling has started at {0} UTC for {1} minutes.</body></html>", DateTime.UtcNow, ThrottlingDuration);
+            Send(mailMessage);
+            PulsusDebugger.Write(this, "Throttling email sent");
+        }
+
+        protected virtual MailMessage PrepareEmail(LoggingEvent loggingEvent)
         {
             var model = new EmailTemplateModel(loggingEvent)
             {
@@ -52,13 +170,7 @@ namespace Pulsus.Targets
             return mailMessage;
         }
 
-        private string PrepareEmailBody(EmailTemplateModel model)
-        {
-            var emailTemplate = new EmailTemplate(model);
-            return emailTemplate.TransformText();
-        }
-
-        public void Send(MailMessage mailMessage)
+        protected virtual void Send(MailMessage mailMessage)
         {
             var client = new SmtpClient();
 
@@ -88,6 +200,17 @@ namespace Pulsus.Targets
             }
 
             client.Send(mailMessage);
+        }
+
+        private string PrepareEmailBody(EmailTemplateModel model)
+        {
+            var emailTemplate = new EmailTemplate(model);
+            return emailTemplate.TransformText();
+        }
+
+        public static DateTime RoundUp(DateTime dt, TimeSpan d)
+        {
+            return new DateTime(((dt.Ticks + d.Ticks - 1) / d.Ticks) * d.Ticks);
         }
     }
 }

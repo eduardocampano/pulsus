@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.Linq;
 using System.Web;
 using Microsoft.SharePoint;
 using Microsoft.SharePoint.Utilities;
@@ -23,13 +24,20 @@ namespace Pulsus.SharePoint.Layouts
             if (Request.QueryString["throw"] != null)
                 throw new ApplicationException("This is a test exception, please ignore");
 
-            if (Request.QueryString["log"] != null)
+            var logString = Request.QueryString["log"];
+            if (logString != null)
             {
-                LogManager.EventFactory.Create()
-                    .Level(LoggingEventLevel.Debug)
-                    .AddData("customKey", "customValue")
-                    .Text(Request.QueryString["log"])
-                    .Push();
+                int logCount;
+                if (!int.TryParse(logString, out logCount))
+                    logCount = 1;
+
+                for (var i = 0; i < logCount; i++)
+                {
+                    LogManager.EventFactory.Create()
+                        .Level(LoggingEventLevel.Debug)
+                        .Text(logCount > 1 ? string.Format("Test Log {0}", i) : logString)
+                        .Push();
+                }
             }
         }
 

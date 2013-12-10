@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using Moq;
 using NUnit.Framework;
+using Pulsus.Internal;
+using SharpTestsEx;
 
 namespace Pulsus.Tests
 {
@@ -36,6 +38,20 @@ namespace Pulsus.Tests
             loggingEventBuilder.AddException(new Exception("exceptionmessage"));
 
             loggingEventMock.VerifyAll();
+        }
+
+        [Test]
+        public void AddingAdditionalSourceToExceptionShouldStoreSourceInLoggingEventData()
+        {
+            var loggingEvent = new LoggingEvent();
+
+            var loggingEventBuilder = new LoggingEventBuilder(loggingEvent);
+
+            loggingEventBuilder.AddException(new Exception(), "test");
+
+            var exceptionInfo = loggingEvent.GetData<ExceptionInformation>(Constants.DataKeys.Exception);
+
+            exceptionInfo.Source.Should().Be("test");
         }
     }
 }

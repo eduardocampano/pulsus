@@ -106,7 +106,7 @@
 .k-state-selected { background-image:none !important;background-color:#555555 !important;color:#ffffff; }
 
 /* pulsus */
-.pulsus-container { display:block;margin:10px;font-size:12px; }
+.pulsus-container { display:block;margin:10px;font-size:12px;width:100%; }
 .pulsus-container .clearfix { display:block;clear:both; }
 
 .pulsus-container .label{ font-size:10px;text-transform:lowercase;display:inline;padding: .2em .6em .3em;font-weight:bold;line-height:1;color:#fff;text-align:center;white-space:nowrap;vertical-align:baseline;border-radius: .25em;}

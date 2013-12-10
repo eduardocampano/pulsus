@@ -51,7 +51,7 @@ namespace Pulsus.Internal
             foreach (var item in items)
             {
                 // bypass keys to be hidden
-                if (hideKeys.Contains(item.Key ?? string.Empty))
+                if (hideKeys.Contains(item.Key ?? string.Empty, StringComparer.OrdinalIgnoreCase))
                     continue;
 
                 var valueString = item.Value == null ? "&nbsp;" : HttpUtility.HtmlEncode(item.Value.ToString());

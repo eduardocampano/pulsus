@@ -113,6 +113,9 @@ namespace Pulsus.Targets
 
         protected virtual bool ShouldSendEmail()
         {
+            if (ThrottlingWindow == 0)
+                return true;
+
             var window = RoundUp(DateTime.UtcNow, TimeSpan.FromMinutes(ThrottlingWindow));
 
             lock (_lock)
@@ -147,12 +150,11 @@ namespace Pulsus.Targets
 
         protected virtual void SendThrottlingEmail()
         {
-            var loggingEvent = new LoggingEvent()
-            {
-                Level = LoggingEventLevel.Error,
-                Text = string.Format("Email throttling has started at {0} UTC for {1} minutes", DateTime.UtcNow, ThrottlingDuration),
-                Tags = new[] { "email-throttling" }
-            };
+            var builder = LogManager.EventFactory.Create()
+                .Level(LoggingEventLevel.Error)
+                .Text("Email throttling has started at {0} UTC for {1} minutes", DateTime.UtcNow, ThrottlingDuration);
+
+            var loggingEvent = builder.LoggingEvent;
 
             var mailMessage = PrepareEmail(loggingEvent);
             Send(mailMessage);

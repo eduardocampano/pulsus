@@ -118,12 +118,12 @@ namespace Pulsus.Internal
             GeneralSection.Clear();
             GeneralSection.Add("Date", LoggingEvent.Date + " UTC");
             GeneralSection.Add("ID", LoggingEvent.EventId);
-            GeneralSection.Add("LogKey", LoggingEvent.LogKey);
             if (!LoggingEvent.ApiKey.IsNullOrEmpty())
                 GeneralSection.Add("ApiKey", LoggingEvent.ApiKey);
             GeneralSection.Add("Level", Enum.GetName(typeof(LoggingEventLevel), LoggingEvent.Level));
             GeneralSection.Add("User", LoggingEvent.User ?? "(none)");
-            GeneralSection.Add("Tags", string.Join(" ", LoggingEvent.Tags.ToArray()));
+            if (LoggingEvent.Tags.Any())
+                GeneralSection.Add("Tags", string.Join(" ", LoggingEvent.Tags.ToArray()));
             GeneralSection.Add("MachineName", LoggingEvent.MachineName);
 
             if (ExceptionInformation != null && !ExceptionInformation.Source.IsNullOrEmpty())

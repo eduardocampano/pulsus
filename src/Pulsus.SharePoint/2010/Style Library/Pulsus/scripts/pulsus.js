@@ -10,6 +10,9 @@
                 data: {
                     period: $('#pulsus-period').val(),
                     search: $('#pulsus-search').val(),
+                    minLevel: $('#pulsus-minLevel').val(),
+                    maxLevel: $('#pulsus-maxLevel').val(),
+                    tags: $('#pulsus-tags').val(),
                     skip: options.data.skip,
                     take: options.data.take
                 },
@@ -135,5 +138,37 @@ $().ready(function () {
 
     $("#pulsus-grid").data("kendoGrid").bind('dataBound', function (e) {
         this.select("tr:eq(1)");
+    });
+
+    $('#filters').kendoButton({ spriteCssClass: 'k-icon k-i-funnel' }).click(function (e) {
+        $('#pulsus-filters-minLevel').val($('#pulsus-minLevel').val());
+        $('#pulsus-filters-maxLevel').val($('#pulsus-maxLevel').val());
+        $('#pulsus-filters-tags').val($('#pulsus-tags').val());
+        $('#filtersModal').data('kendoWindow').center().open();
+        e.preventDefault();
+    });
+
+    $('#filtersModal').kendoWindow({
+        width: "600px",
+        title: "Filters",
+        modal: true,
+        draggable: false,
+        resizable: false,
+        visible: false,
+        actions: [
+            "Close"
+        ],
+        close: refresh
+    });
+
+    $('#filtersOK').kendoButton().click(function () {
+        $('#filtersModal').data('kendoWindow').close();
+        $('#pulsus-minLevel').val($('#pulsus-filters-minLevel').val());
+        $('#pulsus-maxLevel').val($('#pulsus-filters-maxLevel').val());
+        $('#pulsus-tags').val($('#pulsus-filters-tags').val());
+        refresh();
+    });
+    $('#filtersCancel').kendoButton().click(function () {
+        $('#filtersModal').data('kendoWindow').close();
     });
 });

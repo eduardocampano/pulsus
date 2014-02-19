@@ -22,6 +22,10 @@
                 <input type="text" id="pulsus-period" />
                 <label for="pulsus-search">Search</label>
                 <input type="text" id="pulsus-search" />
+                <input type="hidden" id="pulsus-minLevel" value="Warning" />
+                <input type="hidden" id="pulsus-maxLevel" value="Alert" />
+                <input type="hidden" id="pulsus-tags" />
+                <a id="filters" href="#">Filters</a>
                 <div class="clearfix"></div>
             </div>
             <div id="pulsus-grid" class="grid"></div>
@@ -31,7 +35,6 @@
         </div>
         <div class="clearfix"></div>
     </div>
-
     <script src="/Style Library/Pulsus/scripts/jquery.daterangepicker.js"></script>
     <script src="/Style Library/Pulsus/scripts/kendo.all.min.js"></script>
     <script src="/Style Library/Pulsus/scripts/pulsus.js"></script>
@@ -54,6 +57,38 @@
             #}#
         #}#
     </script>
+    <div id="filtersModal" class="k-content" style="display:none;">
+        <p>
+            <label for="pulsus-filters-minLevel">Level</label>
+            <select id="pulsus-filters-minLevel">
+                <option value="None">None</option>
+                <option value="Trace">Trace</option>
+                <option value="Debug">Debug</option>
+                <option value="Information">Information</option>
+                <option value="Warning" selected>Warning</option>
+                <option value="Error">Error</option>
+                <option value="Alert">Alert</option>
+            </select>
+            <label for="pulsus-filters-maxLevel">to</label>
+            <select id="pulsus-filters-maxLevel">
+                <option value="None">None</option>
+                <option value="Trace">Trace</option>
+                <option value="Debug">Debug</option>
+                <option value="Information">Information</option>
+                <option value="Warning">Warning</option>
+                <option value="Error">Error</option>
+                <option value="Alert" selected>Alert</option>
+            </select>
+        </p>
+        <p>
+            <label for="pulsus-filters-tags">Tags</label>
+            <input type="text" id="pulsus-filters-tags" />
+        </p>
+        <p>
+            <button type="button" id="filtersOK">OK</button>
+            <button type="button" id="filtersCancel">Cancel</button>
+        </p>
+    </div>
 </asp:Content>
 
 <asp:Content ID="PageTitle" ContentPlaceHolderID="PlaceHolderPageTitle" runat="server">

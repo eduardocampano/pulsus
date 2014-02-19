@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using Microsoft.SharePoint.ApplicationPages.Calendar.Exchange;
 using Pulsus.Targets;
 
 namespace Pulsus.SharePoint.Core.Data
@@ -18,7 +20,7 @@ namespace Pulsus.SharePoint.Core.Data
             }
         }
 
-        public PageResult<LoggingEventListItem> List(DateTime from, DateTime to, string search, int skip, int take)
+        public PageResult<LoggingEventListItem> List(DateTime from, DateTime to, LoggingEventLevel? minLevel, LoggingEventLevel? maxLevel, string[] tags, string search, int skip, int take)
         {
             var minSqlDate = new DateTime(1753, 1, 1);
 
@@ -30,12 +32,26 @@ namespace Pulsus.SharePoint.Core.Data
             if (to < minSqlDate)
                 to = minSqlDate;
 
-            var searchWhere = string.IsNullOrEmpty(search) ? string.Empty : "and Text like '%' + @search + '%'";
+            var additionalConditions = new List<string>();
+            if (!string.IsNullOrEmpty(search)) 
+                additionalConditions.Add("Text like '%' + @search + '%'");
+            if (minLevel.HasValue)
+                additionalConditions.Add("Level >= @minLevel");
+            if (maxLevel.HasValue)
+                additionalConditions.Add("Level <= @maxLevel");
+            if (tags != null && tags.Length > 0)
+            {
+                foreach (var tag in tags)
+                    additionalConditions.Add(string.Format("charindex('{0}', Tags) > 0", tag));
+            }
+
+            var conditionsSql = string.Empty;
+            if (additionalConditions.Any())
+                conditionsSql = "\r\n and " + string.Join("\r\n and ", additionalConditions.ToArray());
 
             var countSql = string.Format(@"select count(1) as Total
                                                  from [LoggingEvents]
-                                                 where Date >= @from and Date < @to
-                                                 {0}", searchWhere);
+                                                 where Date >= @from and Date < @to {0}", conditionsSql);
 
             var sql = string.Format(@"select top {0} *
                                       from (
@@ -46,12 +62,11 @@ namespace Pulsus.SharePoint.Core.Data
                                                 Text,
                                                 Tags
                                          from [LoggingEvents]
-                                         where Date >= @from and Date < @to
-                                         {2}
+                                         where Date >= @from and Date < @to {2}
                                       ) X
-                                      where X.RowNum >= {1}", take, skip + 1, searchWhere);
-
-            var parameters = new {from, to, search};
+                                      where X.RowNum >= {1}", take, skip + 1, conditionsSql);
+            
+            var parameters = new { from, to, search, minLevel = (int?)minLevel, maxLevel = (int?)maxLevel, tags };
 
             using (var connection = GetConnection())
             {

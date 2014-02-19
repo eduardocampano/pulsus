@@ -1,13 +1,13 @@
-﻿using System;
-using System.Globalization;
-using System.Linq;
-using System.Web;
-using Microsoft.SharePoint;
+﻿using Microsoft.SharePoint;
 using Microsoft.SharePoint.Utilities;
 using Microsoft.SharePoint.WebControls;
-using Pulsus;
 using Pulsus.SharePoint.Core;
 using Pulsus.SharePoint.Core.Data;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Text.RegularExpressions;
+using System.Web;
 
 namespace Pulsus.SharePoint.Layouts
 {
@@ -71,6 +71,9 @@ namespace Pulsus.SharePoint.Layouts
             var to = DateTime.Now.Date;
             var from = to.AddMonths(-1);
 
+            var minLevel = ParseLoggingEventLevel(HttpContext.Current.Request.Form["minLevel"]);
+            var maxLevel = ParseLoggingEventLevel(HttpContext.Current.Request.Form["maxLevel"]);
+            var tags = ParseTags(HttpContext.Current.Request.Form["tags"]);
             var skip = int.Parse(HttpContext.Current.Request.Form["skip"] ?? "0");
             var take = int.Parse(HttpContext.Current.Request.Form["take"] ?? "100");
             var search = HttpContext.Current.Request.Form["search"] ?? string.Empty;
@@ -86,8 +89,34 @@ namespace Pulsus.SharePoint.Layouts
             }
 
             var repository = new DatabaseLoggingEventRepository();
-            var result = repository.List(from, to, search, skip, take);
+            var result = repository.List(from, to, minLevel, maxLevel, tags, search, skip, take);
             Response.JsonResult(result);
+        }
+
+        protected LoggingEventLevel? ParseLoggingEventLevel(string loggingEventLevel)
+        {
+            if (string.IsNullOrEmpty(loggingEventLevel))
+                return null;
+            return Enum.Parse(typeof (LoggingEventLevel), loggingEventLevel, true) as LoggingEventLevel?;
+        }
+
+        protected string[] ParseTags(string tags)
+        {
+            if (string.IsNullOrEmpty(tags))
+                return null;
+
+            var res = new List<string>();            
+            var tokens = tags.ToLower().Split(new[] { " " }, StringSplitOptions.RemoveEmptyEntries);
+            foreach (var token in tokens)
+            {
+                var temp = token.Trim();
+                temp = Regex.Replace(temp, "[^a-zA-Z0-9\\-]", "");
+
+                if (temp.Length > 0)
+                    res.Add(token);
+            }
+
+            return res.ToArray();
         }
     }
 }

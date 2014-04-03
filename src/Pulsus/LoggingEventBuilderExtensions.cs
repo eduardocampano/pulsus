@@ -8,17 +8,12 @@ namespace Pulsus
     {
         public static T AddException<T>(this T builder, Exception exception) where T : class, ILoggingEventBuilder<T>
         {
-            return builder.AddException(exception, null);
-        }
-
-        public static T AddException<T>(this T builder, Exception exception, string source) where T : class, ILoggingEventBuilder<T>
-        {
             if (exception == null)
                 return builder;
 
             try
             {
-                var exceptionInformation = ExceptionInformation.Create(exception, source);
+                var exceptionInformation = ExceptionInformation.Create(exception);
 
                 if (string.IsNullOrEmpty(builder.LoggingEvent.Text))
                     builder.Text(exceptionInformation.Message);

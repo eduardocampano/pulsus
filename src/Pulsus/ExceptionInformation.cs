@@ -10,11 +10,6 @@ namespace Pulsus
     {
         public static ExceptionInformation Create(Exception exception)
         {
-            return Create(exception, null);
-        }
-
-        public static ExceptionInformation Create(Exception exception, string source)
-        {
             // if it's not a .Net core exception, usually more information is being added
             // so use the wrapper for the message, type, etc.
             // if it's a .Net core exception type or an HttpUnhandledException, drill down and get the innermost exception
@@ -24,14 +19,7 @@ namespace Pulsus
             var exceptionInformation = new ExceptionInformation();
             exceptionInformation.Message = exception.Message;
             exceptionInformation.Type = exception.GetType().Name.Replace("Exception", string.Empty);
-
-            var sources = new List<string>();
-            if (!exception.Source.IsNullOrEmpty())
-                sources.Add(exception.Source);
-            if (!source.IsNullOrEmpty())
-                sources.Add(source);
-
-            exceptionInformation.Source = string.Join(",", sources.ToArray());
+            exceptionInformation.Source = exception.Source;
             exceptionInformation.More = new List<ExceptionInformation>();
 
             var httpException = exception as HttpException;

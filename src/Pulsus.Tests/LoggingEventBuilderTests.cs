@@ -39,19 +39,5 @@ namespace Pulsus.Tests
 
             loggingEventMock.VerifyAll();
         }
-
-        [Test]
-        public void AddingAdditionalSourceToExceptionShouldStoreSourceInLoggingEventData()
-        {
-            var loggingEvent = new LoggingEvent();
-
-            var loggingEventBuilder = new LoggingEventBuilder(loggingEvent);
-
-            loggingEventBuilder.AddException(new Exception(), "test");
-
-            var exceptionInfo = loggingEvent.GetData<ExceptionInformation>(Constants.DataKeys.Exception);
-
-            exceptionInfo.Source.Should().Be("test");
-        }
     }
 }

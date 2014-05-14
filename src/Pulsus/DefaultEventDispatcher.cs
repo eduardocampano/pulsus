@@ -22,7 +22,7 @@ namespace Pulsus
             {
                 try
                 {
-                    var loggingEventsToPush = loggingEvents.Where(x => CheckTargetConditionsAndIgnores(x, target)).ToArray();
+                    var loggingEventsToPush = loggingEvents.Where(x => CompliesTargetConditionsAndIgnores(x, target)).ToArray();
 
                     if (loggingEventsToPush.Length > 0)
                         target.Push(loggingEventsToPush);
@@ -38,7 +38,7 @@ namespace Pulsus
             }
         }
 
-        protected virtual bool CheckTargetConditionsAndIgnores(LoggingEvent loggingEvent, Target target)
+        protected virtual bool CompliesTargetConditionsAndIgnores(LoggingEvent loggingEvent, Target target)
         {
             if (loggingEvent == null)
                 throw new ArgumentNullException("loggingEvent");
@@ -49,10 +49,12 @@ namespace Pulsus
             if (!MatchesFilterConditions(loggingEvent, target))
                 return false;
 
-            if (target.Ignores == null || target.Ignores.Count == 0)
-                return true;
+            var matchesAnyIgnoreFilter = target.Ignores != null && target.Ignores.Any(ignoreFilter => MatchesFilterConditions(loggingEvent, ignoreFilter));
 
-            return !target.Ignores.Any(ignoreFilter => MatchesFilterConditions(loggingEvent, ignoreFilter));
+            if (matchesAnyIgnoreFilter)
+                return false;
+
+            return true;
         }
 
         protected virtual bool MatchesFilterConditions(LoggingEvent loggingEvent, IFilter filter)
@@ -63,28 +65,28 @@ namespace Pulsus
             if (filter.MaxLevel != LoggingEventLevel.None && loggingEvent.Level > filter.MaxLevel)
                 return false;
 
-            if (!filter.LogKeyContains.IsNullOrEmpty() && loggingEvent.LogKey.Contains(filter.LogKeyContains))
+            if (!filter.LogKeyContains.IsNullOrEmpty() && loggingEvent.LogKey.IndexOf(filter.LogKeyContains, StringComparison.OrdinalIgnoreCase) < 0)
                 return false;
 
-            if (!filter.LogKeyStartsWith.IsNullOrEmpty() && loggingEvent.LogKey.StartsWith(filter.LogKeyStartsWith))
+            if (!filter.LogKeyStartsWith.IsNullOrEmpty() && !loggingEvent.LogKey.StartsWith(filter.LogKeyStartsWith, StringComparison.OrdinalIgnoreCase))
                 return false;
 
-            if (!filter.TextContains.IsNullOrEmpty() && loggingEvent.Text.Contains(filter.TextContains))
+            if (!filter.TextContains.IsNullOrEmpty() && loggingEvent.Text.IndexOf(filter.TextContains, StringComparison.OrdinalIgnoreCase) < 0)
                 return false;
 
-            if (!filter.TextStartsWith.IsNullOrEmpty() && loggingEvent.Text.StartsWith(filter.TextStartsWith))
+            if (!filter.TextStartsWith.IsNullOrEmpty() && !loggingEvent.Text.StartsWith(filter.TextStartsWith, StringComparison.OrdinalIgnoreCase))
                 return false;
 
             if (filter.MinValue.HasValue && loggingEvent.Value.HasValue && loggingEvent.Value.Value < filter.MinValue.Value)
                 return false;
 
-            if (filter.MaxValue.HasValue && loggingEvent.Value.HasValue && loggingEvent.Value.Value < filter.MaxValue.Value)
+            if (filter.MaxValue.HasValue && loggingEvent.Value.HasValue && loggingEvent.Value.Value > filter.MaxValue.Value)
                 return false;
 
             if (!filter.TagsContains.IsNullOrEmpty())
             {
                 var requiredTags = TagHelpers.Clean(filter.TagsContains);
-                if (!requiredTags.All(x => loggingEvent.Tags.Contains(x)))
+                if (!requiredTags.All(x => loggingEvent.Tags.Contains(x, StringComparer.OrdinalIgnoreCase)))
                     return false;
             }
 

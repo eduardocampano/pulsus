@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Web;
 using Pulsus.Internal;
+using CoreConstants = Pulsus.Internal.Constants;
 
 namespace Pulsus.SharePoint.Core
 {
@@ -15,10 +16,10 @@ namespace Pulsus.SharePoint.Core
                 throw new ArgumentNullException("loggingEvent");
 
             LoggingEvent = loggingEvent;
-            HttpContextInformation = loggingEvent.GetData<HttpContextInformation>(Constants.DataKeys.HttpContext);
-            StackTrace = loggingEvent.GetData<string>(Constants.DataKeys.StackTrace);
-            SqlInformation = loggingEvent.GetData<SqlInformation>(Constants.DataKeys.SQL);
-            ExceptionInformation = loggingEvent.GetData<ExceptionInformation>(Constants.DataKeys.Exception);
+			HttpContextInformation = loggingEvent.GetData<HttpContextInformation>(CoreConstants.DataKeys.HttpContext);
+			StackTrace = loggingEvent.GetData<string>(CoreConstants.DataKeys.StackTrace);
+			SqlInformation = loggingEvent.GetData<SqlInformation>(CoreConstants.DataKeys.SQL);
+			ExceptionInformation = loggingEvent.GetData<ExceptionInformation>(CoreConstants.DataKeys.Exception);
 
             GeneralSection = new Dictionary<string, object>();
             LoadGeneralSection();

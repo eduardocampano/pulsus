@@ -61,6 +61,7 @@
     <Reference Include="Microsoft.SharePoint" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\Constants.cs" />
     <Compile Include="Core\DatabaseLoggingEvent.cs" />
     <Compile Include="Core\Data\CountResult.cs" />
     <Compile Include="Core\Data\LoggingEventListItem.cs" />
@@ -102,6 +103,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Targets\SecureStoreDatabaseTarget.cs" />
     <Compile Include="Targets\ULSTarget.cs" />
+    <Compile Include="TimerJobs\ConfigDeploymentJob.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ADMIN\SharePointProjectItem.spdata">
@@ -141,6 +143,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="NewFolder1\" />
     <Folder Include="Style Library\Pulsus\images\" />
   </ItemGroup>
   <ItemGroup>

@@ -5,13 +5,14 @@ using System.Xml;
 using System.Xml.Linq;
 using Microsoft.SharePoint.Administration;
 using Microsoft.SharePoint.ApplicationPages;
+using Microsoft.SharePoint;
+using Pulsus.SharePoint.TimerJobs;
+using Pulsus.SharePoint.Core;
 
 namespace Pulsus.SharePoint.ApplicationPages
 {
 	public partial class PulsusSettings : DialogAdminPageBase
 	{
-		private static readonly Guid PulsusFeatureId = new Guid("7465ed3a-f5cc-46ba-8205-0ba5fc0e8b35");
-
 		protected override void OnLoad(EventArgs e)
 		{
 			base.OnLoad(e);
@@ -20,9 +21,14 @@ namespace Pulsus.SharePoint.ApplicationPages
 		protected void Selector_ContextChange(object sender, EventArgs e)
 		{
 			var application = GetApplication();
-			var applicationConfig = GetApplicationConfig(application);
-			if (File.Exists(applicationConfig))
-				configuration.Text = File.ReadAllText(applicationConfig);
+			if (application.Properties.ContainsKey(Constants.PulsusConfigKey))
+				configuration.Text = Convert.ToString(application.Properties[Constants.PulsusConfigKey]);
+			else
+			{
+				var applicationConfig = application.GetPulsusConfigPath();
+				if (File.Exists(applicationConfig))
+					configuration.Text = File.ReadAllText(applicationConfig);
+			}
 		}
 
 		protected void okButton_Click(object sender, EventArgs e)
@@ -35,35 +41,37 @@ namespace Pulsus.SharePoint.ApplicationPages
 			}
 			catch (Exception)
 			{
-				// TODO: show error
-				LabelErrorMessage.Text = "Invalid XML condfiguration";
+				LabelErrorMessage.Text = "Invalid XML configuration";
 				return;
 			}
-			
-			Enum.GetValues(typeof(SPUrlZone)).Cast<SPUrlZone>().ToList().ForEach(z =>
-			{
-				var applicationConfig = GetApplicationConfig(application, z);
-				File.WriteAllText(applicationConfig, configuration.Text);
-			});
+
+			if (application.Properties.ContainsKey(Constants.PulsusConfigKey))
+				application.Properties[Constants.PulsusConfigKey] = configuration.Text;
+			else
+				application.Properties.Add(Constants.PulsusConfigKey, configuration.Text);
+
+			var configDeploymentJob = new ConfigDeploymentJob(Constants.ConfigDeploymentJobName, application);
+			var schedule = new SPOneTimeSchedule(DateTime.Now);
+			configDeploymentJob.Schedule = schedule;
+			configDeploymentJob.Update();
+
+			foreach (SPJobDefinition job in application.JobDefinitions)
+				if (job.Title == Constants.ConfigDeploymentJobName)
+					job.Delete();
+
+			application.JobDefinitions.Add(configDeploymentJob);
+			application.Update();
+
+			configDeploymentJob.RunNow();
 
 			ReloadPulsusFeature(application);
-			
+
 			base.EndOperation(0);
 		}
 
 		protected void ReloadPulsusFeature(SPWebApplication application)
 		{
-			application.Features.Add(PulsusFeatureId, true);
-		}
-
-		protected string GetApplicationConfig(SPWebApplication application)
-		{
-			return GetApplicationConfig(application, SPUrlZone.Default);
-		}
-
-		protected string GetApplicationConfig(SPWebApplication application, SPUrlZone zone)
-		{
-			return Path.Combine(application.GetIisSettingsWithFallback(zone).Path.FullName, "Pulsus.config");
+			application.Features.Add(Constants.PulsusFeatureId, true);
 		}
 
 		protected SPWebApplication GetApplication()

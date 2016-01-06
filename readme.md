@@ -1,4 +1,6 @@
-A simple .NET logging, parsing, reporting library for modern applications, designed from the ground up for scalability, high availability and flexibility.
+A simple .NET structured logging library for modern applications, designed from the ground up for scalability, high availability and flexibility.
+
+This library is now officially supported by [url:DataArt|http://www.dataart.com/].
 
 !! Why another logging library?
 We reviewed and used other logging libraries in the past like log4net, NLog, ELMAH. All of them are just great but we were looking for something to cover some specific needs to simplify our development process and make sure our products and solutions meet defined quality standards. Pulsus is mostly based on NLog which is an awesome library and we tried to maintain some of its concepts so this is not a library you need to learn a lot to use it. 
@@ -43,12 +45,5 @@ PM> Install-Package Pulsus.Mvc
 }}
 
 !! Configuration
-Please check the [Configuration] page.
-
-!! More coming soon
-* Javascript client
-* Events viewer
-* Error handling features for the ASP.NET MVC package
-
-Note: This library was originally hosted at [url:GitHub|https://github.com/eduardocampano/Pulsus] but is now officially an [url:DataArt|http://www.dataart.com/] supported project.
+Please check the [Configuration](configuration.md) page.
 

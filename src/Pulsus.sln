@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30110.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pulsus.Mvc", "Pulsus.Mvc\Pulsus.Mvc.csproj", "{F7489518-4A5C-4285-9A23-61E89F34EEE2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pulsus", "Pulsus\Pulsus.csproj", "{65BEE1C8-459A-46FA-90C6-4467EDE2E012}"
@@ -9,14 +11,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pulsus.Tests", "Pulsus.Test
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pulsus.Net4", "Pulsus.Net4\Pulsus.Net4.csproj", "{A0AC0A9A-0145-43FE-A850-9BBDF5701B60}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pulsus.Server", "Pulsus.Server\Pulsus.Server.csproj", "{2672BD6D-1D55-4AEC-86F2-AEB05F548FF5}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pulsus.Web", "Pulsus.Web\Pulsus.Web.csproj", "{D7B90DA4-3BC1-4285-899E-674DE0A811CF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{037A2C3D-A6B5-4689-BD71-253BA83034A5}"
 	ProjectSection(SolutionItems) = preProject
 		build.bat = build.bat
-		LICENSE.md = LICENSE.md
 		Pulsus.Mvc.nuspec = Pulsus.Mvc.nuspec
 		Pulsus.nuspec = Pulsus.nuspec
 		Pulsus.Server.nuspec = Pulsus.Server.nuspec
@@ -45,10 +44,6 @@ Global
 		{A0AC0A9A-0145-43FE-A850-9BBDF5701B60}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A0AC0A9A-0145-43FE-A850-9BBDF5701B60}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A0AC0A9A-0145-43FE-A850-9BBDF5701B60}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2672BD6D-1D55-4AEC-86F2-AEB05F548FF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2672BD6D-1D55-4AEC-86F2-AEB05F548FF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2672BD6D-1D55-4AEC-86F2-AEB05F548FF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2672BD6D-1D55-4AEC-86F2-AEB05F548FF5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D7B90DA4-3BC1-4285-899E-674DE0A811CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D7B90DA4-3BC1-4285-899E-674DE0A811CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D7B90DA4-3BC1-4285-899E-674DE0A811CF}.Release|Any CPU.ActiveCfg = Release|Any CPU

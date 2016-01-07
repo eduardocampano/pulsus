@@ -55,6 +55,12 @@ namespace Pulsus
             return this as T;
         }
 
+        public virtual T CorrelationId(string correlationId)
+        {
+            LoggingEvent.CorrelationId = correlationId;
+            return this as T;
+        }
+
         public virtual T Text(string text, params object[] args)
         {
             if (args == null || !args.Any())

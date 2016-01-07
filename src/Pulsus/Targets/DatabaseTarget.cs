@@ -215,6 +215,7 @@ namespace Pulsus.Targets
                                 
                                 [Tags] [varchar](1000) null,
                                 [Data] [text] null,
+                                [CorrelationId] [varchar](50) null,
                                 [User] [varchar](500) null,
                                 [Psid] [varchar](50) null,
                                 [Ppid] [varchar](50) null,
@@ -254,6 +255,7 @@ namespace Pulsus.Targets
         
                             Tags varchar(1000) null,
                             Data text null,
+                            CorrelationId varchar(50) null,
                             User varchar(500) null,
                             Psid varchar(50) null,
                             Ppid varchar(50) null,
@@ -280,8 +282,8 @@ namespace Pulsus.Targets
         protected virtual string GetMsSqlInsert()
         {
             const string sql = @"if not exists (select 1 from [{0}].[{1}] where [EventId] = @EventId) begin
-                            insert into [{0}].[{1}] ([EventId], [LogKey], [ApiKey], [Date], [Level], [Value], [Text], [Tags], [Data], [MachineName], [Psid], [Ppid], [Host], [Url], [HttpMethod], [IpAddress], [User], [Source], [StatusCode], [Hash], [Count])
-                            values (@EventId, @LogKey, @ApiKey, @Date, @Level, @Value, @Text, @Tags, @Data, @MachineName, @Psid, @Ppid, @Host, @Url, @HttpMethod, @IpAddress, @User, @Source, @StatusCode, @Hash, @Count)
+                            insert into [{0}].[{1}] ([EventId], [LogKey], [ApiKey], [Date], [Level], [Value], [Text], [Tags], [Data], [MachineName], [CorrelationId], [Psid], [Ppid], [Host], [Url], [HttpMethod], [IpAddress], [User], [Source], [StatusCode], [Hash], [Count])
+                            values (@EventId, @LogKey, @ApiKey, @Date, @Level, @Value, @Text, @Tags, @Data, @MachineName, @CorrelationId, @Psid, @Ppid, @Host, @Url, @HttpMethod, @IpAddress, @User, @Source, @StatusCode, @Hash, @Count)
                         end";
 
             return string.Format(sql, Schema, Table);
@@ -289,8 +291,8 @@ namespace Pulsus.Targets
 
         protected virtual string GetMySqlInsert()
         {
-            const string sql = @"insert ignore into {0} (EventId, LogKey, ApiKey, Date, Level, Value, Text, Tags, Data, MachineName, Psid, Ppid, Host, Url, HttpMethod, IpAddress, User, Source, StatusCode, Hash, Count)
-                            values (@EventId, @LogKey, @ApiKey, @Date, @Level, @Value, @Text, @Tags, @Data, @MachineName, @Psid, @Ppid, @Host, @Url, @HttpMethod, @IpAddress, @User, @Source, @StatusCode, @Hash, @Count)";
+            const string sql = @"insert ignore into {0} (EventId, LogKey, ApiKey, Date, Level, Value, Text, Tags, Data, MachineName, CorrelationId, Psid, Ppid, Host, Url, HttpMethod, IpAddress, User, Source, StatusCode, Hash, Count)
+                            values (@EventId, @LogKey, @ApiKey, @Date, @Level, @Value, @Text, @Tags, @Data, @MachineName, @CorrelationId, @Psid, @Ppid, @Host, @Url, @HttpMethod, @IpAddress, @User, @Source, @StatusCode, @Hash, @Count)";
 
             return string.Format(sql, Table);
         }

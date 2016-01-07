@@ -19,6 +19,7 @@ namespace Pulsus.Internal
 			result.Data = LogManager.JsonSerializer.SerializeObject(loggingEvent.Data);
 
 			result.MachineName = Truncate(loggingEvent.MachineName, 100);
+		    result.CorrelationId = Truncate(loggingEvent.CorrelationId, 50);
 			result.User = Truncate(loggingEvent.User, 500);
 			result.Psid = Truncate(loggingEvent.Psid, 50);
 			result.Ppid = Truncate(loggingEvent.Ppid, 50);
@@ -30,6 +31,15 @@ namespace Pulsus.Internal
 				result.Url = Truncate(httpContextInfo.Url, 2000);
 				result.HttpMethod = Truncate(httpContextInfo.Method, 10);
 				result.IpAddress = Truncate(httpContextInfo.IpAddress, 40);
+
+			    if (result.CorrelationId == null)
+			        result.CorrelationId = Truncate(httpContextInfo.CorrelationId, 50);
+			    if (result.User == null)
+			        result.User = Truncate(httpContextInfo.User, 500);
+			    if (result.Psid == null)
+			        result.Psid = Truncate(httpContextInfo.Psid, 50);
+			    if (result.Ppid == null)
+			        result.Ppid = Truncate(httpContextInfo.Ppid, 50);
 			}
 
 			var exceptionInfo = loggingEvent.GetData<ExceptionInformation>(Constants.DataKeys.Exception);
@@ -66,7 +76,8 @@ namespace Pulsus.Internal
 		public string Text { get; set; }
 		public string Tags { get; set; }
 		public string Data { get; set; }
-		public string User { get; set; }
+	    public string CorrelationId { get; set; }
+	    public string User { get; set; }
 		public string Psid { get; set; }
 		public string Ppid { get; set; }
 

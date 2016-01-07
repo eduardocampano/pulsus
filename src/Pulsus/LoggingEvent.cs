@@ -26,7 +26,8 @@ namespace Pulsus
 
 		public virtual string MachineName { get; set; }
 		public virtual string User { get; set; }
-		public virtual string Psid { get; set; }
+	    public virtual string CorrelationId { get; set; }
+	    public virtual string Psid { get; set; }
 		public virtual string Ppid { get; set; }
 
 		public virtual int Hash { get; set; }

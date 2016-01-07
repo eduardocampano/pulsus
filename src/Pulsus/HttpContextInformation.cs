@@ -25,7 +25,10 @@ namespace Pulsus
             var httpContextInformation = new HttpContextInformation();
 
             httpContextInformation.Url = httpContext.Request.Url != null ? httpContext.Request.Url.ToString() : string.Empty;
-            httpContextInformation.User = httpContext.User != null && httpContext.User.Identity.IsAuthenticated ? httpContext.User.Identity.Name : string.Empty;
+            httpContextInformation.User = TryGetValueFromContext(httpContext, "User");
+            httpContextInformation.CorrelationId = TryGetValueFromContext(httpContext, "CorrelationId");
+            httpContextInformation.Psid = TryGetValueFromContext(httpContext, "Psid");
+            httpContextInformation.Ppid = TryGetValueFromContext(httpContext, "Ppid");
             httpContextInformation.UserAgent = httpContext.Request.ServerVariables["HTTP_USER_AGENT"];
             httpContextInformation.Host = HostingEnvironment.IsHosted ? HostingEnvironment.SiteName : EnvironmentHelpers.TryGetMachineName(httpContext);
             httpContextInformation.Referer = httpContext.Request.ServerVariables["HTTP_REFERER"];
@@ -54,7 +57,10 @@ namespace Pulsus
 
         public virtual string Url { get; set; }
         public virtual string UserAgent { get; set; }
+        public virtual string CorrelationId { get; set; }
         public virtual string User { get; set; }
+        public virtual string Psid { get; set; }
+        public virtual string Ppid { get; set; }
         public virtual string Host { get; set; }
         public virtual string Referer { get; set; }
         public virtual string IpAddress { get; set; }
@@ -147,6 +153,27 @@ namespace Pulsus
             {
                 return null;
             }
+        }
+
+        private static string TryGetValueFromContext(HttpContextBase httpContext, string key)
+        {
+            var fullKey = "X-Pulsus-" + key;
+
+            if (httpContext.Items.Contains(fullKey))
+                return httpContext.Items[fullKey].ToString();
+
+            var value = httpContext.Request.Headers[fullKey];
+            if (value != null)
+                return value;
+
+            var cookieValue = httpContext.Request.Cookies[fullKey];
+            if (cookieValue != null)
+                return cookieValue.Value;
+
+            if (key == "User" && httpContext.User != null && httpContext.User.Identity.IsAuthenticated)
+                return httpContext.User.Identity.Name;
+
+            return string.Empty;
         }
     }
 

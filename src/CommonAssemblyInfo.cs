@@ -4,9 +4,9 @@ using System;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyDescription("A simple logging library for modern applications")]
+[assembly: AssemblyDescription("A simple structured logging library for modern applications")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("http://pulsus.codeplex.com")]
+[assembly: AssemblyCompany("http://github.com/eduardocampano/pulsus")]
 [assembly: AssemblyProduct("Pulsus")]
 [assembly: AssemblyCopyright("Copyright © Pulsus Project 2012-2013")]
 [assembly: AssemblyTrademark("")]

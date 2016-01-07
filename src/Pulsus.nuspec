@@ -6,10 +6,10 @@
       <title>Pulsus</title>
       <authors>Eduardo Campañó, Juan Pedro Elizalde, Brian Jenkins</authors>
       <owners>Eduardo Campañó</owners>
-      <projectUrl>https://pulsus.codeplex.com</projectUrl>
+      <projectUrl>https://github.com/eduardocampano/pulsus</projectUrl>
       <requireLicenseAcceptance>false</requireLicenseAcceptance>
       <licenseUrl>https://pulsus.codeplex.com/license</licenseUrl>
-      <description>A simple and extensible logging library built for modern applications.</description>
+      <description>A simple and extensible structured logging library built for modern applications.</description>
       <tags>log logging log trace tracing error exception pulsus</tags>
       <dependencies>
         <dependency id="Newtonsoft.Json" version="4.5.1" />

@@ -19,7 +19,7 @@ namespace Pulsus.Internal
         
         public static class Info
         {
-            public static readonly string WebSite = "https://pulsus.codeplex.com";
+            public static readonly string WebSite = "https://github.com/eduardocampano/pulsus";
         }
     }
 }

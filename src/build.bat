@@ -39,7 +39,6 @@ copy Pulsus.Web\bin\%config%\Pulsus.Web.xml Build\Pulsus.Web\lib\net4\
 
 nuget.exe pack Pulsus.nuspec -Symbols -BasePath Build\Pulsus -Output Build
 nuget.exe pack Pulsus.Web.nuspec -Symbols -BasePath Build\Pulsus.Web -Output Build
-nuget.exe pack Pulsus.Mvc.nuspec -Symbols -BasePath Build\Pulsus.Mvc -Output Build
 
 if not "%errorlevel%"=="0" goto failure
 

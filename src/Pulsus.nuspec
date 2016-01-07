@@ -1,23 +1,23 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-      <id>Pulsus</id>
-      <version>1.7.7</version>
-      <title>Pulsus</title>
-      <authors>Eduardo Campañó, Juan Pedro Elizalde, Brian Jenkins</authors>
-      <owners>Eduardo Campañó</owners>
-      <projectUrl>https://github.com/eduardocampano/pulsus</projectUrl>
-      <requireLicenseAcceptance>false</requireLicenseAcceptance>
-      <licenseUrl>https://github.com/eduardocampano/pulsus/blob/master/LICENSE.txt</licenseUrl>
-      <description>A simple and extensible structured logging library built for modern applications.</description>
-      <tags>log logging log trace tracing error exception pulsus</tags>
-      <dependencies>
-        <dependency id="Newtonsoft.Json" version="4.5.1" />
-      </dependencies>
-      <frameworkAssemblies>
-        <frameworkAssembly assemblyName="System.configuration" />
-        <frameworkAssembly assemblyName="System.Web.Abstractions" />
-        <frameworkAssembly assemblyName="System.Web.Routing" />
-      </frameworkAssemblies>
+    <id>Pulsus</id>
+    <version>1.7.8</version>
+    <title>Pulsus</title>
+    <authors>Eduardo Campañó, Juan Pedro Elizalde, Brian Jenkins</authors>
+    <owners>Eduardo Campañó</owners>
+    <projectUrl>https://github.com/eduardocampano/pulsus</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <licenseUrl>https://github.com/eduardocampano/pulsus/blob/master/LICENSE.txt</licenseUrl>
+    <description>A simple and extensible structured logging library built for modern applications.</description>
+    <tags>log logging log trace tracing error exception pulsus</tags>
+    <dependencies>
+      <dependency id="Newtonsoft.Json" version="4.5.1" />
+    </dependencies>
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="System.configuration" />
+      <frameworkAssembly assemblyName="System.Web.Abstractions" />
+      <frameworkAssembly assemblyName="System.Web.Routing" />
+    </frameworkAssemblies>
   </metadata>
 </package>

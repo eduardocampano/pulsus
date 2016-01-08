@@ -35,16 +35,18 @@ LogManager.EventFactory.Create()
                         .Push();
 ```
 
-##Installing using Nuget
-If you're using classic ASP.NET, WinForms, WPF, console apps:
+##Installation
+If you're using .NET 3.5 or above:
 ```
 PM> Install-Package Pulsus
 ```
+If you're using .NET 4 or above in a ASP.NET app (WebForms, MVC or WebAPI) you can use Pulsus.Web package which will dinamically register the ErrorLogging module in the pipeline without needing to add it on the web.config.
+```
+PM> Install-Package Pulsus.Web
+```
 
-If you're using ASP.NET MVC:
-```
-PM> Install-Package Pulsus.Mvc
-```
+
+
 
 ##Configuration
 Please check the [Configuration](configuration.md) page.

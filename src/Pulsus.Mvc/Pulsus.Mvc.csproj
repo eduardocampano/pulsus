@@ -88,10 +88,6 @@
     <Compile Include="..\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="DependencyResolverEventDispatcher.cs" />
-    <Compile Include="DependencyResolverEventFactory.cs" />
-    <Compile Include="ErrorHandlingModule.cs" />
-    <Compile Include="ExceptionManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AppStart.cs" />
   </ItemGroup>

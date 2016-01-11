@@ -1,19 +1,21 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-	<id>Pulsus.Web</id>
-	<version>1.7.4</version>
-	<title>Pulsus.Web</title>
-	<authors>Eduardo Campañó, Juan Pedro Elizalde, Brian Jenkins</authors>
-	<owners>Eduardo Campañó</owners>
-	<projectUrl>http://pulsus.codeplex.com</projectUrl>
-	<requireLicenseAcceptance>false</requireLicenseAcceptance>
-	<licenseUrl>https://pulsus.codeplex.com/license</licenseUrl>
-	<description>ASP.NET (webforms) integration for Pulsus logging library</description>
-	<tags>log logging log trace tracing error exception pulsus</tags>
-	<dependencies>
-		<dependency id="Pulsus" version="1.7.4" />
-		<dependency id="Microsoft.Web.Infrastructure" version="1.0.0.0" />
-	</dependencies>
+	  <id>Pulsus.Web</id>
+	  <version>1.7.8</version>
+	  <title>Pulsus.Web</title>
+	  <authors>Eduardo Campañó, Juan Pedro Elizalde, Brian Jenkins</authors>
+	  <owners>Eduardo Campañó</owners>
+	  <projectUrl>https://github.com/eduardocampano/pulsus</projectUrl>
+	  <requireLicenseAcceptance>false</requireLicenseAcceptance>
+	  <licenseUrl>https://github.com/eduardocampano/pulsus/blob/master/LICENSE.txt</licenseUrl>
+	  <description>
+      ASP.NET WebForms and MVC integration for Pulsus logging library in .NET 4. This registers the ErrorLoggingModule in the ASP.NET pipeline by using DynamicModuleUtility.RegisterModule(typeof(ErrorLoggingModule)).
+    </description>
+	  <tags>log logging log trace tracing error exception pulsus</tags>
+	  <dependencies>
+		  <dependency id="Pulsus" version="1.7.8" />
+		  <dependency id="Microsoft.Web.Infrastructure" version="1.0.0.0" />
+	  </dependencies>
   </metadata>
 </package>

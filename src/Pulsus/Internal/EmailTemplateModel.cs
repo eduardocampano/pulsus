@@ -122,7 +122,6 @@ namespace Pulsus.Internal
             if (!LoggingEvent.ApiKey.IsNullOrEmpty())
                 GeneralSection.Add("ApiKey", LoggingEvent.ApiKey);
             GeneralSection.Add("Level", Enum.GetName(typeof(LoggingEventLevel), LoggingEvent.Level));
-            GeneralSection.Add("User", LoggingEvent.User ?? "(none)");
             if (LoggingEvent.Tags.Any())
                 GeneralSection.Add("Tags", string.Join(" ", LoggingEvent.Tags.ToArray()));
             GeneralSection.Add("MachineName", LoggingEvent.MachineName);
@@ -130,6 +129,9 @@ namespace Pulsus.Internal
             if (ExceptionInformation != null && !ExceptionInformation.Source.IsNullOrEmpty())
                 GeneralSection.Add("Source", ExceptionInformation.Source);
 
+            GeneralSection.Add("User", LoggingEvent.User ?? "(none)");
+            if (!LoggingEvent.CorrelationId.IsNullOrEmpty())
+                GeneralSection.Add("CorrelationId", LoggingEvent.CorrelationId);
             if (!LoggingEvent.Psid.IsNullOrEmpty())
                 GeneralSection.Add("PSID", LoggingEvent.Psid);
             if (!LoggingEvent.Ppid.IsNullOrEmpty())

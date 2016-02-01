@@ -8,7 +8,7 @@ using System;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("http://github.com/eduardocampano/pulsus")]
 [assembly: AssemblyProduct("Pulsus")]
-[assembly: AssemblyCopyright("Copyright © Pulsus Project 2012-2013")]
+[assembly: AssemblyCopyright("Copyright © Pulsus Project 2012-2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: CLSCompliant(true)]
@@ -23,5 +23,5 @@ using System;
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.7")]
-[assembly: AssemblyFileVersion("1.7.9")]
-[assembly: AssemblyInformationalVersion("1.7.9")]
+[assembly: AssemblyFileVersion("1.7.10")]
+[assembly: AssemblyInformationalVersion("1.7.10")]

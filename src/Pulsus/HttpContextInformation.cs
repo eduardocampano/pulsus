@@ -160,11 +160,15 @@ namespace Pulsus
             var fullKey = "X-Pulsus-" + key;
 
             if (httpContext.Items.Contains(fullKey))
-                return httpContext.Items[fullKey].ToString();
+            {
+                var httpContextItemValue = httpContext.Items[fullKey] as string;
+                if (!string.IsNullOrEmpty(httpContextItemValue))
+                    return httpContext.Items[fullKey] as string;
+            }
 
-            var value = httpContext.Request.Headers[fullKey];
-            if (value != null)
-                return value;
+            var httpHeaderValue = httpContext.Request.Headers[fullKey];
+            if (httpHeaderValue != null)
+                return httpHeaderValue;
 
             var cookieValue = httpContext.Request.Cookies[fullKey];
             if (cookieValue != null)

@@ -1,4 +1,4 @@
-WARNING!!! This library is not supported anymore, I recommend using newer ones like [Seriog](https://serilog.net)  Use it at your own risk.
+WARNING!!! This library is not supported anymore, I recommend using newer ones like [Seriog](https://serilog.net).  Use it at your own risk.
 
 A simple .NET structured logging library for modern applications, designed from the ground up for scalability, high availability and flexibility.
 
